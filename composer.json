@@ -1,0 +1,21 @@
+{
+    "name": "elan-ev/studip-checkin",
+    "version": "0.1.0",
+    "type": "project",
+    "license": "AGPL-3.0",
+    "authors": [
+        {
+            "name": "Ron Lucke",
+            "email": "lucke@elan-ev.de"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Checkin\\": "lib/"
+        }
+    },
+    "require": {
+        "php": "^8.0",
+        "guzzlehttp/guzzle": ">=7.10.0"
+    }
+}

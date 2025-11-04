@@ -1,0 +1,10 @@
+pluginname=StudipCheckin
+displayname=StudipCheckin
+pluginclassname=StudipCheckin
+origin=elan-ev
+version=0.1.0
+category=todo
+summary=todo
+description=todo
+studipMinVersion=6.0
+studipMaxVersion=6.0.99

@@ -1,0 +1,50 @@
+{
+    "name": "studip-checkin-lib",
+    "private": true,
+    "version": "0.1.0",
+    "author": "Ron Lucke <lucke@elan-ev.de> (elan e.V.)",
+    "contributors": [
+        "Ron Lucke <lucke@elan-ev.de> (elan e.V.)",
+        "Farbod Zamani <zamani@elan-ev.de> (elan e.V.)"
+    ],
+    "license": "AGPL-3.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/elan-ev/studip-checkin.git"
+    },
+    "homepage": "https://elan-ev.de",
+    "type": "module",
+    "files": [
+        "dist"
+    ],
+    "main": "./dist/studip-checkin-lib.umd.cjs",
+    "module": "./dist/studip-checkin-lib.js",
+    "exports": {
+        ".": {
+            "import": "./dist/studip-checkin-lib.js",
+            "require": "./dist/studip-checkin-lib.umd.cjs"
+        }
+    },
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "dev-build": "vite build --mode development",
+        "preview": "vite preview",
+        "prezip": "npm install && npm run build && composer install --no-dev",
+        "zip": "zip -r studip-checkin-v$npm_package_version.zip app assets lib migrations dist vendor LICENSE README.md StudipCheckin.php bootstrap.php plugin.manifest -x '*.editorconfig' -x 'vendor/*.git*' -x '*.DS_Store'"
+    },
+    "dependencies": {
+        "vue": "^3.5.22",
+        "pinia": "^3.0.3"
+    },
+    "devDependencies": {
+        "@ckeditor/ckeditor5-vue": "^7.3.0",
+        "@headlessui/vue": "^1.7.23",
+        "@vitejs/plugin-vue": "^6.0.1",
+        "kitsu": "^11.1.0",
+        "sass": "^1.93.3",
+        "sass-loader": "^16.0.6",
+        "vite": "^7.1.12",
+        "vue3-gettext": "^4.0.0-beta.1"
+    }
+}
