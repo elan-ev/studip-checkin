@@ -1,4 +1,17 @@
 <?php
+
+/**
+ * RedirectController
+ *
+ * Controller für die Redirectansicht von StudipCheckin.
+ *
+ * @package   StudipCheckin
+ * @since     0.1.0
+ * @author    Farbod Zamani <zamani@elan-ev.de>
+ * @copyright 2025 elan e.V.
+ * @license   AGPL-3.0
+ * @link      https://elan-ev.de
+ */
 class RedirectController extends PluginController
 {
     public function before_filter(&$action, &$args)
