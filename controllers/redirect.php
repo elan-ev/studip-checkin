@@ -12,6 +12,7 @@ class RedirectController extends PluginController
     {
         PageLayout::setTitle(_('Awesome CheckIn!'));
         PageLayout::setTabNavigation(NULL);
+        PageLayout::disableSidebar();
 
         $this->userId = $userId;
     }
