@@ -13,7 +13,8 @@ export default defineConfig(({ mode }) => {
         build: {
             rollupOptions: {
               input: {
-                'checkin': 'src/checkin.js',
+                'studip-checkin': 'src/checkin.js',
+                'studip-checkin-admin': 'src/checkin-admin.js',
               },
                 output: {
                     entryFileNames: `[name].js`,
