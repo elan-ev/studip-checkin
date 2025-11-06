@@ -3,7 +3,7 @@
  * InitStudipCheckin
  *
  * Migration zum Initialisieren der Datenbanktabellen für das StudipCheckin-Plugin.
- * 
+ *
  * @package   StudipCheckin
  * @since     0.1.0
  * @author    Ron Lucke <lucke@elan-ev.de>
@@ -41,7 +41,7 @@ final class InitStudipCheckin extends Migration
             `chdate`                        INT(11) UNSIGNED NOT NULL,
 
             PRIMARY KEY (`id`),
-            INDEX `filter_id_idx` (`filter_id`)
+            UNIQUE KEY `filter_id_unique` (`filter_id`)
             )"
         );
 

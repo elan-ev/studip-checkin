@@ -19,6 +19,9 @@ trait Schemas
     public function registerSchemas(): array
     {
         return [
+            \StudipCheckin\Models\Form::class => \StudipCheckin\JsonApi\Schemas\FormSchema::class,
+            \StudipCheckin\Models\FormUserData::class => \StudipCheckin\JsonApi\Schemas\FormUserDataSchema::class,
+            \StudipCheckin\Models\RelatedUser::class => \StudipCheckin\JsonApi\Schemas\RelatedUserSchema::class,
         ];
     }
 }
