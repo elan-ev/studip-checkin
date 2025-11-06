@@ -21,6 +21,7 @@ final class InitStudipCheckin extends Migration
             `form_id`                       INT(11) NOT NULL,
             `user_id`                       CHAR(32) NOT NULL,
             `active`                        TINYINT(1) NOT NULL DEFAULT '1',
+            `hide`                          TINYINT(1) NOT NULL DEFAULT '0',
             `mkdate`                        INT(11) UNSIGNED NOT NULL,
             `chdate`                        INT(11) UNSIGNED NOT NULL,
 
@@ -36,6 +37,8 @@ final class InitStudipCheckin extends Migration
             `filter_id`                     char(32)  NOT NULL,
             `name`                          CHAR(255) NOT NULL,
             `structure`                     MEDIUMTEXT NOT NULL,
+            `start_date`                    INT(11) UNSIGNED NOT NULL,
+            `end_date`                      INT(11) UNSIGNED NOT NULL,
             `version`                       INT(11) NOT NULL,
             `mkdate`                        INT(11) UNSIGNED NOT NULL,
             `chdate`                        INT(11) UNSIGNED NOT NULL,
