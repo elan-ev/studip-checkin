@@ -29,7 +29,6 @@ class FormUserDataIndex extends JsonApiController
     public function __invoke(Request $request, Response $response, $args)
     {
         $user = $this->getUser($request);
-
         if (!Authority::canIndexForm($user)) {
             throw new AuthorizationFailedException();
         }
@@ -39,8 +38,8 @@ class FormUserDataIndex extends JsonApiController
         }
 
         list($offset, $limit) = $this->getOffsetAndLimit();
-        $resources = FormUserData::findBySQL('`form_id` = ? LIMIT ? OFFSET ?', [$form->id, $limit, $offset]);
+        $formUserData = FormUserData::findBySQL('`form_id` = ? LIMIT ? OFFSET ?', [$form->id, $limit, $offset]);
 
-        return $this->getPaginatedContentResponse($resources, count($resources));
+        return $this->getPaginatedContentResponse($formUserData, count($formUserData));
     }
 }

@@ -13,6 +13,7 @@
 namespace StudipCheckin\JsonApi\Routes\Form;
 
 use JsonApi\Errors\AuthorizationFailedException;
+use JsonApi\Errors\RecordNotFoundException;
 use JsonApi\JsonApiController;
 
 use Psr\Http\Message\ResponseInterface as Response;
@@ -25,6 +26,16 @@ class Show extends JsonApiController
 {
     public function __invoke(Request $request, Response $response, $args)
     {
+        $user = $this->getUser($request);
+        if (!Authority::canShowForm($user)) {
+            throw new AuthorizationFailedException();
+        }
 
+        $form = Form::find($args['id']);
+        if (!$form) {
+            throw new RecordNotFoundException();
+        }
+
+        return $this->getContentResponse($form);
     }
 }

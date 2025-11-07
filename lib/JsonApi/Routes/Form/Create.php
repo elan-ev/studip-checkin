@@ -28,6 +28,7 @@ use UserFilter;
 class Create extends JsonApiController
 {
     use ValidationTrait;
+
     public function __invoke(Request $request, Response $response, $args)
     {
         $json = $this->validate($request);
@@ -44,9 +45,9 @@ class Create extends JsonApiController
             throw new ConflictException('A form with the same filter already exists.');
         }
 
-        $resource = $this->createCheckinForm($json);
+        $form = $this->createCheckinForm($json);
 
-        return $this->getCreatedResponse($resource);
+        return $this->getCreatedResponse($form);
     }
 
     /**
@@ -68,6 +69,12 @@ class Create extends JsonApiController
         }
         if (!self::arrayHas($json, 'data.attributes.structure')) {
             return 'Missing `structure` member of attributes block.';
+        }
+        // Make sure structure is valid json or empty.
+        $structure = self::arrayGet($json, 'data.attributes.structure', '');
+        $decoded = json_decode($structure, true);
+        if (empty($structure) || empty($decoded)) {
+            return 'Invalid `structure` value.';
         }
     }
 

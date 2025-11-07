@@ -38,7 +38,7 @@ class Authority
         return $GLOBALS['perm']->have_perm('admin', $user->id);
     }
 
-    public static function canViewForm(User $user): bool
+    public static function canShowForm(User $user): bool
     {
         return $GLOBALS['perm']->have_perm('admin', $user->id);
     }

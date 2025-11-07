@@ -30,7 +30,6 @@ class RelatedUsersIndex extends JsonApiController
     public function __invoke(Request $request, Response $response, $args)
     {
         $user = $this->getUser($request);
-
         if (!Authority::canIndexForm($user)) {
             throw new AuthorizationFailedException();
         }
@@ -40,8 +39,8 @@ class RelatedUsersIndex extends JsonApiController
         }
 
         list($offset, $limit) = $this->getOffsetAndLimit();
-        $resources = RelatedUser::findBySQL('`form_id` = ? LIMIT ? OFFSET ?', [$form->id, $limit, $offset]);
+        $relatedUsers = RelatedUser::findBySQL('`form_id` = ? LIMIT ? OFFSET ?', [$form->id, $limit, $offset]);
 
-        return $this->getPaginatedContentResponse($resources, count($resources));
+        return $this->getPaginatedContentResponse($relatedUsers, count($relatedUsers));
     }
 }

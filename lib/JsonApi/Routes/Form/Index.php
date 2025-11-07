@@ -28,14 +28,13 @@ class Index extends JsonApiController
     public function __invoke(Request $request, Response $response, $args)
     {
         $user = $this->getUser($request);
-
         if (!Authority::canIndexForm($user)) {
             throw new AuthorizationFailedException();
         }
 
         list($offset, $limit) = $this->getOffsetAndLimit();
-        $resources = Form::findBySQL('1 LIMIT ? OFFSET ?', [$limit, $offset]);
+        $form = Form::findBySQL('1 LIMIT ? OFFSET ?', [$limit, $offset]);
 
-        return $this->getPaginatedContentResponse($resources, count($resources));
+        return $this->getPaginatedContentResponse($form, count($form));
     }
 }
