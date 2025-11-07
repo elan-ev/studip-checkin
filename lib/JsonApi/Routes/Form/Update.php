@@ -13,6 +13,7 @@
 namespace StudipCheckin\JsonApi\Routes\Form;
 
 use JsonApi\Errors\AuthorizationFailedException;
+use JsonApi\Errors\RecordNotFoundException;
 use JsonApi\JsonApiController;
 use JsonApi\Routes\ValidationTrait;
 
