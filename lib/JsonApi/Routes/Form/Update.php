@@ -43,6 +43,7 @@ class Update extends JsonApiController
         }
 
         $updatedForm = $this->updateCheckinForm($form, $json);
+        $updatedForm->id = '';
         return $this->getContentResponse($updatedForm);
     }
 
@@ -66,6 +67,16 @@ class Update extends JsonApiController
         if (!self::arrayHas($json, 'data.attributes.structure')) {
             return 'Missing `structure` member of attributes block.';
         }
+        // Make sure filter id is not empty.
+        $filterId = self::arrayGet($json, 'data.attributes.filter-id', '');
+        if (empty($filterId)) {
+            return '`filter-id` is required.';
+        }
+        // Make sure user filter already exists and is correct.
+        $userFilter = new UserFilter($filterId);
+        if ($userFilter->getId() !== $filterId || $userFilter->range_type !== Form::class) {
+            return 'UserFilter not found!';
+        }
         // Make sure structure is valid json or empty.
         $structure = self::arrayGet($json, 'data.attributes.structure', '');
         $decoded = json_decode($structure, true);
@@ -82,6 +93,8 @@ class Update extends JsonApiController
 
         // We record this here, before we make any changes to the form object, in order to compare it later.
         $oldFilterId = $form->filter_id;
+        // We should capture the id before we store() it, in order to make sure the null identifier assertion works.
+        $formId = $form->id;
 
         // In case structure has been changed, we increase the version.
         if ($this->compareStructures($form->structure->getArrayCopy(), $structure) === false) {
@@ -96,15 +109,19 @@ class Update extends JsonApiController
 
         // We renew and cleanup after the form instance is saved.
         if ($oldFilterId !== $filterId) {
-            $this->renewRelatedUserEntries($form);
+            // We punch the userFilter with form id.
+            $newUserFilter = new UserFilter($filterId);
+            $newUserFilter->setRange(Form::class, $formId);
+            $newUserFilter->store();
+
+            $this->renewRelatedUserEntries($form, $newUserFilter->getUsers());
 
             // At this point we have no use for the old UserFilter anymore, so we remove it.
             $oldUserFilter = new UserFilter($oldFilterId);
-            $oldUserFilter->delete();
+            if ($oldUserFilter->range_type === Form::class && $oldUserFilter->range_id === $form->id) {
+                $oldUserFilter->delete();
+            }
         }
-
-        // We have to empty out the id in order to return the JsonApi content response.
-        $form->id = '';
 
         return $form;
     }
@@ -124,12 +141,8 @@ class Update extends JsonApiController
         return count($oldStructure) === count($newStructure);
     }
 
-    protected function renewRelatedUserEntries($form)
+    protected function renewRelatedUserEntries($form, $newAffectedUserIds = [])
     {
-        // We get the new filter and compile the list of affected users.
-        $userFilter = new UserFilter($form->filter_id);
-        $newAffectedUserIds = $userFilter->getUsers();
-
         $currentUsersIds = [];
         // We go through all related users of the form and remove those that are no longer affected.
         foreach ($form->related_users as $relatedUser) {

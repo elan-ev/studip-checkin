@@ -70,7 +70,17 @@ class Create extends JsonApiController
         if (!self::arrayHas($json, 'data.attributes.structure')) {
             return 'Missing `structure` member of attributes block.';
         }
-        // Make sure structure is valid json or empty.
+        // Make sure filter id is not empty.
+        $filterId = self::arrayGet($json, 'data.attributes.filter-id', '');
+        if (empty($filterId)) {
+            return '`filter-id` is required.';
+        }
+        // Make sure user filter already exists and is correct.
+        $userFilter = new UserFilter($filterId);
+        if ($userFilter->getId() !== $filterId || $userFilter->range_type !== Form::class) {
+            return 'UserFilter not found!';
+        }
+        // Make sure structure is valid json or not empty.
         $structure = self::arrayGet($json, 'data.attributes.structure', '');
         $decoded = json_decode($structure, true);
         if (empty($structure) || empty($decoded)) {
@@ -93,6 +103,8 @@ class Create extends JsonApiController
 
         // Here we then get the filter and compile the list of affected users.
         $userFilter = new UserFilter($filterId);
+        $userFilter->setRange(Form::class, $form->id);
+        $userFilter->store();
         $affectedUserIds = $userFilter->getUsers();
 
         // We create RelatedUser entries for all affected users.

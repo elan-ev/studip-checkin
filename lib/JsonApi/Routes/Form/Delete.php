@@ -35,6 +35,16 @@ class Delete extends JsonApiController
         if (!$form) {
             throw new RecordNotFoundException();
         }
+
+        // Here when deleting the form, we need to make sure no orphan entry stays behind.
+        $linkedUserFilter = new \UserFilter($form->filter_id);
+        if ($linkedUserFilter->getId() === $form->filter_id && $linkedUserFilter->range_type === Form::class &&
+            $linkedUserFilter->range_id === $form->id) {
+            $linkedUserFilter->delete();
+        }
+
+        // As the SimpleORMap relationship applies,
+        // by deleting form all related users and form user data entries will be deleted as well.
         $form->delete();
 
         return $this->getCodeResponse(204);
