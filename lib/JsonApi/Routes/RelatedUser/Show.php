@@ -25,6 +25,16 @@ class Show extends JsonApiController
 {
     public function __invoke(Request $request, Response $response, $args)
     {
+        $user = $this->getUser($request);
+        if (!Authority::canShowRelatedUser($user)) {
+            throw new AuthorizationFailedException();
+        }
 
+        $relatedUser = RelatedUser::find($args['id']);
+        if (!$relatedUser) {
+            throw new RecordNotFoundException();
+        }
+
+        return $this->getContentResponse($relatedUser);
     }
 }

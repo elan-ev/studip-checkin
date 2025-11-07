@@ -40,10 +40,10 @@ trait Routes
 
         // Related Users.
         $group->get('/checkin-related-users', \StudipCheckin\JsonApi\Routes\RelatedUser\Index::class);
-        $group->get('/checkin-related-users/{id}', \StudipCheckin\JsonApi\Routes\RelatedUser\Show::class);
-        $group->post('/checkin-related-users', \StudipCheckin\JsonApi\Routes\RelatedUser\Create::class);
-        $group->patch('/checkin-related-users/{id}', \StudipCheckin\JsonApi\Routes\RelatedUser\Update::class);
-        $group->delete('/checkin-related-users/{id}', \StudipCheckin\JsonApi\Routes\RelatedUser\Delete::class);
+        $group->get('/checkin-related-user/{id}', \StudipCheckin\JsonApi\Routes\RelatedUser\Show::class);
+        $group->post('/checkin-related-user', \StudipCheckin\JsonApi\Routes\RelatedUser\Create::class);
+        $group->patch('/checkin-related-user/{id}', \StudipCheckin\JsonApi\Routes\RelatedUser\Update::class);
+        $group->delete('/checkin-related-user/{id}', \StudipCheckin\JsonApi\Routes\RelatedUser\Delete::class);
     }
     public function registerUnauthenticatedRoutes(RouteCollectorProxy $group)
     {

@@ -27,6 +27,14 @@ class Index extends JsonApiController
 
     public function __invoke(Request $request, Response $response, $args)
     {
+        $user = $this->getUser($request);
+        if (!Authority::canIndexRelatedUsers($user)) {
+            throw new AuthorizationFailedException();
+        }
 
+        list($offset, $limit) = $this->getOffsetAndLimit();
+        $relatedUsers = RelatedUser::findBySQL('1 LIMIT ? OFFSET ?', [$limit, $offset]);
+
+        return $this->getPaginatedContentResponse($relatedUsers, count($relatedUsers));
     }
 }

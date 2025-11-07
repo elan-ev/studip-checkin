@@ -42,4 +42,29 @@ class Authority
     {
         return $GLOBALS['perm']->have_perm('admin', $user->id);
     }
+
+    public static function canIndexRelatedUsers(User $user): bool
+    {
+        return $GLOBALS['perm']->have_perm('admin', $user->id);
+    }
+
+    public static function canShowRelatedUser(User $user): bool
+    {
+        return $GLOBALS['perm']->have_perm('admin', $user->id);
+    }
+
+    public static function canDeleteRelatedUser(User $user): bool
+    {
+        return $GLOBALS['perm']->have_perm('admin', $user->id);
+    }
+
+    public static function canCreateRelatedUser(User $user): bool
+    {
+        return $GLOBALS['perm']->have_perm('admin', $user->id);
+    }
+
+    public static function canUpdateRelatedUser(User $user): bool
+    {
+        return $GLOBALS['perm']->have_perm('admin', $user->id);
+    }
 }
