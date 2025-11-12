@@ -23,10 +23,10 @@ trait Routes
     {
         // Forms.
         $group->get('/checkin-forms', \StudipCheckin\JsonApi\Routes\Form\Index::class);
-        $group->get('/checkin-form/{id}', \StudipCheckin\JsonApi\Routes\Form\Show::class);
-        $group->post('/checkin-form', \StudipCheckin\JsonApi\Routes\Form\Create::class);
-        $group->patch('/checkin-form/{id}', \StudipCheckin\JsonApi\Routes\Form\Update::class);
-        $group->delete('/checkin-form/{id}', \StudipCheckin\JsonApi\Routes\Form\Delete::class);
+        $group->get('/checkin-forms/{id}', \StudipCheckin\JsonApi\Routes\Form\Show::class);
+        $group->post('/checkin-forms', \StudipCheckin\JsonApi\Routes\Form\Create::class);
+        $group->patch('/checkin-forms/{id}', \StudipCheckin\JsonApi\Routes\Form\Update::class);
+        $group->delete('/checkin-forms/{id}', \StudipCheckin\JsonApi\Routes\Form\Delete::class);
         // Extra related routes for Forms.
         $group->get('/checkin-form/{id}/related-users', \StudipCheckin\JsonApi\Routes\Form\RelatedUsersIndex::class);
         $group->get('/checkin-form/{id}/form-user-data', \StudipCheckin\JsonApi\Routes\Form\FormUserDataIndex::class);
@@ -40,10 +40,10 @@ trait Routes
 
         // Related Users.
         $group->get('/checkin-related-users', \StudipCheckin\JsonApi\Routes\RelatedUser\Index::class);
-        $group->get('/checkin-related-user/{id}', \StudipCheckin\JsonApi\Routes\RelatedUser\Show::class);
-        $group->post('/checkin-related-user', \StudipCheckin\JsonApi\Routes\RelatedUser\Create::class);
-        $group->patch('/checkin-related-user/{id}', \StudipCheckin\JsonApi\Routes\RelatedUser\Update::class);
-        $group->delete('/checkin-related-user/{id}', \StudipCheckin\JsonApi\Routes\RelatedUser\Delete::class);
+        $group->get('/checkin-related-users/{id}', \StudipCheckin\JsonApi\Routes\RelatedUser\Show::class);
+        $group->post('/checkin-related-users', \StudipCheckin\JsonApi\Routes\RelatedUser\Create::class);
+        $group->patch('/checkin-related-users/{id}', \StudipCheckin\JsonApi\Routes\RelatedUser\Update::class);
+        $group->delete('/checkin-related-users/{id}', \StudipCheckin\JsonApi\Routes\RelatedUser\Delete::class);
     }
     public function registerUnauthenticatedRoutes(RouteCollectorProxy $group)
     {
