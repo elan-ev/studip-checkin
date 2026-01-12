@@ -44,6 +44,10 @@ trait Routes
         $group->post('/checkin-related-users', \StudipCheckin\JsonApi\Routes\RelatedUser\Create::class);
         $group->patch('/checkin-related-users/{id}', \StudipCheckin\JsonApi\Routes\RelatedUser\Update::class);
         $group->delete('/checkin-related-users/{id}', \StudipCheckin\JsonApi\Routes\RelatedUser\Delete::class);
+
+        // User Filter Fields.
+        $group->get('/checkin-user-filter-fields', \StudipCheckin\JsonApi\Routes\UserFilter\UserFilterFieldsIndex::class);
+        $group->post('/checkin-user-filters', \StudipCheckin\JsonApi\Routes\UserFilter\UserFiltersCreate::class);
     }
     public function registerUnauthenticatedRoutes(RouteCollectorProxy $group)
     {

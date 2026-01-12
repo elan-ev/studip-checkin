@@ -61,50 +61,61 @@ class Create extends JsonApiController
         if (!self::arrayHas($json, 'data.attributes')) {
             return 'Missing `attributes` member of data block.';
         }
-        if (!self::arrayHas($json, 'data.attributes.filter-id')) {
-            return 'Missing `filter-id` member of attributes block.';
-        }
         if (!self::arrayHas($json, 'data.attributes.name')) {
             return 'Missing `name` member of attributes block.';
         }
         if (!self::arrayHas($json, 'data.attributes.structure')) {
             return 'Missing `structure` member of attributes block.';
         }
-        // Make sure filter id is not empty.
-        $filterId = self::arrayGet($json, 'data.attributes.filter-id', '');
-        if (empty($filterId)) {
-            return '`filter-id` is required.';
-        }
-        // Make sure user filter already exists and is correct.
-        $userFilter = new UserFilter($filterId);
-        if ($userFilter->getId() !== $filterId || $userFilter->range_type !== Form::class) {
-            return 'UserFilter not found!';
-        }
         // Make sure structure is valid json or not empty.
         $structure = self::arrayGet($json, 'data.attributes.structure', '');
         $decoded = json_decode($structure, true);
-        if (empty($structure) || empty($decoded)) {
+        if (empty($structure) || is_null($decoded)) {
             return 'Invalid `structure` value.';
+        }
+
+        // We use filter fields instead of filter id!
+        if (!self::arrayHas($json, 'data.attributes.filter-fields')) {
+            return 'Missing `filter-fields` member of attributes block.';
+        }
+        // Make sure filter fields is not empty.
+        $fields = self::arrayGet($json, 'data.attributes.filter-fields', null);
+        if (empty($fields)) {
+            return '`filter-fields` are required.';
         }
     }
 
     private function createCheckinForm($json)
     {
-        $filterId = self::arrayGet($json, 'data.attributes.filter-id', '');
         $name = self::arrayGet($json, 'data.attributes.name', '');
         $structure = self::arrayGet($json, 'data.attributes.structure', '');
 
+        // Here we then get the filter and compile the list of affected users.
+        $filterFields = self::arrayGet($json, 'data.attributes.filter-fields', []);
+        $userFilter = new UserFilter();
+        $userFilter->fields = [];
+        foreach ($filterFields as $field) {
+            $classname = $field['attributes']['type'];
+            $f = new $classname();
+            if (!empty($field['id'])) {
+                $f->setId($field['id']);
+            }
+            $f->setCompareOperator($field['attributes']['compare-operator']);
+            $f->setValue($field['attributes']['value']);
+            $userFilter->addField($f);
+        }
+        $userFilter->store();
+
         $form = new Form();
-        $form->filter_id = $filterId;
+        $form->filter_id = $userFilter->getId();
         $form->name = $name;
         $form->structure = $structure;
         $form->version = 1;
         $form->store();
 
-        // Here we then get the filter and compile the list of affected users.
-        $userFilter = new UserFilter($filterId);
         $userFilter->setRange(Form::class, $form->id);
         $userFilter->store();
+
         $affectedUserIds = $userFilter->getUsers();
 
         // We create RelatedUser entries for all affected users.

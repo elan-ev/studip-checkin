@@ -67,4 +67,14 @@ class Authority
     {
         return $GLOBALS['perm']->have_perm('admin', $user->id);
     }
+
+    public static function canIndexUserFilterFields(User $user): bool
+    {
+        return $GLOBALS['perm']->have_perm('admin', $user->id);
+    }
+
+    public static function canCreateUserFilters(User $user): bool
+    {
+        return $GLOBALS['perm']->have_perm('admin', $user->id);
+    }
 }

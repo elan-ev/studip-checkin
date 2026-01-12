@@ -59,70 +59,62 @@ class Update extends JsonApiController
         if (!self::arrayHas($json, 'data.attributes')) {
             return 'Missing `attributes` member of data block.';
         }
-        if (!self::arrayHas($json, 'data.attributes.filter-id')) {
-            return 'Missing `filter-id` member of attributes block.';
-        }
         if (!self::arrayHas($json, 'data.attributes.name')) {
             return 'Missing `name` member of attributes block.';
         }
         if (!self::arrayHas($json, 'data.attributes.structure')) {
             return 'Missing `structure` member of attributes block.';
         }
-        // Make sure filter id is not empty.
-        $filterId = self::arrayGet($json, 'data.attributes.filter-id', '');
-        if (empty($filterId)) {
-            return '`filter-id` is required.';
-        }
-        // Make sure user filter already exists and is correct.
-        $userFilter = new UserFilter($filterId);
-        if ($userFilter->getId() !== $filterId || $userFilter->range_type !== Form::class) {
-            return 'UserFilter not found!';
-        }
         // Make sure structure is valid json or empty.
         $structure = self::arrayGet($json, 'data.attributes.structure', '');
         $decoded = json_decode($structure, true);
-        if (empty($structure) || empty($decoded)) {
+        if (empty($structure) || is_null($decoded)) {
             return 'Invalid `structure` value.';
+        }
+
+        $filterFields = self::arrayGet($json, 'data.attributes.filter-fields', null);
+        // validating filter-fields if provided, to be array!
+        if (!is_null($filterFields)) {
+            if (!is_array($filterFields) || empty($filterFields)) {
+                return 'Invalid `filter-fields` value.';
+            }
         }
     }
 
     protected function updateCheckinForm($form, $json)
     {
-        $filterId = self::arrayGet($json, 'data.attributes.filter-id', '');
         $name = self::arrayGet($json, 'data.attributes.name', '');
         $structure = self::arrayGet($json, 'data.attributes.structure', '');
 
-        // We record this here, before we make any changes to the form object, in order to compare it later.
-        $oldFilterId = $form->filter_id;
-        // We should capture the id before we store() it, in order to make sure the null identifier assertion works.
-        $formId = $form->id;
+        $filterFields = self::arrayGet($json, 'data.attributes.filter-fields', []);
+        if (!empty($filterFields)) {
+            $oldFilterId = $form->filter_id;
+            $userFilter = new UserFilter($oldFilterId);
+            $userFilter->fields = [];
+            foreach ($filterFields as $field) {
+                $classname = $field['attributes']['type'];
+                $f = new $classname();
+                if (!empty($field['id'])) {
+                    $f->setId($field['id']);
+                }
+                $f->setCompareOperator($field['attributes']['compare-operator']);
+                $f->setValue($field['attributes']['value']);
+                $userFilter->addField($f);
+            }
+            $userFilter->store();
+
+            $this->renewRelatedUserEntries($form, $userFilter->getUsers());
+        }
 
         // In case structure has been changed, we increase the version.
         if ($this->compareStructures($form->structure->getArrayCopy(), $structure) === false) {
             $form->version += 1;
         }
 
-        $form->filter_id = $filterId;
         $form->name = $name;
         $form->structure = $structure;
 
         $form->store();
-
-        // We renew and cleanup after the form instance is saved.
-        if ($oldFilterId !== $filterId) {
-            // We punch the userFilter with form id.
-            $newUserFilter = new UserFilter($filterId);
-            $newUserFilter->setRange(Form::class, $formId);
-            $newUserFilter->store();
-
-            $this->renewRelatedUserEntries($form, $newUserFilter->getUsers());
-
-            // At this point we have no use for the old UserFilter anymore, so we remove it.
-            $oldUserFilter = new UserFilter($oldFilterId);
-            if ($oldUserFilter->range_type === Form::class && $oldUserFilter->range_id === $form->id) {
-                $oldUserFilter->delete();
-            }
-        }
 
         return $form;
     }
