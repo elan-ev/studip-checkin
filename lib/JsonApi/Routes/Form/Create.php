@@ -38,13 +38,6 @@ class Create extends JsonApiController
             throw new AuthorizationFailedException();
         }
 
-        // Check for conflicts (e.g., existing form with same filter and name)
-        if (!empty(Form::findBySQL('`filter_id` = ?', [
-            self::arrayGet($json, 'data.attributes.filter-id', ''),
-        ]))) {
-            throw new ConflictException('A form with the same filter already exists.');
-        }
-
         $form = $this->createCheckinForm($json);
 
         return $this->getCreatedResponse($form);
