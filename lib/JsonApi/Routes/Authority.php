@@ -77,4 +77,46 @@ class Authority
     {
         return $GLOBALS['perm']->have_perm('admin', $user->id);
     }
+
+    public static function canCreateFormUserData(User $user): bool
+    {
+        return $GLOBALS['perm']->have_perm('user', $user->id);
+    }
+
+    public static function canIndexUserForms(User $user, User $requesting): bool
+    {
+        return $GLOBALS['perm']->have_perm('user', $user->id) && $user->id === $requesting->id;
+    }
+
+    public static function canDeleteFormUserData(User $user, User $requesting): bool
+    {
+        if ($GLOBALS['perm']->have_perm('admin', $requesting->id)) {
+            return true;
+        }
+
+        return $GLOBALS['perm']->have_perm('user', $user->id) && $user->id === $requesting->id;
+    }
+
+    public static function canIndexFormUserData(User $user): bool
+    {
+        return $GLOBALS['perm']->have_perm('admin', $user->id);
+    }
+
+    public static function canShowFormUserData(User $user, User $requesting): bool
+    {
+        if ($GLOBALS['perm']->have_perm('admin', $requesting->id)) {
+            return true;
+        }
+
+        return $GLOBALS['perm']->have_perm('user', $user->id) && $user->id === $requesting->id;
+    }
+
+    public static function canUpdateFormUserData(User $user, User $requesting): bool
+    {
+        if ($GLOBALS['perm']->have_perm('admin', $requesting->id)) {
+            return true;
+        }
+
+        return $GLOBALS['perm']->have_perm('user', $user->id) && $user->id === $requesting->id;
+    }
 }

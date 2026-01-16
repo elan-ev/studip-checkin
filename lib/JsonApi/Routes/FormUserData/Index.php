@@ -25,8 +25,19 @@ class Index extends JsonApiController
 {
     protected $allowedPagingParameters = ['offset', 'limit'];
 
+    /**
+     * @inheritDoc
+     */
     public function __invoke(Request $request, Response $response, $args)
     {
+        $user = $this->getUser($request);
+        if (!Authority::canIndexFormUserData($user)) {
+            throw new AuthorizationFailedException();
+        }
 
+        list($offset, $limit) = $this->getOffsetAndLimit();
+        $formUserData = FormUserData::findBySQL('1 LIMIT ? OFFSET ?', [$limit, $offset]);
+
+        return $this->getPaginatedContentResponse($formUserData, count($formUserData));
     }
 }

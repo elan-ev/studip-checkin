@@ -41,4 +41,32 @@ class RelatedUser extends SimpleORMap
 
         parent::configure($config);
     }
+
+    public static function hasActiveRecord(string $userId): bool
+    {
+        return self::countBySQL('user_id = ? AND active = 1', [$userId]) > 0;
+    }
+
+    public static function hasAnyRecordByForm(string $userId, int $formId): bool
+    {
+        return self::countBySQL('user_id = ? AND form_id = ?', [$userId, $formId]) > 0;
+    }
+
+    public static function getActiveFormsByUser(string $userId): array
+    {
+        $records = self::findBySQL('user_id = ? AND active = 1', [$userId]);
+        $forms = [];
+        foreach ($records as $record) {
+            $forms[] = $record->form;
+        }
+        return $forms;
+    }
+
+    public static function findActiveRecordByUserAndForm(string $userId, int $formId): ?self
+    {
+        return self::findOneBySQL(
+            'user_id = ? AND form_id = ? AND active = 1',
+            [$userId, $formId]
+        );
+    }
 }

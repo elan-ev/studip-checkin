@@ -31,6 +31,9 @@ trait Routes
         $group->get('/checkin-form/{id}/related-users', \StudipCheckin\JsonApi\Routes\Form\RelatedUsersIndex::class);
         $group->get('/checkin-form/{id}/form-user-data', \StudipCheckin\JsonApi\Routes\Form\FormUserDataIndex::class);
 
+        // Get related users active forms.
+        $group->get('/checkin-user-forms/{id}', \StudipCheckin\JsonApi\Routes\Form\UserFormsIndex::class);
+
         // Form User Data.
         $group->get('/checkin-form-user-data', \StudipCheckin\JsonApi\Routes\FormUserData\Index::class);
         $group->get('/checkin-form-user-data/{id}', \StudipCheckin\JsonApi\Routes\FormUserData\Show::class);

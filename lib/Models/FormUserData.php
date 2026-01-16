@@ -46,4 +46,12 @@ class FormUserData extends SimpleORMap
 
         parent::configure($config);
     }
+
+    public static function findByUserFormVersion(int $formId, string $userId, int $formVersion): ?self
+    {
+        return self::findOneBySQL(
+            'form_id = ? AND user_id = ? AND form_version = ?',
+            [$formId, $userId, $formVersion]
+        );
+    }
 }

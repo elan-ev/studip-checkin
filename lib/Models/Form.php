@@ -43,4 +43,9 @@ class Form extends SimpleORMap
 
         parent::configure($config);
     }
+
+    public static function getAll(): array
+    {
+        return self::findBySQL('1');
+    }
 }

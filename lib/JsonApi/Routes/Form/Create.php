@@ -21,6 +21,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 use StudipCheckin\JsonApi\Routes\Authority;
+use StudipCheckin\JsonApi\Schemas\FormSchema;
 use StudipCheckin\Models\Form;
 
 use UserFilter;
@@ -28,6 +29,12 @@ use UserFilter;
 class Create extends JsonApiController
 {
     use ValidationTrait;
+
+    protected $allowedIncludePaths = [
+        FormSchema::REL_FORM_USER_DATA,
+        FormSchema::REL_RELATED_USERS,
+        FormSchema::REL_USER_FILTER,
+    ];
 
     public function __invoke(Request $request, Response $response, $args)
     {
@@ -61,10 +68,9 @@ class Create extends JsonApiController
             return 'Missing `structure` member of attributes block.';
         }
         // Make sure structure is valid json or not empty.
-        $structure = self::arrayGet($json, 'data.attributes.structure', '');
-        $decoded = json_decode($structure, true);
-        if (empty($structure) || is_null($decoded)) {
-            return 'Invalid `structure` value.';
+        $structure = self::arrayGet($json, 'data.attributes.structure', []);
+        if (empty($structure)) {
+            return '`structure` is required.';
         }
 
         // We use filter fields instead of filter id!
@@ -81,7 +87,7 @@ class Create extends JsonApiController
     private function createCheckinForm($json)
     {
         $name = self::arrayGet($json, 'data.attributes.name', '');
-        $structure = self::arrayGet($json, 'data.attributes.structure', '');
+        $structure = self::arrayGet($json, 'data.attributes.structure', []);
 
         // Here we then get the filter and compile the list of affected users.
         $filterFields = self::arrayGet($json, 'data.attributes.filter-fields', []);

@@ -12,6 +12,11 @@
  */
 final class InitStudipCheckin extends Migration
 {
+    public function description()
+    {
+        return 'Init database tables for StudipCheckin plugin.';
+    }
+
     public function up()
     {
         $db = DBManager::get();

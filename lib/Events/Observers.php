@@ -13,6 +13,8 @@
 
 namespace StudipCheckin\Events;
 
+use StudipCheckin\Helper\CheckinBrain;
+
 class Observers {
     /**
      * Subscribe to user login event.
@@ -23,15 +25,14 @@ class Observers {
      * @param string $userId The ID of the logged-in user.
      */
     public static function subscribeToUserLogin($event, $userId) {
-        $user = \User::find($userId);
+        // Check if user has pending form.
+        if (CheckinBrain::ensureUserHasPendingForm($userId)) {
+            // Prepare redirect URL to checkin page, in order to show forms.
+            $url = \PluginEngine::getURL('StudipCheckin', [], 'redirect/index/' . $userId);
 
-        // Look to see if the user belongs to any filtered group and if the user has any pending form to fill.
-
-        // Then Redirect.
-        $url = \PluginEngine::getURL('StudipCheckin', [], 'redirect/index/' . $userId);
-
-        // The only way to redirect after login in Stud.IP is to set this session variable.
-        $_SESSION['redirect_after_login'] = $url;
+            // The only way to redirect after login in Stud.IP is to set this session variable.
+            $_SESSION['redirect_after_login'] = $url;
+        }
     }
 
     /**
@@ -43,6 +44,6 @@ class Observers {
      * @param SimpleORMap $user the created user SimpleORMap object.
      */
     public static function subscribeToUserCreated($event, $user) {
-        // Check if user fits in any filter criteria and then save it!
+        CheckinBrain::checkAndRecordRelatedUser($user->id);
     }
 }

@@ -51,7 +51,7 @@ class FormUserDataSchema extends \JsonApi\Schemas\SchemaProvider
         return [
             'form_id'  => (int) $resource['form_id'],
             'user_id' => (string) $resource['user_id'],
-            'form_data' => (string) $resource['form_data'],
+            'form_data' => $resource['form_data']->getArrayCopy(),
             'form_version' => (int) $resource['form_version'],
         ];
     }

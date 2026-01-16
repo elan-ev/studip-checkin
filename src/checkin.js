@@ -3,7 +3,12 @@ import App from './CheckinApp.vue';
 import { createGettext } from 'vue3-gettext';
 import { createPinia } from 'pinia';
 
-const app = createApp(App);
+const el = document.getElementById('studip-checkin-app');
+const userId = el?.dataset?.userId || null;
+
+const app = createApp(App, {
+  userId,
+});
 
 const gettext = createGettext({
     availableLanguages: {

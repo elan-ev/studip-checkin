@@ -21,13 +21,22 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 use StudipCheckin\JsonApi\Routes\Authority;
+use StudipCheckin\JsonApi\Schemas\FormSchema;
 use StudipCheckin\Models\Form;
+use StudipCheckin\Models\FormUserData;
+use StudipCheckin\Models\RelatedUser;
 
 use UserFilter;
 
 class Update extends JsonApiController
 {
     use ValidationTrait;
+
+    protected $allowedIncludePaths = [
+        FormSchema::REL_FORM_USER_DATA,
+        FormSchema::REL_RELATED_USERS,
+        FormSchema::REL_USER_FILTER,
+    ];
 
     public function __invoke(Request $request, Response $response, $args)
     {
@@ -66,10 +75,9 @@ class Update extends JsonApiController
             return 'Missing `structure` member of attributes block.';
         }
         // Make sure structure is valid json or empty.
-        $structure = self::arrayGet($json, 'data.attributes.structure', '');
-        $decoded = json_decode($structure, true);
-        if (empty($structure) || is_null($decoded)) {
-            return 'Invalid `structure` value.';
+        $structure = self::arrayGet($json, 'data.attributes.structure', []);
+        if (empty($structure)) {
+            return '`structure` is required.';
         }
 
         $filterFields = self::arrayGet($json, 'data.attributes.filter-fields', null);
@@ -84,7 +92,7 @@ class Update extends JsonApiController
     protected function updateCheckinForm($form, $json)
     {
         $name = self::arrayGet($json, 'data.attributes.name', '');
-        $structure = self::arrayGet($json, 'data.attributes.structure', '');
+        $structure = self::arrayGet($json, 'data.attributes.structure', []);
 
         $filterFields = self::arrayGet($json, 'data.attributes.filter-fields', []);
         if (!empty($filterFields)) {
@@ -119,10 +127,9 @@ class Update extends JsonApiController
         return $form;
     }
 
-    protected function compareStructures($oldStructure, $newStructureStr): bool
+    protected function compareStructures(array $oldStructure, array $newStructure): bool
     {
         ksort($oldStructure);
-        $newStructure = json_decode($newStructureStr, true);
         ksort($newStructure);
 
         foreach ($oldStructure as $key => $value) {
@@ -140,12 +147,15 @@ class Update extends JsonApiController
         // We go through all related users of the form and remove those that are no longer affected.
         foreach ($form->related_users as $relatedUser) {
             if (!in_array($relatedUser->user_id, $newAffectedUserIds)) {
-                // We first remove the form user data entries.
-                $formUserDataEntries = \StudipCheckin\Models\FormUserData::findBySQL('`form_id` = ? AND `user_id` = ?',
-                    [$form->id, $relatedUser->user_id]);
+                // TODO: We have to decide whether to remove associated form user data or not, currently not!
+                /* // We first remove the form user data entries.
+                $formUserDataEntries = FormUserData::findBySQL(
+                    '`form_id` = ? AND `user_id` = ?',
+                    [$form->id, $relatedUser->user_id]
+                );
                 foreach ($formUserDataEntries as $formUserData) {
                     $formUserData->delete();
-                }
+                } */
                 // Then we remove the related user entry.
                 $relatedUser->delete();
             } else {
@@ -159,7 +169,7 @@ class Update extends JsonApiController
             if (in_array($userId, $currentUsersIds)) {
                 continue;
             }
-            $relatedUser = new \StudipCheckin\Models\RelatedUser();
+            $relatedUser = new RelatedUser();
             $relatedUser->form_id = $form->id;
             $relatedUser->user_id = $userId;
             $relatedUser->store();

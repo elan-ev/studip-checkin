@@ -19,11 +19,17 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 use StudipCheckin\JsonApi\Routes\Authority;
+use StudipCheckin\JsonApi\Schemas\FormSchema;
 use StudipCheckin\Models\Form;
 
 class Index extends JsonApiController
 {
     protected $allowedPagingParameters = ['offset', 'limit'];
+    protected $allowedIncludePaths = [
+        FormSchema::REL_FORM_USER_DATA,
+        FormSchema::REL_RELATED_USERS,
+        FormSchema::REL_USER_FILTER,
+    ];
 
     public function __invoke(Request $request, Response $response, $args)
     {

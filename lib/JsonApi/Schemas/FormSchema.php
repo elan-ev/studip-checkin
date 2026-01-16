@@ -54,7 +54,7 @@ class FormSchema extends \JsonApi\Schemas\SchemaProvider
         return [
             'filter_id'  => (string) $resource['filter_id'],
             'name' => (string) $resource['name'],
-            'structure' => (string) $resource['structure'],
+            'structure' => $resource['structure']->getArrayCopy(),
             'version' => (string) $resource['version'],
         ];
     }
@@ -66,45 +66,87 @@ class FormSchema extends \JsonApi\Schemas\SchemaProvider
     {
         $relationships = [];
 
+        $relationships = $this->addUserFilterRelationship(
+            $relationships,
+            $resource,
+            $this->shouldInclude($context, self::REL_USER_FILTER)
+        );
+
+        $relationships = $this->addRelatedUsersRelationship(
+            $relationships,
+            $resource,
+            $this->shouldInclude($context, self::REL_RELATED_USERS)
+        );
+
+        $relationships = $this->addFormUserDataRelationship(
+            $relationships,
+            $resource,
+            $this->shouldInclude($context, self::REL_FORM_USER_DATA)
+        );
+
+        return $relationships;
+    }
+
+    private function addUserFilterRelationship(array $relationships, $resource, bool $includeData): array
+    {
         $userFilter = new UserFilter($resource['filter_id']);
-        $relationships[self::REL_USER_FILTER] = $userFilter
-            ? [
-                self::RELATIONSHIP_LINKS => [
-                    Link::RELATED => $this->createLinkToResource($userFilter),
-                ],
-                self::RELATIONSHIP_DATA => $userFilter,
-            ]
-            : [self::RELATIONSHIP_DATA => null];
+        $relation = [
+            self::RELATIONSHIP_LINKS => [
+                Link::RELATED => $this->createLinkToResource($userFilter),
+            ],
+        ];
 
+        if ($includeData) {
+            $relation[self::RELATIONSHIP_DATA] = $userFilter;
+        }
+
+        $relationships[self::REL_USER_FILTER] = $relation;
+
+        return $relationships;
+    }
+
+    private function addRelatedUsersRelationship(array $relationships, $resource, bool $includeData): array
+    {
         $relatedUsers = $resource->related_users;
-        $relationships[self::REL_RELATED_USERS] = $relatedUsers
-            ? [
-                self::RELATIONSHIP_LINKS => [
-                    Link::RELATED => $this->getFactory()->createLink(
-                        true,
-                        $this->getSelfSubUrl($resource) . '/' . self::REL_RELATED_USERS,
-                        true,
-                        []
-                    ),
-                ],
-                self::RELATIONSHIP_DATA => $relatedUsers,
-            ]
-            : [self::RELATIONSHIP_DATA => null];
+        $relation = [
+            self::RELATIONSHIP_LINKS => [
+                Link::RELATED => $this->getFactory()->createLink(
+                    true,
+                    $this->getSelfSubUrl($resource) . '/' . self::REL_RELATED_USERS,
+                    true,
+                    []
+                ),
+            ],
+        ];
 
+        if ($includeData) {
+            $relation[self::RELATIONSHIP_DATA] = $relatedUsers;
+        }
+
+        $relationships[self::REL_RELATED_USERS] = $relation;
+
+        return $relationships;
+    }
+
+    private function addFormUserDataRelationship(array $relationships, $resource, bool $includeData): array
+    {
         $formUserData = $resource->form_user_data;
-        $relationships[self::REL_FORM_USER_DATA] = $formUserData
-            ? [
-                self::RELATIONSHIP_LINKS => [
-                    Link::RELATED => $this->getFactory()->createLink(
-                        true,
-                        $this->getSelfSubUrl($resource) . '/' . self::REL_FORM_USER_DATA,
-                        true,
-                        []
-                    ),
-                ],
-                self::RELATIONSHIP_DATA => $formUserData,
-            ]
-            : [self::RELATIONSHIP_DATA => null];
+        $relation = [
+            self::RELATIONSHIP_LINKS => [
+                Link::RELATED => $this->getFactory()->createLink(
+                    true,
+                    $this->getSelfSubUrl($resource) . '/' . self::REL_FORM_USER_DATA,
+                    true,
+                    []
+                ),
+            ],
+        ];
+
+        if ($includeData) {
+            $relation[self::RELATIONSHIP_DATA] = $formUserData;
+        }
+
+        $relationships[self::REL_FORM_USER_DATA] = $relation;
 
         return $relationships;
     }
