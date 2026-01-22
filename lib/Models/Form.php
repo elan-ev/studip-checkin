@@ -19,6 +19,8 @@ use JSONArrayObject;
  * @property string $name
  * @property \JSONArrayObject $structure database column
  * @property int $version
+ * @property int $start_date
+ * @property int $end_date
  */
 
 class Form extends SimpleORMap

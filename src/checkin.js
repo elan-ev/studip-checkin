@@ -2,6 +2,7 @@ import { createApp } from 'vue';
 import App from './CheckinApp.vue';
 import { createGettext } from 'vue3-gettext';
 import { createPinia } from 'pinia';
+import { router } from './router/checkin';
 
 const el = document.getElementById('studip-checkin-app');
 const userId = el?.dataset?.userId || null;
@@ -21,5 +22,7 @@ app.use(gettext);
 
 const pinia = createPinia();
 app.use(pinia);
+
+app.use(router);
 
 app.mount('#studip-checkin-app');

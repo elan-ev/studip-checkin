@@ -1,7 +1,8 @@
 import { createApp } from 'vue';
-import App from './CheckinAdminApp.vue';
+import App from './CheckinApp.vue';
 import { createGettext } from 'vue3-gettext';
 import { createPinia } from 'pinia';
+import { router } from './router/checkin-admin';
 
 const app = createApp(App);
 
@@ -16,5 +17,7 @@ app.use(gettext);
 
 const pinia = createPinia();
 app.use(pinia);
+
+app.use(router);
 
 app.mount('#studip-checkin-admin-app');

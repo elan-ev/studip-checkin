@@ -52,10 +52,12 @@ class FormSchema extends \JsonApi\Schemas\SchemaProvider
     public function getAttributes($resource, ContextInterface $context): iterable
     {
         return [
-            'filter_id'  => (string) $resource['filter_id'],
+            'filter-id'  => (string) $resource['filter_id'],
             'name' => (string) $resource['name'],
             'structure' => $resource['structure']->getArrayCopy(),
-            'version' => (string) $resource['version'],
+            'version' => (int) $resource['version'],
+            'start-date' => $resource['start_date'] ? date('c', $resource['start_date']) : null,
+            'end-date' => $resource['end_date'] ? date('c', $resource['end_date']) : null,
         ];
     }
 

@@ -28,8 +28,8 @@ trait Routes
         $group->patch('/checkin-forms/{id}', \StudipCheckin\JsonApi\Routes\Form\Update::class);
         $group->delete('/checkin-forms/{id}', \StudipCheckin\JsonApi\Routes\Form\Delete::class);
         // Extra related routes for Forms.
-        $group->get('/checkin-form/{id}/related-users', \StudipCheckin\JsonApi\Routes\Form\RelatedUsersIndex::class);
-        $group->get('/checkin-form/{id}/form-user-data', \StudipCheckin\JsonApi\Routes\Form\FormUserDataIndex::class);
+        $group->get('/checkin-forms/{id}/related-users', \StudipCheckin\JsonApi\Routes\Form\RelatedUsersIndex::class);
+        $group->get('/checkin-forms/{id}/form-user-data', \StudipCheckin\JsonApi\Routes\Form\FormUserDataIndex::class);
 
         // Get related users active forms.
         $group->get('/checkin-user-forms/{id}', \StudipCheckin\JsonApi\Routes\Form\UserFormsIndex::class);

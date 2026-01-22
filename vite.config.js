@@ -9,13 +9,13 @@ export default defineConfig(({ mode }) => {
             alias: {
               "@": fileURLToPath(new URL("./src", import.meta.url)), // Alias für "src"-Ordner
             },
-          },
+        },
         build: {
             rollupOptions: {
-              input: {
-                'studip-checkin': 'src/checkin.js',
-                'studip-checkin-admin': 'src/checkin-admin.js',
-              },
+                input: {
+                    'studip-checkin': 'src/checkin.js',
+                    'studip-checkin-admin': 'src/checkin-admin.js',
+                },
                 output: {
                     entryFileNames: `[name].js`,
                     assetFileNames: (assetInfo) => {
@@ -26,7 +26,7 @@ export default defineConfig(({ mode }) => {
             },
         },
         define: {
-            'process.env.NODE_ENV': `"${mode}"` 
+            'process.env.NODE_ENV': `"${mode}"`
         },
     };
 });

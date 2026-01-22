@@ -87,12 +87,21 @@ class Update extends JsonApiController
                 return 'Invalid `filter-fields` value.';
             }
         }
+
+        if (!self::arrayHas($json, 'data.attributes.start-date')) {
+            return 'Missing `start-date` member of attributes block.';
+        }
+        if (!self::arrayHas($json, 'data.attributes.end-date')) {
+            return 'Missing `end-date` member of attributes block.';
+        }
     }
 
     protected function updateCheckinForm($form, $json)
     {
         $name = self::arrayGet($json, 'data.attributes.name', '');
         $structure = self::arrayGet($json, 'data.attributes.structure', []);
+        $startDate = self::arrayGet($json, 'data.attributes.start-date', 0);
+        $endDate = self::arrayGet($json, 'data.attributes.end-date', 0);
 
         $filterFields = self::arrayGet($json, 'data.attributes.filter-fields', []);
         if (!empty($filterFields)) {
@@ -121,6 +130,8 @@ class Update extends JsonApiController
 
         $form->name = $name;
         $form->structure = $structure;
+        $form->start_date = $startDate;
+        $form->end_date = $endDate;
 
         $form->store();
 
