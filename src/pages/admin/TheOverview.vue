@@ -19,7 +19,7 @@
     import { onMounted } from 'vue';
     import { useFormStore } from '@/store/form';
     import { useUserFilterStore } from '@/store/user-filter';
-    import FormsList from '../../components/admin/FormsList.vue';
+    import FormsList from '@/components/admin/FormsList.vue';
 
     const formStore = useFormStore();
     const userFilterStore = useUserFilterStore();

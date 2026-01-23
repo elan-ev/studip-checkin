@@ -10,6 +10,6 @@ const routes = [
 ];
 
 export const router = createRouter({
-    history: createMemoryHistory(),
+    history: createMemoryHistory(new URL(window.location.href).pathname),
     routes,
 });
