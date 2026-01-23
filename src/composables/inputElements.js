@@ -1,7 +1,7 @@
-export function useInputElements() {
+export default function useInputElements() {
     // TODO all configs, naming, more/better attributes?
 
-    elements = [ 
+    const elements = [
         {
             useCase: 'text',
             type: 'text',

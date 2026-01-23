@@ -1,13 +1,8 @@
 <template>
     <div class="form-elements-list" v-if="open">
         <ul>
-            <li v-for="element in elements" :key="element.id">
-                <button
-                    class="button add"
-                    @click="addElement(element)"
-                >
-                    {{ element.displayName }}
-                </button>
+            <li v-for="(element, index) in inputElements" :key="index">
+                <FormInputElement :type="element.type" @click="addElement(element)"/>
             </li>
         </ul>
     </div>
@@ -15,6 +10,10 @@
 
 <script setup>
     import { defineProps, defineEmits } from 'vue';
+    import useInputElements from '../../composables/inputElements';
+    import FormInputElement from './FormInputElement.vue';
+
+    const inputElements = useInputElements();
 
     const emit = defineEmits(['addElement']);
     const props = defineProps({
@@ -27,14 +26,6 @@
     const addElement = (element) => {
         emit('addElement', element);
     };
-
-    // TODO: Here comes the elements anf the button!
-    // Imaginary form elements for demonstration purposes.
-    const elements = [
-        { id: 'text', type: 'text', displayName: 'Text Field', payload: {}, relationIndices: [] },
-        { id: 'checkbox', type: 'checkbox', displayName: 'Checkbox Field', payload: {}, relationIndices: [] },
-        { id: 'email', type: 'email', displayName: 'Email Field', payload: {}, relationIndices: [] },
-    ];
 </script>
 
 <style>

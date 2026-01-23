@@ -26,9 +26,13 @@
   import FormElementsList from '@/components/admin/FormElementsList.vue';
   import FormEditor from '@/components/admin/FormEditor.vue';
   import FormSettings from '@/components/admin/FormSettings.vue';
+  import { storeToRefs } from 'pinia';
 
   const formStore = useFormStore();
   const formBuilderStore = useFormBuilderStore();
+
+  const { form } = storeToRefs(formBuilderStore);
+
   const route = useRoute();
   const router = useRouter();
 
@@ -60,10 +64,10 @@
   const saveForm = async () => {
     if (props.isNew) {
       // Logic to create a new form
-      await formStore.createForm(formBuilderStore.form);
+      await formStore.createForm(form.value);
     } else {
       // Logic to update the existing form
-      await formStore.updateForm(formBuilderStore.form.id, formBuilderStore.form);
+      await formStore.updateForm(form.value.id, form.value);
     }
     finishUpAndGoBack();
   };
