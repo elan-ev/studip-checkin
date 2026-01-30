@@ -18,8 +18,8 @@
                     <input type="text" id="form-title" v-model="form.name">
                 </label>
                 <label>
-                    {{ $gettext('Bescreibung') }}
-                    <textarea name="description" v-model="form.description"/>
+                    {{ $gettext('Beschreibung') }}
+                    <textarea name="description" v-model="formBuilderStore.form.description"/>
                 </label>
             </fieldset>
 

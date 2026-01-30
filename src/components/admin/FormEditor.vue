@@ -5,16 +5,7 @@
                 v-if="formBuilderStore.form?.structure?.length"
             >
                 <fieldset>
-                    <legend>{{ capitalize($gettext(element.type)) }}</legend>
-                    <label>
-                        <span class="required">
-                            {{ $gettext('Name') }}
-                        </span>
-                        <input
-                            type="text"
-                            v-model="element.name"
-                        />
-                    </label>
+                    <FormInput :element="element" />
                 </fieldset>
                 <FormEditorPlusButton
                     :index="index"
@@ -34,6 +25,8 @@
     import { defineEmits, capitalize, watch, watchEffect } from 'vue';
     import { useFormBuilderStore } from '@/store/form-builder';
     import FormEditorPlusButton from './FormEditorPlusButton.vue';
+    import FormInput from './FormInput.vue';
+
     const formBuilderStore = useFormBuilderStore();
     const emit = defineEmits(['addElement']);
 

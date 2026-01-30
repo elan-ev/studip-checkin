@@ -1,16 +1,17 @@
 <template>
-    <div class="checkin-add-input">
-        <div class="checkin-add-input-element">
-            {{ capitalize(type) }}
-        </div>
-    </div>
+<div class="checkin-add-input">
+    <button class="button add checkin-add-input-element">
+        {{ displayName }}
+    </button>
+</div>
 </template>
 <script setup>
-import { defineProps, capitalize, computed } from 'vue';
-import useInputElements from '@/composables/inputElements';
+import { defineProps, computed } from 'vue';
+import useInputElements from '../../composables/inputElements';
 
 const props = defineProps({
-    type: String
+    type: String,
+    displayName: String
 });
 
 const inputElements = useInputElements();
@@ -25,6 +26,6 @@ const currentElement = computed(() => {
     .checkin-add-input {
         margin: auto;
         padding: 2px;
-        border: solid gray;
+        border: 1px solid gray;
     }
 </style>

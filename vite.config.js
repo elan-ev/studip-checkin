@@ -11,6 +11,7 @@ export default defineConfig(({ mode }) => {
             },
         },
         build: {
+            sourcemap: true,
             rollupOptions: {
                 input: {
                     'studip-checkin': 'src/checkin.js',
