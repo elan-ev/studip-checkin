@@ -9,7 +9,7 @@ export const useUserFilterStore = defineStore('userFilterStore', () => {
     const errors = ref(false);
 
     function storeAppliedField(field) {
-        fields.value.set(String(field.id), field);
+        fields.value.set(String(field.attributes.id), field);
     }
 
     function clearAppliedFields() {
@@ -22,7 +22,7 @@ export const useUserFilterStore = defineStore('userFilterStore', () => {
     });
 
     function storeAvailableField(field) {
-        availableFields.value.set(String(field.id), field);
+        availableFields.value.set(String(field.type), field);
     }
 
     function clearAvailableFields() {
@@ -41,6 +41,7 @@ export const useUserFilterStore = defineStore('userFilterStore', () => {
      */
     async function fetchAvailableFields(context = 'StudipCheckin', target = '') {
         isLoading.value = true;
+        errors.value = false;
         const filter = {
             context,
             target,
@@ -75,6 +76,7 @@ export const useUserFilterStore = defineStore('userFilterStore', () => {
      */
     async function applyUserFilter(filters) {
         isLoading.value = true;
+        errors.value = false;
         try {
             const { data } = await api.post('checkin-user-filters', { filters: filters });
             if (data?.fields) {
@@ -91,6 +93,57 @@ export const useUserFilterStore = defineStore('userFilterStore', () => {
         }
     }
 
+    async function populateAppliedFieldsByFilterId(filterId) {
+        isLoading.value = true;
+        errors.value = false;
+        try {
+            const { data } = await api.get(`user-filters/${filterId}`);
+            if (data?.fields) {
+                clearAppliedFields();
+                for (const fieldId in data.fields) {
+                    storeAppliedField(data.fields[fieldId]);
+                }
+            }
+        } catch (err) {
+            console.error('Error while fetching user filter', err);
+            errors.value = err;
+        } finally {
+            isLoading.value = false;
+        }
+    }
+
+    function addEmptyField() {
+        const hasNew = allAppliedFields.value.some(field => field.attributes.type === null);
+        if (hasNew) {
+            return;
+        }
+        const emptyField = {
+            attributes: {
+                id: `new-${fields.value.size}`,
+                type: null,
+                typeparam: null,
+                'compare-operator': '',
+                value: ''
+            }
+        };
+        storeAppliedField(emptyField);
+    }
+
+    function findConfigByType(type) {
+        void availableFields.value.size;
+        return availableFields.value.get(String(type));
+    }
+
+    function removeField(id) {
+        fields.value.delete(String(id));
+    }
+
+    function reset() {
+        clearAppliedFields();
+        isLoading.value = false;
+        errors.value = false;
+    }
+
     return {
         isLoading,
         errors,
@@ -100,5 +153,11 @@ export const useUserFilterStore = defineStore('userFilterStore', () => {
         allAvailableFields,
         fetchAvailableFields,
         applyUserFilter,
+        populateAppliedFieldsByFilterId,
+        addEmptyField,
+        findConfigByType,
+        clearAppliedFields,
+        removeField,
+        reset,
     };
 });

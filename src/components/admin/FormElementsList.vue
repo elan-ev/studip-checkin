@@ -2,7 +2,7 @@
     <div class="form-elements-list" v-if="open">
         <ul>
             <li v-for="element in elements" :key="element.id">
-                <FormAddInputElement 
+                <FormAddInputElement
                     :type="element.id" :display-name="element.displayName" @click="addElement(element)" />
             </li>
         </ul>
@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-    import { defineProps, defineEmits, computed } from 'vue';
+    import { computed } from 'vue';
     import useInputElements from '../../composables/inputElements';
     import FormAddInputElement from './FormAddInputElement.vue';
 

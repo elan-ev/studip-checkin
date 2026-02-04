@@ -15,7 +15,7 @@ namespace UserFilterFields\StudipCheckin;
 use UserFilterFields\PermissionCondition;
 use DBManager;
 
-class MassMailPermissionFilter extends PermissionCondition
+class StudipCheckinPermissionFilter extends PermissionCondition
 {
 
     public string $target = '';

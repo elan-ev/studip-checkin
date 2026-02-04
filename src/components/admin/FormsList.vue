@@ -33,7 +33,6 @@
 </template>
 
 <script setup>
-    import { defineProps } from 'vue';
     import FormItem from './FormItem.vue';
 
     const props = defineProps({

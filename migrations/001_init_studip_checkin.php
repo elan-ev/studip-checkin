@@ -41,6 +41,7 @@ final class InitStudipCheckin extends Migration
             `id`                            INT(11) NOT NULL AUTO_INCREMENT,
             `filter_id`                     char(32)  NOT NULL,
             `name`                          CHAR(255) NOT NULL,
+            `description`                   TINYTEXT DEFAULT NULL,
             `structure`                     MEDIUMTEXT NOT NULL,
             `start_date`                    INT(11) UNSIGNED NOT NULL,
             `end_date`                      INT(11) UNSIGNED NOT NULL,

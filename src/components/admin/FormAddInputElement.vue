@@ -6,7 +6,7 @@
 </div>
 </template>
 <script setup>
-import { defineProps, computed } from 'vue';
+import { computed } from 'vue';
 import useInputElements from '../../composables/inputElements';
 
 const props = defineProps({

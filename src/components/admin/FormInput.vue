@@ -21,7 +21,7 @@
     </template>
 </template>
 <script setup>
-import { defineProps, computed, capitalize } from 'vue';
+import { computed, capitalize } from 'vue';
 
 const props = defineProps({
     element: Object,

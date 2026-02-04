@@ -5,8 +5,8 @@
         </td>
         <td>{{ form.name }}</td>
         <td>{{ form.version }}</td>
-        <td>{{ form['start-date'] }}</td>
-        <td>{{ form['end-date'] }}</td>
+        <td>{{ startDate }}</td>
+        <td>{{ endDate }}</td>
         <td>{{ userNum }}</td>
         <td>{{ dataNum }}</td>
         <td>
@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-    import { computed, defineProps } from 'vue';
+    import { computed } from 'vue';
     import { useFormStore } from '@/store/form';
     import { useRouter } from 'vue-router';
 
@@ -32,11 +32,27 @@
     });
 
     const userNum = computed(() => {
-        return props.form?.['related-users']?.data?.length || 0;
+        return props.form?.['related-users']?.data?.length ?? 0;
     });
 
     const dataNum = computed(() => {
-        return props.form?.['form-user-data']?.data?.length || 0;
+        return props.form?.['form-user-data']?.data?.length ?? 0;
+    });
+
+    const startDate = computed(() => {
+        if (!props.form?.['start-date']) {
+            return '--';
+        }
+        const [year, month, day] = props.form['start-date'].split('-')
+        return `${day}.${month}.${year}`;
+    });
+
+    const endDate = computed(() => {
+        if (!props.form?.['end-date']) {
+            return '--';
+        }
+        const [year, month, day] = props.form['end-date'].split('-')
+        return `${day}.${month}.${year}`;
     });
 
     const deleteForm = () => {

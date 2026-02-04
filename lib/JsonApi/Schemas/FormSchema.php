@@ -54,10 +54,11 @@ class FormSchema extends \JsonApi\Schemas\SchemaProvider
         return [
             'filter-id'  => (string) $resource['filter_id'],
             'name' => (string) $resource['name'],
+            'description' => (string) $resource['description'] ?? '',
             'structure' => $resource['structure']->getArrayCopy(),
             'version' => (int) $resource['version'],
-            'start-date' => $resource['start_date'] ? date('c', $resource['start_date']) : null,
-            'end-date' => $resource['end_date'] ? date('c', $resource['end_date']) : null,
+            'start-date' => $resource['start_date'] ? date('Y-m-d', $resource['start_date']) : null,
+            'end-date' => $resource['end_date'] ? date('Y-m-d', $resource['end_date']) : null,
         ];
     }
 

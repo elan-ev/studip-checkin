@@ -47,10 +47,14 @@ export const useFormStore = defineStore('formStore', () => {
     async function fetchAll(includePaths = []) {
         isLoading.value = true;
         try {
-            const { data } = await api.fetch(generatePathWithIncludes('checkin-forms', includePaths));
-            data.forEach((form => {
-                storeRecord(form);
-            }))
+            const config = prepareRequestConfig(includePaths);
+            const { data } = await api.fetch('checkin-forms', config);
+            if (data) {
+                clearRecords();
+                data.forEach((form => {
+                    storeRecord(form);
+                }));
+            }
         } catch (err) {
             console.error('Error while fetching forms', err);
             errors.value = err;
@@ -62,7 +66,8 @@ export const useFormStore = defineStore('formStore', () => {
     async function fetchById(id, includePaths = []) {
         isLoading.value = true;
         try {
-            const { data } = await api.fetch(generatePathWithIncludes(`checkin-forms/${id}`, includePaths));
+            const config = prepareRequestConfig(includePaths);
+            const { data } = await api.fetch(`checkin-forms/${id}`, config);
             storeRecord(data);
         } catch (err) {
             console.error(`Error while fetching form by id: ${id}`, err);
@@ -75,7 +80,8 @@ export const useFormStore = defineStore('formStore', () => {
     async function createForm(formData, includePaths = []) {
         isLoading.value = true;
         try {
-            const { data } = await api.post(generatePathWithIncludes('checkin-forms', includePaths), formData);
+            const config = prepareRequestConfig(includePaths);
+            const { data } = await api.post('checkin-forms', formData, config);
             storeRecord(data);
         } catch (err) {
             console.error('Error while creating form', err);
@@ -85,25 +91,28 @@ export const useFormStore = defineStore('formStore', () => {
         }
     }
 
-    async function updateForm(id, formData) {
+    async function updateForm(formData, includePaths = []) {
         isLoading.value = true;
         try {
-            const { data } = await api.patch(generatePathWithIncludes(`checkin-forms/${id}`, includePaths), formData);
+            const config = prepareRequestConfig(includePaths);
+            const { data } = await api.patch('checkin-forms', formData, config);
             storeRecord(data);
         } catch (err) {
-            console.error(`Error while updating form id: ${id}`, err);
+            console.error(`Error while updating form id: ${formData.id}`, err);
             errors.value = err;
         } finally {
             isLoading.value = false;
         }
     }
 
-    function generatePathWithIncludes(basePath, includePaths) {
-        if (includePaths.length === 0) {
-            return basePath;
+    function prepareRequestConfig(includePaths = []) {
+        const config = {};
+        if (includePaths.length > 0) {
+            config.params = {
+                include: includePaths.join(',')
+            }
         }
-        let includes = includePaths.map((p) => `include=${p}`);
-        return `${basePath}?${includes.join('&')}`;
+        return config;
     }
 
     async function fetchByUserId(userId) {

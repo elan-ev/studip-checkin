@@ -3,7 +3,6 @@ import { defineStore } from 'pinia';
 
 export const useFormBuilderStore = defineStore('formBuilderStore', () => {
     const form = ref(null);
-    const isAdding = ref(false);
     const pendingElementIndex = ref(null);
 
     const elements = computed(() => {
@@ -21,9 +20,10 @@ export const useFormBuilderStore = defineStore('formBuilderStore', () => {
         }
     }
 
-    function initFromExisting(existingForm) {
+    async function initFromExisting(existingForm) {
         const clonedRawForm = structuredClone(toRaw(existingForm));
         form.value = clonedRawForm;
+        return true;
     }
 
     function addElementToStructure(index, element) {
@@ -35,11 +35,10 @@ export const useFormBuilderStore = defineStore('formBuilderStore', () => {
     }
 
     function reset() {
-        form.value = null;
+        initEmpty();
     }
 
     function preparePendingElement(index) {
-        isAdding.value = true;
         pendingElementIndex.value = index;
     }
 
@@ -47,7 +46,6 @@ export const useFormBuilderStore = defineStore('formBuilderStore', () => {
         if (pendingElementIndex.value !== null) {
             addElementToStructure(pendingElementIndex.value, element);
         }
-        isAdding.value = false;
         pendingElementIndex.value = null;
     }
 

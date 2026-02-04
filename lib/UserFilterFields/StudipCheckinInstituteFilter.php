@@ -13,7 +13,6 @@
 namespace UserFilterFields\StudipCheckin;
 
 use UserFilterField;
-use MassMail\MassMailPermission;
 use User;
 use DBManager;
 

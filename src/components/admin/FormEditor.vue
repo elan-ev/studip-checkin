@@ -5,6 +5,13 @@
                 v-if="formBuilderStore.form?.structure?.length"
             >
                 <fieldset>
+                    <!-- TODO: This could also be in the FormInput component, we have to decide! -->
+                    <div class="form-editor-fieldset-delete">
+                        <!-- TODO: Also decide whether we need a confirmation before deletion! -->
+                        <button class="button trash" @click.prevent="deleteElement(index)">
+                            {{ $gettext('Entfernen') }}
+                        </button>
+                    </div>
                     <FormInput :element="element" />
                 </fieldset>
                 <FormEditorPlusButton
@@ -22,7 +29,7 @@
 </template>
 
 <script setup>
-    import { defineEmits, capitalize, watch, watchEffect } from 'vue';
+    import { capitalize, watch, watchEffect } from 'vue';
     import { useFormBuilderStore } from '@/store/form-builder';
     import FormEditorPlusButton from './FormEditorPlusButton.vue';
     import FormInput from './FormInput.vue';
@@ -34,10 +41,12 @@
         emit('requestAddElement', index);
     };
 
-    
+    const deleteElement = (index) => {
+        formBuilderStore.removeElementFromStructure(index);
+    };
 </script>
 
-<style>
+<style lang="scss">
     .form-editor {
         flex: 1;
         background-color: aqua;

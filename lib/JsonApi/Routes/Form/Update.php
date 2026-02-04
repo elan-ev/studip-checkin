@@ -100,8 +100,8 @@ class Update extends JsonApiController
     {
         $name = self::arrayGet($json, 'data.attributes.name', '');
         $structure = self::arrayGet($json, 'data.attributes.structure', []);
-        $startDate = self::arrayGet($json, 'data.attributes.start-date', 0);
-        $endDate = self::arrayGet($json, 'data.attributes.end-date', 0);
+        $startDate = self::arrayGet($json, 'data.attributes.start-date', '');
+        $endDate = self::arrayGet($json, 'data.attributes.end-date', '');
 
         $filterFields = self::arrayGet($json, 'data.attributes.filter-fields', []);
         if (!empty($filterFields)) {
@@ -128,10 +128,12 @@ class Update extends JsonApiController
             $form->version += 1;
         }
 
+
         $form->name = $name;
         $form->structure = $structure;
-        $form->start_date = $startDate;
-        $form->end_date = $endDate;
+
+        $form->start_date = !empty($startDate) ? strtotime($startDate) : 0;
+        $form->end_date = !empty($endDate) ? strtotime($endDate) : 0;
 
         $form->store();
 
