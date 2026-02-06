@@ -7,7 +7,7 @@
                 </RouterLink>
             </div>
             <div class="checkin-form-list">
-                <FormsList v-if="formStore.all.length > 0" :forms="formStore.all" />
+                <FormsList :forms="formStore.all" />
             </div>
             <div class="checkin-form-list-footer">
                 <!-- Here comes the pagination! -->

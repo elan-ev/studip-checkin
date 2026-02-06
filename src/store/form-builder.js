@@ -44,7 +44,8 @@ export const useFormBuilderStore = defineStore('formBuilderStore', () => {
 
     function finishPendingElement(element) {
         if (pendingElementIndex.value !== null) {
-            addElementToStructure(pendingElementIndex.value, element);
+            const clonedRawElement = structuredClone(toRaw(element));
+            addElementToStructure(pendingElementIndex.value, clonedRawElement);
         }
         pendingElementIndex.value = null;
     }

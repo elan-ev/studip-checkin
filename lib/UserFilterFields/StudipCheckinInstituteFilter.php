@@ -13,7 +13,6 @@
 namespace UserFilterFields\StudipCheckin;
 
 use UserFilterField;
-use User;
 use DBManager;
 
 class StudipCheckinInstituteFilter extends UserFilterField

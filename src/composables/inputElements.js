@@ -16,6 +16,12 @@ export default function useInputElements() {
         },
         {
             useCase: 'select',
+            type: 'checkbox',
+            displayName: 'TrueFalse',
+            icon: '',
+        },
+        {
+            useCase: 'select',
             type: 'select',
             displayName: 'Auswahlfeld',
             icon: '',

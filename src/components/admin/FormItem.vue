@@ -7,8 +7,12 @@
         <td>{{ form.version }}</td>
         <td>{{ startDate }}</td>
         <td>{{ endDate }}</td>
-        <td>{{ userNum }}</td>
-        <td>{{ dataNum }}</td>
+        <td>
+            <router-link :to="{ path: `/form/${form.id}/related-users`}">{{ userNum }}</router-link>
+        </td>
+        <td>
+            <router-link :to="{ path: `/form/${form.id}/user-data`}">{{ dataNum }}</router-link>
+        </td>
         <td>
             <button class="button edit" @click="redirectEdit">{{ $gettext('Edit') }}</button>
             <button class="button trash" @click="deleteForm">{{ $gettext('Delete') }}</button>

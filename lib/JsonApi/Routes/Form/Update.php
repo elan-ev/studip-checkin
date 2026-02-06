@@ -103,6 +103,8 @@ class Update extends JsonApiController
         $startDate = self::arrayGet($json, 'data.attributes.start-date', '');
         $endDate = self::arrayGet($json, 'data.attributes.end-date', '');
 
+        $refinedStructure = Form::refineStructure($structure);
+
         $filterFields = self::arrayGet($json, 'data.attributes.filter-fields', []);
         if (!empty($filterFields)) {
             $oldFilterId = $form->filter_id;
@@ -124,13 +126,12 @@ class Update extends JsonApiController
         }
 
         // In case structure has been changed, we increase the version.
-        if ($this->compareStructures($form->structure->getArrayCopy(), $structure) === false) {
+        if ($this->compareStructures($form->structure->getArrayCopy(), $refinedStructure) === false) {
             $form->version += 1;
         }
 
-
         $form->name = $name;
-        $form->structure = $structure;
+        $form->structure = $refinedStructure;
 
         $form->start_date = !empty($startDate) ? strtotime($startDate) : 0;
         $form->end_date = !empty($endDate) ? strtotime($endDate) : 0;

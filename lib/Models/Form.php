@@ -51,4 +51,14 @@ class Form extends SimpleORMap
     {
         return self::findBySQL('1');
     }
+
+    public static function refineStructure($structure): array
+    {
+        return array_map(function ($element) {
+            if (!str_starts_with($element['id'], 'elm')) {
+                $element['id'] = uniqid('elm');
+            }
+            return $element;
+        }, $structure);
+    }
 }

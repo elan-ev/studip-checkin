@@ -5,7 +5,7 @@ import UserForms from '../pages/user/UserForms.vue';
 
 const routes = [
     { name: 'user-forms', path: '/', component: UserForms },
-    { name: 'user-form-data', path: '/form-data', component: UserFormData },
+    { name: 'user-form-data', path: '/form-data/:formId', component: UserFormData, props: true },
 ];
 
 export const router = createRouter({

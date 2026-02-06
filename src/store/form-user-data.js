@@ -7,11 +7,6 @@ export const useFormUserDataStore = defineStore('formUserDataStore', () => {
     const isLoading = ref(false);
     const errors = ref(false);
 
-    function renewRecord(newRecord) {
-        removeRecord(newRecord.id);
-        storeRecord(newRecord);
-    }
-
     function storeRecord(newRecord) {
         records.value.set(String(newRecord.id), newRecord);
     }
@@ -65,7 +60,7 @@ export const useFormUserDataStore = defineStore('formUserDataStore', () => {
         isLoading.value = true;
         try {
             const { data } = await api.get(`checkin-form-user-data/${id}`);
-            renewRecord(data);
+            storeRecord(data);
         } catch (err) {
             console.error(`Error while fetching form user data with id: ${id}`, err);
             errors.value = err;
@@ -91,7 +86,8 @@ export const useFormUserDataStore = defineStore('formUserDataStore', () => {
         isLoading.value = true;
         try {
             const { data } = await api.patch(`checkin-form-user-data/${id}`, payload);
-            renewRecord(data);
+            data.id = id;
+            storeRecord(data);
         } catch (err) {
             console.error(`Error while updating form user data with id: ${id}`, err);
             errors.value = err;

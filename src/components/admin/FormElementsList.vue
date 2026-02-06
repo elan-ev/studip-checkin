@@ -3,7 +3,7 @@
         <ul>
             <li v-for="element in elements" :key="element.id">
                 <FormAddInputElement
-                    :type="element.id" :display-name="element.displayName" @click="addElement(element)" />
+                    :type="element.type" :display-name="element.displayName" @click="addElement(element)" />
             </li>
         </ul>
     </div>
@@ -35,9 +35,9 @@
                 type: element.type,
                 displayName: element.displayName,
                 payload: {
-                    id: "Test",
-                    label: "Name",
-                    value: "Test"
+                    placeholder: '',
+                    label: '',
+                    options: []
                 },
                 relationIndices: [],
             });

@@ -49,9 +49,10 @@ class RelatedUserSchema extends \JsonApi\Schemas\SchemaProvider
     public function getAttributes($resource, ContextInterface $context): iterable
     {
         return [
-            'form_id'  => (int) $resource['form_id'],
-            'user_id' => (string) $resource['user_id'],
+            'form-id'  => (int) $resource['form_id'],
+            'user-id' => (string) $resource['user_id'],
             'active' => (bool) $resource['active'],
+            'hide' => (bool) $resource['hide'],
         ];
     }
 
@@ -83,5 +84,33 @@ class RelatedUserSchema extends \JsonApi\Schemas\SchemaProvider
             : [self::RELATIONSHIP_DATA => null];
 
         return $relationships;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function hasResourceMeta($resource): bool
+    {
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getResourceMeta($resource)
+    {
+        $userMeta = [];
+        if ($resource?->user) {
+            $userMeta = [
+                'name' => $resource->user->vorname,
+                'surename' => $resource->user->nachname,
+                'username' => $resource->user->username,
+                'email' => $resource->user->email,
+                'fullname' => $resource->user->getFullname(),
+            ];
+        }
+        return [
+            'user' => $userMeta,
+        ];
     }
 }

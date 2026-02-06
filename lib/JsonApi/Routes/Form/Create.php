@@ -99,6 +99,8 @@ class Create extends JsonApiController
         $endDate = self::arrayGet($json, 'data.attributes.end-date', '');
         $description = self::arrayGet($json, 'data.attributes.description', '');
 
+        $refinedStructure = Form::refineStructure($structure);
+
         // Here we then get the filter and compile the list of affected users.
         $filterFields = self::arrayGet($json, 'data.attributes.filter-fields', []);
         $userFilter = new UserFilter();
@@ -119,7 +121,7 @@ class Create extends JsonApiController
         $form->filter_id = $userFilter->getId();
         $form->name = $name;
         $form->description = $description;
-        $form->structure = $structure;
+        $form->structure = $refinedStructure;
         $form->version = 1;
         $form->start_date = !empty($startDate) ? strtotime($startDate) : 0;
         $form->end_date = !empty($endDate) ? strtotime($endDate) : 0;

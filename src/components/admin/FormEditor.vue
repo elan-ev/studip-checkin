@@ -15,7 +15,7 @@
                     <FormInput :element="element" />
                 </fieldset>
                 <FormEditorPlusButton
-                    :index="index"
+                    :index="(index + 1)"
                     @startAddingElement="addElementHere"
                 />
             </template>

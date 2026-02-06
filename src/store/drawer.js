@@ -44,6 +44,20 @@ export const useDrawerStore = defineStore('drawerStore', () => {
         });
     }
 
+    function openFormDataInDrawer(formId, formDataId = undefined, readOnly = false) {
+        const FormDataComponent = expandedViewsRegistry['form-data'];
+        if (!FormDataComponent) {
+            console.error('FormDataExpandedView in Registry nicht gefunden!');
+            return;
+        }
+
+        openDrawer(FormDataComponent, {
+            formId,
+            formDataId,
+            readOnly
+        });
+    }
+
     return {
         isDrawerOpen,
         drawerComponent,
@@ -54,5 +68,6 @@ export const useDrawerStore = defineStore('drawerStore', () => {
         closeDrawer,
 
         openUserFilterConfigInDrawer,
+        openFormDataInDrawer,
     };
 });

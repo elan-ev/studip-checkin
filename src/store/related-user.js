@@ -8,6 +8,10 @@ export const useRelatedUserStore = defineStore('relatedUserStore', () => {
     const errors = ref(false);
 
     function storeRecord(newRecord) {
+        const existingRecord = byId(newRecord.id);
+        if (existingRecord) {
+            console.log('Existing record!');
+        }
         records.value.set(String(newRecord.id), newRecord);
     }
 
@@ -85,16 +89,12 @@ export const useRelatedUserStore = defineStore('relatedUserStore', () => {
         }
     }
 
-    function renewRecord(newRecord) {
-        removeRecord(newRecord.id);
-        storeRecord(newRecord);
-    }
-
     async function updateRecord(relatedUserId, relatedUserData) {
         isLoading.value = true;
         try {
-            const { data } = await api.patch(`checkin-related-users/${relatedUserId}`, relatedUserData);
-            renewRecord(data);
+            const { data } = await api.patch('checkin-related-users', relatedUserData);
+            data.id = relatedUserId;
+            storeRecord(data);
         } catch (err) {
             console.error(`Error while updating related user record with id: ${relatedUserId}`, err);
             errors.value = err;
@@ -117,6 +117,7 @@ export const useRelatedUserStore = defineStore('relatedUserStore', () => {
     }
 
     return {
+        records,
         storeRecord,
         clearRecords,
         all,

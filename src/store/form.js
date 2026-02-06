@@ -96,6 +96,7 @@ export const useFormStore = defineStore('formStore', () => {
         try {
             const config = prepareRequestConfig(includePaths);
             const { data } = await api.patch('checkin-forms', formData, config);
+            data.id = formData.id;
             storeRecord(data);
         } catch (err) {
             console.error(`Error while updating form id: ${formData.id}`, err);

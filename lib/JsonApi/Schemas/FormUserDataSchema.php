@@ -49,10 +49,11 @@ class FormUserDataSchema extends \JsonApi\Schemas\SchemaProvider
     public function getAttributes($resource, ContextInterface $context): iterable
     {
         return [
-            'form_id'  => (int) $resource['form_id'],
-            'user_id' => (string) $resource['user_id'],
-            'form_data' => $resource['form_data']->getArrayCopy(),
-            'form_version' => (int) $resource['form_version'],
+            'form-id'  => (int) $resource['form_id'],
+            'data' => $resource['form_data']->getArrayCopy(),
+            'version' => (int) $resource['form_version'],
+            'mkdate' => $resource['mkdate'] ? date('d.m.Y H:i', $resource['mkdate']) : null,
+            'chdate' => $resource['chdate'] ? date('d.m.Y H:i', $resource['chdate']) : null,
         ];
     }
 
@@ -84,5 +85,33 @@ class FormUserDataSchema extends \JsonApi\Schemas\SchemaProvider
             : [self::RELATIONSHIP_DATA => null];
 
         return $relationships;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function hasResourceMeta($resource): bool
+    {
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getResourceMeta($resource)
+    {
+        $userMeta = [];
+        if ($resource?->user) {
+            $userMeta = [
+                'name' => $resource->user->vorname,
+                'surename' => $resource->user->nachname,
+                'username' => $resource->user->username,
+                'email' => $resource->user->email,
+                'fullname' => $resource->user->getFullname(),
+            ];
+        }
+        return [
+            'user' => $userMeta,
+        ];
     }
 }
