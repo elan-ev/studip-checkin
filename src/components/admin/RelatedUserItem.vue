@@ -17,9 +17,10 @@
 </template>
 
 <script setup>
-    import { computed } from 'vue';
+    import { computed, getCurrentInstance } from 'vue';
     import { useRelatedUserStore } from '@/store/related-user';
 
+    const { proxy } = getCurrentInstance();
     const relatedUserStore = useRelatedUserStore();
 
     const props = defineProps({
@@ -29,17 +30,19 @@
         },
     });
 
-    console.log();
-
     const userInfo = computed(() => {
         return `${props.user.meta.user.fullname} (${props.user.meta.user.username})`;
     });
 
     const deleteUser = () => {
-        // TODO: Add confirmation dialog and handler!
-        if (confirm(`Are you sure you want to delete the user "${props.user.fullname}" from this form?`)) {
-            relatedUserStore.removeRecord(props.user.id, true);
-        }
+        if (STUDIP.Dialog.confirm(
+                proxy.$gettext(`Are you sure you want to delete the user "${props.user.fullname}" from this form?`),
+                () => {
+                    relatedUserStore.removeRecord(props.user.id, true);
+                },
+                STUDIP.Dialog.close()
+            )
+        );
     };
 
     const updateUser = async () => {

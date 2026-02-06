@@ -13,6 +13,7 @@
 namespace StudipCheckin\JsonApi\Routes\FormUserData;
 
 use JsonApi\Errors\AuthorizationFailedException;
+use JsonApi\Errors\ConflictException;
 use JsonApi\Errors\RecordNotFoundException;
 use JsonApi\JsonApiController;
 use JsonApi\Routes\ValidationTrait;
@@ -21,8 +22,9 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 use StudipCheckin\JsonApi\Routes\Authority;
+use StudipCheckin\Models\Form;
 use StudipCheckin\Models\FormUserData;
-use StudipCheckin\Helper\CheckinBrain;
+use StudipCheckin\Models\RelatedUser;
 
 class Create extends JsonApiController
 {
@@ -40,18 +42,31 @@ class Create extends JsonApiController
             throw new AuthorizationFailedException();
         }
 
+        $formVersion = self::arrayGet($json, 'data.attributes.form-version', 0);
+        $formData = self::arrayGet($json, 'data.attributes.form-data', []);
         $formId = self::arrayGet($json, 'data.attributes.form-id', 0);
 
-        if (!CheckinBrain::validateFormUserDataRelatedRecords($user->id, (int) $formId)) {
+        $form = Form::find($formId);
+        $activeRelatedUser = RelatedUser::findActiveRecordByUserAndForm($user->id, $formId);
+
+        if (!$form || !$activeRelatedUser) {
             throw new RecordNotFoundException();
         }
 
-        $formVersion = self::arrayGet($json, 'data.attributes.form-version', 0);
-        $formData = self::arrayGet($json, 'data.attributes.form-data', []);
+        $formUserData = FormUserData::findByFormUser($formId, $user->id);
+        if (
+            ((int) $formVersion !== (int) $form->version) ||
+            ($formUserData && (int) $formUserData->form_version === (int) $form->version)
+        ) {
+            throw new ConflictException('There was a conflic either by existing record or mismatching versions');
+        }
 
-        $formUserData = new FormUserData();
-        $formUserData->form_id = (int) $formId;
-        $formUserData->user_id = $user->id;
+        if (empty($formUserData)) {
+            $formUserData = new FormUserData();
+            $formUserData->form_id = (int) $formId;
+            $formUserData->user_id = $user->id;
+        }
+
         $formUserData->form_version = (int) $formVersion;
         $formUserData->form_data = $formData;
         $formUserData->store();

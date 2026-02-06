@@ -19,7 +19,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 use StudipCheckin\JsonApi\Routes\Authority;
-use StudipCheckin\Models\RelatedUser;
+use StudipCheckin\Helper\CheckinBrain;
 
 class UserFormsIndex extends JsonApiController
 {
@@ -32,8 +32,8 @@ class UserFormsIndex extends JsonApiController
             throw new AuthorizationFailedException();
         }
 
-        $forms = RelatedUser::getActiveFormsByUser($user->id);
+        $pendingForms = CheckinBrain::getUserPendingForm($user->id);
 
-        return $this->getContentResponse($forms);
+        return $this->getContentResponse($pendingForms);
     }
 }

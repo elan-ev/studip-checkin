@@ -55,14 +55,17 @@
 <script setup>
     import StudipIcon from '@/components/studip/StudipIcon.vue';
     import StudipDrawer from '@/components/studip/StudipDrawer.vue';
-    import { onMounted } from 'vue';
+    import { watch, onMounted, getCurrentInstance } from 'vue';
     import { useRouter } from 'vue-router';
     import { useFormStore } from '@/store/form';
     import { useDrawerStore } from '@/store/drawer';
+    import { storeToRefs } from 'pinia';
 
+    const { proxy } = getCurrentInstance();
+    const router = useRouter();
     const drawerStore = useDrawerStore();
     const formStore = useFormStore();
-    const router = useRouter();
+    const { records } = storeToRefs(formStore);
 
     const props = defineProps({
         userId: {
@@ -83,6 +86,19 @@
     const openFormDataDrawer = (formId) => {
         drawerStore.openFormDataInDrawer(formId);
     }
+
+    watch(() => records.value, (newValue, oldValue) => {
+        if (newValue.size === 0) {
+            // TODO: decide how to act here! of course confirm is not needed here! :D
+            if (STUDIP.Dialog.confirm(
+                proxy.$gettext('Done! You can now proceed'),
+                () => {
+                    window.location = STUDIP.URLHelper.getURL('dispatch.php/start');
+                },
+                STUDIP.Dialog.close())
+            );
+        }
+    });
 
 </script>
 

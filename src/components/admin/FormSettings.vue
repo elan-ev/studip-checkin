@@ -83,7 +83,6 @@
 
     const saveForm = () => {
         // Do whatever needs to be done before save.
-        console.log("🚀 ~ form:", form.value);
         if (formValidation()) {
             const formData = prepareFormData();
             emit('save', formData);

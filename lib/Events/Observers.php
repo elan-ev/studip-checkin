@@ -26,7 +26,7 @@ class Observers {
      */
     public static function subscribeToUserLogin($event, $userId) {
         // Check if user has pending form.
-        if (CheckinBrain::ensureUserHasPendingForm($userId)) {
+        if (!empty(CheckinBrain::getUserPendingForm($userId))) {
             // Prepare redirect URL to checkin page, in order to show forms.
             $url = \PluginEngine::getURL('StudipCheckin', [], 'redirect/index/' . $userId);
 

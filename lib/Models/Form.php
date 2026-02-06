@@ -47,6 +47,30 @@ class Form extends SimpleORMap
         parent::configure($config);
     }
 
+    public function isRunnable(): bool
+    {
+        $now = time();
+        // Has Start Date only.
+        if (!empty($this->start_date) && empty($this->end_date)) {
+            return (int) $this->start_date <= $now;
+        }
+
+        // Has End Date only.
+        if (empty($this->start_date) && !empty($this->end_date)) {
+            return (int) $this->end_date >= $now;
+        }
+
+        // Has both dates.
+        if (!empty($this->start_date) && !empty($this->end_date)) {
+            return
+                (int) $this->start_date <= $now &&
+                (int) $this->end_date >= $now;
+        }
+
+        // If no date applied!
+        return true;
+    }
+
     public static function getAll(): array
     {
         return self::findBySQL('1');
@@ -54,11 +78,23 @@ class Form extends SimpleORMap
 
     public static function refineStructure($structure): array
     {
-        return array_map(function ($element) {
+        // First we populate the default ids.
+        $refinedStructure = array_map(function ($element) {
             if (!str_starts_with($element['id'], 'elm')) {
                 $element['id'] = uniqid('elm');
             }
             return $element;
         }, $structure);
+
+        // Then we remove those items that does not have proper data (empty items), if any.
+        $filteredStructure = array_filter($refinedStructure, function ($element) {
+            $isValid = !empty($element['payload']['label']);
+            if ($isValid && in_array($element['type'], ['select', 'radio'])) {
+                $isValid = !empty($element['payload']['options']);
+            }
+            return $isValid;
+        });
+
+        return $filteredStructure;
     }
 }

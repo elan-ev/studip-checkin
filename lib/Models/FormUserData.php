@@ -54,4 +54,17 @@ class FormUserData extends SimpleORMap
             [$formId, $userId, $formVersion]
         );
     }
+
+    public static function findByFormUser(int $formId, string $userId): ?self
+    {
+        return self::findOneBySQL(
+            'form_id = ? AND user_id = ?',
+            [$formId, $userId]
+        );
+    }
+
+    public static function formDataExists(int $formId, string $userId): bool
+    {
+        return self::countBySQL('form_id = ? AND user_id = ?', [$formId, $userId]) > 0;
+    }
 }

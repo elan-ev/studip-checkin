@@ -19,27 +19,38 @@ use StudipCheckin\Models\FormUserData;
 class CheckinBrain {
 
     /**
-     * Ensure user has pending form to fill.
-     * First checks if user is an active related user,
-     * then checks if there is any form without submitted data for the current version.
+     * Retrieves all pending forms for a user that require submission.
      *
-     * @param string $userId User Id
-     * @return bool
+     * A form is considered "pending" if all of the following conditions are met:
+     * - The user is an active related user for the form
+     * - The form is within its runnable date range (if a date range is defined)
+     * - The user has not yet submitted data for the current version of the form
+     *
+     * @param string $userId The unique identifier of the user
+     * @return array Array of Form objects that are pending user submission.
+     *               Returns an empty array if no pending forms are found.
      */
-    public static function ensureUserHasPendingForm(string $userId): bool
+    public static function getUserPendingForm(string $userId): array
     {
+        $pendingForms = [];
         $isActiveRelatedUser = RelatedUser::hasActiveRecord($userId);
         if ($isActiveRelatedUser) {
             $forms = RelatedUser::getActiveFormsByUser($userId);
             foreach ($forms as $form) {
-                $formData = FormUserData::findByUserFormVersion($form->id, $userId, $form->version);
-                if (!$formData) {
-                    return true;
+                // If the form has date range and it is not expired?
+                if (!$form->isRunnable()) {
+                    continue;
                 }
+                // If the user has already answer this version of the form!?
+                $formData = FormUserData::findByUserFormVersion($form->id, $userId, $form->version);
+                if (!empty($formData)) {
+                    continue;
+                }
+                $pendingForms[] = $form;
             }
         }
 
-        return false;
+        return $pendingForms;
     }
 
     /**
@@ -65,32 +76,5 @@ class CheckinBrain {
                 $relatedUser->store();
             }
         }
-    }
-
-    /**
-     * Consider all aspects and validate if FormUserData can be created for given user and form.
-     * @param string $userId User ID
-     * @param int $formId Form ID
-     * @return bool
-     */
-    public static function validateFormUserDataRelatedRecords(string $userId, int $formId): bool
-    {
-        $form = Form::find($formId);
-        if (!$form) {
-            return false;
-        }
-
-        $activeRelatedUser = RelatedUser::findActiveRecordByUserAndForm($userId, $formId);
-        if (!$activeRelatedUser) {
-            return false;
-        }
-
-        // TODO: This can be optimized to throw Conflict Error if exists, but currently considered as not found!
-        $formData = FormUserData::findByUserFormVersion($formId, $userId, $form->version);
-        if ($formData) {
-            return false;
-        }
-
-        return true;
     }
 }

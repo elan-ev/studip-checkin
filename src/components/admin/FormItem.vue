@@ -21,10 +21,11 @@
 </template>
 
 <script setup>
-    import { computed } from 'vue';
+    import { computed, getCurrentInstance } from 'vue';
     import { useFormStore } from '@/store/form';
     import { useRouter } from 'vue-router';
 
+    const { proxy } = getCurrentInstance();
     const formStore = useFormStore();
     const router = useRouter();
 
@@ -60,10 +61,14 @@
     });
 
     const deleteForm = () => {
-        // TODO: Add confirmation dialog and handler!
-        if (confirm(`Are you sure you want to delete the form "${props.form.name}"?`)) {
-            formStore.removeRecord(props.form.id, true);
-        }
+        if (STUDIP.Dialog.confirm(
+                proxy.$gettext(`Are you sure you want to delete the form "${props.form.name}"?`),
+                () => {
+                    formStore.removeRecord(props.form.id, true);
+                },
+                STUDIP.Dialog.close()
+            )
+        );
     };
 
     const redirectEdit = () => {

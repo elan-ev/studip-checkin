@@ -25,7 +25,6 @@
     const userFilterStore = useUserFilterStore();
 
     onMounted(async () => {
-        console.log('Mounted...');
         await formStore.fetchAll(['related-users', 'form-user-data']);
         await userFilterStore.fetchAvailableFields();
     });

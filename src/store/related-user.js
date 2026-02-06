@@ -8,10 +8,6 @@ export const useRelatedUserStore = defineStore('relatedUserStore', () => {
     const errors = ref(false);
 
     function storeRecord(newRecord) {
-        const existingRecord = byId(newRecord.id);
-        if (existingRecord) {
-            console.log('Existing record!');
-        }
         records.value.set(String(newRecord.id), newRecord);
     }
 

@@ -7,7 +7,6 @@
                 <fieldset>
                     <!-- TODO: This could also be in the FormInput component, we have to decide! -->
                     <div class="form-editor-fieldset-delete">
-                        <!-- TODO: Also decide whether we need a confirmation before deletion! -->
                         <button class="button trash" @click.prevent="deleteElement(index)">
                             {{ $gettext('Entfernen') }}
                         </button>
@@ -29,11 +28,12 @@
 </template>
 
 <script setup>
-    import { capitalize, watch, watchEffect } from 'vue';
+    import { getCurrentInstance } from 'vue';
     import { useFormBuilderStore } from '@/store/form-builder';
     import FormEditorPlusButton from './FormEditorPlusButton.vue';
     import FormInput from './FormInput.vue';
 
+    const { proxy } = getCurrentInstance();
     const formBuilderStore = useFormBuilderStore();
     const emit = defineEmits(['addElement']);
 
@@ -42,7 +42,14 @@
     };
 
     const deleteElement = (index) => {
-        formBuilderStore.removeElementFromStructure(index);
+        if (STUDIP.Dialog.confirm(
+                proxy.$gettext('Are you sure you want to delete the input?'),
+                () => {
+                    formBuilderStore.removeElementFromStructure(index);
+                },
+                STUDIP.Dialog.close()
+            )
+        );
     };
 </script>
 

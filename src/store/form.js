@@ -132,6 +132,10 @@ export const useFormStore = defineStore('formStore', () => {
         }
     }
 
+    function completeUserFormDataRecord(formId) {
+        records.value.delete(String(formId));
+    }
+
     return {
         records,
         storeRecord,
@@ -146,5 +150,6 @@ export const useFormStore = defineStore('formStore', () => {
         updateForm,
         fetchAll,
         fetchByUserId,
+        completeUserFormDataRecord,
     };
 });

@@ -143,15 +143,34 @@ class Update extends JsonApiController
 
     protected function compareStructures(array $oldStructure, array $newStructure): bool
     {
-        ksort($oldStructure);
-        ksort($newStructure);
+        $kOldStructure = [];
+        foreach ($oldStructure as $elm) {
+            $kOldStructure[$elm['id']] = $elm;
+        }
+        ksort($kOldStructure);
 
-        foreach ($oldStructure as $key => $value) {
-            if (!array_key_exists($key, $newStructure) || $newStructure[$key] !== $value) {
+        $kNewStructure = [];
+        foreach ($newStructure as $elm) {
+            $kNewStructure[$elm['id']] = $elm;
+        }
+        ksort($kNewStructure);
+
+        foreach ($kOldStructure as $key => $value) {
+            // If it is removed!
+            if (!array_key_exists($key, $kNewStructure)) {
+                return false;
+            }
+
+            $oldValueStr = json_encode($value);
+            $newValueStr = json_encode($kNewStructure[$key]);
+
+            // Any changes to the settings or payload!?
+            if ($oldValueStr !== $newValueStr) {
                 return false;
             }
         }
 
+        // If we hit here, then we check for the count of elements if there is any new item added.
         return count($oldStructure) === count($newStructure);
     }
 
