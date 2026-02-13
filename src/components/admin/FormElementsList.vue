@@ -37,7 +37,8 @@
                 payload: {
                     placeholder: '',
                     label: '',
-                    options: []
+                    options: [],
+                    required: '0'
                 },
                 relationIndices: [],
             });

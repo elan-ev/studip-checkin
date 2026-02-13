@@ -50,6 +50,11 @@ export const useFormBuilderStore = defineStore('formBuilderStore', () => {
         pendingElementIndex.value = null;
     }
 
+    function changeElementPosition(oldIndex, newIndex, element) {
+        form.value.structure.splice(oldIndex, 1);
+        form.value.structure.splice(newIndex, 0, element);
+    }
+
     return {
         form,
         elements,
@@ -61,5 +66,6 @@ export const useFormBuilderStore = defineStore('formBuilderStore', () => {
         removeElementFromStructure,
         preparePendingElement,
         finishPendingElement,
+        changeElementPosition,
     }
 });

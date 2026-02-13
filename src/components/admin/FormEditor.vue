@@ -11,7 +11,7 @@
                             {{ $gettext('Entfernen') }}
                         </button>
                     </div>
-                    <FormInput :element="element" />
+                    <FormInput :element="element" :index="index"/>
                 </fieldset>
                 <FormEditorPlusButton
                     :index="(index + 1)"
