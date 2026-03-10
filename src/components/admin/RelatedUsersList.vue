@@ -1,15 +1,15 @@
 <template>
     <table class="default">
-        <caption>{{ $gettext('Liste der Nutzer unter Form:') + ` ${form.name}` }}</caption>
+        <caption>{{ $gettext('Liste der Nutzenden für Formular:') + ` ${form.name}` }}</caption>
         <thead>
             <tr>
                 <th scope="col" width="1%">
                     <input type="checkbox" name="users-bulk-selection" id="users-bulk-selection">
                 </th>
-                <th scope="col">{{ $gettext('Name') }}</th>
+                <th scope="col" width="50%">{{ $gettext('Name') }}</th>
                 <th scope="col">{{ $gettext('Akiv?') }}</th>
                 <th scope="col">{{ $gettext('Unsichbar?') }}</th>
-                <th scope="col">{{ $gettext('Aktionen') }}</th>
+                <th scope="col" class="actions">{{ $gettext('Aktionen') }}</th>
             </tr>
         </thead>
         <tbody>

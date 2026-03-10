@@ -13,9 +13,17 @@
         <td>
             <router-link :to="{ path: `/form/${form.id}/user-data`}">{{ dataNum }}</router-link>
         </td>
-        <td>
-            <button class="button edit" @click="redirectEdit">{{ $gettext('Edit') }}</button>
-            <button class="button trash" @click="deleteForm">{{ $gettext('Delete') }}</button>
+        <td class="actions">
+            <StudipActionMenu
+                :context="$gettext('Formular')"
+                :collapse-at="0"
+                :items="[
+                    { id: 1, label: $gettext('Bearbeiten'), icon: 'edit', emit: 'edit' },
+                    { id: 2, label: $gettext('Löschen'), icon: 'trash', emit: 'delete' },
+                ]"
+                @edit="redirectEdit"
+                @delete="deleteForm"
+            />
         </td>
     </tr>
 </template>
@@ -24,6 +32,7 @@
     import { computed, getCurrentInstance } from 'vue';
     import { useFormStore } from '@/store/form';
     import { useRouter } from 'vue-router';
+    import StudipActionMenu from '@/components/studip/StudipActionMenu.vue';
 
     const { proxy } = getCurrentInstance();
     const formStore = useFormStore();

@@ -6,10 +6,10 @@
                 <th scope="col" width="1%">
                     <input type="checkbox" name="data-bulk-selection" id="data-bulk-selection">
                 </th>
-                <th scope="col">{{ $gettext('Nuzter Info') }}</th>
+                <th scope="col" width="50%">{{ $gettext('Nutzende') }}</th>
                 <th scope="col">{{ $gettext('Version des Formulars') }}</th>
                 <th scope="col">{{ $gettext('Datum') }}</th>
-                <th scope="col">{{ $gettext('Aktionen') }}</th>
+                <th scope="col" class="actions">{{ $gettext('Aktionen') }}</th>
             </tr>
         </thead>
         <tbody>

@@ -158,7 +158,3 @@
         emit('close');
     }
 </script>
-
-<style lang="scss">
-
-</style>

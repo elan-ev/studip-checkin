@@ -6,13 +6,13 @@
                 <th scope="col" width="1%">
                     <input type="checkbox" name="form-bulk-selection" id="form-bulk-selection">
                 </th>
-                <th scope="col">{{ $gettext('Name') }}</th>
+                <th scope="col" width="50%">{{ $gettext('Name') }}</th>
                 <th scope="col">{{ $gettext('Version') }}</th>
                 <th scope="col">{{ $gettext('Startdatum') }}</th>
                 <th scope="col">{{ $gettext('Enddatum') }}</th>
-                <th scope="col">{{ $gettext('Zahl der Nutzern') }}</th>
-                <th scope="col">{{ $gettext('Zahl der Datei') }}</th>
-                <th scope="col">{{ $gettext('Aktionen') }}</th>
+                <th scope="col">{{ $gettext('Nutzende') }}</th>
+                <th scope="col">{{ $gettext('Datensätze') }}</th>
+                <th scope="col" class="actions">{{ $gettext('Aktionen') }}</th>
             </tr>
         </thead>
         <tbody>
