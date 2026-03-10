@@ -3,7 +3,7 @@
         <div class="checkin-form-list-container">
             <div class="checkin-form-list-header">
                 <RouterLink :to="{ path: '/new'}" class="button add">
-                    {{ $gettext('Neues Form erstellen') }}
+                    {{ $gettext('Neues Formular erstellen') }}
                 </RouterLink>
             </div>
             <div class="checkin-form-list">

@@ -14,8 +14,7 @@ const routes = [
 ];
 
 const absoluteUriStudip = new URL(window.STUDIP.ABSOLUTE_URI_STUDIP);
-const cid = window.STUDIP.URLHelper.parameters.cid;
-const baseUrl = `${absoluteUriStudip.pathname}plugins.php/studipcheckin/admin/`;
+const baseUrl = `${absoluteUriStudip.pathname}plugins.php/studipcheckin/admin/#`;
 
 export const router = createRouter({
     history: createWebHistory(baseUrl),
