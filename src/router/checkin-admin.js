@@ -1,4 +1,4 @@
-import { createMemoryHistory, createRouter } from 'vue-router';
+import { createWebHistory, createRouter } from 'vue-router';
 
 import TheOverview from '../pages/admin/TheOverview.vue';
 import FormPage from '../pages/admin/FormPage.vue';
@@ -13,7 +13,11 @@ const routes = [
     { name: 'form-user-data', path: '/form/:formId/user-data', component: FormUserDataPage, props: true },
 ];
 
+const absoluteUriStudip = new URL(window.STUDIP.ABSOLUTE_URI_STUDIP);
+const cid = window.STUDIP.URLHelper.parameters.cid;
+const baseUrl = `${absoluteUriStudip.pathname}plugins.php/studipcheckin/admin/`;
+
 export const router = createRouter({
-    history: createMemoryHistory(new URL(window.location.href).pathname),
+    history: createWebHistory(baseUrl),
     routes,
 });
