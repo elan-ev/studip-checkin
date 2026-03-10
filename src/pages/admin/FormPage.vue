@@ -116,8 +116,8 @@ const finishUpAndGoBack = () => {
 </script>
 
 <style>
-#content-wrapper {
-    position: relative !important; /* TODO: Remove later, since the drawer did not work on 6.0.1 I had to add it!!! */
+#plugin-studip_checkin-admin-index #content-wrapper {
+    position: relative;
 }
 .form-page {
     height: 100%;
