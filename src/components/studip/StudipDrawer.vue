@@ -118,7 +118,7 @@ const drawerStyle = computed(() => {
             padding: 10px 20px;
 
             .studip-icon {
-                color: var(--color--highlight);
+                color: var(--color--highlight, var(--base-color));
                 vertical-align: middle;
             }
         }
