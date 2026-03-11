@@ -5,6 +5,9 @@
                 <FormAddInputElement
                     :type="element.type" :display-name="element.displayName" @click="addElement(element)" />
             </li>
+            <li>
+                <button class="button" @click="emit('close')">{{ $gettext('Abbrechen') }}</button>
+            </li>
         </ul>
     </div>
 </template>
@@ -15,7 +18,7 @@
     import FormAddInputElement from './FormAddInputElement.vue';
 
     const inputElements = useInputElements();
-    const emit = defineEmits(['addElement']);
+    const emit = defineEmits(['addElement', 'close']);
     const props = defineProps({
         open: {
             type: Boolean,

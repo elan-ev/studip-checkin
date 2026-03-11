@@ -119,7 +119,7 @@ export const useUserFilterStore = defineStore('userFilterStore', () => {
         }
         const emptyField = {
             attributes: {
-                id: `new-${fields.value.size}`,
+                id: 'new-' + Date.now() + Math.random().toString(36).substr(2, 9),
                 type: null,
                 typeparam: null,
                 'compare-operator': '',

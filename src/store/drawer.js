@@ -8,6 +8,7 @@ export const useDrawerStore = defineStore('drawerStore', () => {
     const drawerComponent = ref(null);
     const drawerProps = ref({});
     const drawerAttachTarget = ref(null);
+    const drawerTitle = ref('');
 
     function setDrawerAttachTarget() {
         const targetElement = document.querySelector('#content-wrapper');
@@ -30,10 +31,12 @@ export const useDrawerStore = defineStore('drawerStore', () => {
 
     function closeDrawer() {
         isDrawerOpen.value = false;
+        drawerTitle.value = '';
     }
 
     function openUserFilterConfigInDrawer(filterId) {
         const UserFilterComponent = expandedViewsRegistry['user-filter'];
+        drawerTitle.value = 'Zielgruppen Filter';
         if (!UserFilterComponent) {
             console.error('UserFilterExpandedView in Registry nicht gefunden!');
             return;
@@ -63,6 +66,7 @@ export const useDrawerStore = defineStore('drawerStore', () => {
         drawerComponent,
         drawerProps,
         drawerAttachTarget,
+        drawerTitle,
         setDrawerAttachTarget,
         openDrawer,
         closeDrawer,

@@ -1,10 +1,19 @@
 <template>
     <table class="default">
-        <caption>{{ $gettext('Liste der Forms') }}</caption>
+        <caption>
+            <span class="actions">
+                <RouterLink :to="{ path: '/new' }" :title="$gettext('Neues Formular erstellen')">
+                    <StudipIcon shape="add" />
+                </RouterLink>
+            </span>
+            {{
+                $gettext('Formulare')
+            }}
+        </caption>
         <thead>
             <tr>
                 <th scope="col" width="1%">
-                    <input type="checkbox" name="form-bulk-selection" id="form-bulk-selection">
+                    <input type="checkbox" name="form-bulk-selection" id="form-bulk-selection" />
                 </th>
                 <th scope="col" width="50%">{{ $gettext('Name') }}</th>
                 <th scope="col">{{ $gettext('Version') }}</th>
@@ -22,30 +31,33 @@
                 </tr>
             </template>
             <template v-else>
-                <FormItem
-                    v-for="form in forms"
-                    :key="form.id"
-                    :form="form"
-                />
+                <FormItem v-for="form in forms" :key="form.id" :form="form" />
             </template>
         </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="8">
+                    <RouterLink :to="{ path: '/new' }" class="button add">
+                        {{ $gettext('Neues Formular erstellen') }}
+                    </RouterLink>
+                </td>
+            </tr>
+        </tfoot>
     </table>
 </template>
 
 <script setup>
-    import FormItem from './FormItem.vue';
+import FormItem from './FormItem.vue';
+import StudipIcon from '@/components/studip/StudipIcon.vue';
 
-    const props = defineProps({
-        forms: {
-            type: Array,
-            required: true,
-        },
-    });
+const props = defineProps({
+    forms: {
+        type: Array,
+        required: true,
+    },
+});
 
-    // TODO: Add bulk actions!
-
+// TODO: Add bulk actions!
 </script>
 
-<style>
-
-</style>
+<style></style>

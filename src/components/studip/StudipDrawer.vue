@@ -5,6 +5,9 @@
             <Transition name="drawer-slide">
                 <div v-if="visible" class="drawer" :class="[wrapperClass, `drawer--${side}`]" :style="drawerStyle">
                     <header class="drawer__header">
+                        <h2 class="drawer__title">
+                            {{ title }}
+                        </h2>
                         <button
                             class="drawer__close"
                             @click="emit('close')"
@@ -55,6 +58,10 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
+    title: {
+        type: String,
+        default: ''
+    }
 });
 
 // Selector für Teleport
@@ -106,7 +113,7 @@ const drawerStyle = computed(() => {
         z-index: 10;
         border-bottom: 1px solid var(--dark-gray-color-10);
         display: flex;
-        flex-direction: row-reverse;
+        flex-direction: row;
         justify-content: space-between;
         align-items: center;
 
@@ -122,6 +129,10 @@ const drawerStyle = computed(() => {
                 vertical-align: middle;
             }
         }
+    }
+
+    &__title {
+        padding-left: 10px;
     }
 
     .drawer__content {

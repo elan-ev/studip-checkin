@@ -1,6 +1,11 @@
 <template>
+    <header class="checkin-header">
+        <h2 class="checkin-header-content">
+            {{ isNew ? $gettext('Neues Formular') : form.name }}
+        </h2>
+    </header>
     <div class="form-page">
-        <FormElementsList :open="openElementsList" @addElement="performAddElement" />
+        <FormElementsList :open="openElementsList" @addElement="performAddElement" @close="closeAddElement" />
         <FormEditor @requestAddElement="prepareAddingElement" @delete="deleteElementFromPayload" />
         <FormSettings @save="saveForm" @cancel="finishUpAndGoBack" />
     </div>
@@ -9,6 +14,7 @@
         side="right"
         width="570px"
         :displayOverlay="true"
+        :title="drawerStore.drawerTitle"
         :attachTo="drawerStore.drawerAttachTarget"
         :visible="drawerStore.isDrawerOpen"
         @close="drawerStore.closeDrawer"
@@ -108,6 +114,11 @@ const performAddElement = (element) => {
     openElementsList.value = false;
 };
 
+const closeAddElement = () => {
+    openElementsList.value = false;
+    formBuilderStore.preparePendingElement(null);
+};
+
 const finishUpAndGoBack = () => {
     formBuilderStore.reset();
     openElementsList.value = false;
@@ -116,15 +127,12 @@ const finishUpAndGoBack = () => {
 </script>
 
 <style>
-#plugin-studip_checkin-admin-index #content-wrapper {
-    position: relative;
-}
 .form-page {
     height: 100%;
     width: 100%;
     display: flex;
     flex-direction: row;
-    gap: 0.25rem;
+    gap: 15px;
     justify-content: space-between;
 }
 </style>

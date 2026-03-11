@@ -1,49 +1,47 @@
 <template>
-    <div class="checkin-overview">
+    <section class="checkin-overview">
+        <header class="checkin-header">
+            <h2 class="checkin-header-content">
+                {{ $gettext('CheckIn-Plugin') }}
+            </h2>
+        </header>
         <div class="checkin-form-list-container">
-            <div class="checkin-form-list-header">
-                <RouterLink :to="{ path: '/new'}" class="button add">
-                    {{ $gettext('Neues Formular erstellen') }}
-                </RouterLink>
-            </div>
             <div class="checkin-form-list">
                 <FormsList :forms="formStore.all" />
             </div>
-            <div class="checkin-form-list-footer">
-                <!-- Here comes the pagination! -->
-            </div>
         </div>
-    </div>
+    </section>
 </template>
 <script setup>
-    import { onMounted } from 'vue';
-    import { useFormStore } from '@/store/form';
-    import { useUserFilterStore } from '@/store/user-filter';
-    import FormsList from '@/components/admin/FormsList.vue';
+import { onMounted } from 'vue';
+import { useFormStore } from '@/store/form';
+import { useUserFilterStore } from '@/store/user-filter';
+import FormsList from '@/components/admin/FormsList.vue';
 
-    const formStore = useFormStore();
-    const userFilterStore = useUserFilterStore();
+const formStore = useFormStore();
+const userFilterStore = useUserFilterStore();
 
-    onMounted(async () => {
-        await formStore.fetchAll(['related-users', 'form-user-data']);
-        await userFilterStore.fetchAvailableFields();
-    });
+onMounted(async () => {
+    await formStore.fetchAll(['related-users', 'form-user-data']);
+    await userFilterStore.fetchAvailableFields();
+});
 </script>
 
 <style lang="scss">
-    .checkin-overview {
+#plugin-studip_checkin-admin-index #content-wrapper {
+    position: relative;
+}
+#studip-checkin-admin-app {
+    .checkin-header {
         display: flex;
-        width: 100%;
-        height: 100%;
-        flex-direction: row;
-        gap: 1rem;
+        justify-content: space-between;
+        margin-bottom: 20px;
+
+        .checkin-header-content {
+            margin: 0;
+            padding: 0;
+            font-size: 22px;
+        }
     }
-    .checkin-form-list-container {
-        flex: 1;
-        padding: 1rem;
-        overflow-y: auto;
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-    }
+}
 </style>
