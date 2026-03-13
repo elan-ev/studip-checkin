@@ -2,6 +2,14 @@
     <div class="form-settings">
         <form class="default form-settings-form">
             <label>
+                {{ $gettext('Titel') }}
+                <input type="text" id="form-title" v-model="form.name" />
+            </label>
+            <label>
+                {{ $gettext('Beschreibung') }}
+                <textarea name="description" v-model="formBuilderStore.form.description" />
+            </label>
+            <label>
                 {{ $gettext('Startet am') }}
                 <div class="date-container">
                     <input type="date" name="start-date" v-model="form['start-date']" :max="form['end-date']" />
@@ -26,14 +34,6 @@
                         @click="emptyFormDate('end-date')"
                     />
                 </div>
-            </label>
-            <label>
-                {{ $gettext('Titel') }}
-                <input type="text" id="form-title" v-model="form.name" />
-            </label>
-            <label>
-                {{ $gettext('Beschreibung') }}
-                <textarea name="description" v-model="formBuilderStore.form.description" />
             </label>
             <label>
                 <button class="button add" @click.prevent="openUserFilterDrawer">
@@ -137,11 +137,11 @@ const emptyFormDate = (dateProp) => {
 .form-settings {
     flex-basis: 25%;
     max-width: 300px;
-    height: calc(100vh - 300px); // calc correct value with computed!
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border: solid thin var(--color--fieldset-border);
+    border: none;
 
     .form-settings-form {
         padding: 10px;
@@ -151,7 +151,7 @@ const emptyFormDate = (dateProp) => {
         display: flex;
         flex-direction: row;
         justify-content: center;
-        background-color: var(--color--fieldset-header);
+        margin-bottom: -10px;
     }
 }
 .date-container {

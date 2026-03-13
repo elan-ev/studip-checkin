@@ -11,13 +11,13 @@ export const useFormBuilderStore = defineStore('formBuilderStore', () => {
 
     function initEmpty() {
         form.value = {
-            "end-date": "",
-            "start-date": "",
-            "filter-id": "",
-            "name": "",
-            "structure": [],
-            "version": 1,
-        }
+            'end-date': '',
+            'start-date': '',
+            'filter-id': '',
+            name: '',
+            structure: [],
+            version: 1,
+        };
     }
 
     async function initFromExisting(existingForm) {
@@ -43,10 +43,10 @@ export const useFormBuilderStore = defineStore('formBuilderStore', () => {
     }
 
     function finishPendingElement(element) {
-        if (pendingElementIndex.value !== null) {
-            const clonedRawElement = structuredClone(toRaw(element));
-            addElementToStructure(pendingElementIndex.value, clonedRawElement);
-        }
+        const index = pendingElementIndex.value ?? elements.value.length;
+        const clonedRawElement = structuredClone(toRaw(element));
+        addElementToStructure(index, clonedRawElement);
+
         pendingElementIndex.value = null;
     }
 
@@ -67,5 +67,5 @@ export const useFormBuilderStore = defineStore('formBuilderStore', () => {
         preparePendingElement,
         finishPendingElement,
         changeElementPosition,
-    }
+    };
 });

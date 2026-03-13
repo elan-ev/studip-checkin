@@ -31,17 +31,4 @@ onMounted(async () => {
 #plugin-studip_checkin-admin-index #content-wrapper {
     position: relative;
 }
-#studip-checkin-admin-app {
-    .checkin-header {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 20px;
-
-        .checkin-header-content {
-            margin: 0;
-            padding: 0;
-            font-size: 22px;
-        }
-    }
-}
 </style>

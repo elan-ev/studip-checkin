@@ -1,10 +1,10 @@
 <template>
-    <header class="checkin-header">
-        <h2 class="checkin-header-content">
+    <CheckinHeader>
+        <template #title>
             {{ isNew ? $gettext('Neues Formular') : form.name }}
-        </h2>
-    </header>
-    <div class="form-page">
+        </template>
+    </CheckinHeader>
+    <div class="form-page" ref="formPage">
         <FormElementsList :open="openElementsList" @addElement="performAddElement" @close="closeAddElement" />
         <FormEditor @requestAddElement="prepareAddingElement" @delete="deleteElementFromPayload" />
         <FormSettings @save="saveForm" @cancel="finishUpAndGoBack" />
@@ -24,7 +24,7 @@
 </template>
 
 <script setup>
-import { onBeforeUnmount, onMounted, watch, ref, getCurrentInstance } from 'vue';
+import { onBeforeUnmount, onMounted, onUnmounted, watch, ref, getCurrentInstance } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useFormStore } from '@/store/form';
 import { useFormBuilderStore } from '@/store/form-builder';
@@ -33,6 +33,7 @@ import { useUserFilterStore } from '@/store/user-filter';
 import FormElementsList from '@/components/admin/FormElementsList.vue';
 import FormEditor from '@/components/admin/FormEditor.vue';
 import FormSettings from '@/components/admin/FormSettings.vue';
+import CheckinHeader from '@/components/admin/CheckinHeader.vue';
 import StudipDrawer from '@/components/studip/StudipDrawer.vue';
 import { storeToRefs } from 'pinia';
 
@@ -54,6 +55,8 @@ const props = defineProps({
         required: true,
     },
 });
+
+const formPage = ref(null);
 
 watch(
     () => route.params.id,
@@ -77,9 +80,22 @@ onBeforeUnmount(() => {
     userFilterStore.reset();
 });
 
+onUnmounted(() => {
+    window.removeEventListener('resize', updateOffset);
+});
+
 onMounted(async () => {
     drawerStore.setDrawerAttachTarget();
+    updateOffset();
+    window.addEventListener('resize', updateOffset);
 });
+
+const updateOffset = () => {
+    if (formPage.value) {
+        const rect = formPage.value.getBoundingClientRect();
+        formPage.value.style.setProperty('--offset-top', `${rect.top}px`);
+    }
+};
 
 const saveForm = async (formData) => {
     if (props.isNew) {
@@ -128,11 +144,14 @@ const finishUpAndGoBack = () => {
 
 <style>
 .form-page {
-    height: 100%;
+    height: calc(100vh - var(--offset-top, 150px) - 20px); 
     width: 100%;
     display: flex;
     flex-direction: row;
     gap: 15px;
     justify-content: space-between;
+    overflow: hidden;
+    margin-bottom: 20px;
+    box-sizing: border-box;
 }
 </style>

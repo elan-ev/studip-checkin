@@ -3,6 +3,8 @@ import vue from '@vitejs/plugin-vue';
 import { fileURLToPath, URL } from "node:url";
 
 export default defineConfig(({ mode }) => {
+    const isDev = mode === 'development';
+
     return {
         plugins: [vue()],
         resolve: {
@@ -27,7 +29,9 @@ export default defineConfig(({ mode }) => {
             },
         },
         define: {
-            'process.env.NODE_ENV': `"${mode}"`
+            'process.env.NODE_ENV': JSON.stringify(mode),
+            '__VUE_PROD_DEVTOOLS__': isDev,
+            '__VUE_PROD_HYDRATION_MISMATCH_DETAILS__': isDev
         },
     };
 });

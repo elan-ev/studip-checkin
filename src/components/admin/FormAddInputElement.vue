@@ -1,9 +1,7 @@
 <template>
-<div class="checkin-add-input">
     <button class="button add checkin-add-input-element">
         {{ displayName }}
     </button>
-</div>
 </template>
 <script setup>
 import { computed } from 'vue';
@@ -22,10 +20,6 @@ const currentElement = computed(() => {
 
 // TODO add icons etc
 </script>
-<style lang="css" scoped>
-    .checkin-add-input {
-        margin: auto;
-        padding: 2px;
-        border: 1px solid gray;
-    }
+<style lang="scss">
+
 </style>

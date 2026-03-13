@@ -1,58 +1,58 @@
 <template>
-    <div class="form-elements-list" v-if="open">
-        <ul>
-            <li v-for="element in elements" :key="element.id">
-                <FormAddInputElement
-                    :type="element.type" :display-name="element.displayName" @click="addElement(element)" />
-            </li>
-            <li>
-                <button class="button" @click="emit('close')">{{ $gettext('Abbrechen') }}</button>
-            </li>
-        </ul>
-    </div>
+    <ul class="form-elements-list">
+        <li v-for="element in elements" :key="element.id">
+            <FormAddInputElement
+                :type="element.type"
+                :display-name="element.displayName"
+                @click="addElement(element)"
+            />
+        </li>
+    </ul>
 </template>
 
 <script setup>
-    import { computed } from 'vue';
-    import useInputElements from '../../composables/inputElements';
-    import FormAddInputElement from './FormAddInputElement.vue';
+import { computed } from 'vue';
+import useInputElements from '../../composables/inputElements';
+import FormAddInputElement from './FormAddInputElement.vue';
 
-    const inputElements = useInputElements();
-    const emit = defineEmits(['addElement', 'close']);
-    const props = defineProps({
-        open: {
-            type: Boolean,
-            required: true,
-        },
-    });
+const inputElements = useInputElements();
+const emit = defineEmits(['addElement']);
+const props = defineProps({
+    open: {
+        type: Boolean,
+        required: true,
+    },
+});
 
-    const addElement = (element) => {
-        emit('addElement', element);
-    };
+const addElement = (element) => {
+    emit('addElement', element);
+};
 
-    const elements = computed(() => {
-        const elements = []
-        for (const element of inputElements) {
-            elements.push({
-                id: element.type,
-                type: element.type,
-                displayName: element.displayName,
-                payload: {
-                    placeholder: '',
-                    label: '',
-                    options: [],
-                    required: '0'
-                },
-                relationIndices: [],
-            });
-        }
-        return elements;
-    });
+const elements = computed(() => {
+    const elements = [];
+    for (const element of inputElements) {
+        elements.push({
+            id: element.type,
+            type: element.type,
+            displayName: element.displayName,
+            payload: {
+                placeholder: '',
+                label: '',
+                options: [],
+                required: '0',
+            },
+            relationIndices: [],
+        });
+    }
+    return elements;
+});
 </script>
 
 <style>
-    .form-elements-list {
-        flex-basis: 25%;
-        background-color: lightgreen;
-    }
+.form-elements-list {
+    flex-basis: 25%;
+    max-width: 300px;
+    list-style: none;
+    padding: 0;
+}
 </style>
