@@ -1,13 +1,13 @@
 <template>
-    <ul class="form-elements-list">
-        <li v-for="element in elements" :key="element.id">
+    <div class="form-elements-list">
+        <template v-for="element in elements" :key="element.id">
             <FormAddInputElement
                 :type="element.type"
                 :display-name="element.displayName"
                 @click="addElement(element)"
             />
-        </li>
-    </ul>
+        </template>
+    </div>
 </template>
 
 <script setup>
@@ -51,8 +51,17 @@ const elements = computed(() => {
 <style>
 .form-elements-list {
     flex-basis: 25%;
-    max-width: 300px;
+    max-width: 280px;
     list-style: none;
     padding: 0;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 130px);
+    grid-auto-rows: min-content;
+    align-content: start;
+    justify-content: left;
+    gap: 10px;
+    height: calc(100vh - var(--offset-top, 150px) - 20px);
+    overflow-y: auto;
 }
 </style>

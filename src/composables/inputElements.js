@@ -6,37 +6,37 @@ export default function useInputElements() {
             useCase: 'text',
             type: 'text',
             displayName: 'Textfeld',
-            icon: '',
+            icon: 'block-typewriter',
         },
         {
             useCase: 'select',
             type: 'radio',
             displayName: 'Optionsfeld',
-            icon: '',
+            icon: 'radiobutton-checked',
         },
         {
             useCase: 'select',
             type: 'checkbox',
             displayName: 'TrueFalse',
-            icon: '',
+            icon: 'accept',
         },
         {
             useCase: 'select',
             type: 'select',
             displayName: 'Auswahlfeld',
-            icon: '',
+            icon: 'view-list',
         },
         {
             useCase: 'pattern',
             type: 'url',
             displayName: 'URL Feld',
-            icon: '',
+            icon: 'group',
         },
         {
             useCase: 'pattern',
             type: 'email',
             displayName: 'E-Mail Feld',
-            icon: '',
+            icon: 'mail',
         }
     ];
 

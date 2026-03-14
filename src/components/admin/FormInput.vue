@@ -98,7 +98,7 @@
     const addNewOption = () => {
         let hasEmptyItem = props.element.payload.options.filter(item => item.text === '');
         if (hasEmptyItem.length) {
-            STUDIP.Report.error(proxy.$gettext('Leer Option ist vorhanden!'));
+            STUDIP.Report.warning(proxy.$gettext('Es ist eine leer Option ist vorhanden.'));
             return;
         }
         props.element.payload.options.push({
