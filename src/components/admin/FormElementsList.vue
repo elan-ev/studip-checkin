@@ -15,7 +15,7 @@ import { computed } from 'vue';
 import useInputElements from '../../composables/inputElements';
 import FormAddInputElement from './FormAddInputElement.vue';
 
-const inputElements = useInputElements();
+const { inputElements } = useInputElements();
 const emit = defineEmits(['addElement']);
 const props = defineProps({
     open: {
@@ -29,22 +29,18 @@ const addElement = (element) => {
 };
 
 const elements = computed(() => {
-    const elements = [];
-    for (const element of inputElements) {
-        elements.push({
-            id: element.type,
-            type: element.type,
-            displayName: element.displayName,
-            payload: {
-                placeholder: '',
-                label: '',
-                options: [],
-                required: '0',
-            },
-            relationIndices: [],
-        });
-    }
-    return elements;
+    return inputElements.value.map(element => ({
+        id: element.type,
+        type: element.type,
+        displayName: element.displayName,
+        payload: {
+            placeholder: '',
+            label: '',
+            options: [],
+            required: '0',
+        },
+        relationIndices: [],
+    }));
 });
 </script>
 

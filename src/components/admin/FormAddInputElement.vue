@@ -20,9 +20,9 @@ const props = defineProps({
     },
 });
 
-const inputElements = useInputElements();
+const { inputElements } = useInputElements();
 const currentElement = computed(() => {
-    return inputElements.find((element) => element.type === props.type);
+    return inputElements.value.find((element) => element.type === props.type);
 });
 
 const elementIcon = computed(() => {
