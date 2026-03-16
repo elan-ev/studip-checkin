@@ -18,6 +18,7 @@ export default defineConfig(({ mode }) => {
                 input: {
                     'studip-checkin': 'src/checkin.js',
                     'studip-checkin-admin': 'src/checkin-admin.js',
+                    'studip-checkin-profile': 'src/checkin-profile.js',
                 },
                 output: {
                     entryFileNames: `[name].js`,

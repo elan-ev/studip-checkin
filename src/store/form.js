@@ -116,10 +116,10 @@ export const useFormStore = defineStore('formStore', () => {
         return config;
     }
 
-    async function fetchByUserId(userId) {
+    async function fetchByUserId(userId, all = false) {
         isLoading.value = true;
         try {
-            const { data } = await api.get(`checkin-user-forms/${userId}`);
+            const { data } = await api.get(`checkin-user-forms/${userId}/${all ? 'all': 'pending'}`);
             clearRecords();
             data.forEach((form => {
                 storeRecord(form);

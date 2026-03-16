@@ -33,12 +33,18 @@ class StudipCheckin extends StudIPPlugin implements SystemPlugin, JsonApiPlugin
             'type' => 'module',
             'rel' => 'preload',
         ]);
+        PageLayout::addScript($this->getPluginUrl() . '/dist/studip-checkin-profile.js', [
+            'type' => 'module',
+            'rel' => 'preload',
+        ]);
         PageLayout::addStylesheet($this->getPluginUrl() . '/dist/drawer.css');
         PageLayout::addStylesheet($this->getPluginUrl() . '/dist/studip-checkin-admin.css');
 
         if ($GLOBALS['perm']->have_perm("admin")) {
             $this->addContentsNavigation();
         }
+
+        $this->addProfileNavigation();
 
     }
 
@@ -64,6 +70,14 @@ class StudipCheckin extends StudIPPlugin implements SystemPlugin, JsonApiPlugin
         }
 
     }
+
+    private function addProfileNavigation(): void
+    {
+        if (Navigation::hasItem('/profile')) {
+            Navigation::addItem('/profile/checkin', $this->buildProfileNavigation());
+        }
+    }
+
     private function buildContentsNavigation(): Navigation
     {
         $navigation = new Navigation($this->_('CheckInPlugin'));
@@ -72,6 +86,20 @@ class StudipCheckin extends StudIPPlugin implements SystemPlugin, JsonApiPlugin
         $navigation->addSubNavigation('index', new Navigation(
             'Übersicht',
             PluginEngine::getURL($this, [], 'admin')
+        ));
+
+        return $navigation;
+
+    }
+
+    private function buildProfileNavigation(): Navigation
+    {
+        $navigation = new Navigation($this->_('CheckInPlugin'));
+        $navigation->setDescription('TODO: Lorem ipsum dolor');
+        $navigation->setImage(Icon::create('place', 'navigation'));
+        $navigation->addSubNavigation('index', new Navigation(
+            'CheckIn',
+            PluginEngine::getURL($this, [], 'profile')
         ));
 
         return $navigation;

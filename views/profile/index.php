@@ -1,0 +1,1 @@
+<div id="studip-checkin-profile-app"></div>
