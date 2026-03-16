@@ -1,6 +1,11 @@
 <template>
   <table class="default">
-        <caption>{{ $gettext('Liste der Nutzer unter Form:') + ` ${form.name}` }}</caption>
+        <caption>
+            {{ $gettext('Liste der Nutzer unter Form:') + ` ${form.name}` }}
+            <span class="actions">
+                <a :href="exportLink"><StudipIcon shape="export" :title="$gettext('CSV Export')"/></a>
+            </span>
+        </caption>
         <thead>
             <tr>
                 <th scope="col" width="1%">
@@ -31,6 +36,8 @@
 </template>
 
 <script setup>
+    import { computed } from 'vue';
+    import StudipIcon from '@/components/studip/StudipIcon.vue';
     import FormUserDataItem from './FormUserDataItem.vue';
 
     const props = defineProps({
@@ -42,6 +49,9 @@
             type: Object,
             required: true,
         }
+    });
+    const exportLink = computed(() => {
+        return window.STUDIP.ABSOLUTE_URI_STUDIP + 'plugins.php/studipcheckin/admin/export?id=' + props.form.id;
     });
 
 </script>

@@ -20,12 +20,67 @@ class AdminController extends PluginController
             Navigation::activateItem('/contents/checkin');
         }
         $helpbar = Helpbar::get();
-        $helpbar->addPlainText('', 
+        $helpbar->addPlainText(
+            '',
             _('Das StudipCheckin Plugin') //TODO add more text
         );
-        $helpbar->addPlainText('',  _('Dieses Plugin wurde vom elan e.V. entwickelt. Es steht unter der GNU Affero General Public License, Version 3. Der vollständige Quellcode ist öffentlich zugänglich im GitHub-Repository.'));
+        $helpbar->addPlainText('', _('Dieses Plugin wurde vom elan e.V. entwickelt. Es steht unter der GNU Affero General Public License, Version 3. Der vollständige Quellcode ist öffentlich zugänglich im GitHub-Repository.'));
         $helpbar->addLink('GNU Affero General Public License', 'https://www.gnu.org/licenses/agpl-3.0.de.html', Icon::create('link-extern', Icon::ROLE_INFO_ALT), '_blank');
         $helpbar->addLink('GitHub-Repository', 'https://github.com/elan-ev/studip-checkin', Icon::create('link-extern', Icon::ROLE_INFO_ALT), '_blank');
         $helpbar->addLink('elan e.V.', 'https://elan-ev.de', Icon::create('link-extern', Icon::ROLE_INFO_ALT), '_blank');
+    }
+
+    public function export_action()
+    {
+        $request = iterator_to_array(Request::getInstance());
+        $form_id = $request['id'];
+        $filename = 'export';
+        $headers = [];
+        $csvdata = [];
+
+        if ($form_id) {
+            $form = StudipCheckin\Models\Form::find($form_id);
+            $filename = str_replace(' ', '_', $form->name);
+            $structure = json_decode($form->structure, true);
+            $staticHeaders = ['Nachname', 'Vorname', 'Username', 'Matrikelnummer'];
+            $form_headers = array_column(array_column($structure, 'payload'), 'label');
+            $headers = array_merge($staticHeaders, $form_headers);
+
+            $formUserData = StudipCheckin\Models\FormUserData::findBySQL('`form_id` = ?', [$form->id]);
+
+            foreach ($formUserData as $data) {
+                $user = User::find($data->user_id);
+                $user_information = [$user->nachname, $user->vorname, $user->username, $user->matriculation_number];
+                $form_data = json_decode($data->form_data, true);
+                $user_data = [];
+                foreach ($structure as $field) {
+                    $id = $field['id'];
+                    $rawValue = $form_data[$id] ?? null;
+                    $user_data[] = $this->transformValue($field, $rawValue);
+                }
+
+                $csvdata[] = array_merge($user_information, $user_data);
+            }
+        }
+
+        $this->render_csv(array_merge([$headers], $csvdata), "{$filename}.csv");
+    }
+
+    private function transformValue($field, $rawValue)
+    {
+        if ($rawValue === null)
+            return '';
+
+        $type = $field['type'] ?? '';
+        $options = $field['payload']['options'] ?? [];
+
+        return match ($type) {
+            'radio' => $options[$rawValue]['text'] ?? $rawValue,
+            'multiselect' => is_array($rawValue)
+            ? implode(', ', array_map(fn($idx) => $options[$idx]['text'] ?? $idx, $rawValue))
+            : $rawValue,
+            'switch' => $rawValue ? 'Ja' : 'Nein',
+            default => is_array($rawValue) ? implode(', ', $rawValue) : $rawValue,
+        };
     }
 }
