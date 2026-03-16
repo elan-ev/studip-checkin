@@ -7,6 +7,8 @@
         :placeholder="placeholder"
         :disabled="disabled"
         :required="required"
+        :min="min"
+        :max="max"
         class="form-input-field"
     />
 </template>
@@ -25,6 +27,14 @@ defineProps({
     placeholder: String,
     disabled: Boolean,
     required: [Boolean, String],
+    min: {
+        type: Number,
+        default: undefined
+    },
+    max: {
+        type: Number,
+        default: undefined
+    },
 });
 
 defineEmits(['update:modelValue']);

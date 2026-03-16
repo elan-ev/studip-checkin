@@ -31,8 +31,9 @@ import { computed } from 'vue';
 import FormInputText from './inputs/FormInputText.vue';
 import FormInputTextarea from './inputs/FormInputTextarea.vue';
 import FormInputSelect from './inputs/FormInputSelect.vue';
-import FormInputCheckbox from './inputs/FormInputCheckbox.vue';
+import FormInputSwitch from './inputs/FormInputSwitch.vue';
 import FormInputRadioGroup from './inputs/FormInputRadioGroup.vue';
+import FormInputCheckboxGroup from './inputs/FormInputCheckboxGroup.vue';
 
 const props = defineProps({
     element: Object,
@@ -50,8 +51,9 @@ const inputComponent = computed(() => {
         'url': FormInputText,
         'textarea': FormInputTextarea, 
         'select': FormInputSelect,
-        'checkbox': FormInputCheckbox,
-        'radio': FormInputRadioGroup
+        'switch': FormInputSwitch,
+        'radio': FormInputRadioGroup,
+        'multiselect': FormInputCheckboxGroup
     };
     return map[props.element.type] || FormInputText;
 });
@@ -60,7 +62,9 @@ const extraProps = computed(() => {
     return {
         type: props.element.type,
         placeholder: props.element.payload?.placeholder,
-        required: props.element.required
+        required: props.element.required,
+        min: props.element.payload?.min,
+        max: props.element.payload?.max
     };
 });
 </script>

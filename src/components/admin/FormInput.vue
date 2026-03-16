@@ -1,6 +1,6 @@
 <template>
     <legend class="checkin-movable">
-        <span>{{ capitalize($gettext(element.type)) }}</span>
+        <span>{{ element.displayName }}</span>
         <button
             v-if="index > 0"
             class="checkin-movable-up"
@@ -19,12 +19,12 @@
         </button>
     </legend>
     <label>
-        {{ $gettext('Feld Text') }}
-        <input type="text" v-model="element.payload.label">
+        {{ $gettext('Beschriftung') }}
+        <input type="text" v-model="element.payload.label" />
     </label>
     <label>
         {{ $gettext('Platzhalter') }}
-        <input type="text" v-model="element.payload.placeholder">
+        <input type="text" v-model="element.payload.placeholder" />
     </label>
     <section v-if="hasOptions">
         <h4>
@@ -33,7 +33,7 @@
         <label v-for="(option, index) in element.payload.options" :key="index">
             {{ $gettext('Wert der Option') }}
             <div class="option-div">
-                <input type="text" v-model="element.payload.options[index].text">
+                <input type="text" v-model="element.payload.options[index].text" />
                 <button
                     class="delete-option"
                     @click="removeOption(index)"
@@ -48,102 +48,112 @@
             {{ $gettext('Neue Option hinzufügen') }}
         </button>
     </section>
+    <section v-if="hasMinMax">
+        <label>
+            {{ $gettext('Minimum') }}
+            <input type="number" v-model="element.payload.min" />
+        </label>
+        <label>
+            {{ $gettext('Maximum') }}
+            <input type="number" v-model="element.payload.max" />
+        </label>
+    </section>
     <div class="floatingCheckbox">
-        <input type="checkbox" name="requiredField" v-model="element.payload.required">
+        <input type="checkbox" name="requiredField" v-model="element.payload.required" />
         <label for="requiredField">{{ $gettext('Pflichtfeld') }}</label>
     </div>
-
 </template>
 <script setup>
-    import StudipIcon from '@/components/studip/StudipIcon.vue';
-    import { computed, capitalize, getCurrentInstance } from 'vue';
-    import { useFormBuilderStore } from '@/store/form-builder';
+import StudipIcon from '@/components/studip/StudipIcon.vue';
+import { computed, capitalize, getCurrentInstance } from 'vue';
+import { useFormBuilderStore } from '@/store/form-builder';
 
-    const { proxy } = getCurrentInstance();
-    const formBuilderStore = useFormBuilderStore();
+const { proxy } = getCurrentInstance();
+const formBuilderStore = useFormBuilderStore();
 
-    const props = defineProps({
-        element: Object,
-        index: String,
-    });
+const props = defineProps({
+    element: Object,
+    index: String,
+});
 
-    const hasOptions = computed(() => {
-        const withOptions = ['radio', 'select']
-        if (withOptions.includes(props.element.type)) {
-            return true;
-        }
-        return false;
-    });
+const hasOptions = computed(() => {
+    const withOptions = ['radio', 'select', 'multiselect'];
+    return withOptions.includes(props.element.type);
+});
 
-    const moveUp = () => {
-        // TODO checks for errors
-        if (props.index > 0) {
-            const newIndex = props.index - 1;
-            formBuilderStore.changeElementPosition(props.index, newIndex, props.element);
-        } else {
-            STUDIP.Report.error(proxy.$gettext('Ungültige Position für das Element'));
-        }
-    };
+const hasMinMax = computed(() => {
+    const withMinMax = ['number'];
+    return withMinMax.includes(props.element.type);
+});
 
-    const moveDown = () => {
-        // TODO checks for errors
-        if (props.index < formBuilderStore.form.structure.length - 1) {
-            const newIndex = props.index + 1;
-            formBuilderStore.changeElementPosition(props.index, newIndex, props.element);
-        } else {
-            STUDIP.Report.error(proxy.$gettext('Ungültige Position für das Element'));
-        }
-    };
-
-    const addNewOption = () => {
-        let hasEmptyItem = props.element.payload.options.filter(item => item.text === '');
-        if (hasEmptyItem.length) {
-            STUDIP.Report.warning(proxy.$gettext('Es ist eine leer Option ist vorhanden.'));
-            return;
-        }
-        props.element.payload.options.push({
-            text: ''
-        });
+const moveUp = () => {
+    // TODO checks for errors
+    if (props.index > 0) {
+        const newIndex = props.index - 1;
+        formBuilderStore.changeElementPosition(props.index, newIndex, props.element);
+    } else {
+        STUDIP.Report.error(proxy.$gettext('Ungültige Position für das Element'));
     }
+};
 
-    const removeOption = (index) => {
-        props.element.payload.options.splice(index, 1);
+const moveDown = () => {
+    // TODO checks for errors
+    if (props.index < formBuilderStore.form.structure.length - 1) {
+        const newIndex = props.index + 1;
+        formBuilderStore.changeElementPosition(props.index, newIndex, props.element);
+    } else {
+        STUDIP.Report.error(proxy.$gettext('Ungültige Position für das Element'));
     }
+};
 
+const addNewOption = () => {
+    let hasEmptyItem = props.element.payload.options.filter((item) => item.text === '');
+    if (hasEmptyItem.length) {
+        STUDIP.Report.warning(proxy.$gettext('Es ist eine leer Option ist vorhanden.'));
+        return;
+    }
+    props.element.payload.options.push({
+        text: '',
+    });
+};
+
+const removeOption = (index) => {
+    props.element.payload.options.splice(index, 1);
+};
 </script>
 <style lang="scss" scoped>
-    .delete-option {
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 10px 20px;
+.delete-option {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
 
-        .studip-icon {
-            color: var(--color--highlight, var(--base-color));
-            vertical-align: middle;
-        }
+    .studip-icon {
+        color: var(--color--highlight, var(--base-color));
+        vertical-align: middle;
     }
-    .option-div {
-        display: flex;
-        gap: 0.5rem;
-        justify-content: start;
-        align-items: center;
+}
+.option-div {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: start;
+    align-items: center;
+}
+.checkin-movable {
+    display: flex;
+    align-items: center;
+    span {
+        flex-grow: 1;
     }
-    .checkin-movable {
-        display: flex;
-        align-items: center;
-        span {
-            flex-grow: 1;
-        }
-        button {
-            align-self: flex-end;
-            margin-left: 5px;
-        }
+    button {
+        align-self: flex-end;
+        margin-left: 5px;
     }
-    .floating-checkbox {
-        label {
-            display: inline !important;
-            padding-left: 10px;
-        }
+}
+.floating-checkbox {
+    label {
+        display: inline !important;
+        padding-left: 10px;
     }
+}
 </style>

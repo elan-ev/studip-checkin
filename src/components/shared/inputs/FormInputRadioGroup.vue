@@ -1,24 +1,33 @@
 <template>
-    <div class="form-input-checkbox-container">
-        <input
-            :id="id"
-            type="checkbox"
-            :checked="modelValue"
-            @change="$emit('update:modelValue', $event.target.checked)"
-            :disabled="disabled"
-            :required="required"
-            class="form-checkbox-field"
+    <div class="form-radio-group-container">
+        <div 
+            v-for="(option, index) in element?.payload?.options" 
+            :key="index" 
+            class="radio-option"
         >
+            <input
+                :id="`${id}-${index}`"
+                :name="id"
+                type="radio"
+                :value="index"
+                :checked="Number(modelValue) === index"
+                @change="$emit('update:modelValue', index)"
+                :disabled="disabled"
+                :required="required && index === 0"
+                class="form-radio-field"
+            >
+            <label :for="`${id}-${index}`" class="radio-label">
+                {{ option.text }}
+            </label>
+        </div>
     </div>
 </template>
 
 <script setup>
 defineProps({
-    modelValue: {
-        type: Boolean,
-        default: false
-    },
+    modelValue: [String, Number],
     id: String,
+    element: Object,
     disabled: Boolean,
     required: [Boolean, String]
 });
@@ -27,21 +36,27 @@ defineEmits(['update:modelValue']);
 </script>
 
 <style lang="scss" scoped>
-.form-input-checkbox-container {
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 8px;
+.form-radio-group-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
 }
 
-.form-checkbox-field {
+.radio-option {
+    display: flex;
+    align-items: center;
     cursor: pointer;
-    width: 16px;
-    height: 16px;
-    accent-color: var(--color--brand-primary);
 
-    &:disabled {
-        cursor: not-allowed;
-        opacity: 0.5;
+    .form-radio-field {
+        margin-right: 8px;
+        cursor: pointer;
+        accent-color: var(--color--brand-primary);
+    }
+
+    .radio-label {
+        cursor: pointer;
+        font-weight: normal;
     }
 }
 </style>
