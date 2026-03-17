@@ -3,19 +3,22 @@
         <span>{{ element.displayName }}</span>
         <button
             v-if="index > 0"
-            class="checkin-movable-up"
+            class="button-undecorated"
             @click.prevent="moveUp()"
             :title="$gettext('Nach oben bewegen')"
         >
-            <StudipIcon shape="arr_2up" :size="16" />
+            <StudipIcon shape="arr_2up" :size="20" />
         </button>
         <button
             v-if="index < formBuilderStore.form.structure.length - 1"
-            class="checkin-movable-down"
+            class="button-undecorated"
             @click.prevent="moveDown()"
             :title="$gettext('Nach unten bewegen')"
         >
-            <StudipIcon shape="arr_2down" :size="16" />
+            <StudipIcon shape="arr_2down" :size="20" />
+        </button>
+        <button class="button-undecorated" :title="$gettext('Löschen')" @click.prevent.stop="emit('delete')">
+            <StudipIcon shape="trash" :size="20" />
         </button>
     </legend>
     <label>
@@ -34,13 +37,8 @@
             {{ $gettext('Wert der Option') }}
             <div class="option-div">
                 <input type="text" v-model="element.payload.options[index].text" />
-                <button
-                    class="delete-option"
-                    @click="removeOption(index)"
-                    :title="$gettext('Option Löschen')"
-                    :aria-label="$gettext('Option Löschen')"
-                >
-                    <StudipIcon shape="trash" :size="24" />
+                <button class="delete-option" @click="removeOption(index)" :title="$gettext('Option Löschen')">
+                    <StudipIcon shape="trash" :size="20" />
                 </button>
             </div>
         </label>
@@ -58,18 +56,62 @@
             <input type="number" v-model="element.payload.max" />
         </label>
     </section>
-    <div class="floatingCheckbox">
-        <input type="checkbox" name="requiredField" v-model="element.payload.required" />
-        <label for="requiredField">{{ $gettext('Pflichtfeld') }}</label>
-    </div>
+
+    <label>
+        {{ $gettext('Pflichtfeld') }}
+        <input type="checkbox" v-model="element.payload.required" />
+    </label>
+    <section v-if="hasCondition" class="checkin-form-input-condition">
+        <h3>
+            {{ $gettext('Bedingung') }}
+            <button class="button-undecorated" :title="$gettext('Bedingung entfernen')" @click.prevent="removeCondition">
+                <StudipIcon shape="trash" :size="20" />
+            </button>
+        </h3>
+        <label>
+            {{ $gettext('Ziel') }}
+            <select v-model="element.payload['condition-target']">
+                <template v-for="(storeElement, storeElementIndex) in storeElements" :key="element.id">
+                    <option
+                        v-if="storeElement.id !== element.id"
+                        :value="storeElement.id"
+                        :disabled="storeElementIndex > index"
+                    >
+                        {{ storeElement.payload.label }} ({{ storeElement.displayName }})
+                    </option>
+                </template>
+            </select>
+            <div v-if="targetElement" class="condition-value-config">
+                <h4>
+                    {{ $gettext('Wert muss sein') }}
+                </h4>
+                <component
+                    :is="inputComponentForTarget"
+                    v-model="element.payload['condition-value']"
+                    :element="targetElement"
+                />
+            </div>
+        </label>
+    </section>
+    <button v-else class="button add" @click.prevent="addCondition">
+        {{ $gettext('Bedingung hinzufügen') }}
+    </button>
 </template>
 <script setup>
 import StudipIcon from '@/components/studip/StudipIcon.vue';
 import { computed, capitalize, getCurrentInstance } from 'vue';
 import { useFormBuilderStore } from '@/store/form-builder';
 
+import FormInputText from '@/components/shared/inputs/FormInputText.vue';
+import FormInputTextarea from '@/components/shared/inputs/FormInputTextarea.vue';
+import FormInputSelect from '@/components/shared/inputs/FormInputSelect.vue';
+import FormInputSwitch from '@/components/shared/inputs/FormInputSwitch.vue';
+import FormInputRadioGroup from '@/components/shared/inputs/FormInputRadioGroup.vue';
+import FormInputCheckboxGroup from '@/components/shared/inputs/FormInputCheckboxGroup.vue';
+
 const { proxy } = getCurrentInstance();
 const formBuilderStore = useFormBuilderStore();
+const emit = defineEmits(['delete']);
 
 const props = defineProps({
     element: Object,
@@ -85,6 +127,46 @@ const hasMinMax = computed(() => {
     const withMinMax = ['number'];
     return withMinMax.includes(props.element.type);
 });
+
+const hasCondition = computed(() => {
+    return props.element.payload['has-conditions'] ?? false;
+});
+
+const targetElement = computed(() => {
+    const targetId = props.element.payload['condition-target'];
+    return storeElements.value.find((el) => el.id === targetId);
+});
+
+const inputComponentForTarget = computed(() => {
+    if (!targetElement.value) return null;
+
+    const map = {
+        text: FormInputText,
+        email: FormInputText,
+        url: FormInputText,
+        textarea: FormInputTextarea,
+        select: FormInputSelect,
+        switch: FormInputSwitch,
+        radio: FormInputRadioGroup,
+        multiselect: FormInputCheckboxGroup,
+    };
+
+    return map[targetElement.value.type];
+});
+
+const storeElements = computed(() => {
+    return formBuilderStore.elements;
+});
+
+const addCondition = () => {
+    props.element.payload['has-conditions'] = true;
+};
+
+const removeCondition = () => {
+    props.element.payload['has-conditions'] = false;
+    props.element.payload['condition-target'] = null;
+    props.element.payload['condition-value'] = null;
+}
 
 const moveUp = () => {
     // TODO checks for errors
@@ -154,6 +236,11 @@ const removeOption = (index) => {
     label {
         display: inline !important;
         padding-left: 10px;
+    }
+}
+.checkin-form-input-condition {
+    .button-undecorated {
+        vertical-align: sub;
     }
 }
 </style>

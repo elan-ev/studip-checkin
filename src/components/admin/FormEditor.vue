@@ -4,12 +4,7 @@
             <template v-if="formBuilderStore.form?.structure?.length">
                 <template v-for="(element, index) in formBuilderStore.form.structure" :key="element.id">
                     <fieldset>
-                        <div class="form-editor-fieldset-delete">
-                            <button class="button trash" @click.prevent="deleteElement(index)">
-                                {{ $gettext('Entfernen') }}
-                            </button>
-                        </div>
-                        <FormInput :element="element" :index="index" />
+                        <FormInput :element="element" :index="index" @delete="deleteElement(index)"/>
                     </fieldset>
                     <FormEditorPlusButton
                         v-if="index < formBuilderStore.form.structure.length - 1"
@@ -42,7 +37,7 @@ const addElementHere = (index) => {
 const deleteElement = (index) => {
     if (
         STUDIP.Dialog.confirm(
-            proxy.$gettext('Are you sure you want to delete the input?'),
+            proxy.$gettext('Möchten Sie dieses Feld wirklich löschen?'),
             () => {
                 formBuilderStore.removeElementFromStructure(index);
             },
@@ -61,7 +56,7 @@ const deleteElement = (index) => {
     overflow-x: hidden;
 
     padding: 20px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--color--tile-border);;
     border-radius: 4px;
     box-sizing: border-box;
 }
