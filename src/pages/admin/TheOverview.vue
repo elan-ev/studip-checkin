@@ -31,4 +31,12 @@ onMounted(async () => {
 #plugin-studip_checkin-admin-index #content-wrapper {
     position: relative;
 }
+
+.button-undecorated {
+    color: var(--base-color);
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    height: 28px;
+}
 </style>

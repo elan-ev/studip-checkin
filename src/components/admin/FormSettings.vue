@@ -13,31 +13,45 @@
                 {{ $gettext('Startet am') }}
                 <div class="date-container">
                     <input type="date" name="start-date" v-model="form['start-date']" :max="form['end-date']" />
-                    <StudipIcon
+                    <button
                         v-if="form?.['start-date']"
-                        :size="16"
-                        shape="trash"
-                        role="button"
-                        :title="$gettext('Dieses Datum löschen')"
+                        class="button-undecorated"
+                        :title="$gettext('Startdatum löschen')"
                         @click="emptyFormDate('start-date')"
-                    />
+                    >
+                        <StudipIcon shape="trash" :size="20" />
+                    </button>
                 </div>
                 <br />
                 {{ $gettext('Endet am') }}
                 <div class="date-container">
                     <input type="date" name="end-date" v-model="form['end-date']" :min="form['start-date']" />
-                    <StudipIcon
+                    <button
                         v-if="form?.['end-date']"
-                        shape="trash"
-                        role="button"
-                        :title="$gettext('Dieses Datum löschen')"
+                        class="button-undecorated"
+                        :title="$gettext('Enddatum löschen')"
                         @click="emptyFormDate('end-date')"
-                    />
+                    >
+                        <StudipIcon shape="trash" :size="20" />
+                    </button>
                 </div>
             </label>
+            <div v-if="!hasUserFilter" class="messagebox messagebox_warning">
+                {{ $gettext('Es wurde noch kein Zielgruppenfilter gesetzt') }}
+            </div>
+            <div v-else class="messagebox messagebox_info">
+                {{
+                    $ngettext(
+                        '%{counter} Zielgruppenfilter wurde gesetzt',
+                        '%{counter} Zielgruppenfilter wurden gesetzt',
+                        userFiltersCounter,
+                        { counter: userFiltersCounter },
+                    )
+                }}
+            </div>
             <label>
-                <button class="button add" @click.prevent="openUserFilterDrawer">
-                    {{ $gettext('Zielgruppen Filter hinzufügen') }}
+                <button class="button" :class="{'add':  !hasUserFilter, 'edit': hasUserFilter}" @click.prevent="openUserFilterDrawer">
+                    {{ hasUserFilter ?  $gettext('Zielgruppenfilter ändern') : $gettext('Zielgruppenfilter hinzufügen') }}
                 </button>
             </label>
         </form>
@@ -76,6 +90,14 @@ const isDateRangeValid = computed(() => {
     }
 
     return new Date(form.value['start-date']) <= new Date(form.value['end-date']);
+});
+
+const userFiltersCounter = computed(() => {
+    return allAppliedFields.value.length;
+});
+
+const hasUserFilter = computed(() => {
+    return userFiltersCounter.value > 0;
 });
 
 const saveForm = () => {
@@ -136,7 +158,7 @@ const emptyFormDate = (dateProp) => {
 <style lang="scss">
 .form-settings {
     flex-basis: 25%;
-    max-width: 300px;
+    max-width: 405px;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -156,9 +178,10 @@ const emptyFormDate = (dateProp) => {
 }
 .date-container {
     display: flex;
-    gap: 1rem;
+    gap: 10px;
     justify-content: space-between;
     align-items: center;
+
     .icon-shape-trash {
         flex-shrink: 0;
     }

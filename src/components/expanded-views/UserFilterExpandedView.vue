@@ -43,11 +43,11 @@
                 </select>
                 <button
                     v-if="field.attributes.type"
-                    class="user-filter-fields-button"
+                    class="button-undecorated"
                     :title="$gettext('Dieses Feld löschen')"
                     @click="userFilterStore.removeField(field.attributes.id)"
                 >
-                    <StudipIcon :size="24" shape="trash" />
+                    <StudipIcon :size="20" shape="trash" />
                 </button>
             </section>
         </template>
@@ -147,13 +147,6 @@ const submitUserFilter = async () => {
 <style lang="scss">
 .user-filter-fields-divider {
     margin: 10px 0;
-}
-.user-filter-fields-button {
-    color: var(--base-color);
-    border: none;
-    cursor: pointer;
-    background-color: transparent;
-    height: 28px;
 }
 form.default section.user-filter-fields-container {
     width: 100;

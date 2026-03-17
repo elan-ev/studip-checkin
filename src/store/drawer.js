@@ -36,7 +36,7 @@ export const useDrawerStore = defineStore('drawerStore', () => {
 
     function openUserFilterConfigInDrawer(filterId) {
         const UserFilterComponent = expandedViewsRegistry['user-filter'];
-        drawerTitle.value = 'Zielgruppen Filter';
+        drawerTitle.value = 'Zielgruppenfilter';
         if (!UserFilterComponent) {
             console.error('UserFilterExpandedView in Registry nicht gefunden!');
             return;

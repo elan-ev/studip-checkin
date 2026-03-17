@@ -20,5 +20,4 @@ class ProfileController extends PluginController
             Navigation::activateItem('/profile/checkin');
         }
     }
-
 }
