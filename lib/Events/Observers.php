@@ -7,7 +7,7 @@
  * @author    Ron Lucke <lucke@elan-ev.de>
  * @author    Farbod Zamani <zamani@elan-ev.de>
  * @copyright 2025 elan e.V.
- * @license   AGPL-3.0
+ * @license   GPL-3.0 WITH License-Supplement (see LICENSE-SUPPLEMENT.txt)
  * @link      https://elan-ev.de
  */
 
