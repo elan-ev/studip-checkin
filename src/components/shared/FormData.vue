@@ -1,13 +1,14 @@
 <template>
     <form class="default" v-if="form">
         <fieldset>
-            <FormField
-                v-for="element in form.structure"
-                :key="element.id"
-                :element="element"
-                v-model="formData[element.id]"
-                :read-only="readOnly"
-            />
+            <template v-for="element in form.structure" :key="element.id">
+                <FormField
+                    v-show="isVisible(element)"
+                    :element="element"
+                    v-model="formData[element.id]"
+                    :read-only="readOnly"
+                />
+            </template>
         </fieldset>
         <footer v-if="!readOnly">
             <button class="button accept" @click.prevent="saveForm">
@@ -46,7 +47,7 @@ const props = defineProps({
     },
 });
 
-const emit = defineEmits(['done', 'close']);
+const emit = defineEmits(['done','close']);
 
 const form = computed(() => {
     return formStore.byId(props.formId);
@@ -70,6 +71,38 @@ onMounted(() => {
     });
 });
 
+const isVisible = (element) => {
+    if (!element.payload?.['has-conditions'] || !element.payload?.['condition-target']) {
+        return true;
+    }
+
+    const targetId = element.payload['condition-target'];
+    const requiredValue = element.payload['condition-value'];
+    const actualValue = formData.value[targetId];
+
+    if (
+        actualValue === undefined ||
+        actualValue === null ||
+        actualValue === '' ||
+        (Array.isArray(actualValue) && actualValue.length === 0)
+    ) {
+        return false;
+    }
+
+    if (Array.isArray(requiredValue)) {
+        if (Array.isArray(actualValue)) {
+            return actualValue.some((val) => requiredValue.includes(val));
+        }
+        return requiredValue.includes(actualValue);
+    }
+
+    if (Array.isArray(actualValue)) {
+        return actualValue.includes(requiredValue);
+    }
+
+    return String(actualValue) === String(requiredValue);
+};
+
 const validateFormData = () => {
     // TODO: check the relationships, as soon as it is implemented in FormInputs.
 
@@ -81,23 +114,38 @@ const validateFormData = () => {
     return !invalidRequired;
 };
 
+const usersFormData = computed(() => {
+    return formUserDataStore.getByFormId(form.value.id) ?? null;
+});
+const hasFormData = computed(() => {
+    return usersFormData.value !== null;
+});
+
 const saveForm = async () => {
     if (!validateFormData()) {
         STUDIP.Report.error(proxy.$gettext('Etwas fehlt!'));
     }
     const payload = {
+        'id': usersFormData.value?.id ?? null,
         'form-id': form.value.id,
         'form-version': form.value.version,
         'form-data': formData.value,
     };
-    await formUserDataStore.createRecord(payload);
+    if (hasFormData.value) {
+        await formUserDataStore.updateRecord(usersFormData.value.id, payload);
+        emit('close');
+    } else {
+        await formUserDataStore.createRecord(payload);
+        emit('done');
+    }
     if (errors?.value) {
         // Show error!
         console.error(errors.value);
         STUDIP.Report.error(proxy.$gettext('Das Formular konnte nicht gespeichert werden!'));
         return;
+    } else {
+        STUDIP.Report.success(proxy.$gettext('Das Formular wurde erfolgreich gespeichert'));
     }
-    emit('done');
 };
 
 const cancel = () => {

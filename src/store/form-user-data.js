@@ -20,9 +20,13 @@ export const useFormUserDataStore = defineStore('formUserDataStore', () => {
         return records.value.get(String(id));
     }
 
+    function getByFormId(formId) {
+        return all.value.find((record) => record['form-id'] === Number(formId));
+    }
+
     const all = computed(() => {
         void records.value.size;
-        return  [...records.value.values()];
+        return [...records.value.values()];
     });
 
     async function removeRecord(formUserDataId, deletePermanently = false) {
@@ -45,9 +49,25 @@ export const useFormUserDataStore = defineStore('formUserDataStore', () => {
         try {
             const { data } = await api.get('checkin-form-user-data');
             clearRecords();
-            data.forEach((record => {
+            data.forEach((record) => {
                 storeRecord(record);
-            }));
+            });
+        } catch (err) {
+            console.error('Error while fetching form user data', err);
+            errors.value = err;
+        } finally {
+            isLoading.value = false;
+        }
+    }
+
+    async function fetchAllForUser(userId) {
+        isLoading.value = true;
+        try {
+            const { data } = await api.get(`users/${userId}/checkin-form-user-data`);
+            clearRecords();
+            data.forEach((record) => {
+                storeRecord(record);
+            });
         } catch (err) {
             console.error('Error while fetching form user data', err);
             errors.value = err;
@@ -85,7 +105,7 @@ export const useFormUserDataStore = defineStore('formUserDataStore', () => {
     async function updateRecord(id, payload) {
         isLoading.value = true;
         try {
-            const { data } = await api.patch(`checkin-form-user-data/${id}`, payload);
+            const { data } = await api.patch(`checkin-form-user-data`, payload);
             data.id = id;
             storeRecord(data);
         } catch (err) {
@@ -101,9 +121,9 @@ export const useFormUserDataStore = defineStore('formUserDataStore', () => {
         try {
             const { data } = await api.get(`checkin-forms/${formId}/form-user-data`);
             clearRecords();
-            data.forEach((record => {
+            data.forEach((record) => {
                 storeRecord(record);
-            }));
+            });
         } catch (err) {
             console.error(`Error while fetching form user data for form id: ${formId}`, err);
             errors.value = err;
@@ -118,7 +138,9 @@ export const useFormUserDataStore = defineStore('formUserDataStore', () => {
         errors,
         all,
         byId,
+        getByFormId,
         fetchAll,
+        fetchAllForUser,
         fetchById,
         createRecord,
         updateRecord,

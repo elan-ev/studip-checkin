@@ -9,6 +9,7 @@ export const useDrawerStore = defineStore('drawerStore', () => {
     const drawerProps = ref({});
     const drawerAttachTarget = ref(null);
     const drawerTitle = ref('');
+    const drawerContext = ref('');
 
     function setDrawerAttachTarget() {
         const targetElement = document.querySelector('#content-wrapper');
@@ -17,6 +18,10 @@ export const useDrawerStore = defineStore('drawerStore', () => {
         } else {
             console.warn("Das Drawer-Ziel #content-wrapper wurde im DOM nicht gefunden!");
         }
+    }
+
+    function setDrawerContext(val) {
+        drawerContext.value = val;
     }
 
     function openDrawer(component, props = {}) {
@@ -67,7 +72,9 @@ export const useDrawerStore = defineStore('drawerStore', () => {
         drawerProps,
         drawerAttachTarget,
         drawerTitle,
+        drawerContext,
         setDrawerAttachTarget,
+        setDrawerContext,
         openDrawer,
         closeDrawer,
 

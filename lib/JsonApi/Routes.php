@@ -41,6 +41,8 @@ trait Routes
         $group->patch('/checkin-form-user-data/{id}', \StudipCheckin\JsonApi\Routes\FormUserData\Update::class);
         $group->delete('/checkin-form-user-data/{id}', \StudipCheckin\JsonApi\Routes\FormUserData\Delete::class);
 
+        $group->get('/users/{id}/checkin-form-user-data', \StudipCheckin\JsonApi\Routes\FormUserData\IndexByUser::class);
+
         // Related Users.
         $group->get('/checkin-related-users', \StudipCheckin\JsonApi\Routes\RelatedUser\Index::class);
         $group->get('/checkin-related-users/{id}', \StudipCheckin\JsonApi\Routes\RelatedUser\Show::class);

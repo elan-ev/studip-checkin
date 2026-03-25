@@ -12,16 +12,8 @@
             <ul class="action-menu-list">
                 <li v-for="item in navigationItems" :key="item.id" class="action-menu-item">
                     <hr v-if="item.type === 'separator'" />
-                    <a
-                        v-else-if="item.type === 'link'"
-                        v-bind="linkAttributes(item)"
-                        v-on="linkEvents(item)"
-                    >
-                        <StudipIcon
-                            v-if="item.icon !== false"
-                            :shape="item.icon.shape"
-                            :role="item.icon.role"
-                        />
+                    <a v-else-if="item.type === 'link'" v-bind="linkAttributes(item)" v-on="linkEvents(item)">
+                        <StudipIcon v-if="item.icon !== false" :shape="item.icon.shape" :role="item.icon.role" />
                         <span v-else class="action-menu-no-icon"></span>
                         {{ item.label }}
                     </a>
@@ -55,20 +47,9 @@
         </div>
     </div>
     <div v-else>
-        <a
-            v-for="item in navigationItems"
-            :key="item.id"
-            v-bind="linkAttributes(item)"
-            v-on="linkEvents(item)"
-        >
+        <a v-for="item in navigationItems" :key="item.id" v-bind="linkAttributes(item)" v-on="linkEvents(item)">
             <span v-if="item.type === 'separator'" class="quiet">|</span>
-            <StudipIcon
-                v-else
-                :title="item.label"
-                :shape="item.icon.shape"
-                :role="item.icon.role"
-                :size="20"
-            />
+            <StudipIcon v-else :title="item.label" :shape="item.icon.shape" :role="item.icon.role" :size="20" />
         </a>
     </div>
 </template>
@@ -161,10 +142,7 @@ const shouldCollapse = computed(() => {
     if (collapseAt === true) {
         return true;
     }
-    return (
-        Number.parseInt(collapseAt) <=
-        props.items.filter((item) => item.type !== 'separator').length
-    );
+    return Number.parseInt(collapseAt) <= props.items.filter((item) => item.type !== 'separator').length;
 });
 const title = computed(() => {
     return props.context

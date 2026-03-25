@@ -20,7 +20,7 @@
         <tbody>
             <template v-if="data.length === 0">
                 <tr>
-                    <td colspan="8">{{ $gettext('Keinen Datei gefunden.') }}</td>
+                    <td colspan="8">{{ $gettext('Keinen Daten gefunden.') }}</td>
                 </tr>
             </template>
             <template v-else>

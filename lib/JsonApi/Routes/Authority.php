@@ -102,6 +102,15 @@ class Authority
         return $GLOBALS['perm']->have_perm('admin', $user->id);
     }
 
+    public static function canIndexUsersFormUserData(User $user, User $requesting): bool
+    {
+        if ($GLOBALS['perm']->have_perm('admin', $requesting->id)) {
+            return true;
+        }
+
+        return $GLOBALS['perm']->have_perm('user', $user->id) && $user->id === $requesting->id;
+    }
+
     public static function canShowFormUserData(User $user, User $requesting): bool
     {
         if ($GLOBALS['perm']->have_perm('admin', $requesting->id)) {
