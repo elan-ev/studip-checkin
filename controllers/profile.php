@@ -15,7 +15,10 @@ class ProfileController extends PluginController
 {
     public function index_action()
     {
+        StudipCheckin\Helper\AttributionHelper::addLicenseToHelpbar();
+
         PageLayout::disableSidebar();
+
         if (Navigation::hasItem('/profile')) {
             Navigation::activateItem('/profile/checkin');
         }

@@ -23,6 +23,7 @@ class RedirectController extends PluginController
 
     public function index_action($userId)
     {
+        StudipCheckin\Helper\AttributionHelper::addLicenseToHelpbar();
         PageLayout::setTitle(_('Awesome CheckIn!'));
         PageLayout::setTabNavigation(NULL);
         PageLayout::disableSidebar();
