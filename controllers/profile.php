@@ -22,5 +22,7 @@ class ProfileController extends PluginController
         if (Navigation::hasItem('/profile')) {
             Navigation::activateItem('/profile/checkin');
         }
+
+        $this->preferredLanguage = str_replace('_', '-', $_SESSION['_language']);
     }
 }

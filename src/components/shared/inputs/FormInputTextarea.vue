@@ -3,7 +3,7 @@
         :id="id"
         :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"
-        :placeholder="placeholder"
+        :placeholder="placeholder[lang]"
         :disabled="disabled"
         :required="required"
         class="form-textarea-field"
@@ -17,6 +17,10 @@ defineProps({
     placeholder: String,
     disabled: Boolean,
     required: [Boolean, String],
+    lang: {
+        type: String,
+        default: 'de',
+    },
 });
 
 defineEmits(['update:modelValue']);

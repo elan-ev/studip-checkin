@@ -4,7 +4,7 @@
         :type="type"
         :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"
-        :placeholder="placeholder"
+        :placeholder="placeholder[lang]"
         :disabled="disabled"
         :required="required"
         :min="min"
@@ -27,6 +27,10 @@ defineProps({
     placeholder: String,
     disabled: Boolean,
     required: [Boolean, String],
+    lang: {
+        type: String,
+        default: 'de',
+    },
     min: {
         type: Number,
         default: undefined

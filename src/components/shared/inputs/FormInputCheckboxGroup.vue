@@ -1,10 +1,6 @@
 <template>
     <div class="form-checkbox-group-container">
-        <div 
-            v-for="(option, index) in element?.payload?.options" 
-            :key="index" 
-            class="checkbox-option"
-        >
+        <div v-for="(option, index) in element?.payload?.options" :key="index" class="checkbox-option">
             <input
                 :id="`${id}-${index}`"
                 type="checkbox"
@@ -14,9 +10,9 @@
                 :disabled="disabled"
                 :required="required && (!modelValue || modelValue.length === 0)"
                 class="form-checkbox-field"
-            >
+            />
             <label :for="`${id}-${index}`" class="checkbox-label">
-                {{ option.text }}
+                {{ option.text[lang] }}
             </label>
         </div>
     </div>
@@ -26,12 +22,16 @@
 const props = defineProps({
     modelValue: {
         type: Array,
-        default: () => []
+        default: () => [],
     },
     id: String,
     element: Object,
     disabled: Boolean,
-    required: [Boolean, String]
+    required: [Boolean, String],
+    lang: {
+        type: String,
+        default: 'de',
+    },
 });
 
 const emit = defineEmits(['update:modelValue']);
@@ -45,7 +45,7 @@ const toggleOption = (index) => {
     } else {
         currentValues.push(index);
     }
-    
+
     emit('update:modelValue', currentValues);
 };
 </script>

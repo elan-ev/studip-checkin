@@ -2,7 +2,7 @@
     <div class="form-field-wrapper" :class="`type-${element.type}`">
         <label :for="element.id">
             <span v-if="element.type !== 'checkbox'">
-                {{ element.payload?.label }}
+                {{ element.payload?.label[lang] }}
                 <span v-if="element.required" class="required-asterisk">*</span>
             </span>
 
@@ -13,11 +13,12 @@
                 @update:model-value="$emit('update:modelValue', $event)"
                 :element="element"
                 :disabled="readOnly"
+                :lang="lang"
                 v-bind="extraProps"
             />
 
             <span v-if="element.type === 'checkbox'">
-                {{ element.payload?.label }}
+                {{ element.payload?.label[lang] }}
                 <span v-if="element.required" class="required-asterisk">*</span>
             </span>
         </label>
@@ -35,6 +36,10 @@ import FormInputSwitch from './inputs/FormInputSwitch.vue';
 import FormInputRadioGroup from './inputs/FormInputRadioGroup.vue';
 import FormInputCheckboxGroup from './inputs/FormInputCheckboxGroup.vue';
 
+import { useContextStore } from '@/store/context';
+
+const contextStore = useContextStore();
+
 const props = defineProps({
     element: Object,
     modelValue: [String, Number, Boolean, Array],
@@ -43,6 +48,10 @@ const props = defineProps({
 });
 
 defineEmits(['update:modelValue']);
+
+const lang = computed(() => {
+    return contextStore.langSelector;
+});
 
 const inputComponent = computed(() => {
     const map = {
@@ -64,7 +73,7 @@ const extraProps = computed(() => {
         placeholder: props.element.payload?.placeholder,
         required: props.element.required,
         min: props.element.payload?.min,
-        max: props.element.payload?.max
+        max: props.element.payload?.max,
     };
 });
 </script>

@@ -29,5 +29,6 @@ class RedirectController extends PluginController
         PageLayout::disableSidebar();
 
         $this->userId = $userId;
+        $this->preferredLanguage = str_replace('_', '-', $_SESSION['_language']);
     }
 }

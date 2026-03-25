@@ -1,1 +1,1 @@
-<div id="studip-checkin-app" data-user-id="<?= $userId ?>"></div>
+<div id="studip-checkin-app" data-user-id="<?= $userId ?>" data-preferred-language='<?= $preferredLanguage ?>'></div>

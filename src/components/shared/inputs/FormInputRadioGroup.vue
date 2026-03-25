@@ -1,10 +1,6 @@
 <template>
     <div class="form-radio-group-container">
-        <div 
-            v-for="(option, index) in element?.payload?.options" 
-            :key="index" 
-            class="radio-option"
-        >
+        <div v-for="(option, index) in element?.payload?.options" :key="index" class="radio-option">
             <input
                 :id="`${id}-${index}`"
                 :name="id"
@@ -15,9 +11,9 @@
                 :disabled="disabled"
                 :required="required && index === 0"
                 class="form-radio-field"
-            >
+            />
             <label :for="`${id}-${index}`" class="radio-label">
-                {{ option.text }}
+                {{ option.text[lang] }}
             </label>
         </div>
     </div>
@@ -29,7 +25,11 @@ defineProps({
     id: String,
     element: Object,
     disabled: Boolean,
-    required: [Boolean, String]
+    required: [Boolean, String],
+    lang: {
+        type: String,
+        default: 'de',
+    },
 });
 
 defineEmits(['update:modelValue']);

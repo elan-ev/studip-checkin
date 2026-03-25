@@ -21,31 +21,38 @@
             <StudipIcon shape="trash" :size="20" />
         </button>
     </legend>
-    <label>
-        {{ $gettext('Beschriftung') }}
-        <input type="text" v-model="element.payload.label" />
-    </label>
-    <label>
-        {{ $gettext('Platzhalter') }}
-        <input type="text" v-model="element.payload.placeholder" />
-    </label>
-    <section v-if="hasOptions">
-        <h4>
-            {{ $gettext('Optionen') }}
-        </h4>
-        <label v-for="(option, index) in element.payload.options" :key="index">
-            {{ $gettext('Wert der Option') }}
-            <div class="option-div">
-                <input type="text" v-model="element.payload.options[index].text" />
-                <button class="delete-option" @click="removeOption(index)" :title="$gettext('Option Löschen')">
-                    <StudipIcon shape="trash" :size="20" />
-                </button>
-            </div>
-        </label>
-        <button class="button add" @click.prevent="addNewOption">
-            {{ $gettext('Neue Option hinzufügen') }}
-        </button>
-    </section>
+    <div class="lang-wrapper">
+        <div v-for="lang in ['de', 'en']" :key="lang" class="checkin-lang-group">
+            <h3 class="checkin-lang-group-header">{{ lang.toUpperCase() }}</h3>
+            <label>
+                {{ $gettext('Beschriftung') }}
+                <input type="text" v-model="element.payload.label[lang]" />
+            </label>
+            <label>
+                {{ $gettext('Platzhalter') }}
+                <input type="text" v-model="element.payload.placeholder[lang]" />
+            </label>
+            <section v-if="hasOptions">
+                <h4>{{ $gettext('Optionen') }}</h4>
+                <label v-for="(option, optIndex) in element.payload.options" :key="optIndex">
+                    {{ $gettext('Wert der Option') }}
+                    <div class="option-div">
+                        <input type="text" v-model="element.payload.options[optIndex].text[lang]" />
+                        <button
+                            class="delete-option"
+                            @click="removeOption(optIndex)"
+                            :title="$gettext('Option Löschen')"
+                        >
+                            <StudipIcon shape="trash" :size="20" />
+                        </button>
+                    </div>
+                </label>
+            </section>
+        </div>
+    </div>
+    <button v-if="hasOptions" class="button add" @click.prevent="addNewOption">
+        {{ $gettext('Neue Option hinzufügen') }}
+    </button>
     <section v-if="hasMinMax">
         <label>
             {{ $gettext('Minimum') }}
@@ -64,7 +71,11 @@
     <section v-if="hasCondition" class="checkin-form-input-condition">
         <h3>
             {{ $gettext('Bedingung') }}
-            <button class="button-undecorated" :title="$gettext('Bedingung entfernen')" @click.prevent="removeCondition">
+            <button
+                class="button-undecorated"
+                :title="$gettext('Bedingung entfernen')"
+                @click.prevent="removeCondition"
+            >
                 <StudipIcon shape="trash" :size="20" />
             </button>
         </h3>
@@ -99,7 +110,7 @@
 </template>
 <script setup>
 import StudipIcon from '@/components/studip/StudipIcon.vue';
-import { computed, capitalize, getCurrentInstance } from 'vue';
+import { computed, capitalize, getCurrentInstance, onMounted } from 'vue';
 import { useFormBuilderStore } from '@/store/form-builder';
 
 import FormInputText from '@/components/shared/inputs/FormInputText.vue';
@@ -166,7 +177,7 @@ const removeCondition = () => {
     props.element.payload['has-conditions'] = false;
     props.element.payload['condition-target'] = null;
     props.element.payload['condition-value'] = null;
-}
+};
 
 const moveUp = () => {
     // TODO checks for errors
@@ -195,15 +206,42 @@ const addNewOption = () => {
         return;
     }
     props.element.payload.options.push({
-        text: '',
+        text: {
+            de: '',
+            en: '',
+        },
     });
 };
 
 const removeOption = (index) => {
     props.element.payload.options.splice(index, 1);
 };
+
+onMounted(() => {
+    if (hasOptions.value && props.element.payload.options.length === 0) {
+        addNewOption();
+    }
+});
 </script>
 <style lang="scss" scoped>
+.lang-wrapper {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+
+    .checkin-lang-group {
+        flex: 1; 
+        min-width: 0;
+        border: 1px solid var(--color--tile-border);
+        padding: 1rem;
+
+        .checkin-lang-group-header {
+            font-weight: 700;
+            margin: 0 0 1em 0;
+        }
+    }
+}
 .delete-option {
     background: none;
     border: none;

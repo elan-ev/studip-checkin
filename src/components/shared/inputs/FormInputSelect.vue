@@ -8,11 +8,11 @@
         class="form-select-field"
     >
         <option value="" disabled selected v-if="placeholder">
-            {{ placeholder }}
+            {{ placeholder[lang] }}
         </option>
 
         <option v-for="(option, index) in element?.payload?.options" :key="index" :value="index">
-            {{ $gettext(option.text) }}
+            {{ $gettext(option.text[lang]) }}
         </option>
     </select>
 </template>
@@ -25,6 +25,10 @@ defineProps({
     disabled: Boolean,
     required: [Boolean, String],
     placeholder: String,
+    lang: {
+        type: String,
+        default: 'de',
+    },
 });
 
 defineEmits(['update:modelValue']);

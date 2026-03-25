@@ -3,7 +3,7 @@
         <studip-switch
             :id="id"
             v-model="internalValue"
-            :label="element?.payload?.label || ''"
+            :label="element?.payload?.label[lang] || ''"
             :disabled="disabled"
             :active-icon="element?.payload?.activeIcon || 'accept'"
             :inactive-icon="element?.payload?.inactiveIcon || 'decline'"
@@ -18,18 +18,22 @@ import StudipSwitch from '@/components/studip/StudipSwitch.vue';
 const props = defineProps({
     modelValue: {
         type: Boolean,
-        default: false
+        default: false,
     },
     id: String,
     disabled: Boolean,
-    required: [Boolean, String]
+    required: [Boolean, String],
+    lang: {
+        type: String,
+        default: 'de',
+    },
 });
 
 const emit = defineEmits(['update:modelValue']);
 
 const internalValue = computed({
     get: () => props.modelValue,
-    set: (value) => emit('update:modelValue', value)
+    set: (value) => emit('update:modelValue', value),
 });
 </script>
 

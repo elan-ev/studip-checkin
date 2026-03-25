@@ -20,6 +20,8 @@ class AdminController extends PluginController
         if (Navigation::hasItem('/contents')) {
             Navigation::activateItem('/contents/checkin');
         }
+
+        $this->preferredLanguage = str_replace('_', '-', $_SESSION['_language']);
     }
 
     public function export_action()
