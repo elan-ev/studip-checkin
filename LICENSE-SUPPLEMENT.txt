@@ -4,7 +4,7 @@ Pursuant to Section 7(b) of the GNU General Public License, version 3, this Prog
 
 1.    Attribution and Source Notice: If the Program or any modified version thereof provides a graphical user interface (GUI), the interface must prominently display a visible notice identifying the original authors, the official source code repository, and the applicable license terms.
 
-2.    Integrity of Notices: You must not remove, obscure, or alter these specific attribution notices or the technical mechanism used to display them within the user interface. Any modification to the placement, appearance, or content of these notices requires the express prior written consent of the original authors.
+2.    Integrity of Notices: These notices must continue to be displayed in modified versions in an appropriate form; content (authors, repository, license) must not be removed. Adjustments to layout/placement are permitted as long as the notices remain clearly visible.
 
 3.    Scope of Requirement: For the avoidance of doubt, these additional terms apply strictly to this plugin and its components. These requirements do not extend to the underlying Stud.IP core system or any other independent modules with which this Program interacts.
 
