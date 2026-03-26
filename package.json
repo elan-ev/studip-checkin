@@ -29,6 +29,8 @@
         "dev": "vite build --watch",
         "build": "vite build",
         "dev-build": "vite build --mode development",
+        "gettext:extract": "node scripts/extract.js",
+        "gettext:compile": "node scripts/compile-translations.js",
         "preview": "vite preview",
         "prezip": "npm install && npm run build && composer install --no-dev",
         "zip": "zip -r studip-checkin-v$npm_package_version.zip app assets lib migrations dist vendor LICENSE README.md StudipCheckin.php bootstrap.php plugin.manifest -x '*.editorconfig' -x 'vendor/*.git*' -x '*.DS_Store'"
@@ -43,9 +45,12 @@
         "@headlessui/vue": "^1.7.23",
         "@vitejs/plugin-vue": "^6.0.1",
         "kitsu": "^11.1.0",
+        "po2json": "^0.4.5",
         "sass": "^1.97.2",
         "sass-loader": "^16.0.6",
         "vite": "^7.1.12",
-        "vue3-gettext": "^4.0.0-beta.1"
+        "vue3-gettext": "^4.0.0-beta.1",
+        "gettext-extractor-vue": "^5.2.0",
+        "gettext-parser": "^9.0.2"
     }
 }

@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { ref, getCurrentInstance } from 'vue';
 import { CHECKIN_EXPANDED_VIEWS as expandedViewsRegistry } from
 '@/components/expanded-views/expandedViewRegistery.js';
 
@@ -11,12 +11,14 @@ export const useDrawerStore = defineStore('drawerStore', () => {
     const drawerTitle = ref('');
     const drawerContext = ref('');
 
+    const { proxy } = getCurrentInstance();
+
     function setDrawerAttachTarget() {
         const targetElement = document.querySelector('#content-wrapper');
         if (targetElement) {
             drawerAttachTarget.value = targetElement;
         } else {
-            console.warn("Das Drawer-Ziel #content-wrapper wurde im DOM nicht gefunden!");
+            console.warn('Das Drawer-Ziel #content-wrapper wurde im DOM nicht gefunden!');
         }
     }
 
@@ -41,7 +43,7 @@ export const useDrawerStore = defineStore('drawerStore', () => {
 
     function openUserFilterConfigInDrawer(filterId) {
         const UserFilterComponent = expandedViewsRegistry['user-filter'];
-        drawerTitle.value = 'Zielgruppenfilter';
+        drawerTitle.value = proxy.$gettext('Zielgruppenfilter');
         if (!UserFilterComponent) {
             console.error('UserFilterExpandedView in Registry nicht gefunden!');
             return;

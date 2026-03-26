@@ -106,7 +106,7 @@ const saveForm = () => {
         const formData = prepareFormData();
         emit('save', formData);
     } else {
-        STUDIP.Report.error(proxy.$gettext('Etwas Fehlt!!!'));
+        STUDIP.Report.error(proxy.$gettext('Etwas fehlt!'));
     }
 };
 

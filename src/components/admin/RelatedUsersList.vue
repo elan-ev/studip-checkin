@@ -7,15 +7,15 @@
                     <input type="checkbox" name="users-bulk-selection" id="users-bulk-selection">
                 </th>
                 <th scope="col" width="50%">{{ $gettext('Name') }}</th>
-                <th scope="col">{{ $gettext('Akiv?') }}</th>
-                <th scope="col">{{ $gettext('Unsichbar?') }}</th>
+                <th scope="col">{{ $gettext('Akiv') }}?</th>
+                <th scope="col">{{ $gettext('Unsichbar') }}?</th>
                 <th scope="col" class="actions">{{ $gettext('Aktionen') }}</th>
             </tr>
         </thead>
         <tbody>
             <template v-if="users.length === 0">
                 <tr>
-                    <td colspan="8">{{ $gettext('Keinen Nutzer gefunden.') }}</td>
+                    <td colspan="8">{{ $gettext('Kein Nutzer gefunden.') }}</td>
                 </tr>
             </template>
             <template v-else>

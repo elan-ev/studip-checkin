@@ -94,7 +94,7 @@
             </select>
             <div v-if="targetElement" class="condition-value-config">
                 <h4>
-                    {{ $gettext('Wert muss sein') }}
+                    {{ $gettext('Erwarteter Wert') }}
                 </h4>
                 <component
                     :is="inputComponentForTarget"

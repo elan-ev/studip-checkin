@@ -43,7 +43,7 @@ const userInfo = computed(() => {
 const deleteUser = () => {
     if (
         STUDIP.Dialog.confirm(
-            proxy.$gettext(`Are you sure you want to delete the user "${props.user.fullname}" from this form?`),
+            proxy.$gettext('Möchten Sie den Benutzer wirklich aus diesem Formular löschen?'),
             () => {
                 relatedUserStore.removeRecord(props.user.id, true);
             },

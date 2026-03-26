@@ -10,7 +10,7 @@
         <tbody>
             <template v-if="formStore.all.length === 0">
                 <tr>
-                    <td colspan="8">{{ $gettext('Keinen Formulare gefunden.') }}</td>
+                    <td colspan="8">{{ $gettext('Keine Formulare gefunden.') }}</td>
                 </tr>
             </template>
             <template v-else>
@@ -23,7 +23,7 @@
                         <StudipIcon
                             role="button"
                             shape="evaluation"
-                            :title="$gettext('Formular ausfühlen')"
+                            :title="$gettext('Formular ausfüllen')"
                             @click="goToFormData(form.id)"
                         />
                         <br>
@@ -31,7 +31,7 @@
                         <StudipIcon
                             role="button"
                             shape="evaluation"
-                            :title="$gettext('Formular ausfühlen')"
+                            :title="$gettext('Formular ausfüllen')"
                             @click="openFormDataDrawer(form.id)"
                         />
                     </td>
@@ -91,7 +91,7 @@
         if (newValue.size === 0) {
             // TODO: decide how to act here! of course confirm is not needed here! :D
             if (STUDIP.Dialog.confirm(
-                proxy.$gettext('Done! You can now proceed'),
+                proxy.$gettext('Fertig! Sie können nun fortfahren.'),
                 () => {
                     window.location = STUDIP.URLHelper.getURL('dispatch.php/start');
                 },

@@ -59,7 +59,7 @@ const userInfo = computed(() => {
 const deleteFormUserData = () => {
     if (
         STUDIP.Dialog.confirm(
-            proxy.$gettext('Are you sure you want to delete the form data?'),
+            proxy.$gettext('Möchten Sie die Formulardaten wirklich löschen?'),
             () => {
                 formUserDataStore.removeRecord(props.formData.id, true);
             },
