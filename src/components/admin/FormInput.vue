@@ -88,7 +88,7 @@
                         :value="storeElement.id"
                         :disabled="storeElementIndex > index"
                     >
-                        {{ storeElement.payload.label }} ({{ storeElement.displayName }})
+                        {{ storeElement.payload.label[lang] }} ({{ storeElement.displayName }})
                     </option>
                 </template>
             </select>
@@ -110,8 +110,9 @@
 </template>
 <script setup>
 import StudipIcon from '@/components/studip/StudipIcon.vue';
-import { computed, capitalize, getCurrentInstance, onMounted } from 'vue';
+import { computed, getCurrentInstance, onMounted } from 'vue';
 import { useFormBuilderStore } from '@/store/form-builder';
+import { useContextStore } from '@/store/context';
 
 import FormInputText from '@/components/shared/inputs/FormInputText.vue';
 import FormInputTextarea from '@/components/shared/inputs/FormInputTextarea.vue';
@@ -122,11 +123,16 @@ import FormInputCheckboxGroup from '@/components/shared/inputs/FormInputCheckbox
 
 const { proxy } = getCurrentInstance();
 const formBuilderStore = useFormBuilderStore();
+const contextStore = useContextStore();
 const emit = defineEmits(['delete']);
 
 const props = defineProps({
     element: Object,
     index: String,
+});
+
+const lang = computed(() => {
+    return contextStore.langSelector;
 });
 
 const hasOptions = computed(() => {
