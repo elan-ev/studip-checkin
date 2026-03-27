@@ -16,6 +16,7 @@
         v-if="drawerStore.drawerAttachTarget"
         side="right"
         width="570px"
+        :title="drawerStore.drawerTitle"
         :displayOverlay="true"
         :attachTo="drawerStore.drawerAttachTarget"
         :visible="drawerStore.isDrawerOpen"

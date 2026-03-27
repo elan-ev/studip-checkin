@@ -1,6 +1,6 @@
 <template>
     <form class="default" v-if="form">
-        <fieldset>
+        <fieldset class="undecorated">
             <template v-for="element in form.structure" :key="element.id">
                 <FormField
                     v-show="isVisible(element)"
@@ -153,3 +153,6 @@ const cancel = () => {
     emit('close');
 };
 </script>
+<style lang="scss">
+
+</style>

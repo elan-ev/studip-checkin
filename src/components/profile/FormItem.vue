@@ -55,15 +55,15 @@ const actionMenuItems = computed(() => {
 
 const editForm = () => {
     if (hasFormData.value) {
-        drawerStore.openFormDataInDrawer(props.form.id, formData.value.id, false);
+        drawerStore.openFormDataInDrawer(props.form.id, formData.value.id, false, props.form.name);
     } else {
-        drawerStore.openFormDataInDrawer(props.form.id, undefined, false);
+        drawerStore.openFormDataInDrawer(props.form.id, undefined, false, props.form.name);
     }
 };
 
 const showForm = () => {
     if (hasFormData.value) {
-        drawerStore.openFormDataInDrawer(props.form.id, formData.value.id, true);
+        drawerStore.openFormDataInDrawer(props.form.id, formData.value.id, true, props.form.name);
     } else {
         console.error('form data not found!');
     }

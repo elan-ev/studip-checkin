@@ -17,6 +17,7 @@
         side="right"
         width="570px"
         :displayOverlay="true"
+        :title="drawerStore.drawerTitle"
         :attachTo="drawerStore.drawerAttachTarget"
         :visible="drawerStore.isDrawerOpen"
         @close="drawerStore.closeDrawer"

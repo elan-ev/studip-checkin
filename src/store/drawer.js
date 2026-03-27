@@ -1,8 +1,7 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import { useGettext } from 'vue3-gettext';
-import { CHECKIN_EXPANDED_VIEWS as expandedViewsRegistry } from
-'@/components/expanded-views/expandedViewRegistery.js';
+import { CHECKIN_EXPANDED_VIEWS as expandedViewsRegistry } from '@/components/expanded-views/expandedViewRegistery.js';
 
 export const useDrawerStore = defineStore('drawerStore', () => {
     const isDrawerOpen = ref(false);
@@ -28,7 +27,7 @@ export const useDrawerStore = defineStore('drawerStore', () => {
     }
 
     function openDrawer(component, props = {}) {
-            if (!component) {
+        if (!component) {
             console.error('openDrawer wurde ohne Komponente aufgerufen.');
             return;
         }
@@ -55,8 +54,9 @@ export const useDrawerStore = defineStore('drawerStore', () => {
         });
     }
 
-    function openFormDataInDrawer(formId, formDataId = undefined, readOnly = false) {
+    function openFormDataInDrawer(formId, formDataId = undefined, readOnly = false, title = '') {
         const FormDataComponent = expandedViewsRegistry['form-data'];
+        drawerTitle.value = title;
         if (!FormDataComponent) {
             console.error('FormDataExpandedView in Registry nicht gefunden!');
             return;
@@ -65,7 +65,7 @@ export const useDrawerStore = defineStore('drawerStore', () => {
         openDrawer(FormDataComponent, {
             formId,
             formDataId,
-            readOnly
+            readOnly,
         });
     }
 

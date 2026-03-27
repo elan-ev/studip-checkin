@@ -43,9 +43,7 @@ msgstr ""
 msgid "aktiv"
 msgstr ""
 
-#: src/components/admin/FormUserDataItem.vue
-#: src/components/admin/FormUserDataItem.vue:14
-msgid "Antwort betrachten"
+msgid "Antworten betrachten"
 msgstr ""
 
 #: src/components/profile/FormItem.vue

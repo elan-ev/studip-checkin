@@ -43,10 +43,8 @@ msgstr "Context menu for  %{context}"
 msgid "aktiv"
 msgstr "activ"
 
-#: src/components/admin/FormUserDataItem.vue
-#: src/components/admin/FormUserDataItem.vue:14
-msgid "Antwort betrachten"
-msgstr "View reply"
+msgid "Antworten betrachten"
+msgstr "View replies"
 
 #: src/components/profile/FormItem.vue
 msgid "Anzeigen"

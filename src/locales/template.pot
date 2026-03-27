@@ -12,7 +12,7 @@ msgid "Abbrechen"
 msgstr ""
 
 #: src/components/admin/FormItem.vue
-#: src/components/admin/FormItem.vue:65
+#: src/components/admin/FormItem.vue:67
 msgid "abgelaufen"
 msgstr ""
 
@@ -32,7 +32,7 @@ msgstr ""
 #: src/components/studip/StudipActionMenu.vue
 #: src/components/studip/StudipActionMenu.vue:10
 #: src/pages/user/UserForms.vue
-#: src/pages/user/UserForms.vue:7
+#: src/pages/user/UserForms.vue:11
 msgid "Aktionen"
 msgstr ""
 
@@ -47,13 +47,13 @@ msgid "Aktionsmenü für %{context}"
 msgstr ""
 
 #: src/components/admin/FormItem.vue
-#: src/components/admin/FormItem.vue:72
+#: src/components/admin/FormItem.vue:74
 msgid "aktiv"
 msgstr ""
 
 #: src/components/admin/FormUserDataItem.vue
 #: src/components/admin/FormUserDataItem.vue:11
-msgid "Antwort betrachten"
+msgid "Antworten betrachten"
 msgstr ""
 
 #: src/components/profile/FormItem.vue
@@ -108,7 +108,7 @@ msgid "Beschriftung"
 msgstr ""
 
 #: src/pages/user/UserForms.vue
-#: src/pages/user/UserForms.vue:3
+#: src/pages/user/UserForms.vue:5
 msgid "Bitte füllen Sie die folgenden Formulare aus"
 msgstr ""
 
@@ -134,7 +134,7 @@ msgstr ""
 #: src/components/shared/FormData.vue
 #: src/components/shared/FormData.vue:148
 #: src/pages/user/UserFormData.vue
-#: src/pages/user/UserFormData.vue:24
+#: src/pages/user/UserFormData.vue:29
 msgid "Das Formular wurde erfolgreich gespeichert"
 msgstr ""
 
@@ -176,7 +176,7 @@ msgid "Endet am"
 msgstr ""
 
 #: src/components/admin/FormItem.vue
-#: src/components/admin/FormItem.vue:69
+#: src/components/admin/FormItem.vue:71
 msgid "endet bald"
 msgstr ""
 
@@ -212,7 +212,7 @@ msgid "Feldname"
 msgstr ""
 
 #: src/pages/user/UserForms.vue
-#: src/pages/user/UserForms.vue:95
+#: src/pages/user/UserForms.vue:70
 msgid "Fertig! Sie können nun fortfahren."
 msgstr ""
 
@@ -226,6 +226,7 @@ msgid "Formular"
 msgstr ""
 
 #: src/pages/user/UserForms.vue
+#: src/pages/user/UserForms.vue:27
 msgid "Formular ausfüllen"
 msgstr ""
 
@@ -256,7 +257,7 @@ msgstr ""
 #: src/components/profile/FormsList.vue
 #: src/components/profile/FormsList.vue:18
 #: src/pages/user/UserForms.vue
-#: src/pages/user/UserForms.vue:13
+#: src/pages/user/UserForms.vue:17
 msgid "Keine Formulare gefunden."
 msgstr ""
 
@@ -310,12 +311,12 @@ msgid "Möchten Sie %{name} wirklich aus diesem Formular löschen?"
 msgstr ""
 
 #: src/components/admin/FormItem.vue
-#: src/components/admin/FormItem.vue:131
+#: src/components/admin/FormItem.vue:133
 msgid "Möchten Sie das Formular \"%{name}\" wirklich löschen?"
 msgstr ""
 
 #: src/components/admin/FormUserDataItem.vue
-#: src/components/admin/FormUserDataItem.vue:60
+#: src/components/admin/FormUserDataItem.vue:63
 msgid "Möchten Sie die Formulardaten für %{name} wirklich löschen?"
 msgstr ""
 
@@ -339,7 +340,7 @@ msgstr ""
 #: src/components/profile/FormsList.vue
 #: src/components/profile/FormsList.vue:10
 #: src/pages/user/UserForms.vue
-#: src/pages/user/UserForms.vue:6
+#: src/pages/user/UserForms.vue:10
 msgid "Name"
 msgstr ""
 
@@ -488,7 +489,7 @@ msgid "Ziel"
 msgstr ""
 
 #: src/store/drawer.js
-#: src/store/drawer.js:47
+#: src/store/drawer.js:46
 msgid "Zielgruppenfilter"
 msgstr ""
 
@@ -506,7 +507,5 @@ msgstr ""
 #: src/pages/admin/FormUserDataPage.vue:3
 #: src/pages/admin/RelatedUsersPage.vue
 #: src/pages/admin/RelatedUsersPage.vue:3
-#: src/pages/user/UserFormData.vue
-#: src/pages/user/UserFormData.vue:3
 msgid "Zurück zur Übersicht"
 msgstr ""

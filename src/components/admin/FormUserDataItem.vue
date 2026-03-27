@@ -8,7 +8,7 @@
                 :context="$gettext('Datensatz')"
                 :collapse-at="0"
                 :items="[
-                    { id: 1, label: $gettext('Antwort betrachten'), icon: 'log', emit: 'showData' },
+                    { id: 1, label: $gettext('Antworten betrachten'), icon: 'log', emit: 'showData' },
                     { id: 2, label: $gettext('Löschen'), icon: 'trash', emit: 'delete' },
                 ]"
                 @showData="openFormDataDrawer"
@@ -42,10 +42,13 @@ const props = defineProps({
     },
 });
 
+const form = computed(() => {
+    return formStore.byId(props.formId);
+});
+
 const isUpToDate = computed(() => {
-    const form = formStore.byId(props.formId);
-    if (form) {
-        return props.formData.version == form.version;
+    if (form.value) {
+        return props.formData.version == form.value.version;
     }
     return false;
 });
@@ -67,7 +70,7 @@ const deleteFormUserData = () => {
 };
 
 const openFormDataDrawer = () => {
-    drawerStore.openFormDataInDrawer(props.formId, props.formData.id, true);
+    drawerStore.openFormDataInDrawer(props.formId, props.formData.id, true, form.value.name);
 };
 </script>
 
