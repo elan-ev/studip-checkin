@@ -16,12 +16,13 @@
     </tr>
 </template>
 <script setup>
-import { computed, getCurrentInstance } from 'vue';
-const { proxy } = getCurrentInstance();
+import { computed } from 'vue';
+import { useGettext } from 'vue3-gettext';
 import StudipActionMenu from '@/components/studip/StudipActionMenu.vue';
 import { useFormUserDataStore } from '@/store/form-user-data';
 import { useDrawerStore } from '@/store/drawer';
 
+const { $gettext } = useGettext();
 const formUserDataStore = useFormUserDataStore();
 const drawerStore = useDrawerStore();
 
@@ -44,10 +45,10 @@ const actionMenuItems = computed(() => {
     let menu = [];
 
     if (hasFormData.value) {
-        menu.push({ id: 1, label: proxy.$gettext('Anzeigen'), icon: 'log', emit: 'show' });
+        menu.push({ id: 1, label: $gettext('Anzeigen'), icon: 'log', emit: 'show' });
     }
 
-    menu.push({ id: 2, label: hasFormData.value ? proxy.$gettext('Bearbeiten') : proxy.$gettext('Ausfüllen'), icon: 'edit', emit: 'edit' });
+    menu.push({ id: 2, label: hasFormData.value ? $gettext('Bearbeiten') : $gettext('Ausfüllen'), icon: 'edit', emit: 'edit' });
 
     return menu;
 });

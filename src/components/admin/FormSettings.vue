@@ -67,14 +67,15 @@
 </template>
 
 <script setup>
-import StudipIcon from '@/components/studip/StudipIcon.vue';
-import { computed, getCurrentInstance } from 'vue';
+import { computed} from 'vue';
+import { useGettext } from 'vue3-gettext';
 import { storeToRefs } from 'pinia';
 import { useFormBuilderStore } from '@/store/form-builder';
 import { useDrawerStore } from '@/store/drawer';
 import { useUserFilterStore } from '@/store/user-filter';
+import StudipIcon from '@/components/studip/StudipIcon.vue';
 
-const { proxy } = getCurrentInstance();
+const { $gettext } = useGettext();
 const userFilterStore = useUserFilterStore();
 const formBuilderStore = useFormBuilderStore();
 const drawerStore = useDrawerStore();
@@ -106,7 +107,7 @@ const saveForm = () => {
         const formData = prepareFormData();
         emit('save', formData);
     } else {
-        STUDIP.Report.error(proxy.$gettext('Etwas fehlt!'));
+        STUDIP.Report.error($gettext('Etwas fehlt!'));
     }
 };
 

@@ -1,13 +1,11 @@
 <template>
     <tr>
-        <td>
-            <input type="checkbox" :name="`form-selection-${form.id}`" :id="`form-selection-${form.id}`" />
-        </td>
         <td>{{ form.name }}</td>
         <td :title="filterText">{{ filterCounter }}</td>
         <td>{{ form.version }}</td>
         <td>{{ startDate }}</td>
         <td>{{ endDate }}</td>
+        <td>{{ status }}</td>
         <td>
             <router-link :to="{ path: `/form/${form.id}/related-users` }">{{ userNum }}</router-link>
         </td>
@@ -30,12 +28,13 @@
 </template>
 
 <script setup>
-import { computed, getCurrentInstance } from 'vue';
+import { computed } from 'vue';
+import { useGettext } from 'vue3-gettext';
 import { useFormStore } from '@/store/form';
 import { useRouter } from 'vue-router';
 import StudipActionMenu from '@/components/studip/StudipActionMenu.vue';
 
-const { proxy } = getCurrentInstance();
+const { $gettext } = useGettext();
 const formStore = useFormStore();
 const router = useRouter();
 
@@ -59,6 +58,47 @@ const filterText = computed(() => {
         .replace(/&nbsp;/g, ' ')
         .replace(/\s+/g, ' ')
         .trim();
+});
+
+const status = computed(() => {
+    if (isExpired.value) {
+        return $gettext('abgelaufen');
+    }
+
+    if (isEndingSoon.value) {
+        return $gettext('endet bald');
+    }
+
+    return $gettext('aktiv');
+});
+
+const isExpired = computed(() => {
+    const endDate = props.form?.['end-date'];
+    if (!endDate) return false;
+
+    const today = new Date();
+    const end = new Date(endDate);
+
+    today.setHours(0, 0, 0, 0);
+    end.setHours(0, 0, 0, 0);
+
+    return end < today;
+});
+
+const isEndingSoon = computed(() => {
+    const endDate = props.form?.endDate;
+    if (!endDate) return false;
+
+    const today = new Date();
+    const end = new Date(endDate);
+
+    today.setHours(0, 0, 0, 0);
+    end.setHours(0, 0, 0, 0);
+
+    const diffMs = end - today;
+    const diffDays = diffMs / (1000 * 60 * 60 * 24);
+
+    return diffDays >= 0 && diffDays <= 7;
 });
 
 const userNum = computed(() => {
@@ -88,7 +128,7 @@ const endDate = computed(() => {
 const deleteForm = () => {
     if (
         STUDIP.Dialog.confirm(
-            proxy.$gettext(`Are you sure you want to delete the form "${props.form.name}"?`),
+            $gettext('Möchten Sie das Formular "%{name}" wirklich löschen?', { name: props.form.name }),
             () => {
                 formStore.removeRecord(props.form.id, true);
             },

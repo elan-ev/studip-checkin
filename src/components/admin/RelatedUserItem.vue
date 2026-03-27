@@ -1,8 +1,5 @@
 <template>
     <tr>
-        <td>
-            <input type="checkbox" :name="`user-selection-${user.id}`" :id="`user-selection-${user.id}`" />
-        </td>
         <td>{{ userInfo }}</td>
         <td>
             <input type="checkbox" v-model="user.active" :checked="user.active" @change="updateUser" />
@@ -22,11 +19,12 @@
 </template>
 
 <script setup>
-import { computed, getCurrentInstance } from 'vue';
+import { computed } from 'vue';
+import { useGettext } from 'vue3-gettext';
 import { useRelatedUserStore } from '@/store/related-user';
 import StudipActionMenu from '@/components/studip/StudipActionMenu.vue';
 
-const { proxy } = getCurrentInstance();
+const { $gettext } = useGettext();
 const relatedUserStore = useRelatedUserStore();
 
 const props = defineProps({
@@ -43,7 +41,7 @@ const userInfo = computed(() => {
 const deleteUser = () => {
     if (
         STUDIP.Dialog.confirm(
-            proxy.$gettext('Möchten Sie den Benutzer wirklich aus diesem Formular löschen?'),
+            $gettext('Möchten Sie den Benutzer wirklich aus diesem Formular löschen?'),
             () => {
                 relatedUserStore.removeRecord(props.user.id, true);
             },

@@ -12,14 +12,12 @@
         </caption>
         <thead>
             <tr>
-                <th scope="col" width="1%">
-                    <input type="checkbox" name="form-bulk-selection" id="form-bulk-selection" />
-                </th>
                 <th scope="col" width="50%">{{ $gettext('Name') }}</th>
                 <th scope="col">{{ $gettext('Filter') }}</th>
                 <th scope="col">{{ $gettext('Version') }}</th>
                 <th scope="col">{{ $gettext('Startdatum') }}</th>
                 <th scope="col">{{ $gettext('Enddatum') }}</th>
+                <th scope="col">{{ $gettext('Status') }}</th>
                 <th scope="col">{{ $gettext('Nutzende') }}</th>
                 <th scope="col">{{ $gettext('Rückläufe') }}</th>
                 <th scope="col" class="actions">{{ $gettext('Aktionen') }}</th>

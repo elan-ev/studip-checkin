@@ -10,6 +10,9 @@ msgstr "Content-Type: text/plain; charset=utf-8\n"
 msgid "Abbrechen"
 msgstr ""
 
+msgid "abgelaufen"
+msgstr ""
+
 msgid "Akiv"
 msgstr ""
 
@@ -35,6 +38,9 @@ msgstr ""
 
 #: src/components/studip/StudipActionMenu.vue:149
 msgid "Aktionsmenü für %{context}"
+msgstr ""
+
+msgid "aktiv"
 msgstr ""
 
 #: src/components/admin/FormUserDataItem.vue
@@ -120,11 +126,6 @@ msgstr ""
 msgid "Datensatz"
 msgstr ""
 
-#: src/components/admin/FormUserDataList.vue
-#: src/components/admin/FormUserDataList.vue:16
-msgid "Datum"
-msgstr ""
-
 #: src/components/expanded-views/UserFilterExpandedView.vue
 msgid "Dieses Feld löschen"
 msgstr ""
@@ -155,6 +156,9 @@ msgstr ""
 msgid "Endet am"
 msgstr ""
 
+msgid "endet bald"
+msgstr ""
+
 msgid "Erwarteter Wert"
 msgstr ""
 
@@ -181,6 +185,9 @@ msgid "Feldname"
 msgstr ""
 
 msgid "Fertig! Sie können nun fortfahren."
+msgstr ""
+
+msgid "Filter"
 msgstr ""
 
 #: src/components/admin/FormItem.vue
@@ -212,6 +219,9 @@ msgstr ""
 #: src/components/profile/FormsList.vue
 #: src/components/profile/FormsList.vue:18
 msgid "Keine Formulare gefunden."
+msgstr ""
+
+msgid "letzte Änderung"
 msgstr ""
 
 #: src/components/admin/RelatedUsersList.vue
@@ -249,6 +259,9 @@ msgstr ""
 #: src/components/admin/FormInput.vue
 #: src/components/admin/FormInput.vue:58
 msgid "Minimum"
+msgstr ""
+
+msgid "Möchten Sie das Formular \"%{name}\" wirklich löschen?"
 msgstr ""
 
 msgid "Möchten Sie den Benutzer wirklich aus diesem Formular löschen?"
@@ -354,6 +367,9 @@ msgstr ""
 #: src/components/admin/FormSettings.vue
 #: src/components/admin/FormSettings.vue:13
 msgid "Startet am"
+msgstr ""
+
+msgid "Status"
 msgstr ""
 
 #: src/components/admin/FormSettings.vue

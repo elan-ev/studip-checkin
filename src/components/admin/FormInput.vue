@@ -109,11 +109,12 @@
     </button>
 </template>
 <script setup>
-import StudipIcon from '@/components/studip/StudipIcon.vue';
-import { computed, getCurrentInstance, onMounted } from 'vue';
+import { computed, onMounted } from 'vue';
+import { useGettext } from 'vue3-gettext';
 import { useFormBuilderStore } from '@/store/form-builder';
 import { useContextStore } from '@/store/context';
 
+import StudipIcon from '@/components/studip/StudipIcon.vue';
 import FormInputText from '@/components/shared/inputs/FormInputText.vue';
 import FormInputTextarea from '@/components/shared/inputs/FormInputTextarea.vue';
 import FormInputSelect from '@/components/shared/inputs/FormInputSelect.vue';
@@ -121,7 +122,7 @@ import FormInputSwitch from '@/components/shared/inputs/FormInputSwitch.vue';
 import FormInputRadioGroup from '@/components/shared/inputs/FormInputRadioGroup.vue';
 import FormInputCheckboxGroup from '@/components/shared/inputs/FormInputCheckboxGroup.vue';
 
-const { proxy } = getCurrentInstance();
+const { $gettext } = useGettext();
 const formBuilderStore = useFormBuilderStore();
 const contextStore = useContextStore();
 const emit = defineEmits(['delete']);
@@ -191,7 +192,7 @@ const moveUp = () => {
         const newIndex = props.index - 1;
         formBuilderStore.changeElementPosition(props.index, newIndex, props.element);
     } else {
-        STUDIP.Report.error(proxy.$gettext('Ungültige Position für das Element'));
+        STUDIP.Report.error($gettext('Ungültige Position für das Element'));
     }
 };
 
@@ -201,14 +202,14 @@ const moveDown = () => {
         const newIndex = props.index + 1;
         formBuilderStore.changeElementPosition(props.index, newIndex, props.element);
     } else {
-        STUDIP.Report.error(proxy.$gettext('Ungültige Position für das Element'));
+        STUDIP.Report.error($gettext('Ungültige Position für das Element'));
     }
 };
 
 const addNewOption = () => {
     let hasEmptyItem = props.element.payload.options.filter((item) => item.text === '');
     if (hasEmptyItem.length) {
-        STUDIP.Report.warning(proxy.$gettext('Es ist eine leer Option ist vorhanden.'));
+        STUDIP.Report.warning($gettext('Es ist eine leer Option ist vorhanden.'));
         return;
     }
     props.element.payload.options.push({

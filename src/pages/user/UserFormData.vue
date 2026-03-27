@@ -6,12 +6,12 @@
 </template>
 
 <script setup>
-import { getCurrentInstance } from 'vue';
+import { useGettext } from 'vue3-gettext';
 import { useRouter } from 'vue-router';
 import { useFormStore } from '@/store/form';
 import FormData from '@/components/shared/FormData.vue';
 
-const { proxy } = getCurrentInstance();
+const { $gettext } = useGettext();
 const router = useRouter();
 const formStore = useFormStore();
 
@@ -21,7 +21,7 @@ const props = defineProps({
 
 const cleanFormRecord = () => {
     formStore.completeUserFormDataRecord(props.formId);
-    STUDIP.Report.success(proxy.$gettext('Das Formular wurde erfolgreich gespeichert'));
+    STUDIP.Report.success($gettext('Das Formular wurde erfolgreich gespeichert'));
     goBack();
 };
 

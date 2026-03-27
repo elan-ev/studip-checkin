@@ -23,14 +23,15 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, getCurrentInstance } from 'vue';
+import { ref, computed, onMounted } from 'vue';
+import { useGettext } from 'vue3-gettext';
 import { useFormStore } from '@/store/form';
 import { useFormUserDataStore } from '@/store/form-user-data';
 import { storeToRefs } from 'pinia';
 
 import FormField from '@/components/shared/FormField.vue';
 
-const { proxy } = getCurrentInstance();
+const { $gettext } = useGettext();
 const formStore = useFormStore();
 const formUserDataStore = useFormUserDataStore();
 const { errors } = storeToRefs(formUserDataStore);
@@ -123,7 +124,7 @@ const hasFormData = computed(() => {
 
 const saveForm = async () => {
     if (!validateFormData()) {
-        STUDIP.Report.error(proxy.$gettext('Etwas fehlt!'));
+        STUDIP.Report.error($gettext('Etwas fehlt!'));
     }
     const payload = {
         'id': usersFormData.value?.id ?? null,
@@ -141,10 +142,10 @@ const saveForm = async () => {
     if (errors?.value) {
         // Show error!
         console.error(errors.value);
-        STUDIP.Report.error(proxy.$gettext('Das Formular konnte nicht gespeichert werden!'));
+        STUDIP.Report.error($gettext('Das Formular konnte nicht gespeichert werden!'));
         return;
     } else {
-        STUDIP.Report.success(proxy.$gettext('Das Formular wurde erfolgreich gespeichert'));
+        STUDIP.Report.success($gettext('Das Formular wurde erfolgreich gespeichert'));
     }
 };
 

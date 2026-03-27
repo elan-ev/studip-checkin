@@ -24,7 +24,8 @@
 </template>
 
 <script setup>
-import { onBeforeUnmount, onMounted, onUnmounted, watch, ref, getCurrentInstance } from 'vue';
+import { onBeforeUnmount, onMounted, onUnmounted, watch, ref } from 'vue';
+import { useGettext } from 'vue3-gettext';
 import { useRoute, useRouter } from 'vue-router';
 import { useFormStore } from '@/store/form';
 import { useFormBuilderStore } from '@/store/form-builder';
@@ -37,7 +38,7 @@ import CheckinHeader from '@/components/admin/CheckinHeader.vue';
 import StudipDrawer from '@/components/studip/StudipDrawer.vue';
 import { storeToRefs } from 'pinia';
 
-const { proxy } = getCurrentInstance();
+const { $gettext } = useGettext();
 const formStore = useFormStore();
 const formBuilderStore = useFormBuilderStore();
 const drawerStore = useDrawerStore();
@@ -108,7 +109,7 @@ const saveForm = async (formData) => {
     if (errors?.value) {
         // Show error!
         console.error(errors.value);
-        STUDIP.Report.error(proxy.$gettext('Beim Erstellen des Formulars ist ein Fehler aufgetreten.'));
+        STUDIP.Report.error($gettext('Beim Erstellen des Formulars ist ein Fehler aufgetreten.'));
         return;
     }
     finishUpAndGoBack();

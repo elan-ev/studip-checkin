@@ -10,6 +10,9 @@ msgstr "Content-Type: text/plain; charset=utf-8\n"
 msgid "Abbrechen"
 msgstr "Cancel"
 
+msgid "abgelaufen"
+msgstr ""
+
 msgid "Akiv"
 msgstr "Active"
 
@@ -36,6 +39,9 @@ msgstr "Action menu"
 #: src/components/studip/StudipActionMenu.vue:149
 msgid "Aktionsmenü für %{context}"
 msgstr "Context menu for  %{context}"
+
+msgid "aktiv"
+msgstr ""
 
 #: src/components/admin/FormUserDataItem.vue
 #: src/components/admin/FormUserDataItem.vue:14
@@ -120,11 +126,6 @@ msgstr "The form could not be saved!"
 msgid "Datensatz"
 msgstr "data record"
 
-#: src/components/admin/FormUserDataList.vue
-#: src/components/admin/FormUserDataList.vue:16
-msgid "Datum"
-msgstr "date"
-
 #: src/components/expanded-views/UserFilterExpandedView.vue
 msgid "Dieses Feld löschen"
 msgstr "Clear this field"
@@ -155,6 +156,9 @@ msgstr "Delete end date"
 msgid "Endet am"
 msgstr "Ends on"
 
+msgid "endet bald"
+msgstr ""
+
 msgid "Erwarteter Wert"
 msgstr "Expected value"
 
@@ -182,6 +186,9 @@ msgstr "Field name"
 
 msgid "Fertig! Sie können nun fortfahren."
 msgstr "Done! You can now proceed."
+
+msgid "Filter"
+msgstr ""
 
 #: src/components/admin/FormItem.vue
 msgid "Formular"
@@ -213,6 +220,9 @@ msgstr "No data found."
 #: src/components/profile/FormsList.vue:18
 msgid "Keine Formulare gefunden."
 msgstr "No forms found."
+
+msgid "letzte Änderung"
+msgstr ""
 
 #: src/components/admin/RelatedUsersList.vue
 #: src/components/admin/RelatedUsersList.vue:3
@@ -250,6 +260,9 @@ msgstr "Multi-line text field"
 #: src/components/admin/FormInput.vue:58
 msgid "Minimum"
 msgstr "Minimum"
+
+msgid "Möchten Sie das Formular \"%{name}\" wirklich löschen?"
+msgstr ""
 
 msgid "Möchten Sie den Benutzer wirklich aus diesem Formular löschen?"
 msgstr "Are you sure you want to delete this user from this form?"
@@ -355,6 +368,9 @@ msgstr "Delete start date"
 #: src/components/admin/FormSettings.vue:13
 msgid "Startet am"
 msgstr "Starts on"
+
+msgid "Status"
+msgstr ""
 
 #: src/components/admin/FormSettings.vue
 #: src/components/admin/FormSettings.vue:5

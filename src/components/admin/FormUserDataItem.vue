@@ -1,8 +1,5 @@
 <template>
     <tr>
-        <td>
-            <input type="checkbox" :name="`data-selection-${formData.id}`" :id="`data-selection-${formData.id}`" />
-        </td>
         <td>{{ userInfo }}</td>
         <td>{{ formData.version }}</td>
         <td>{{ formData.chdate }}</td>
@@ -22,13 +19,14 @@
 </template>
 
 <script setup>
-import StudipActionMenu from '@/components/studip/StudipActionMenu.vue';
-import { computed, getCurrentInstance } from 'vue';
+import { computed } from 'vue';
+import { useGettext } from 'vue3-gettext';
 import { useFormUserDataStore } from '@/store/form-user-data';
 import { useFormStore } from '@/store/form';
 import { useDrawerStore } from '@/store/drawer';
+import StudipActionMenu from '@/components/studip/StudipActionMenu.vue';
 
-const { proxy } = getCurrentInstance();
+const { $gettext } = useGettext();
 const formUserDataStore = useFormUserDataStore();
 const formStore = useFormStore();
 const drawerStore = useDrawerStore();
@@ -59,7 +57,7 @@ const userInfo = computed(() => {
 const deleteFormUserData = () => {
     if (
         STUDIP.Dialog.confirm(
-            proxy.$gettext('Möchten Sie die Formulardaten wirklich löschen?'),
+            $gettext('Möchten Sie die Formulardaten wirklich löschen?'),
             () => {
                 formUserDataStore.removeRecord(props.formData.id, true);
             },

@@ -21,12 +21,12 @@
 </template>
 
 <script setup>
-import { getCurrentInstance } from 'vue';
+import { useGettext } from 'vue3-gettext';
 import { useFormBuilderStore } from '@/store/form-builder';
 import FormEditorPlusButton from './FormEditorPlusButton.vue';
 import FormInput from './FormInput.vue';
 
-const { proxy } = getCurrentInstance();
+const { $gettext } = useGettext();
 const formBuilderStore = useFormBuilderStore();
 const emit = defineEmits(['addElement']);
 
@@ -37,7 +37,7 @@ const addElementHere = (index) => {
 const deleteElement = (index) => {
     if (
         STUDIP.Dialog.confirm(
-            proxy.$gettext('Möchten Sie dieses Feld wirklich löschen?'),
+            $gettext('Möchten Sie dieses Feld wirklich löschen?'),
             () => {
                 formBuilderStore.removeElementFromStructure(index);
             },
