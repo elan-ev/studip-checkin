@@ -120,11 +120,6 @@ msgstr ""
 msgid "Datensatz"
 msgstr ""
 
-#: src/components/admin/FormsList.vue
-#: src/components/admin/FormsList.vue:23
-msgid "Datensätze"
-msgstr ""
-
 #: src/components/admin/FormUserDataList.vue
 #: src/components/admin/FormUserDataList.vue:16
 msgid "Datum"
@@ -329,6 +324,9 @@ msgstr ""
 #: src/components/admin/FormInput.vue
 #: src/components/admin/FormInput.vue:32
 msgid "Platzhalter"
+msgstr ""
+
+msgid "Rückläufe"
 msgstr ""
 
 #: src/components/studip/StudipDrawer.vue

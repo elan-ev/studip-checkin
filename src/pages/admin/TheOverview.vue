@@ -22,7 +22,7 @@ const formStore = useFormStore();
 const userFilterStore = useUserFilterStore();
 
 onMounted(async () => {
-    await formStore.fetchAll(['related-users', 'form-user-data']);
+    await formStore.fetchAll(['related-users', 'form-user-data', 'user-filter']);
     await userFilterStore.fetchAvailableFields();
 });
 </script>

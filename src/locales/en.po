@@ -120,11 +120,6 @@ msgstr "The form could not be saved!"
 msgid "Datensatz"
 msgstr "data record"
 
-#: src/components/admin/FormsList.vue
-#: src/components/admin/FormsList.vue:23
-msgid "Datensätze"
-msgstr "data records"
-
 #: src/components/admin/FormUserDataList.vue
 #: src/components/admin/FormUserDataList.vue:16
 msgid "Datum"
@@ -330,6 +325,9 @@ msgstr "Required field"
 #: src/components/admin/FormInput.vue:32
 msgid "Platzhalter"
 msgstr "Placeholder"
+
+msgid "Rückläufe"
+msgstr "Responses"
 
 #: src/components/studip/StudipDrawer.vue
 msgid "Schließen"
