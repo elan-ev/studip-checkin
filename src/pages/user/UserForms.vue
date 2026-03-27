@@ -30,6 +30,9 @@
                 </tr>
             </template>
         </tbody>
+        <footer>
+            <button class="button" @click="goToStart"> {{ $gettext('Zur Startseite') }}</button>
+        </footer>
     </table>
 </template>
 
@@ -60,16 +63,19 @@ const goToFormData = (formId) => {
     router.push({ path: `/form-data/${formId}` });
 };
 
+const goToStart = () => {
+    window.location = STUDIP.URLHelper.getURL('dispatch.php/start');
+}
+
 watch(
     () => records.value,
     (newValue, oldValue) => {
         if (newValue.size === 0) {
-            // TODO: decide how to act here! of course confirm is not needed here! :D
             if (
                 STUDIP.Dialog.confirm(
-                    $gettext('Fertig! Sie können nun fortfahren.'),
+                    $gettext('Fertig! Sie können nun fortfahren. Möchten Sie zur Startseite navigieren?'),
                     () => {
-                        window.location = STUDIP.URLHelper.getURL('dispatch.php/start');
+                        goToStart();
                     },
                     STUDIP.Dialog.close(),
                 )

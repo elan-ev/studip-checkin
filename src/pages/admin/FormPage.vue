@@ -145,7 +145,7 @@ const finishUpAndGoBack = () => {
 
 <style>
 .form-page {
-    height: calc(100vh - var(--offset-top, 150px) - 20px); 
+    height: calc(100vh - var(--offset-top, 150px) - 20px);
     width: 100%;
     display: flex;
     flex-direction: row;

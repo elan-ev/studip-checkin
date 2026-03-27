@@ -182,8 +182,8 @@ msgstr "Add field"
 msgid "Feldname"
 msgstr "Field name"
 
-msgid "Fertig! Sie können nun fortfahren."
-msgstr "Done! You can now proceed."
+msgid "Fertig! Sie können nun fortfahren. Möchten Sie zur Startseite navigieren?"
+msgstr "Done! You can now continue. Would you like to go to the home page?"
 
 msgid "Filter"
 msgstr "Filter"
@@ -437,6 +437,9 @@ msgstr "Change target audience filter"
 #: src/components/admin/FormSettings.vue:54
 msgid "Zielgruppenfilter hinzufügen"
 msgstr "Add an audience filter"
+
+msgid "Zur Startseite"
+msgstr "Go to home"
 
 #: src/pages/admin/FormUserDataPage.vue
 #: src/pages/admin/FormUserDataPage.vue:3

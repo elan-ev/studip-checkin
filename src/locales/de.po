@@ -182,7 +182,7 @@ msgstr ""
 msgid "Feldname"
 msgstr ""
 
-msgid "Fertig! Sie können nun fortfahren."
+msgid "Fertig! Sie können nun fortfahren. Möchten Sie zur Startseite navigieren?"
 msgstr ""
 
 msgid "Filter"
@@ -436,6 +436,9 @@ msgstr ""
 #: src/components/admin/FormSettings.vue
 #: src/components/admin/FormSettings.vue:54
 msgid "Zielgruppenfilter hinzufügen"
+msgstr ""
+
+msgid "Zur Startseite"
 msgstr ""
 
 #: src/pages/admin/FormUserDataPage.vue

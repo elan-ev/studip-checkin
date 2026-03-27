@@ -40,7 +40,7 @@
     "Etwas fehlt!": "Something's missing!",
     "Feld hinzufügen": "Add field",
     "Feldname": "Field name",
-    "Fertig! Sie können nun fortfahren.": "Done! You can now proceed.",
+    "Fertig! Sie können nun fortfahren. Möchten Sie zur Startseite navigieren?": "Done! You can now continue. Would you like to go to the home page?",
     "Filter": "Filter",
     "Formular": "Form",
     "Formular ausfüllen": "Fill out the form",
@@ -95,6 +95,7 @@
     "Zielgruppenfilter": "Filters",
     "Zielgruppenfilter ändern": "Change target audience filter",
     "Zielgruppenfilter hinzufügen": "Add an audience filter",
+    "Zur Startseite": "Go to home",
     "Zurück zur Übersicht": "Back to overview"
   }
 }

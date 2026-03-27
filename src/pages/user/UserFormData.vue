@@ -28,7 +28,6 @@ const form = computed(() => {
 
 const cleanFormRecord = () => {
     formStore.completeUserFormDataRecord(props.formId);
-    STUDIP.Report.success($gettext('Das Formular wurde erfolgreich gespeichert'));
     goBack();
 };
 

@@ -133,8 +133,6 @@ msgstr ""
 
 #: src/components/shared/FormData.vue
 #: src/components/shared/FormData.vue:148
-#: src/pages/user/UserFormData.vue
-#: src/pages/user/UserFormData.vue:29
 msgid "Das Formular wurde erfolgreich gespeichert"
 msgstr ""
 
@@ -212,8 +210,8 @@ msgid "Feldname"
 msgstr ""
 
 #: src/pages/user/UserForms.vue
-#: src/pages/user/UserForms.vue:70
-msgid "Fertig! Sie können nun fortfahren."
+#: src/pages/user/UserForms.vue:76
+msgid "Fertig! Sie können nun fortfahren. Möchten Sie zur Startseite navigieren?"
 msgstr ""
 
 #: src/components/admin/FormsList.vue
@@ -501,6 +499,11 @@ msgstr ""
 #: src/components/admin/FormSettings.vue
 #: src/components/admin/FormSettings.vue:54
 msgid "Zielgruppenfilter hinzufügen"
+msgstr ""
+
+#: src/pages/user/UserForms.vue
+#: src/pages/user/UserForms.vue:34
+msgid "Zur Startseite"
 msgstr ""
 
 #: src/pages/admin/FormUserDataPage.vue
