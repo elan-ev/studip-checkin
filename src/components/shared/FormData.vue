@@ -1,5 +1,5 @@
 <template>
-    <form class="default" v-if="form">
+    <form v-if="form" class="default">
         <fieldset class="undecorated">
             <template v-for="element in form.structure" :key="element.id">
                 <FormField
@@ -153,6 +153,3 @@ const cancel = () => {
     emit('close');
 };
 </script>
-<style lang="scss">
-
-</style>

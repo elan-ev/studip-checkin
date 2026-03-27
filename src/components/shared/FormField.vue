@@ -1,6 +1,6 @@
 <template>
     <div class="form-field-wrapper" :class="`type-${element.type}`">
-        <label :for="element.id">
+        <label :for="element.id"  class="form-field-label">
             <span v-if="element.type !== 'checkbox'">
                 {{ element.payload?.label[lang] }}
                 <span v-if="element.required" class="required-asterisk">*</span>
@@ -77,3 +77,12 @@ const extraProps = computed(() => {
     };
 });
 </script>
+
+<style lang="scss">
+.form-field-wrapper {
+    .form-field-label span {
+        display: block;
+        margin-bottom: 1em;
+    }
+}
+</style>

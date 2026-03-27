@@ -60,7 +60,8 @@ const toggleOption = (index) => {
 
 .checkbox-option {
     display: flex;
-    align-items: center;
+    flex-direction: row;
+    align-items: flex-start;
     cursor: pointer;
 
     .form-checkbox-field {

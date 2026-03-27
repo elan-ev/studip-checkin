@@ -4,7 +4,7 @@ import { computed, ref } from 'vue';
 export const useContextStore = defineStore('contextStore', () => {
     const preferredLanguage = ref('de_DE');
 
-    const languageIsGerman = computed(() => preferredLanguage.value === 'de_DE' || preferredLanguage.value === 'de-DE');
+    const languageIsGerman = computed(() => preferredLanguage.value === 'de-DE');
 
     const langSelector = computed(() => {
         return languageIsGerman.value ? 'de' : 'en';
