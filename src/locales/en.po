@@ -11,7 +11,7 @@ msgid "Abbrechen"
 msgstr "Cancel"
 
 msgid "abgelaufen"
-msgstr ""
+msgstr "expired"
 
 msgid "Akiv"
 msgstr "Active"
@@ -41,7 +41,7 @@ msgid "Aktionsmenü für %{context}"
 msgstr "Context menu for  %{context}"
 
 msgid "aktiv"
-msgstr ""
+msgstr "activ"
 
 #: src/components/admin/FormUserDataItem.vue
 #: src/components/admin/FormUserDataItem.vue:14
@@ -157,7 +157,7 @@ msgid "Endet am"
 msgstr "Ends on"
 
 msgid "endet bald"
-msgstr ""
+msgstr "ends soon"
 
 msgid "Erwarteter Wert"
 msgstr "Expected value"
@@ -188,7 +188,7 @@ msgid "Fertig! Sie können nun fortfahren."
 msgstr "Done! You can now proceed."
 
 msgid "Filter"
-msgstr ""
+msgstr "Filter"
 
 #: src/components/admin/FormItem.vue
 msgid "Formular"
@@ -222,7 +222,7 @@ msgid "Keine Formulare gefunden."
 msgstr "No forms found."
 
 msgid "letzte Änderung"
-msgstr ""
+msgstr "Last updated"
 
 #: src/components/admin/RelatedUsersList.vue
 #: src/components/admin/RelatedUsersList.vue:3
@@ -261,14 +261,14 @@ msgstr "Multi-line text field"
 msgid "Minimum"
 msgstr "Minimum"
 
+msgid "Möchten Sie %{name} wirklich aus diesem Formular löschen?"
+msgstr "Are you sure you want to delete %{name} from this form?"
+
 msgid "Möchten Sie das Formular \"%{name}\" wirklich löschen?"
-msgstr ""
+msgstr "Are you sure you want to delete the form \"%{name}\"?"
 
-msgid "Möchten Sie den Benutzer wirklich aus diesem Formular löschen?"
-msgstr "Are you sure you want to delete this user from this form?"
-
-msgid "Möchten Sie die Formulardaten wirklich löschen?"
-msgstr "Are you sure you want to delete the form data?"
+msgid "Möchten Sie die Formulardaten für %{name} wirklich löschen?"
+msgstr "Are you sure you want to delete the form data for %{name}?"
 
 #: src/components/admin/FormEditor.vue
 msgid "Möchten Sie dieses Feld wirklich löschen?"
@@ -370,7 +370,7 @@ msgid "Startet am"
 msgstr "Starts on"
 
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: src/components/admin/FormSettings.vue
 #: src/components/admin/FormSettings.vue:5

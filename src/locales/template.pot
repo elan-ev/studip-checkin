@@ -304,19 +304,19 @@ msgstr ""
 msgid "Minimum"
 msgstr ""
 
+#: src/components/admin/RelatedUserItem.vue
+#: src/components/admin/RelatedUserItem.vue:44
+msgid "Möchten Sie %{name} wirklich aus diesem Formular löschen?"
+msgstr ""
+
 #: src/components/admin/FormItem.vue
 #: src/components/admin/FormItem.vue:131
 msgid "Möchten Sie das Formular \"%{name}\" wirklich löschen?"
 msgstr ""
 
-#: src/components/admin/RelatedUserItem.vue
-#: src/components/admin/RelatedUserItem.vue:44
-msgid "Möchten Sie den Benutzer wirklich aus diesem Formular löschen?"
-msgstr ""
-
 #: src/components/admin/FormUserDataItem.vue
 #: src/components/admin/FormUserDataItem.vue:60
-msgid "Möchten Sie die Formulardaten wirklich löschen?"
+msgid "Möchten Sie die Formulardaten für %{name} wirklich löschen?"
 msgstr ""
 
 #: src/components/admin/FormEditor.vue

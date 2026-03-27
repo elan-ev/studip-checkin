@@ -261,13 +261,13 @@ msgstr ""
 msgid "Minimum"
 msgstr ""
 
+msgid "Möchten Sie %{name} wirklich aus diesem Formular löschen?"
+msgstr ""
+
 msgid "Möchten Sie das Formular \"%{name}\" wirklich löschen?"
 msgstr ""
 
-msgid "Möchten Sie den Benutzer wirklich aus diesem Formular löschen?"
-msgstr ""
-
-msgid "Möchten Sie die Formulardaten wirklich löschen?"
+msgid "Möchten Sie die Formulardaten für %{name} wirklich löschen?"
 msgstr ""
 
 #: src/components/admin/FormEditor.vue
