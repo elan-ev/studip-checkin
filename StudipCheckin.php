@@ -37,10 +37,7 @@ class StudipCheckin extends StudIPPlugin implements SystemPlugin, JsonApiPlugin
             'type' => 'module',
             'rel' => 'preload',
         ]);
-        PageLayout::addStylesheet($this->getPluginUrl() . '/dist/drawer.css');
-        PageLayout::addStylesheet($this->getPluginUrl() . '/dist/StudipActionMenu.css');
-        PageLayout::addStylesheet($this->getPluginUrl() . '/dist/studip-checkin-admin.css');
-        PageLayout::addStylesheet($this->getPluginUrl() . '/dist/studip-checkin-profile.css');
+        PageLayout::addStylesheet($this->getPluginUrl() . '/dist/checkin.css');
 
         if ($GLOBALS['perm']->have_perm("admin")) {
             $this->addContentsNavigation();
