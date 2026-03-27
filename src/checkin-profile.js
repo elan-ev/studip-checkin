@@ -6,28 +6,30 @@ import { router } from './router/checkin-profile';
 import { useContextStore } from './store/context';
 
 const el = document.getElementById('studip-checkin-profile-app');
-const preferredLanguage = el?.dataset?.preferredLanguage || null;
+if (el) {
+    const preferredLanguage = el?.dataset?.preferredLanguage || null;
 
-const app = createApp(App);
+    const app = createApp(App);
 
-const gettext = createGettext({
-    availableLanguages: {
-        en: 'English',
-        de: 'Deutsch',
-    },
-    defaultLanguage: 'de',
-});
-app.use(gettext);
+    const gettext = createGettext({
+        availableLanguages: {
+            en: 'English',
+            de: 'Deutsch',
+        },
+        defaultLanguage: 'de',
+    });
+    app.use(gettext);
 
-const pinia = createPinia();
-app.use(pinia);
+    const pinia = createPinia();
+    app.use(pinia);
 
-const contextStore = useContextStore();
+    const contextStore = useContextStore();
 
-if (preferredLanguage) {
-    contextStore.setPreferredLanguage(preferredLanguage);
+    if (preferredLanguage) {
+        contextStore.setPreferredLanguage(preferredLanguage);
+    }
+
+    app.use(router);
+
+    app.mount('#studip-checkin-profile-app');
 }
-
-app.use(router);
-
-app.mount('#studip-checkin-profile-app');

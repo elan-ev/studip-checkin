@@ -1,12 +1,17 @@
 <template>
-    <div class="checkin-user-form-data-wrapper">
-        <h2 class="checkin-user-form-data-header">{{ form.name }}</h2>
-        <FormData :formId="formId" :disable-cancel="records.size === 1" @done="cleanFormRecord" @close="goBack" />
-    </div>
+    <article class="checkin-user-form-data-wrapper">
+        <header class="checkin-user-form-data-header">
+            <h2>{{ form.name }}</h2>
+            <p>{{ form.description }}</p>
+        </header>
+        <section>
+            <FormData :formId="formId" :disable-cancel="records.size === 1" @done="cleanFormRecord" @close="goBack" />
+        </section>
+    </article>
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useFormStore } from '@/store/form';
 import { storeToRefs } from 'pinia';
@@ -33,6 +38,23 @@ const goBack = () => {
     router.push({ name: 'user-forms' });
 };
 
+const setOverlay = () => {
+    const el = document.getElementById('studip-checkin-app');
+    const topBar = document.getElementById('top-bar');
+    const footer = document.getElementById('main-footer');
+    const padding = 30;
+
+    const diffHeight = topBar.offsetHeight + footer.offsetHeight + 2 * padding;
+    const diffWidth = 2 * padding;
+
+    el.style.setProperty('--checkin-overlay-height', `calc( 100vH - ${diffHeight}px)`);
+    el.style.setProperty('--checkin-overlay-width', `calc( 100vW - ${diffWidth}px)`);
+    el.style.setProperty('--checkin-overlay-padding', ` ${padding}px`);
+};
+
+onMounted(() => {
+    setOverlay();
+});
 </script>
 
 <style lang="scss">

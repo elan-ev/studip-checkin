@@ -99,6 +99,7 @@ class Update extends JsonApiController
     protected function updateCheckinForm($form, $json)
     {
         $name = self::arrayGet($json, 'data.attributes.name', '');
+        $description = self::arrayGet($json, 'data.attributes.description', '');
         $structure = self::arrayGet($json, 'data.attributes.structure', []);
         $startDate = self::arrayGet($json, 'data.attributes.start-date', '');
         $endDate = self::arrayGet($json, 'data.attributes.end-date', '');
@@ -131,6 +132,7 @@ class Update extends JsonApiController
         }
 
         $form->name = $name;
+        $form->description = $description;
         $form->structure = $refinedStructure;
 
         $form->start_date = !empty($startDate) ? strtotime($startDate) : 0;

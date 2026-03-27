@@ -7,7 +7,7 @@
             </label>
             <label>
                 {{ $gettext('Beschreibung') }}
-                <textarea name="description" v-model="formBuilderStore.form.description" />
+                <textarea name="description" v-model="form.description" />
             </label>
             <label>
                 {{ $gettext('Startet am') }}
@@ -141,7 +141,7 @@ const prepareFormData = () => {
     formData['start-date'] = form.value?.['start-date'] ?? null;
     formData['end-date'] = form.value?.['end-date'] ?? null;
     formData['filter-fields'] = allAppliedFields.value ?? [];
-
+console.log(formData);
     return formData;
 };
 
