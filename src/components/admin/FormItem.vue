@@ -46,7 +46,9 @@ const props = defineProps({
 });
 
 const filterCounter = computed(() => {
-    return Object.keys(props.form?.['user-filter']?.data?.fields).length ?? 0;
+    const filters = props.form?.['user-filter']?.data?.fields;
+    
+    return filters ? Object.keys(filters).length : 0;
 });
 
 const filterText = computed(() => {
