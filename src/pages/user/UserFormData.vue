@@ -1,26 +1,24 @@
 <template>
-    <div class="checkin-user-form-data-wrapper" ref="formWrapper">
+    <div class="checkin-user-form-data-wrapper">
         <h2 class="checkin-user-form-data-header">{{ form.name }}</h2>
-        <FormData :formId="formId" @done="cleanFormRecord" @close="goBack" />
+        <FormData :formId="formId" :disable-cancel="records.size === 1" @done="cleanFormRecord" @close="goBack" />
     </div>
 </template>
 
 <script setup>
-import { computed, ref, onMounted } from 'vue';
-import { useGettext } from 'vue3-gettext';
+import { computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useFormStore } from '@/store/form';
+import { storeToRefs } from 'pinia';
 import FormData from '@/components/shared/FormData.vue';
 
-const { $gettext } = useGettext();
 const router = useRouter();
 const formStore = useFormStore();
+const { records } = storeToRefs(formStore);
 
 const props = defineProps({
     formId: Number,
 });
-
-const formWrapper = ref(null);
 
 const form = computed(() => {
     return formStore.byId(props.formId);
@@ -35,23 +33,11 @@ const goBack = () => {
     router.push({ name: 'user-forms' });
 };
 
-const updateOffset = () => {
-    if (formWrapper.value) {
-        const rect = formWrapper.value.getBoundingClientRect();
-        formWrapper.value.style.setProperty('--offset-top', `${rect.top}px`);
-    }
-};
-
-onMounted(async () => {
-    updateOffset();
-    window.addEventListener('resize', updateOffset);
-});
 </script>
 
 <style lang="scss">
 .checkin-user-form-data-wrapper {
-    max-height: calc(100vh - var(--offset-top, 150px) - 90px);
-    max-width: 480px;
+    max-width: 800px;
     margin: 0 auto;
 
     .checkin-user-form-data-header {

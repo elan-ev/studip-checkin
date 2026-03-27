@@ -1,5 +1,5 @@
 <template>
-    <table class="default">
+    <table v-if="!loading && records.size !== 1" class="default">
         <caption>
             {{
                 $gettext('Bitte füllen Sie die folgenden Formulare aus')
@@ -37,7 +37,7 @@
 </template>
 
 <script setup>
-import { watch, onMounted } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 import { useGettext } from 'vue3-gettext';
 import { useRouter } from 'vue-router';
 import { useFormStore } from '@/store/form';
@@ -55,8 +55,12 @@ const props = defineProps({
     },
 });
 
+const loading = ref(true);
+
 onMounted(async () => {
+    loading.value = true;
     await formStore.fetchByUserId(props.userId);
+    loading.value = false;
 });
 
 const goToFormData = (formId) => {
@@ -71,16 +75,30 @@ watch(
     () => records.value,
     (newValue, oldValue) => {
         if (newValue.size === 0) {
-            if (
-                STUDIP.Dialog.confirm(
-                    $gettext('Fertig! Sie können nun fortfahren. Möchten Sie zur Startseite navigieren?'),
-                    () => {
-                        goToStart();
-                    },
-                    STUDIP.Dialog.close(),
-                )
-            );
+            goToStart();
+        }
+        if (newValue.size === 1) {
+            const singleFormId = newValue.keys().next().value;
+            goToFormData(singleFormId);
         }
     },
 );
 </script>
+<style lang="scss">
+$padding: 15px;
+$banner: 40px;
+$footer: 32px;
+$diffHeight: $padding + $padding + $banner + $footer;
+#studip-checkin-app {
+    position: absolute;
+    top: 40px;
+    background-color: #fff;
+    z-index: 1000;
+    width: var(--checkin-overlay-width);
+    height: var(--checkin-overlay-height);
+    margin: 0;
+    padding: var(--checkin-overlay-padding);
+    left: 0;
+    overflow: auto;
+}
+</style>

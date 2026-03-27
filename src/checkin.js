@@ -9,8 +9,6 @@ const el = document.getElementById('studip-checkin-app');
 const userId = el?.dataset?.userId || null;
 const preferredLanguage = el?.dataset?.preferredLanguage || null;
 
-
-
 const app = createApp(App, {
   userId,
 });
@@ -36,3 +34,14 @@ if (preferredLanguage) {
 app.use(router);
 
 app.mount('#studip-checkin-app');
+
+const topBar = document.getElementById('top-bar');
+const footer = document.getElementById('main-footer');
+const padding = 30;
+
+const diffHeight = topBar.offsetHeight + footer.offsetHeight + 2 * padding;
+const diffWidth = 2 * padding;
+
+el.style.setProperty('--checkin-overlay-height', `calc( 100vH - ${diffHeight}px)`);
+el.style.setProperty('--checkin-overlay-width', `calc( 100vW - ${diffWidth}px)`);
+el.style.setProperty('--checkin-overlay-padding', ` ${padding}px`);

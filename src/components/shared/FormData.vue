@@ -15,7 +15,7 @@
                 {{ $gettext('Speichern') }}
             </button>
 
-            <button class="button cancel" @click.prevent="cancel">
+            <button v-if="!disableCancel" class="button cancel" @click.prevent="cancel">
                 {{ $gettext('Abbrechen') }}
             </button>
         </footer>
@@ -46,9 +46,13 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
+    disableCancel: {
+        type: Boolean,
+        default: false,
+    },
 });
 
-const emit = defineEmits(['done','close']);
+const emit = defineEmits(['done', 'close']);
 
 const form = computed(() => {
     return formStore.byId(props.formId);
@@ -127,7 +131,7 @@ const saveForm = async () => {
         STUDIP.Report.error($gettext('Etwas fehlt!'));
     }
     const payload = {
-        'id': usersFormData.value?.id ?? null,
+        id: usersFormData.value?.id ?? null,
         'form-id': form.value.id,
         'form-version': form.value.version,
         'form-data': formData.value,
