@@ -17,7 +17,7 @@ export const useFormStore = defineStore('formStore', () => {
 
     const all = computed(() => {
         void records.value.size;
-        return  [...records.value.values()];
+        return [...records.value.values()];
     });
 
     async function removeRecord(formId, deletePermanently = false) {
@@ -51,9 +51,9 @@ export const useFormStore = defineStore('formStore', () => {
             const { data } = await api.fetch('checkin-forms', config);
             if (data) {
                 clearRecords();
-                data.forEach((form => {
+                data.forEach((form) => {
                     storeRecord(form);
-                }));
+                });
             }
         } catch (err) {
             console.error('Error while fetching forms', err);
@@ -91,6 +91,23 @@ export const useFormStore = defineStore('formStore', () => {
         }
     }
 
+    async function copyForm(formId) {
+        isLoading.value = true;
+        const formData = {
+                type: 'checkin-forms',
+                'source-id': formId
+        }
+        try {
+            const { data } = await api.post('checkin-forms/copy', formData);
+            storeRecord(data);
+        } catch (err) {
+            console.error('Error while coping form', err);
+            errors.value = err;
+        } finally {
+            isLoading.value = false;
+        }
+    }
+
     async function updateForm(formData, includePaths = []) {
         isLoading.value = true;
         try {
@@ -110,8 +127,8 @@ export const useFormStore = defineStore('formStore', () => {
         const config = {};
         if (includePaths.length > 0) {
             config.params = {
-                include: includePaths.join(',')
-            }
+                include: includePaths.join(','),
+            };
         }
         return config;
     }
@@ -119,11 +136,11 @@ export const useFormStore = defineStore('formStore', () => {
     async function fetchByUserId(userId, all = false) {
         isLoading.value = true;
         try {
-            const { data } = await api.get(`checkin-user-forms/${userId}/${all ? 'all': 'pending'}`);
+            const { data } = await api.get(`checkin-user-forms/${userId}/${all ? 'all' : 'pending'}`);
             clearRecords();
-            data.forEach((form => {
+            data.forEach((form) => {
                 storeRecord(form);
-            }))
+            });
         } catch (err) {
             console.error(`Error while fetching forms for user with id: ${userId}`, err);
             errors.value = err;
@@ -147,6 +164,7 @@ export const useFormStore = defineStore('formStore', () => {
         byId,
         fetchById,
         createForm,
+        copyForm,
         updateForm,
         fetchAll,
         fetchByUserId,

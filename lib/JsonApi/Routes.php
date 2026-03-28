@@ -30,6 +30,7 @@ trait Routes
         // Extra related routes for Forms.
         $group->get('/checkin-forms/{id}/related-users', \StudipCheckin\JsonApi\Routes\Form\RelatedUsersIndex::class);
         $group->get('/checkin-forms/{id}/form-user-data', \StudipCheckin\JsonApi\Routes\Form\FormUserDataIndex::class);
+        $group->post('/checkin-forms/copy', \StudipCheckin\JsonApi\Routes\Form\Copy::class);
 
         // Get related users active forms.
         $group->get('/checkin-user-forms/{id}/{mode:all|pending}', \StudipCheckin\JsonApi\Routes\Form\UserFormsIndex::class);
