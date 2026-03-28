@@ -1,7 +1,7 @@
 <template>
     <CheckinHeader>
         <template #title>
-            {{ isNew ? $gettext('Neues Formular') : form.name }}
+            {{ isNew ? $gettext('Neues Formular') : form.name || $gettext('Formulartitel') }}
         </template>
     </CheckinHeader>
     <div class="form-page" ref="formPage">

@@ -2,17 +2,23 @@
     <div class="form-settings">
         <form class="default form-settings-form">
             <label>
-                {{ $gettext('Titel') }}
-                <input type="text" id="form-title" v-model="form.name" />
+                <span class="required">{{ $gettext('Titel') }}</span>
+                <input type="text" id="form-title" v-model="form.name" required />
             </label>
             <label>
                 {{ $gettext('Beschreibung') }}
-                <textarea name="description" v-model="form.description" />
+                <textarea v-model="form.description" name="description" class="form-settings-description" />
             </label>
             <label>
-                {{ $gettext('Startet am') }}
+                <span class="required">{{ $gettext('Startet am') }}</span>
                 <div class="date-container">
-                    <input type="date" name="start-date" v-model="form['start-date']" :max="form['end-date']" />
+                    <input
+                        type="date"
+                        name="start-date"
+                        v-model="form['start-date']"
+                        :max="form['end-date']"
+                        required
+                    />
                     <button
                         v-if="form?.['start-date']"
                         class="button-undecorated"
@@ -23,9 +29,9 @@
                     </button>
                 </div>
                 <br />
-                {{ $gettext('Endet am') }}
+                <span class="required">{{ $gettext('Endet am') }}</span>
                 <div class="date-container">
-                    <input type="date" name="end-date" v-model="form['end-date']" :min="form['start-date']" />
+                    <input type="date" name="end-date" v-model="form['end-date']" :min="form['start-date']" required />
                     <button
                         v-if="form?.['end-date']"
                         class="button-undecorated"
@@ -50,8 +56,14 @@
                 }}
             </div>
             <label>
-                <button class="button" :class="{'add':  !hasUserFilter, 'edit': hasUserFilter}" @click.prevent="openUserFilterDrawer">
-                    {{ hasUserFilter ?  $gettext('Zielgruppenfilter ändern') : $gettext('Zielgruppenfilter hinzufügen') }}
+                <button
+                    class="button"
+                    :class="{ add: !hasUserFilter, edit: hasUserFilter }"
+                    @click.prevent="openUserFilterDrawer"
+                >
+                    {{
+                        hasUserFilter ? $gettext('Zielgruppenfilter ändern') : $gettext('Zielgruppenfilter hinzufügen')
+                    }}
                 </button>
             </label>
         </form>
@@ -67,7 +79,7 @@
 </template>
 
 <script setup>
-import { computed} from 'vue';
+import { computed, ref } from 'vue';
 import { useGettext } from 'vue3-gettext';
 import { storeToRefs } from 'pinia';
 import { useFormBuilderStore } from '@/store/form-builder';
@@ -81,10 +93,38 @@ const formBuilderStore = useFormBuilderStore();
 const drawerStore = useDrawerStore();
 
 const { allAppliedFields } = storeToRefs(userFilterStore);
+const { form } = storeToRefs(formBuilderStore);
 
 const emit = defineEmits(['save', 'cancel']);
 
-const { form } = storeToRefs(formBuilderStore);
+const validationErrors = ref({
+    name: false,
+    structure: false,
+    filters: false,
+    startDate: false,
+    endDate: false,
+    dateRange: false,
+});
+
+const hasValidationErrors = computed(() => {
+    return Object.values(validationErrors.value).includes(true);
+});
+
+const activeErrorMessages = computed(() => {
+    const messages = [];
+    if (hasValidationErrors.value) {
+        if (validationErrors.value.name) messages.push($gettext('Bitte geben Sie einen Titel an.'));
+        if (validationErrors.value.structure)
+            messages.push($gettext('Bitte fügen Sie mindestens ein Formularelement ein.'));
+        if (validationErrors.value.filters)
+            messages.push($gettext('Bitte wählen Sie mindestens einen Zielgruppenfilter aus.'));
+        if (validationErrors.value.startDate) messages.push($gettext('Bitte geben Sie ein Startdatum an.'));
+        if (validationErrors.value.endDate) messages.push($gettext('Bitte geben Sie ein Enddatum an.'));
+        if (validationErrors.value.dateRange) messages.push($gettext('Bitte prüfen Sie Start- und Enddatum.'));
+    }
+    return messages;
+});
+
 const isDateRangeValid = computed(() => {
     if (!form.value?.['start-date'] || !form.value?.['end-date']) {
         return true;
@@ -102,12 +142,14 @@ const hasUserFilter = computed(() => {
 });
 
 const saveForm = () => {
-    // Do whatever needs to be done before save.
-    if (formValidation()) {
+    formValidation();
+    if (!hasValidationErrors.value) {
         const formData = prepareFormData();
         emit('save', formData);
     } else {
-        STUDIP.Report.error($gettext('Etwas fehlt!'));
+        const errorContent = '<ul><li>' + activeErrorMessages.value.join('</li><li>') + '</li></ul>';
+        STUDIP.Report.warning($gettext('Bitte überprüfen Sie ihre Eingaben.'), errorContent);
+        console.error(validationErrors.value);
     }
 };
 
@@ -118,16 +160,12 @@ const cancelChanges = () => {
 };
 
 const formValidation = () => {
-    if (
-        !form.value.name ||
-        !form.value.structure ||
-        !allAppliedFields.value ||
-        allAppliedFields.value?.length === 0 ||
-        !isDateRangeValid.value
-    ) {
-        return false;
-    }
-    return true;
+    validationErrors.value.name = !form.value.name;
+    validationErrors.value.structure = !form.value.structure || form.value.structure.length === 0;
+    validationErrors.value.filters = !allAppliedFields.value || allAppliedFields.value?.length === 0;
+    validationErrors.value.startDate = !form.value['start-date'];
+    validationErrors.value.endDate = !form.value['end-date'];
+    validationErrors.value.dateRange = !isDateRangeValid.value;
 };
 
 const prepareFormData = () => {
@@ -141,7 +179,7 @@ const prepareFormData = () => {
     formData['start-date'] = form.value?.['start-date'] ?? null;
     formData['end-date'] = form.value?.['end-date'] ?? null;
     formData['filter-fields'] = allAppliedFields.value ?? [];
-console.log(formData);
+
     return formData;
 };
 
@@ -168,6 +206,11 @@ const emptyFormDate = (dateProp) => {
 
     .form-settings-form {
         padding: 10px;
+
+        .form-settings-description {
+            resize: vertical;
+            min-height: 160px;
+        }
     }
 
     .form-settings-actions {
