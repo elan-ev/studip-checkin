@@ -109,11 +109,11 @@ const isVisible = (element) => {
 };
 
 const validateFormData = () => {
-    // TODO: check the relationships, as soon as it is implemented in FormInputs.
-
-    // we check required elements.
     let invalidRequired = form.value.structure.some((input, index) => {
-        return (input.required && !formData.value?.[input.id]) || formData.value?.[input.id] === null;
+        if (!isVisible(input)) {
+            return false;
+        }
+        return (input.payload.required && !formData.value?.[input.id]) || formData.value?.[input.id] === null;
     });
 
     return !invalidRequired;
@@ -128,7 +128,8 @@ const hasFormData = computed(() => {
 
 const saveForm = async () => {
     if (!validateFormData()) {
-        STUDIP.Report.error($gettext('Etwas fehlt!'));
+        STUDIP.Report.warning($gettext('Bitte überprüfen Sie ihre Eingaben.'));
+        return;
     }
     const payload = {
         id: usersFormData.value?.id ?? null,

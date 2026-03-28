@@ -59,7 +59,7 @@ onMounted(() => {
 
 <style lang="scss">
 .checkin-user-form-data-wrapper {
-    max-width: 800px;
+    max-width: 48em;
     margin: 0 auto;
 
     .checkin-user-form-data-header {

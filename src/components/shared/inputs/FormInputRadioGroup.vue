@@ -20,7 +20,8 @@
 </template>
 
 <script setup>
-defineProps({
+import { onMounted, nextTick } from 'vue';
+const props = defineProps({
     modelValue: [String, Number],
     id: String,
     element: Object,
@@ -32,7 +33,13 @@ defineProps({
     },
 });
 
-defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:modelValue']);
+
+onMounted(() => {
+    if (props.modelValue === undefined) {
+        nextTick(() => { emit('update:modelValue', 0); });
+    }
+});
 </script>
 
 <style lang="scss" scoped>
@@ -45,7 +52,7 @@ defineEmits(['update:modelValue']);
 
 .radio-option {
     display: flex;
-    align-items: center;
+    align-items: self-start;
     cursor: pointer;
 
     .form-radio-field {

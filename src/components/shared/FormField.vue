@@ -1,28 +1,25 @@
 <template>
     <div class="form-field-wrapper" :class="`type-${element.type}`">
-        <label :for="element.id"  class="form-field-label">
-            <span v-if="element.type !== 'checkbox'">
+        <label :for="element.id" class="form-field-label">
+            <span v-if="element.type !== 'checkbox'" :class="{ required: element.payload?.required === true && !readOnly }">
                 {{ element.payload?.label[lang] }}
-                <span v-if="element.required" class="required-asterisk">*</span>
             </span>
-
             <component
                 :is="inputComponent"
                 :id="element.id"
                 :model-value="modelValue"
-                @update:model-value="$emit('update:modelValue', $event)"
+                @update:modelValue="$emit('update:modelValue', $event)"
                 :element="element"
                 :disabled="readOnly"
                 :lang="lang"
                 v-bind="extraProps"
             />
 
-            <span v-if="element.type === 'checkbox'">
+            <span v-if="element.type === 'checkbox'" :style="{ required: element.payload?.required === true && !readOnly }">
                 {{ element.payload?.label[lang] }}
-                <span v-if="element.required" class="required-asterisk">*</span>
             </span>
         </label>
-        
+
         <span v-if="error" class="field-error">{{ error }}</span>
     </div>
 </template>
@@ -44,7 +41,7 @@ const props = defineProps({
     element: Object,
     modelValue: [String, Number, Boolean, Array],
     readOnly: Boolean,
-    error: String
+    error: String,
 });
 
 defineEmits(['update:modelValue']);
@@ -55,14 +52,14 @@ const lang = computed(() => {
 
 const inputComponent = computed(() => {
     const map = {
-        'text': FormInputText,
-        'email': FormInputText,
-        'url': FormInputText,
-        'textarea': FormInputTextarea, 
-        'select': FormInputSelect,
-        'switch': FormInputSwitch,
-        'radio': FormInputRadioGroup,
-        'multiselect': FormInputCheckboxGroup
+        text: FormInputText,
+        email: FormInputText,
+        url: FormInputText,
+        textarea: FormInputTextarea,
+        select: FormInputSelect,
+        switch: FormInputSwitch,
+        radio: FormInputRadioGroup,
+        multiselect: FormInputCheckboxGroup,
     };
     return map[props.element.type] || FormInputText;
 });
