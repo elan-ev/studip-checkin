@@ -3,7 +3,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 
 #: src/components/admin/FormSettings.vue
-#: src/components/admin/FormSettings.vue:63
+#: src/components/admin/FormSettings.vue:99
 #: src/components/expanded-views/UserFilterExpandedView.vue
 #: src/components/expanded-views/UserFilterExpandedView.vue:65
 #: src/components/shared/FormData.vue
@@ -12,12 +12,12 @@ msgid "Abbrechen"
 msgstr ""
 
 #: src/components/admin/FormItem.vue
-#: src/components/admin/FormItem.vue:67
+#: src/components/admin/FormItem.vue:76
 msgid "abgelaufen"
 msgstr ""
 
 #: src/components/admin/RelatedUsersList.vue
-#: src/components/admin/RelatedUsersList.vue:7
+#: src/components/admin/RelatedUsersList.vue:11
 msgid "Akiv"
 msgstr ""
 
@@ -26,13 +26,11 @@ msgstr ""
 #: src/components/admin/FormUserDataList.vue
 #: src/components/admin/FormUserDataList.vue:16
 #: src/components/admin/RelatedUsersList.vue
-#: src/components/admin/RelatedUsersList.vue:9
+#: src/components/admin/RelatedUsersList.vue:13
 #: src/components/profile/FormsList.vue
 #: src/components/profile/FormsList.vue:12
 #: src/components/studip/StudipActionMenu.vue
 #: src/components/studip/StudipActionMenu.vue:10
-#: src/pages/user/UserForms.vue
-#: src/pages/user/UserForms.vue:11
 msgid "Aktionen"
 msgstr ""
 
@@ -47,7 +45,7 @@ msgid "Aktionsmenü für %{context}"
 msgstr ""
 
 #: src/components/admin/FormItem.vue
-#: src/components/admin/FormItem.vue:74
+#: src/components/admin/FormItem.vue:83
 msgid "aktiv"
 msgstr ""
 
@@ -57,12 +55,12 @@ msgid "Antworten betrachten"
 msgstr ""
 
 #: src/components/profile/FormItem.vue
-#: src/components/profile/FormItem.vue:48
+#: src/components/profile/FormItem.vue:54
 msgid "Anzeigen"
 msgstr ""
 
 #: src/components/profile/FormItem.vue
-#: src/components/profile/FormItem.vue:51
+#: src/components/profile/FormItem.vue:57
 msgid "Ausfüllen"
 msgstr ""
 
@@ -74,7 +72,7 @@ msgstr ""
 #: src/components/admin/FormItem.vue
 #: src/components/admin/FormItem.vue:20
 #: src/components/profile/FormItem.vue
-#: src/components/profile/FormItem.vue:51
+#: src/components/profile/FormItem.vue:57
 msgid "Bearbeiten"
 msgstr ""
 
@@ -93,12 +91,13 @@ msgid "Bedingung hinzufügen"
 msgstr ""
 
 #: src/pages/admin/FormPage.vue
-#: src/pages/admin/FormPage.vue:112
+#: src/pages/admin/FormPage.vue:118
 msgid "Beim Erstellen des Formulars ist ein Fehler aufgetreten."
 msgstr ""
 
 #: src/components/admin/FormSettings.vue
-#: src/components/admin/FormSettings.vue:9
+#: src/components/admin/FormSettings.vue:12
+#: src/components/admin/FormSettings.vue:27
 msgid "Beschreibung"
 msgstr ""
 
@@ -107,14 +106,51 @@ msgstr ""
 msgid "Beschriftung"
 msgstr ""
 
+#: src/components/admin/FormSettings.vue
+#: src/components/admin/FormSettings.vue:142
+msgid "Bitte fügen Sie mindestens ein Formularelement ein."
+msgstr ""
+
 #: src/pages/user/UserForms.vue
-#: src/pages/user/UserForms.vue:5
+#: src/pages/user/UserForms.vue:4
 msgid "Bitte füllen Sie die folgenden Formulare aus"
+msgstr ""
+
+#: src/components/admin/FormSettings.vue
+#: src/components/admin/FormSettings.vue:146
+msgid "Bitte geben Sie ein Enddatum an."
+msgstr ""
+
+#: src/components/admin/FormSettings.vue
+#: src/components/admin/FormSettings.vue:145
+msgid "Bitte geben Sie ein Startdatum an."
+msgstr ""
+
+#: src/components/admin/FormSettings.vue
+#: src/components/admin/FormSettings.vue:140
+msgid "Bitte geben Sie einen Titel an."
+msgstr ""
+
+#: src/components/admin/FormSettings.vue
+#: src/components/admin/FormSettings.vue:147
+msgid "Bitte prüfen Sie Start- und Enddatum."
+msgstr ""
+
+#: src/components/admin/FormSettings.vue
+#: src/components/admin/FormSettings.vue:175
+#: src/components/shared/FormData.vue
+#: src/components/shared/FormData.vue:131
+msgid "Bitte überprüfen Sie Ihre Eingaben."
 msgstr ""
 
 #: src/components/admin/FormEditor.vue
 #: src/components/admin/FormEditor.vue:17
 msgid "Bitte wählen Sie ein Element aus der Liste aus."
+msgstr ""
+
+#: src/components/admin/FormSettings.vue
+#: src/components/admin/FormSettings.vue:144
+msgid "Bitte wählen Sie mindestens einen Zielgruppenfilter aus."
 msgstr ""
 
 #: src/pages/admin/TheOverview.vue
@@ -127,17 +163,22 @@ msgid "CSV Export"
 msgstr ""
 
 #: src/components/shared/FormData.vue
-#: src/components/shared/FormData.vue:145
+#: src/components/shared/FormData.vue:150
 msgid "Das Formular konnte nicht gespeichert werden!"
 msgstr ""
 
 #: src/components/shared/FormData.vue
-#: src/components/shared/FormData.vue:148
+#: src/components/shared/FormData.vue:153
 msgid "Das Formular wurde erfolgreich gespeichert"
 msgstr ""
 
 #: src/components/admin/FormUserDataItem.vue
 msgid "Datensatz"
+msgstr ""
+
+#: src/components/admin/FormSettings.vue
+#: src/components/admin/FormSettings.vue:6
+msgid "DE"
 msgstr ""
 
 #: src/components/expanded-views/UserFilterExpandedView.vue
@@ -159,6 +200,11 @@ msgstr ""
 msgid "Eingabezeile"
 msgstr ""
 
+#: src/components/admin/FormSettings.vue
+#: src/components/admin/FormSettings.vue:21
+msgid "EN"
+msgstr ""
+
 #: src/components/admin/FormsList.vue
 #: src/components/admin/FormsList.vue:19
 msgid "Enddatum"
@@ -169,12 +215,12 @@ msgid "Enddatum löschen"
 msgstr ""
 
 #: src/components/admin/FormSettings.vue
-#: src/components/admin/FormSettings.vue:26
+#: src/components/admin/FormSettings.vue:56
 msgid "Endet am"
 msgstr ""
 
 #: src/components/admin/FormItem.vue
-#: src/components/admin/FormItem.vue:71
+#: src/components/admin/FormItem.vue:80
 msgid "endet bald"
 msgstr ""
 
@@ -189,15 +235,8 @@ msgid "Es ist eine leer Option ist vorhanden."
 msgstr ""
 
 #: src/components/admin/FormSettings.vue
-#: src/components/admin/FormSettings.vue:40
+#: src/components/admin/FormSettings.vue:70
 msgid "Es wurde noch kein Zielgruppenfilter gesetzt"
-msgstr ""
-
-#: src/components/admin/FormSettings.vue
-#: src/components/admin/FormSettings.vue:110
-#: src/components/shared/FormData.vue
-#: src/components/shared/FormData.vue:127
-msgid "Etwas fehlt!"
 msgstr ""
 
 #: src/components/expanded-views/UserFilterExpandedView.vue
@@ -209,11 +248,6 @@ msgstr ""
 msgid "Feldname"
 msgstr ""
 
-#: src/pages/user/UserForms.vue
-#: src/pages/user/UserForms.vue:76
-msgid "Fertig! Sie können nun fortfahren. Möchten Sie zur Startseite navigieren?"
-msgstr ""
-
 #: src/components/admin/FormsList.vue
 #: src/components/admin/FormsList.vue:16
 msgid "Filter"
@@ -223,16 +257,16 @@ msgstr ""
 msgid "Formular"
 msgstr ""
 
-#: src/pages/user/UserForms.vue
-#: src/pages/user/UserForms.vue:27
-msgid "Formular ausfüllen"
-msgstr ""
-
 #: src/components/admin/FormsList.vue
 #: src/components/admin/FormsList.vue:10
 #: src/components/profile/FormsList.vue
 #: src/components/profile/FormsList.vue:5
 msgid "Formulare"
+msgstr ""
+
+#: src/pages/admin/FormPage.vue
+#: src/pages/admin/FormPage.vue:4
+msgid "Formulartitel"
 msgstr ""
 
 #: src/composables/inputElements.js
@@ -241,7 +275,7 @@ msgid "Ja/Nein-Schalter"
 msgstr ""
 
 #: src/components/admin/RelatedUsersList.vue
-#: src/components/admin/RelatedUsersList.vue:15
+#: src/components/admin/RelatedUsersList.vue:19
 msgid "Kein Nutzer gefunden."
 msgstr ""
 
@@ -254,9 +288,12 @@ msgstr ""
 #: src/components/admin/FormsList.vue:29
 #: src/components/profile/FormsList.vue
 #: src/components/profile/FormsList.vue:18
-#: src/pages/user/UserForms.vue
-#: src/pages/user/UserForms.vue:17
 msgid "Keine Formulare gefunden."
+msgstr ""
+
+#: src/components/admin/FormItem.vue
+#: src/components/admin/FormItem.vue:21
+msgid "Kopieren"
 msgstr ""
 
 #: src/components/admin/FormUserDataList.vue
@@ -265,7 +302,7 @@ msgid "letzte Änderung"
 msgstr ""
 
 #: src/components/admin/RelatedUsersList.vue
-#: src/components/admin/RelatedUsersList.vue:3
+#: src/components/admin/RelatedUsersList.vue:5
 msgid "Liste der Nutzenden für Formular:"
 msgstr ""
 
@@ -276,7 +313,7 @@ msgstr ""
 
 #: src/components/admin/FormInput.vue
 #: src/components/admin/FormItem.vue
-#: src/components/admin/FormItem.vue:21
+#: src/components/admin/FormItem.vue:22
 #: src/components/admin/FormUserDataItem.vue
 #: src/components/admin/FormUserDataItem.vue:12
 #: src/components/admin/RelatedUserItem.vue
@@ -309,12 +346,12 @@ msgid "Möchten Sie %{name} wirklich aus diesem Formular löschen?"
 msgstr ""
 
 #: src/components/admin/FormItem.vue
-#: src/components/admin/FormItem.vue:133
+#: src/components/admin/FormItem.vue:146
 msgid "Möchten Sie das Formular \"%{name}\" wirklich löschen?"
 msgstr ""
 
 #: src/components/admin/FormUserDataItem.vue
-#: src/components/admin/FormUserDataItem.vue:63
+#: src/components/admin/FormUserDataItem.vue:69
 msgid "Möchten Sie die Formulardaten für %{name} wirklich löschen?"
 msgstr ""
 
@@ -334,11 +371,9 @@ msgstr ""
 #: src/components/admin/FormsList.vue
 #: src/components/admin/FormsList.vue:15
 #: src/components/admin/RelatedUsersList.vue
-#: src/components/admin/RelatedUsersList.vue:6
+#: src/components/admin/RelatedUsersList.vue:10
 #: src/components/profile/FormsList.vue
 #: src/components/profile/FormsList.vue:10
-#: src/pages/user/UserForms.vue
-#: src/pages/user/UserForms.vue:10
 msgid "Name"
 msgstr ""
 
@@ -398,7 +433,7 @@ msgid "Schließen"
 msgstr ""
 
 #: src/components/admin/FormSettings.vue
-#: src/components/admin/FormSettings.vue:60
+#: src/components/admin/FormSettings.vue:96
 #: src/components/expanded-views/UserFilterExpandedView.vue
 #: src/components/expanded-views/UserFilterExpandedView.vue:62
 #: src/components/shared/FormData.vue
@@ -416,7 +451,7 @@ msgid "Startdatum löschen"
 msgstr ""
 
 #: src/components/admin/FormSettings.vue
-#: src/components/admin/FormSettings.vue:13
+#: src/components/admin/FormSettings.vue:37
 msgid "Startet am"
 msgstr ""
 
@@ -426,7 +461,8 @@ msgid "Status"
 msgstr ""
 
 #: src/components/admin/FormSettings.vue
-#: src/components/admin/FormSettings.vue:5
+#: src/components/admin/FormSettings.vue:23
+#: src/components/admin/FormSettings.vue:8
 msgid "Titel"
 msgstr ""
 
@@ -442,7 +478,7 @@ msgid "Ungültige Position für das Element"
 msgstr ""
 
 #: src/components/admin/RelatedUsersList.vue
-#: src/components/admin/RelatedUsersList.vue:8
+#: src/components/admin/RelatedUsersList.vue:12
 msgid "Unsichbar"
 msgstr ""
 
@@ -492,17 +528,17 @@ msgid "Zielgruppenfilter"
 msgstr ""
 
 #: src/components/admin/FormSettings.vue
-#: src/components/admin/FormSettings.vue:54
+#: src/components/admin/FormSettings.vue:89
 msgid "Zielgruppenfilter ändern"
 msgstr ""
 
 #: src/components/admin/FormSettings.vue
-#: src/components/admin/FormSettings.vue:54
+#: src/components/admin/FormSettings.vue:89
 msgid "Zielgruppenfilter hinzufügen"
 msgstr ""
 
 #: src/pages/user/UserForms.vue
-#: src/pages/user/UserForms.vue:34
+#: src/pages/user/UserForms.vue:17
 msgid "Zur Startseite"
 msgstr ""
 

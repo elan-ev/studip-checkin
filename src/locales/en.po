@@ -92,15 +92,36 @@ msgstr "Description"
 msgid "Beschriftung"
 msgstr "Labeling"
 
+msgid "Bitte fügen Sie mindestens ein Formularelement ein."
+msgstr "Please include at least one form field."
+
 #: src/pages/user/UserForms.vue
 #: src/pages/user/UserForms.vue:3
 msgid "Bitte füllen Sie die folgenden Formulare aus"
 msgstr "Please fill out the following forms"
 
+msgid "Bitte geben Sie ein Enddatum an."
+msgstr ""
+
+msgid "Bitte geben Sie ein Startdatum an."
+msgstr "Please enter an end date."
+
+msgid "Bitte geben Sie einen Titel an."
+msgstr "Please enter a title."
+
+msgid "Bitte prüfen Sie Start- und Enddatum."
+msgstr "Please check the start and end dates."
+
+msgid "Bitte überprüfen Sie Ihre Eingaben."
+msgstr "Please check your entries."
+
 #: src/components/admin/FormEditor.vue
 #: src/components/admin/FormEditor.vue:17
 msgid "Bitte wählen Sie ein Element aus der Liste aus."
 msgstr "Please select an item from the list."
+
+msgid "Bitte wählen Sie mindestens einen Zielgruppenfilter aus."
+msgstr "Please select at least one target audience filter."
 
 #: src/pages/admin/TheOverview.vue
 #: src/pages/admin/TheOverview.vue:5
@@ -124,6 +145,9 @@ msgstr "The form could not be saved!"
 msgid "Datensatz"
 msgstr "data record"
 
+msgid "DE"
+msgstr "DE"
+
 #: src/components/expanded-views/UserFilterExpandedView.vue
 msgid "Dieses Feld löschen"
 msgstr "Clear this field"
@@ -139,6 +163,9 @@ msgstr "Single selection"
 #: src/composables/inputElements.js
 msgid "Eingabezeile"
 msgstr "Input field"
+
+msgid "EN"
+msgstr "EN"
 
 #: src/components/admin/FormsList.vue
 #: src/components/admin/FormsList.vue:21
@@ -169,10 +196,6 @@ msgstr "There is an empty option available."
 msgid "Es wurde noch kein Zielgruppenfilter gesetzt"
 msgstr "No target audience filter has been set yet"
 
-#: src/components/shared/FormData.vue
-msgid "Etwas fehlt!"
-msgstr "Something's missing!"
-
 #: src/components/expanded-views/UserFilterExpandedView.vue
 #: src/components/expanded-views/UserFilterExpandedView.vue:56
 msgid "Feld hinzufügen"
@@ -182,9 +205,6 @@ msgstr "Add field"
 msgid "Feldname"
 msgstr "Field name"
 
-msgid "Fertig! Sie können nun fortfahren. Möchten Sie zur Startseite navigieren?"
-msgstr "Done! You can now continue. Would you like to go to the home page?"
-
 msgid "Filter"
 msgstr "Filter"
 
@@ -192,15 +212,15 @@ msgstr "Filter"
 msgid "Formular"
 msgstr "Form"
 
-msgid "Formular ausfüllen"
-msgstr "Fill out the form"
-
 #: src/components/admin/FormsList.vue
 #: src/components/admin/FormsList.vue:10
 #: src/components/profile/FormsList.vue
 #: src/components/profile/FormsList.vue:5
 msgid "Formulare"
 msgstr "Forms"
+
+msgid "Formulartitel"
+msgstr "Form Title"
 
 #: src/composables/inputElements.js
 msgid "Ja/Nein-Schalter"
@@ -218,6 +238,9 @@ msgstr "No data found."
 #: src/components/profile/FormsList.vue:18
 msgid "Keine Formulare gefunden."
 msgstr "No forms found."
+
+msgid "Kopieren"
+msgstr "Copy"
 
 msgid "letzte Änderung"
 msgstr "Last updated"

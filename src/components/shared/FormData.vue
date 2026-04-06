@@ -128,7 +128,7 @@ const hasFormData = computed(() => {
 
 const saveForm = async () => {
     if (!validateFormData()) {
-        STUDIP.Report.warning($gettext('Bitte überprüfen Sie ihre Eingaben.'));
+        STUDIP.Report.warning($gettext('Bitte überprüfen Sie Ihre Eingaben.'));
         return;
     }
     const payload = {

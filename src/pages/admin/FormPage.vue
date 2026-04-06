@@ -1,7 +1,7 @@
 <template>
     <CheckinHeader>
         <template #title>
-            {{ isNew ? $gettext('Neues Formular') : form.name || $gettext('Formulartitel') }}
+            {{ isNew ? $gettext('Neues Formular') : form.name[lang] || $gettext('Formulartitel') }}
         </template>
     </CheckinHeader>
     <div class="form-page" ref="formPage">
@@ -24,13 +24,14 @@
 </template>
 
 <script setup>
-import { onBeforeUnmount, onMounted, onUnmounted, watch, ref } from 'vue';
+import { onBeforeUnmount, onMounted, onUnmounted, watch, ref, computed } from 'vue';
 import { useGettext } from 'vue3-gettext';
 import { useRoute, useRouter } from 'vue-router';
 import { useFormStore } from '@/store/form';
 import { useFormBuilderStore } from '@/store/form-builder';
 import { useDrawerStore } from '@/store/drawer';
 import { useUserFilterStore } from '@/store/user-filter';
+import { useContextStore } from '@/store/context';
 import FormElementsList from '@/components/admin/FormElementsList.vue';
 import FormEditor from '@/components/admin/FormEditor.vue';
 import FormSettings from '@/components/admin/FormSettings.vue';
@@ -43,6 +44,7 @@ const formStore = useFormStore();
 const formBuilderStore = useFormBuilderStore();
 const drawerStore = useDrawerStore();
 const userFilterStore = useUserFilterStore();
+const contextStore = useContextStore();
 
 const { form } = storeToRefs(formBuilderStore);
 const { errors } = storeToRefs(formStore);
@@ -58,6 +60,10 @@ const props = defineProps({
 });
 
 const formPage = ref(null);
+
+const lang = computed(() => {
+    return contextStore.langSelector;
+});
 
 watch(
     () => route.params.id,

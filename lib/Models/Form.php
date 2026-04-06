@@ -16,8 +16,8 @@ use JSONArrayObject;
  *
  * @property int $id
  * @property string $filter_id
- * @property string $name
- * @property string $description
+ * @property \JSONArrayObject $name
+ * @property \JSONArrayObject $description
  * @property \JSONArrayObject $structure database column
  * @property int $version
  * @property int $start_date
@@ -42,7 +42,10 @@ class Form extends SimpleORMap
             'on_delete'         => 'delete',
         ];
 
+        $config['serialized_fields']['name'] = JSONArrayObject::class;
+        $config['serialized_fields']['description'] = JSONArrayObject::class;
         $config['serialized_fields']['structure'] = JSONArrayObject::class;
+        
 
         parent::configure($config);
     }

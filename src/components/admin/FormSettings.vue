@@ -1,14 +1,38 @@
 <template>
     <div class="form-settings">
         <form class="default form-settings-form">
-            <label>
-                <span class="required">{{ $gettext('Titel') }}</span>
-                <input type="text" id="form-title" v-model="form.name" required />
-            </label>
-            <label>
-                {{ $gettext('Beschreibung') }}
-                <textarea v-model="form.description" name="description" class="form-settings-description" />
-            </label>
+            <template v-if="form.name && form.description">
+                <fieldset>
+                    <legend>{{ $gettext('DE') }}</legend>
+                    <label>
+                        <span class="required">{{ $gettext('Titel') }}</span>
+                        <input type="text" id="form-title-de" v-model="form.name['de']" required />
+                    </label>
+                    <label>
+                        {{ $gettext('Beschreibung') }}
+                        <textarea
+                            v-model="form.description['de']"
+                            name="description-de"
+                            class="form-settings-description"
+                        />
+                    </label>
+                </fieldset>
+                <fieldset>
+                    <legend>{{ $gettext('EN') }}</legend>
+                    <label>
+                        <span class="required">{{ $gettext('Titel') }}</span>
+                        <input type="text" id="form-title-en" v-model="form.name['en']" required />
+                    </label>
+                    <label>
+                        {{ $gettext('Beschreibung') }}
+                        <textarea
+                            v-model="form.description['en']"
+                            name="description-en"
+                            class="form-settings-description"
+                        />
+                    </label>
+                </fieldset>
+            </template>
             <label>
                 <span class="required">{{ $gettext('Startet am') }}</span>
                 <div class="date-container">
@@ -148,7 +172,7 @@ const saveForm = () => {
         emit('save', formData);
     } else {
         const errorContent = '<ul><li>' + activeErrorMessages.value.join('</li><li>') + '</li></ul>';
-        STUDIP.Report.warning($gettext('Bitte überprüfen Sie ihre Eingaben.'), errorContent);
+        STUDIP.Report.warning($gettext('Bitte überprüfen Sie Ihre Eingaben.'), errorContent);
         console.error(validationErrors.value);
     }
 };
@@ -160,7 +184,7 @@ const cancelChanges = () => {
 };
 
 const formValidation = () => {
-    validationErrors.value.name = !form.value.name;
+    validationErrors.value.name = !form.value.name['de'] || !form.value.name['en'];
     validationErrors.value.structure = !form.value.structure || form.value.structure.length === 0;
     validationErrors.value.filters = !allAppliedFields.value || allAppliedFields.value?.length === 0;
     validationErrors.value.startDate = !form.value['start-date'];
@@ -173,8 +197,8 @@ const prepareFormData = () => {
     if (form.value?.id) {
         formData.id = form.value.id;
     }
-    formData.name = form.value?.name ?? '';
-    formData.description = form.value?.description ?? '';
+    formData.name = form.value?.name ?? [];
+    formData.description = form.value?.description ?? { de: '', en: '' };
     formData.structure = form.value?.structure ?? [];
     formData['start-date'] = form.value?.['start-date'] ?? null;
     formData['end-date'] = form.value?.['end-date'] ?? null;

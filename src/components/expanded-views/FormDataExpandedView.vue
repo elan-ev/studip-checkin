@@ -1,4 +1,5 @@
 <template>
+    <p class="checkin-drawer-form-description">{{ form.description[lang] }}</p>
     <FormData
         :formId="formId"
         :formDataId="formDataId"
@@ -9,14 +10,15 @@
 </template>
 
 <script setup>
+import { computed } from 'vue';
 import FormData from '@/components/shared/FormData.vue';
 import { useDrawerStore } from '@/store/drawer';
-import { getCurrentInstance } from 'vue';
 import { useFormStore } from '@/store/form';
+import { useContextStore } from '@/store/context';
 
-const { proxy } = getCurrentInstance();
 const formStore = useFormStore();
 const drawerStore = useDrawerStore();
+const contextStore = useContextStore();
 
 const props = defineProps({
     formId: {
@@ -25,6 +27,14 @@ const props = defineProps({
     },
     formDataId: Number,
     readOnly: Boolean,
+});
+
+const form = computed(() => {
+    return formStore.byId(props.formId);
+});
+
+const lang = computed(() => {
+    return contextStore.langSelector;
 });
 
 const cleanFormRecord = () => {
@@ -39,3 +49,8 @@ const closeDrawer = () => {
     drawerStore.closeDrawer();
 };
 </script>
+<style lang="scss">
+.checkin-drawer-form-description {
+    margin-bottom: 30px;
+}
+</style>

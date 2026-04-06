@@ -1,6 +1,10 @@
 <template>
     <table class="default">
-        <caption>{{ $gettext('Liste der Nutzenden für Formular:') + ` ${form.name}` }}</caption>
+        <caption>
+            {{
+                $gettext('Liste der Nutzenden für Formular:') + ` ${form.name[lang]}`
+            }}
+        </caption>
         <thead>
             <tr>
                 <th scope="col" width="50%">{{ $gettext('Name') }}</th>
@@ -16,32 +20,33 @@
                 </tr>
             </template>
             <template v-else>
-                <RelatedUserItem
-                    v-for="user in users"
-                    :key="user.id"
-                    :user="user"
-                />
+                <RelatedUserItem v-for="user in users" :key="user.id" :user="user" />
             </template>
         </tbody>
     </table>
 </template>
 
 <script setup>
-    import RelatedUserItem from './RelatedUserItem.vue';
+import { computed } from 'vue';
+import RelatedUserItem from './RelatedUserItem.vue';
+import { useContextStore } from '@/store/context';
 
-    const props = defineProps({
-        users: {
-            type: Array,
-            required: true,
-        },
-        form: {
-            type: Object,
-            required: true,
-        }
-    });
+const contextStore = useContextStore();
 
+const props = defineProps({
+    users: {
+        type: Array,
+        required: true,
+    },
+    form: {
+        type: Object,
+        required: true,
+    },
+});
+
+const lang = computed(() => {
+    return contextStore.langSelector;
+});
 </script>
 
-<style>
-
-</style>
+<style></style>

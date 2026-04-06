@@ -1,52 +1,38 @@
 <template>
-    <table v-if="!loading && records.size !== 1" class="default">
-        <caption>
-            {{
-                $gettext('Bitte füllen Sie die folgenden Formulare aus')
-            }}
-        </caption>
-        <thead>
-            <tr>
-                <th scope="col">{{ $gettext('Name') }}</th>
-                <th scope="col" width="25%">{{ $gettext('Aktionen') }}</th>
-            </tr>
-        </thead>
-        <tbody>
-            <template v-if="formStore.all.length === 0">
-                <tr>
-                    <td colspan="8">{{ $gettext('Keine Formulare gefunden.') }}</td>
-                </tr>
-            </template>
-            <template v-else>
-                <tr v-for="form in formStore.all">
-                    <td>
-                        {{ form.name }}
-                    </td>
-                    <td>
-                        <button class="button" @click="goToFormData(form.id)">
-                            {{ $gettext('Formular ausfüllen') }}
-                        </button>
-                    </td>
-                </tr>
-            </template>
-        </tbody>
-        <footer>
-            <button class="button" @click="goToStart"> {{ $gettext('Zur Startseite') }}</button>
+    <article v-if="!loading && records.size !== 1" class="checkin-user-forms">
+        <header class="checkin-user-forms-header">
+            <h2>{{ $gettext('Bitte füllen Sie die folgenden Formulare aus') }}</h2>
+        </header>
+        <section>
+            <ul class="checkin-user-forms-list">
+                <li v-for="form in formStore.all" class="checkin-user-forms-list-item">
+                    <button @click="goToFormData(form.id)" class="checkin-user-forms-list-item-button undecorated">
+                        <h3>{{ form.name[lang] }}</h3>
+                        <p>{{ form.description[lang] }}</p>
+                    </button>
+                </li>
+            </ul>
+        </section>
+        <footer class="checkin-user-forms-footer">
+            <button class="undecorated as-link" @click="goToStart">{{ $gettext('Zur Startseite') }}</button>
         </footer>
-    </table>
+    </article>
 </template>
 
 <script setup>
-import { ref, watch, onMounted } from 'vue';
+import { ref, watch, onMounted, computed } from 'vue';
 import { useGettext } from 'vue3-gettext';
 import { useRouter } from 'vue-router';
 import { useFormStore } from '@/store/form';
+import { useContextStore } from '@/store/context';
 import { storeToRefs } from 'pinia';
 
 const { $gettext } = useGettext();
 const router = useRouter();
 const formStore = useFormStore();
 const { records } = storeToRefs(formStore);
+const contextStore = useContextStore();
+
 
 const props = defineProps({
     userId: {
@@ -56,6 +42,10 @@ const props = defineProps({
 });
 
 const loading = ref(true);
+
+const lang = computed(() => {
+    return contextStore.langSelector;
+});
 
 onMounted(async () => {
     loading.value = true;
@@ -69,7 +59,7 @@ const goToFormData = (formId) => {
 
 const goToStart = () => {
     window.location = STUDIP.URLHelper.getURL('dispatch.php/start');
-}
+};
 
 watch(
     () => records.value,
@@ -85,20 +75,63 @@ watch(
 );
 </script>
 <style lang="scss">
-$padding: 15px;
-$banner: 40px;
-$footer: 32px;
-$diffHeight: $padding + $padding + $banner + $footer;
-#studip-checkin-app {
-    position: absolute;
-    top: 40px;
-    background-color: #fff;
-    z-index: 1000;
-    width: var(--checkin-overlay-width);
-    height: var(--checkin-overlay-height);
-    margin: 0;
-    padding: var(--checkin-overlay-padding);
-    left: 0;
-    overflow: auto;
+#plugin-studip_checkin-redirect-index {
+    #navigation-level-1,
+    #current-page-structure {
+        display: none;
+    }
+}
+
+.checkin-user-forms {
+    max-width: 800px;
+    margin: 0 auto;
+
+    &-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    &-list {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding: 0;
+
+        &-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 5px;
+            background: var(--color--global-background);
+            gap: 15px;
+            transition:
+                transform 0.1s,
+                box-shadow 0.1s;
+
+            &:not(:last-child) {
+                border-bottom: 1px solid var(--color--tile-border);
+            }
+
+            &-button.undecorated {
+                text-align: left;
+                width: 100%;
+                border-left: solid 4px var(--active-color);
+                padding-left: 10px;
+
+                h3 {
+                    margin-top: 5px;
+                    color: var(--base-color);
+                }
+
+                &:hover h3 {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    &-footer {
+        text-align: right;
+        margin-top: 30px;
+    }
 }
 </style>

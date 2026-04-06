@@ -24,12 +24,14 @@ import { useGettext } from 'vue3-gettext';
 import { useFormUserDataStore } from '@/store/form-user-data';
 import { useFormStore } from '@/store/form';
 import { useDrawerStore } from '@/store/drawer';
+import { useContextStore } from '@/store/context';
 import StudipActionMenu from '@/components/studip/StudipActionMenu.vue';
 
 const { $gettext } = useGettext();
 const formUserDataStore = useFormUserDataStore();
 const formStore = useFormStore();
 const drawerStore = useDrawerStore();
+const contextStore = useContextStore();
 
 const props = defineProps({
     formData: {
@@ -44,6 +46,10 @@ const props = defineProps({
 
 const form = computed(() => {
     return formStore.byId(props.formId);
+});
+
+const lang = computed(() => {
+    return contextStore.langSelector;
 });
 
 const isUpToDate = computed(() => {
@@ -70,7 +76,7 @@ const deleteFormUserData = () => {
 };
 
 const openFormDataDrawer = () => {
-    drawerStore.openFormDataInDrawer(props.formId, props.formData.id, true, form.value.name);
+    drawerStore.openFormDataInDrawer(props.formId, props.formData.id, true, form.value.name[lang]);
 };
 </script>
 

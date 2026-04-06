@@ -1,8 +1,8 @@
 <template>
     <article class="checkin-user-form-data-wrapper">
         <header class="checkin-user-form-data-header">
-            <h2>{{ form.name }}</h2>
-            <p>{{ form.description }}</p>
+            <h2>{{ form.name[lang] }}</h2>
+            <p>{{ form.description[lang] }}</p>
         </header>
         <section>
             <FormData :formId="formId" :disable-cancel="records.size === 1" @done="cleanFormRecord" @close="goBack" />
@@ -11,15 +11,17 @@
 </template>
 
 <script setup>
-import { computed, onMounted } from 'vue';
+import { computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useFormStore } from '@/store/form';
 import { storeToRefs } from 'pinia';
 import FormData from '@/components/shared/FormData.vue';
+import { useContextStore } from '@/store/context';
 
 const router = useRouter();
 const formStore = useFormStore();
 const { records } = storeToRefs(formStore);
+const contextStore = useContextStore();
 
 const props = defineProps({
     formId: Number,
@@ -27,6 +29,10 @@ const props = defineProps({
 
 const form = computed(() => {
     return formStore.byId(props.formId);
+});
+
+const lang = computed(() => {
+    return contextStore.langSelector;
 });
 
 const cleanFormRecord = () => {
@@ -37,24 +43,6 @@ const cleanFormRecord = () => {
 const goBack = () => {
     router.push({ name: 'user-forms' });
 };
-
-const setOverlay = () => {
-    const el = document.getElementById('studip-checkin-app');
-    const topBar = document.getElementById('top-bar');
-    const footer = document.getElementById('main-footer');
-    const padding = 30;
-
-    const diffHeight = topBar.offsetHeight + footer.offsetHeight + 2 * padding;
-    const diffWidth = 2 * padding;
-
-    el.style.setProperty('--checkin-overlay-height', `calc( 100vH - ${diffHeight}px)`);
-    el.style.setProperty('--checkin-overlay-width', `calc( 100vW - ${diffWidth}px)`);
-    el.style.setProperty('--checkin-overlay-padding', ` ${padding}px`);
-};
-
-onMounted(() => {
-    setOverlay();
-});
 </script>
 
 <style lang="scss">

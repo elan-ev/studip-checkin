@@ -92,14 +92,35 @@ msgstr ""
 msgid "Beschriftung"
 msgstr ""
 
+msgid "Bitte fügen Sie mindestens ein Formularelement ein."
+msgstr ""
+
 #: src/pages/user/UserForms.vue
 #: src/pages/user/UserForms.vue:3
 msgid "Bitte füllen Sie die folgenden Formulare aus"
 msgstr ""
 
+msgid "Bitte geben Sie ein Enddatum an."
+msgstr ""
+
+msgid "Bitte geben Sie ein Startdatum an."
+msgstr ""
+
+msgid "Bitte geben Sie einen Titel an."
+msgstr ""
+
+msgid "Bitte prüfen Sie Start- und Enddatum."
+msgstr ""
+
+msgid "Bitte überprüfen Sie Ihre Eingaben."
+msgstr ""
+
 #: src/components/admin/FormEditor.vue
 #: src/components/admin/FormEditor.vue:17
 msgid "Bitte wählen Sie ein Element aus der Liste aus."
+msgstr ""
+
+msgid "Bitte wählen Sie mindestens einen Zielgruppenfilter aus."
 msgstr ""
 
 #: src/pages/admin/TheOverview.vue
@@ -124,6 +145,9 @@ msgstr ""
 msgid "Datensatz"
 msgstr ""
 
+msgid "DE"
+msgstr ""
+
 #: src/components/expanded-views/UserFilterExpandedView.vue
 msgid "Dieses Feld löschen"
 msgstr ""
@@ -138,6 +162,9 @@ msgstr ""
 
 #: src/composables/inputElements.js
 msgid "Eingabezeile"
+msgstr ""
+
+msgid "EN"
 msgstr ""
 
 #: src/components/admin/FormsList.vue
@@ -169,10 +196,6 @@ msgstr ""
 msgid "Es wurde noch kein Zielgruppenfilter gesetzt"
 msgstr ""
 
-#: src/components/shared/FormData.vue
-msgid "Etwas fehlt!"
-msgstr ""
-
 #: src/components/expanded-views/UserFilterExpandedView.vue
 #: src/components/expanded-views/UserFilterExpandedView.vue:56
 msgid "Feld hinzufügen"
@@ -182,9 +205,6 @@ msgstr ""
 msgid "Feldname"
 msgstr ""
 
-msgid "Fertig! Sie können nun fortfahren. Möchten Sie zur Startseite navigieren?"
-msgstr ""
-
 msgid "Filter"
 msgstr ""
 
@@ -192,14 +212,14 @@ msgstr ""
 msgid "Formular"
 msgstr ""
 
-msgid "Formular ausfüllen"
-msgstr ""
-
 #: src/components/admin/FormsList.vue
 #: src/components/admin/FormsList.vue:10
 #: src/components/profile/FormsList.vue
 #: src/components/profile/FormsList.vue:5
 msgid "Formulare"
+msgstr ""
+
+msgid "Formulartitel"
 msgstr ""
 
 #: src/composables/inputElements.js
@@ -217,6 +237,9 @@ msgstr ""
 #: src/components/profile/FormsList.vue
 #: src/components/profile/FormsList.vue:18
 msgid "Keine Formulare gefunden."
+msgstr ""
+
+msgid "Kopieren"
 msgstr ""
 
 msgid "letzte Änderung"

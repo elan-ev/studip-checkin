@@ -2,7 +2,7 @@
     <table class="default">
         <caption>
             {{
-                $gettext('Liste der Nutzer unter Form:') + ` ${form.name}`
+                $gettext('Liste der Nutzer unter Form:') + ` ${form.name[lang]}`
             }}
             <span class="actions">
                 <a :href="exportLink"><StudipIcon shape="export" :title="$gettext('CSV Export')" /></a>
@@ -33,6 +33,9 @@
 import { computed } from 'vue';
 import StudipIcon from '@/components/studip/StudipIcon.vue';
 import FormUserDataItem from './FormUserDataItem.vue';
+import { useContextStore } from '@/store/context';
+
+const contextStore = useContextStore();
 
 const props = defineProps({
     data: {
@@ -46,6 +49,10 @@ const props = defineProps({
 });
 const exportLink = computed(() => {
     return window.STUDIP.ABSOLUTE_URI_STUDIP + 'plugins.php/studipcheckin/admin/export?id=' + props.form.id;
+});
+
+const lang = computed(() => {
+    return contextStore.langSelector;
 });
 </script>
 

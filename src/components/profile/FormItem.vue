@@ -1,7 +1,7 @@
 <template>
     <tr>
         <td>
-            {{ form.name }}
+            {{ form.name[lang] }}
         </td>
         <td>{{ form.version }}</td>
         <td class="actions">
@@ -21,16 +21,22 @@ import { useGettext } from 'vue3-gettext';
 import StudipActionMenu from '@/components/studip/StudipActionMenu.vue';
 import { useFormUserDataStore } from '@/store/form-user-data';
 import { useDrawerStore } from '@/store/drawer';
+import { useContextStore } from '@/store/context';
 
 const { $gettext } = useGettext();
 const formUserDataStore = useFormUserDataStore();
 const drawerStore = useDrawerStore();
+const contextStore = useContextStore();
 
 const props = defineProps({
     form: {
         type: Object,
         required: true,
     },
+});
+
+const lang = computed(() => {
+    return contextStore.langSelector;
 });
 
 const formData = computed(() => {

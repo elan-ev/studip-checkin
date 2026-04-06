@@ -1,6 +1,6 @@
 <template>
     <tr>
-        <td>{{ form.name }}</td>
+        <td>{{ form.name[lang] }}</td>
         <td :title="filterText">{{ filterCounter }}</td>
         <td>{{ form.version }}</td>
         <td>{{ startDate }}</td>
@@ -33,11 +33,13 @@
 import { computed } from 'vue';
 import { useGettext } from 'vue3-gettext';
 import { useFormStore } from '@/store/form';
+import { useContextStore } from '@/store/context';
 import { useRouter } from 'vue-router';
 import StudipActionMenu from '@/components/studip/StudipActionMenu.vue';
 
 const { $gettext } = useGettext();
 const formStore = useFormStore();
+const contextStore = useContextStore();
 const router = useRouter();
 
 const props = defineProps({
@@ -46,6 +48,11 @@ const props = defineProps({
         required: true,
     },
 });
+
+const lang = computed(() => {
+    return contextStore.langSelector;
+});
+
 
 const filterCounter = computed(() => {
     const filters = props.form?.['user-filter']?.data?.fields;
@@ -136,7 +143,7 @@ const copyForm = () => {
 const deleteForm = () => {
     if (
         STUDIP.Dialog.confirm(
-            $gettext('Möchten Sie das Formular "%{name}" wirklich löschen?', { name: props.form.name }),
+            $gettext('Möchten Sie das Formular "%{name}" wirklich löschen?', { name: props.form.name[lang] }),
             () => {
                 formStore.removeRecord(props.form.id, true);
             },
