@@ -129,12 +129,12 @@ msgid "Bitte geben Sie ein Startdatum an."
 msgstr ""
 
 #: src/composables/useValidation.js
-#: src/composables/useValidation.js:34
+#: src/composables/useValidation.js:40
 msgid "Bitte geben Sie eine gültige E-Mail-Adresse ein."
 msgstr ""
 
 #: src/composables/useValidation.js
-#: src/composables/useValidation.js:39
+#: src/composables/useValidation.js:47
 msgid "Bitte geben Sie eine gültige URL ein."
 msgstr ""
 
@@ -200,17 +200,17 @@ msgid "DE"
 msgstr ""
 
 #: src/composables/useValidation.js
-#: src/composables/useValidation.js:28
+#: src/composables/useValidation.js:34
 msgid "Der Wert ist zu groß."
 msgstr ""
 
 #: src/composables/useValidation.js
-#: src/composables/useValidation.js:25
+#: src/composables/useValidation.js:31
 msgid "Der Wert ist zu klein."
 msgstr ""
 
 #: src/composables/useValidation.js
-#: src/composables/useValidation.js:16
+#: src/composables/useValidation.js:22
 msgid "Dieses Feld ist ein Pflichtfeld."
 msgstr ""
 
