@@ -15,67 +15,75 @@
 namespace StudipCheckin\JsonApi\Routes;
 
 use User;
+use RolePersistence;
 
 class Authority
 {
+    const ROLENAME = 'CheckinPlugin_Admin';
+
+    private static function rootAndAdminOnly(User $user): bool
+    {
+        return $GLOBALS['perm']->have_perm('root', $user->id) || RolePersistence::isAssignedRole($user->id, self::ROLENAME);
+    }
+
     public static function canIndexForm(User $user): bool
     {
-        return $GLOBALS['perm']->have_perm('admin', $user->id);
+        return self::rootAndAdminOnly($user);
     }
 
     public static function canCreateForm(User $user): bool
     {
-        return $GLOBALS['perm']->have_perm('admin', $user->id);
+        return self::rootAndAdminOnly($user);
     }
 
     public static function canUpdateForm(User $user): bool
     {
-        return $GLOBALS['perm']->have_perm('admin', $user->id);
+        return self::rootAndAdminOnly($user);
     }
 
     public static function canDeleteForm(User $user): bool
     {
-        return $GLOBALS['perm']->have_perm('admin', $user->id);
+        return self::rootAndAdminOnly($user);
     }
 
     public static function canShowForm(User $user): bool
     {
-        return $GLOBALS['perm']->have_perm('admin', $user->id);
+        return self::rootAndAdminOnly($user);
     }
 
     public static function canIndexRelatedUsers(User $user): bool
     {
-        return $GLOBALS['perm']->have_perm('admin', $user->id);
+        return self::rootAndAdminOnly($user);
     }
 
     public static function canShowRelatedUser(User $user): bool
     {
-        return $GLOBALS['perm']->have_perm('admin', $user->id);
+        return self::rootAndAdminOnly($user);
     }
 
     public static function canDeleteRelatedUser(User $user): bool
     {
-        return $GLOBALS['perm']->have_perm('admin', $user->id);
+        return self::rootAndAdminOnly($user);
     }
 
     public static function canCreateRelatedUser(User $user): bool
     {
-        return $GLOBALS['perm']->have_perm('admin', $user->id);
+        return self::rootAndAdminOnly($user);
     }
 
     public static function canUpdateRelatedUser(User $user): bool
     {
-        return $GLOBALS['perm']->have_perm('admin', $user->id);
+        return self::rootAndAdminOnly($user);
     }
 
     public static function canIndexUserFilterFields(User $user): bool
     {
-        return $GLOBALS['perm']->have_perm('admin', $user->id);
+        return self::rootAndAdminOnly($user);
     }
 
     public static function canCreateUserFilters(User $user): bool
     {
-        return $GLOBALS['perm']->have_perm('admin', $user->id);
+        return self::rootAndAdminOnly($user);
     }
 
     public static function canCreateFormUserData(User $user): bool
@@ -90,7 +98,7 @@ class Authority
 
     public static function canDeleteFormUserData(User $user, User $requesting): bool
     {
-        if ($GLOBALS['perm']->have_perm('admin', $requesting->id)) {
+        if (self::rootAndAdminOnly($requesting)) {
             return true;
         }
 
@@ -99,12 +107,12 @@ class Authority
 
     public static function canIndexFormUserData(User $user): bool
     {
-        return $GLOBALS['perm']->have_perm('admin', $user->id);
+        return self::rootAndAdminOnly($user);
     }
 
     public static function canIndexUsersFormUserData(User $user, User $requesting): bool
     {
-        if ($GLOBALS['perm']->have_perm('admin', $requesting->id)) {
+        if (self::rootAndAdminOnly($requesting)) {
             return true;
         }
 
@@ -113,7 +121,7 @@ class Authority
 
     public static function canShowFormUserData(User $user, User $requesting): bool
     {
-        if ($GLOBALS['perm']->have_perm('admin', $requesting->id)) {
+        if (self::rootAndAdminOnly($requesting)) {
             return true;
         }
 
@@ -122,7 +130,7 @@ class Authority
 
     public static function canUpdateFormUserData(User $user, User $requesting): bool
     {
-        if ($GLOBALS['perm']->have_perm('admin', $requesting->id)) {
+        if (self::rootAndAdminOnly($requesting)) {
             return true;
         }
 

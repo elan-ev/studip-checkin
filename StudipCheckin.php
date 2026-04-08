@@ -21,6 +21,8 @@ class StudipCheckin extends StudIPPlugin implements SystemPlugin, JsonApiPlugin
 {
     use Routes;
     use Schemas;
+    const ROLENAME = 'CheckinPlugin_Admin';
+
     public function __construct()
     {
         parent::__construct();
@@ -37,7 +39,7 @@ class StudipCheckin extends StudIPPlugin implements SystemPlugin, JsonApiPlugin
             'rel' => 'preload',
         ]);
 
-        if ($GLOBALS['perm']->have_perm("admin")) {
+        if ($GLOBALS['perm']->have_perm("root") || RolePersistence::isAssignedRole($GLOBALS['user']->user_id, self::ROLENAME) ) {
             $this->addContentsNavigation();
             PageLayout::addScript($this->getPluginUrl() . '/dist/studip-checkin-admin.js', [
                 'type' => 'module',
@@ -55,7 +57,7 @@ class StudipCheckin extends StudIPPlugin implements SystemPlugin, JsonApiPlugin
 
     public function getPluginName(): string
     {
-        return _('Check-In Plugin');
+        return _('CheckInPlugin');
     }
 
     public function getInfoTemplate($courseId)
