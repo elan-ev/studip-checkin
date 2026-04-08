@@ -2,7 +2,7 @@
     <section class="checkin-overview">
         <header class="checkin-header">
             <h2 class="checkin-header-content">
-                {{ $gettext('CheckIn-Plugin') }}
+                {{ $gettext('CheckInPlugin') }}
             </h2>
         </header>
         <div class="checkin-form-list-container">

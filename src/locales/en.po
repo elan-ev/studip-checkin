@@ -48,7 +48,7 @@ msgstr "View replies"
 
 #: src/components/profile/FormItem.vue
 msgid "Anzeigen"
-msgstr "display"
+msgstr "Display"
 
 #: src/components/profile/FormItem.vue
 msgid "Ausfüllen"
@@ -101,10 +101,10 @@ msgid "Bitte füllen Sie die folgenden Formulare aus"
 msgstr "Please fill out the following forms"
 
 msgid "Bitte geben Sie ein Enddatum an."
-msgstr ""
+msgstr "Please enter an end date."
 
 msgid "Bitte geben Sie ein Startdatum an."
-msgstr "Please enter an end date."
+msgstr "Please enter a start date."
 
 msgid "Bitte geben Sie einen Titel an."
 msgstr "Please enter a title."
@@ -123,10 +123,8 @@ msgstr "Please select an item from the list."
 msgid "Bitte wählen Sie mindestens einen Zielgruppenfilter aus."
 msgstr "Please select at least one target audience filter."
 
-#: src/pages/admin/TheOverview.vue
-#: src/pages/admin/TheOverview.vue:5
-msgid "CheckIn-Plugin"
-msgstr "CheckIn-Plugin"
+msgid "CheckInPlugin"
+msgstr "CheckInPlugin"
 
 #: src/components/admin/FormUserDataList.vue
 msgid "CSV Export"

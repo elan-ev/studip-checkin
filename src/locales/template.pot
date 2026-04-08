@@ -155,7 +155,7 @@ msgstr ""
 
 #: src/pages/admin/TheOverview.vue
 #: src/pages/admin/TheOverview.vue:5
-msgid "CheckIn-Plugin"
+msgid "CheckInPlugin"
 msgstr ""
 
 #: src/components/admin/FormUserDataList.vue
