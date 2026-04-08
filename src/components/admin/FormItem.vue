@@ -20,10 +20,16 @@
                     { id: 1, label: $gettext('Bearbeiten'), icon: 'edit', emit: 'edit' },
                     { id: 2, label: $gettext('Kopieren'), icon: 'copy', emit: 'copy' },
                     { id: 3, label: $gettext('Löschen'), icon: 'trash', emit: 'delete' },
+                    { id: 4 , type: 'separator'},
+                    { id: 5, label: $gettext('Rückläufe'), icon: 'reply', emit: 'showResponses' },
+                    { id: 6, label: $gettext('Nutzende'), icon: 'group2', emit: 'showUsers' },
+                    { id: 7, label: $gettext('Daten exportieren'), icon: 'export', type: 'link', url: exportURL },
                 ]"
                 @edit="redirectEdit"
                 @copy="copyForm"
                 @delete="deleteForm"
+                @showResponses="redirectResponses"
+                @showUsers="redirectRelatedUsers"
             />
         </td>
     </tr>
@@ -136,6 +142,10 @@ const endDate = computed(() => {
     return `${day}.${month}.${year}`;
 });
 
+const exportURL = computed(() => {
+    return window.STUDIP.ABSOLUTE_URI_STUDIP + 'plugins.php/studipcheckin/admin/export?id=' + props.form.id;
+});
+
 const copyForm = () => {
     formStore.copyForm(props.form.id);
 }
@@ -155,4 +165,12 @@ const deleteForm = () => {
 const redirectEdit = () => {
     router.push({ path: `/edit/${props.form.id}` });
 };
+
+const redirectResponses = () => {
+    router.push({ path:  `/form/${props.form.id}/user-data` });
+}
+
+const redirectRelatedUsers = () => {
+    router.push({ path:  `/form/${props.form.id}/related-users` });
+}
 </script>
