@@ -19,7 +19,11 @@ export default function useValidation() {
             value === null || value === undefined || value === '' || (Array.isArray(value) && value.length === 0);
 
         if (fieldRequired && isEmpty) {
-            return $gettext('Dieses Feld ist ein Pflichtfeld.');
+            if (element.type !== 'multiselect') {
+                return $gettext('Dieses Feld ist ein Pflichtfeld.');
+            } else {
+                return $gettext('Bitte wählen Sie mindestens eine Option aus.');
+            }
         }
 
         if (isEmpty) return null;

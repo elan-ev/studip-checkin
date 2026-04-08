@@ -64,7 +64,7 @@
         </label>
     </section>
 
-    <label>
+    <label v-if="hasRequired">
         <input type="checkbox" v-model="element.payload.required" />
         {{ $gettext('Pflichtfeld') }}
     </label>
@@ -142,6 +142,11 @@ const lang = computed(() => {
 const hasPlaceholder = computed( () => {
     const withPlaceholder = ['text', 'textarea', 'url', 'email', 'number'];
     return withPlaceholder.includes(props.element.type);
+});
+
+const hasRequired = computed( () => {
+    const withoutRequired = ['switch', 'radio'];
+    return !withoutRequired.includes(props.element.type);
 });
 
 const hasOptions = computed(() => {

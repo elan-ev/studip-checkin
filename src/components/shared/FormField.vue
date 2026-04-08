@@ -108,6 +108,7 @@ const extraProps = computed(() => {
         }
         input[type='text'],
         textarea,
+        select,
         input[type='url'],
         input[type='email'],
         input[type='number'] {
