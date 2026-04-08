@@ -83,10 +83,7 @@ const extraProps = computed(() => {
 <style lang="scss">
 .form-field-wrapper {
     margin-bottom: 1.5em;
-    .form-field-label span {
-        display: block;
-        margin-bottom: 1em;
-    }
+
     &.has-error {
         .form-field-label span,
         .field-error {
