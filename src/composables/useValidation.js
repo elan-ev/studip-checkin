@@ -1,20 +1,24 @@
-// src/composables/useValidation.js
 import { useGettext } from 'vue3-gettext';
 
 export default function useValidation() {
     const { $gettext } = useGettext();
 
+    const isRequired = (payload) => {
+        const val = payload?.required;
+        if (typeof val === 'boolean') return val;
+        return val === '1' || val === 1;
+    };
+
     const validateField = (element, value, isVisible = true) => {
         if (!isVisible) return null;
 
         const payload = element.payload || {};
-        const isRequired = Boolean(parseInt(payload.required));
+        const fieldRequired = isRequired(payload);
 
-        // 1. Pflichtfeld-Check
-        const isEmpty = value === null || value === undefined || value === '' || 
-                        (Array.isArray(value) && value.length === 0);
-        
-        if (isRequired && isEmpty) {
+        const isEmpty =
+            value === null || value === undefined || value === '' || (Array.isArray(value) && value.length === 0);
+
+        if (fieldRequired && isEmpty) {
             return $gettext('Dieses Feld ist ein Pflichtfeld.');
         }
 
@@ -37,7 +41,9 @@ export default function useValidation() {
                 }
                 break;
             case 'url':
-                try { new URL(value); } catch (_) {
+                try {
+                    new URL(value);
+                } catch (_) {
                     return $gettext('Bitte geben Sie eine gültige URL ein.');
                 }
                 break;

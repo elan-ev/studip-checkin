@@ -106,6 +106,12 @@ msgstr ""
 msgid "Bitte geben Sie ein Startdatum an."
 msgstr ""
 
+msgid "Bitte geben Sie eine gültige E-Mail-Adresse ein."
+msgstr ""
+
+msgid "Bitte geben Sie eine gültige URL ein."
+msgstr ""
+
 msgid "Bitte geben Sie einen Titel an."
 msgstr ""
 
@@ -127,6 +133,9 @@ msgstr ""
 msgid "CSV Export"
 msgstr ""
 
+msgid "Das Formular enthält Fehler. Bitte überprüfen Sie die folgenden Felder:"
+msgstr ""
+
 #: src/components/shared/FormData.vue
 msgid "Das Formular konnte nicht gespeichert werden!"
 msgstr ""
@@ -144,6 +153,15 @@ msgid "Datensatz"
 msgstr ""
 
 msgid "DE"
+msgstr ""
+
+msgid "Der Wert ist zu groß."
+msgstr ""
+
+msgid "Der Wert ist zu klein."
+msgstr ""
+
+msgid "Dieses Feld ist ein Pflichtfeld."
 msgstr ""
 
 #: src/components/expanded-views/UserFilterExpandedView.vue
@@ -168,10 +186,6 @@ msgstr ""
 #: src/components/admin/FormsList.vue
 #: src/components/admin/FormsList.vue:21
 msgid "Enddatum"
-msgstr ""
-
-#: src/components/admin/FormSettings.vue
-msgid "Enddatum löschen"
 msgstr ""
 
 #: src/components/admin/FormSettings.vue
@@ -377,10 +391,6 @@ msgstr ""
 #: src/components/admin/FormsList.vue
 #: src/components/admin/FormsList.vue:20
 msgid "Startdatum"
-msgstr ""
-
-#: src/components/admin/FormSettings.vue
-msgid "Startdatum löschen"
 msgstr ""
 
 #: src/components/admin/FormSettings.vue

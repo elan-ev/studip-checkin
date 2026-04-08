@@ -43,7 +43,6 @@ import { useFormStore } from '@/store/form';
 import { useFormUserDataStore } from '@/store/form-user-data';
 import { useContextStore } from '@/store/context';
 import { storeToRefs } from 'pinia';
-
 import FormField from '@/components/shared/FormField.vue';
 import useValidation from '@/composables/useValidation';
 
@@ -156,6 +155,7 @@ const validateFormData = () => {
 const usersFormData = computed(() => {
     return formUserDataStore.getByFormId(form.value.id) ?? null;
 });
+
 const hasFormData = computed(() => {
     return usersFormData.value !== null;
 });
@@ -186,7 +186,6 @@ const saveForm = async () => {
         emit('done');
     }
     if (errors?.value) {
-        // Show error!
         console.error(errors.value);
         STUDIP.Report.error($gettext('Das Formular konnte nicht gespeichert werden!'));
         return;
@@ -194,6 +193,7 @@ const saveForm = async () => {
         STUDIP.Report.success($gettext('Das Formular wurde erfolgreich gespeichert'));
     }
 };
+
 const getLabelForId = (id) => {
     const element = form.value.structure.find((el) => el.id === id);
 

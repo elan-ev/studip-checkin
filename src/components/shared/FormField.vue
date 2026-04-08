@@ -93,6 +93,8 @@ const extraProps = computed(() => {
             color: var(--color--warning);
             text-indent: 0.25ex;
         }
+        input[type='text'],
+        textarea,
         input[type='url'],
         input[type='email'],
         input[type='number'] {
