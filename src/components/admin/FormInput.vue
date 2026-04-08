@@ -4,7 +4,7 @@
         <button
             v-if="index > 0"
             class="button-undecorated"
-            @click.prevent="moveUp()"
+            @click.prevent.stop="moveUp()"
             :title="$gettext('Nach oben bewegen')"
         >
             <StudipIcon shape="arr_2up" :size="20" />
@@ -12,7 +12,7 @@
         <button
             v-if="index < formBuilderStore.form.structure.length - 1"
             class="button-undecorated"
-            @click.prevent="moveDown()"
+            @click.prevent.stop="moveDown()"
             :title="$gettext('Nach unten bewegen')"
         >
             <StudipIcon shape="arr_2down" :size="20" />
