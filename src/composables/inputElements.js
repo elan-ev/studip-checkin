@@ -20,6 +20,12 @@ export default function useInputElements() {
         return elements.value.filter(el => el.useCase === useCase);
     };
 
+    const getDisplayNameByType = (type) => {
+        const element = elements.value.find(el => el.type === type);
+
+        return element?.displayName || type;
+    }
+
     const addCustomElement = (newElement) => {
         elements.value.push(newElement);
     };
@@ -27,6 +33,7 @@ export default function useInputElements() {
     return {
         inputElements: computed(() => elements.value),
         getElementsByUseCase,
+        getDisplayNameByType,
         addCustomElement
     };
 }

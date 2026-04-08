@@ -1,6 +1,6 @@
 <template>
     <legend class="checkin-movable">
-        <span>{{ element.displayName }}</span>
+        <span>{{ getDisplayNameByType(element.type) }}</span>
         <button
             v-if="index > 0"
             class="button-undecorated"
@@ -114,6 +114,8 @@ import { useGettext } from 'vue3-gettext';
 import { useFormBuilderStore } from '@/store/form-builder';
 import { useContextStore } from '@/store/context';
 
+import useInputElements from '@/composables/inputElements';
+
 import StudipIcon from '@/components/studip/StudipIcon.vue';
 import FormInputText from '@/components/shared/inputs/FormInputText.vue';
 import FormInputTextarea from '@/components/shared/inputs/FormInputTextarea.vue';
@@ -125,6 +127,7 @@ import FormInputCheckboxGroup from '@/components/shared/inputs/FormInputCheckbox
 const { $gettext } = useGettext();
 const formBuilderStore = useFormBuilderStore();
 const contextStore = useContextStore();
+const { getDisplayNameByType } = useInputElements();
 const emit = defineEmits(['delete']);
 
 const props = defineProps({
