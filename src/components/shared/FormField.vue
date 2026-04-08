@@ -1,5 +1,9 @@
 <template>
-    <div class="form-field-wrapper" :class="[`type-${element.type}`, { 'has-error': error }]">
+    <div
+        v-if="element.type !== 'radio'"
+        class="form-field-wrapper"
+        :class="[`type-${element.type}`, { 'has-error': error }]"
+    >
         <label :for="element.id" class="form-field-label">
             <span
                 v-if="element.type !== 'checkbox'"
@@ -27,6 +31,18 @@
         </label>
         <span v-if="error" :id="`${element.id}-error`" class="field-error" aria-live="polite">{{ error }}</span>
     </div>
+    <fieldset v-else class="undecorated form-field-fieldset">
+        <legend>{{ element.payload?.label[lang] }}</legend>
+        <FormInputRadioGroup
+            :id="element.id"
+            :model-value="modelValue"
+            :element="element"
+            :disabled="readOnly"
+            :lang="lang"
+            v-bind="extraProps"
+            @update:modelValue="$emit('update:modelValue', $event)"
+        />
+    </fieldset>
 </template>
 
 <script setup>
@@ -103,5 +119,9 @@ const extraProps = computed(() => {
             }
         }
     }
+}
+form.default fieldset.undecorated.form-field-fieldset {
+    margin-bottom: 1.5em;
+    min-height: unset;
 }
 </style>
