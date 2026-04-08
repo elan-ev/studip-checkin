@@ -123,9 +123,6 @@ msgstr "Please select an item from the list."
 msgid "Bitte wählen Sie mindestens einen Zielgruppenfilter aus."
 msgstr "Please select at least one target audience filter."
 
-msgid "CheckInPlugin"
-msgstr "CheckInPlugin"
-
 #: src/components/admin/FormUserDataList.vue
 msgid "CSV Export"
 msgstr "CSV Export"
@@ -138,6 +135,9 @@ msgstr "The form could not be saved!"
 #: src/pages/user/UserFormData.vue
 msgid "Das Formular wurde erfolgreich gespeichert"
 msgstr "The form could not be saved!"
+
+msgid "Daten exportieren"
+msgstr "Export data"
 
 #: src/components/admin/FormUserDataItem.vue
 msgid "Datensatz"

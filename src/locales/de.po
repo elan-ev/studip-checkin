@@ -123,9 +123,6 @@ msgstr ""
 msgid "Bitte wählen Sie mindestens einen Zielgruppenfilter aus."
 msgstr ""
 
-msgid "CheckInPlugin"
-msgstr ""
-
 #: src/components/admin/FormUserDataList.vue
 msgid "CSV Export"
 msgstr ""
@@ -137,6 +134,9 @@ msgstr ""
 #: src/components/shared/FormData.vue
 #: src/pages/user/UserFormData.vue
 msgid "Das Formular wurde erfolgreich gespeichert"
+msgstr ""
+
+msgid "Daten exportieren"
 msgstr ""
 
 #: src/components/admin/FormUserDataItem.vue
