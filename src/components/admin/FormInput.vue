@@ -28,7 +28,7 @@
                 {{ $gettext('Beschriftung') }}
                 <input type="text" v-model="element.payload.label[lang]" />
             </label>
-            <label>
+            <label v-if="hasPlaceholder">
                 {{ $gettext('Platzhalter') }}
                 <input type="text" v-model="element.payload.placeholder[lang]" />
             </label>
@@ -137,6 +137,11 @@ const props = defineProps({
 
 const lang = computed(() => {
     return contextStore.langSelector;
+});
+
+const hasPlaceholder = computed( () => {
+    const withPlaceholder = ['text', 'textarea', 'url', 'email', 'number'];
+    return withPlaceholder.includes(props.element.type);
 });
 
 const hasOptions = computed(() => {
