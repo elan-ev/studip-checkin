@@ -27,6 +27,8 @@ class AdminController extends PluginController
     public function export_action()
     {
         $request = iterator_to_array(Request::getInstance());
+        $preferredLanguage = str_replace('_', '-', $_SESSION['_language']);
+        $lang = strtok($preferredLanguage, '-');
         $form_id = $request['id'];
         $filename = 'export';
         $headers = [];
@@ -34,7 +36,7 @@ class AdminController extends PluginController
 
         if ($form_id) {
             $form = StudipCheckin\Models\Form::find($form_id);
-            $filename = str_replace(' ', '_', $form->name);
+            $filename = str_replace(' ', '_', $form->name[$lang]);
             $structure = json_decode($form->structure, true);
             $staticHeaders = ['Nachname', 'Vorname', 'Username', 'Matrikelnummer'];
             $form_headers = array_column(array_column($structure, 'payload'), 'label');
