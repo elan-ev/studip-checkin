@@ -41,27 +41,11 @@
                         :max="form['end-date']"
                         required
                     />
-                    <button
-                        v-if="form?.['start-date']"
-                        class="button-undecorated"
-                        :title="$gettext('Startdatum löschen')"
-                        @click="emptyFormDate('start-date')"
-                    >
-                        <StudipIcon shape="trash" :size="20" />
-                    </button>
                 </div>
                 <br />
                 <span class="required">{{ $gettext('Endet am') }}</span>
                 <div class="date-container">
                     <input type="date" name="end-date" v-model="form['end-date']" :min="form['start-date']" required />
-                    <button
-                        v-if="form?.['end-date']"
-                        class="button-undecorated"
-                        :title="$gettext('Enddatum löschen')"
-                        @click="emptyFormDate('end-date')"
-                    >
-                        <StudipIcon shape="trash" :size="20" />
-                    </button>
                 </div>
             </label>
             <div v-if="!hasUserFilter" class="messagebox messagebox_warning">
@@ -107,7 +91,6 @@ import { storeToRefs } from 'pinia';
 import { useFormBuilderStore } from '@/store/form-builder';
 import { useDrawerStore } from '@/store/drawer';
 import { useUserFilterStore } from '@/store/user-filter';
-import StudipIcon from '@/components/studip/StudipIcon.vue';
 
 const { $gettext } = useGettext();
 const userFilterStore = useUserFilterStore();
@@ -207,12 +190,6 @@ const prepareFormData = () => {
 
 const openUserFilterDrawer = () => {
     drawerStore.openUserFilterConfigInDrawer(form.value['filter-id']);
-};
-
-const emptyFormDate = (dateProp) => {
-    if (form.value?.[dateProp]) {
-        form.value[dateProp] = null;
-    }
 };
 </script>
 
