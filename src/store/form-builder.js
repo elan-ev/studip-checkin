@@ -42,7 +42,8 @@ export const useFormBuilderStore = defineStore('formBuilderStore', () => {
             'end-date': '',
             'start-date': '',
             'filter-id': '',
-            name: '',
+            name: { de: '', en: '' },
+            description: { de: '', en: '' },
             structure: [],
             version: 1,
         };

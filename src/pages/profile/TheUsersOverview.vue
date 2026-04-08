@@ -45,5 +45,6 @@ onMounted(async () => {
 <style lang="scss">
 #plugin-studip_checkin-profile-index #content-wrapper {
     position: relative;
+    padding: 15px 15px 50px 15px;
 }
 </style>

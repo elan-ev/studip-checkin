@@ -1,38 +1,36 @@
 <template>
     <div class="form-settings">
         <form class="default form-settings-form">
-            <template v-if="form.name && form.description">
-                <fieldset>
-                    <legend>{{ $gettext('DE') }}</legend>
-                    <label>
-                        <span class="required">{{ $gettext('Titel') }}</span>
-                        <input type="text" id="form-title-de" v-model="form.name['de']" required />
-                    </label>
-                    <label>
-                        {{ $gettext('Beschreibung') }}
-                        <textarea
-                            v-model="form.description['de']"
-                            name="description-de"
-                            class="form-settings-description"
-                        />
-                    </label>
-                </fieldset>
-                <fieldset>
-                    <legend>{{ $gettext('EN') }}</legend>
-                    <label>
-                        <span class="required">{{ $gettext('Titel') }}</span>
-                        <input type="text" id="form-title-en" v-model="form.name['en']" required />
-                    </label>
-                    <label>
-                        {{ $gettext('Beschreibung') }}
-                        <textarea
-                            v-model="form.description['en']"
-                            name="description-en"
-                            class="form-settings-description"
-                        />
-                    </label>
-                </fieldset>
-            </template>
+            <fieldset>
+                <legend>{{ $gettext('DE') }}</legend>
+                <label>
+                    <span class="required">{{ $gettext('Titel') }}</span>
+                    <input type="text" id="form-title-de" v-model="form.name['de']" required />
+                </label>
+                <label>
+                    {{ $gettext('Beschreibung') }}
+                    <textarea
+                        v-model="form.description['de']"
+                        name="description-de"
+                        class="form-settings-description"
+                    />
+                </label>
+            </fieldset>
+            <fieldset>
+                <legend>{{ $gettext('EN') }}</legend>
+                <label>
+                    <span class="required">{{ $gettext('Titel') }}</span>
+                    <input type="text" id="form-title-en" v-model="form.name['en']" required />
+                </label>
+                <label>
+                    {{ $gettext('Beschreibung') }}
+                    <textarea
+                        v-model="form.description['en']"
+                        name="description-en"
+                        class="form-settings-description"
+                    />
+                </label>
+            </fieldset>
             <label>
                 <span class="required">{{ $gettext('Startet am') }}</span>
                 <div class="date-container">
@@ -197,7 +195,7 @@ const prepareFormData = () => {
     if (form.value?.id) {
         formData.id = form.value.id;
     }
-    formData.name = form.value?.name ?? [];
+    formData.name = form.value?.name ?? { de: '', en: '' };
     formData.description = form.value?.description ?? { de: '', en: '' };
     formData.structure = form.value?.structure ?? [];
     formData['start-date'] = form.value?.['start-date'] ?? null;
@@ -229,8 +227,6 @@ const emptyFormDate = (dateProp) => {
     border: none;
 
     .form-settings-form {
-        padding: 10px;
-
         .form-settings-description {
             resize: vertical;
             min-height: 160px;

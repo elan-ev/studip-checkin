@@ -30,6 +30,7 @@ onMounted(async () => {
 <style lang="scss">
 #plugin-studip_checkin-admin-index #content-wrapper {
     position: relative;
+    padding: 15px 15px 50px 15px;
 }
 
 .button-undecorated {
