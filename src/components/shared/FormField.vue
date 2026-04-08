@@ -1,7 +1,10 @@
 <template>
-    <div class="form-field-wrapper" :class="`type-${element.type}`">
+    <div class="form-field-wrapper" :class="[`type-${element.type}`, { 'has-error': error }]">
         <label :for="element.id" class="form-field-label">
-            <span v-if="element.type !== 'checkbox'" :class="{ required: element.payload?.required === true && !readOnly }">
+            <span
+                v-if="element.type !== 'checkbox'"
+                :class="{ required: element.payload?.required === true && !readOnly }"
+            >
                 {{ element.payload?.label[lang] }}
             </span>
             <component
@@ -15,12 +18,14 @@
                 v-bind="extraProps"
             />
 
-            <span v-if="element.type === 'checkbox'" :style="{ required: element.payload?.required === true && !readOnly }">
+            <span
+                v-if="element.type === 'checkbox'"
+                :style="{ required: element.payload?.required === true && !readOnly }"
+            >
                 {{ element.payload?.label[lang] }}
             </span>
         </label>
-
-        <span v-if="error" class="field-error">{{ error }}</span>
+        <span v-if="error" :id="`${element.id}-error`" class="field-error" aria-live="polite">{{ error }}</span>
     </div>
 </template>
 
@@ -77,9 +82,27 @@ const extraProps = computed(() => {
 
 <style lang="scss">
 .form-field-wrapper {
+    margin-bottom: 1.5em;
     .form-field-label span {
         display: block;
         margin-bottom: 1em;
+    }
+    &.has-error {
+        .form-field-label span,
+        .field-error {
+            color: var(--color--warning);
+            text-indent: 0.25ex;
+        }
+        input[type='url'],
+        input[type='email'],
+        input[type='number'] {
+            border-color: var(--color--warning);
+
+            &:focus {
+                outline-color: var(--color--warning);
+                box-shadow: 0 0 0 3px rgba(214, 0, 0, 0.2);
+            }
+        }
     }
 }
 </style>

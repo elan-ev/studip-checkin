@@ -1,5 +1,11 @@
 <template>
     <form v-if="form" class="default">
+        <div class="sr-only" role="alert" aria-live="assertive">
+            <p v-if="Object.keys(fieldErrors).length > 0">
+                {{ $gettext('Das Formular enthält Fehler. Bitte überprüfen Sie die folgenden Felder:') }}
+                <template v-for="(error, id) in fieldErrors" :key="id"> {{ getLabelForId(id) }}: {{ error }} </template>
+            </p>
+        </div>
         <fieldset class="undecorated">
             <template v-for="element in form.structure" :key="element.id">
                 <FormField
@@ -7,6 +13,7 @@
                     :element="element"
                     v-model="formData[element.id]"
                     :read-only="readOnly"
+                    :error="fieldErrors[element.id]"
                 />
             </template>
         </fieldset>
@@ -21,7 +28,7 @@
                 </button>
             </template>
             <template v-else>
-                 <button class="button edit" @click.prevent="editForm">
+                <button class="button edit" @click.prevent="editForm">
                     {{ $gettext('Bearbeiten') }}
                 </button>
             </template>
@@ -30,18 +37,24 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, nextTick } from 'vue';
 import { useGettext } from 'vue3-gettext';
 import { useFormStore } from '@/store/form';
 import { useFormUserDataStore } from '@/store/form-user-data';
+import { useContextStore } from '@/store/context';
 import { storeToRefs } from 'pinia';
 
 import FormField from '@/components/shared/FormField.vue';
+import useValidation from '@/composables/useValidation';
 
+const { validateField } = useValidation();
 const { $gettext } = useGettext();
 const formStore = useFormStore();
 const formUserDataStore = useFormUserDataStore();
+const contextStore = useContextStore();
 const { errors } = storeToRefs(formUserDataStore);
+
+const fieldErrors = ref({});
 
 const props = defineProps({
     formId: {
@@ -59,11 +72,15 @@ const props = defineProps({
     },
     inProfile: {
         type: Boolean,
-        default: false
-    }
+        default: false,
+    },
 });
 
 const emit = defineEmits(['done', 'close', 'edit']);
+
+const lang = computed(() => {
+    return contextStore.langSelector;
+});
 
 const form = computed(() => {
     return formStore.byId(props.formId);
@@ -120,14 +137,20 @@ const isVisible = (element) => {
 };
 
 const validateFormData = () => {
-    let invalidRequired = form.value.structure.some((input, index) => {
-        if (!isVisible(input)) {
-            return false;
+    let isValid = true;
+    fieldErrors.value = {};
+
+    form.value.structure.forEach((element) => {
+        const visible = isVisible(element);
+        const error = validateField(element, formData.value[element.id], visible);
+
+        if (error) {
+            fieldErrors.value[element.id] = error;
+            isValid = false;
         }
-        return (input.payload.required && !formData.value?.[input.id]) || formData.value?.[input.id] === null;
     });
 
-    return !invalidRequired;
+    return isValid;
 };
 
 const usersFormData = computed(() => {
@@ -140,6 +163,13 @@ const hasFormData = computed(() => {
 const saveForm = async () => {
     if (!validateFormData()) {
         STUDIP.Report.warning($gettext('Bitte überprüfen Sie Ihre Eingaben.'));
+        nextTick(() => {
+            const firstErrorId = Object.keys(fieldErrors.value)[0];
+            const element = document.getElementById(firstErrorId);
+            if (element) {
+                element.focus();
+            }
+        });
         return;
     }
     const payload = {
@@ -164,6 +194,15 @@ const saveForm = async () => {
         STUDIP.Report.success($gettext('Das Formular wurde erfolgreich gespeichert'));
     }
 };
+const getLabelForId = (id) => {
+    const element = form.value.structure.find((el) => el.id === id);
+
+    if (element && element.payload && element.payload.label) {
+        return element.payload.label[lang.value] || id;
+    }
+
+    return id;
+};
 
 const cancel = () => {
     emit('close');
@@ -171,5 +210,5 @@ const cancel = () => {
 
 const editForm = () => {
     emit('edit');
-}
+};
 </script>
