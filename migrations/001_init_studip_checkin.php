@@ -40,8 +40,8 @@ final class InitStudipCheckin extends Migration
         $db->exec("CREATE TABLE IF NOT EXISTS `checkin_forms` (
             `id`                            INT(11) NOT NULL AUTO_INCREMENT,
             `filter_id`                     char(32)  NOT NULL,
-            `name`                          CHAR(255) NOT NULL,
-            `description`                   TINYTEXT DEFAULT NULL,
+            `name`                          MEDIUMTEXT NOT NULL,
+            `description`                   MEDIUMTEXT DEFAULT NULL,
             `structure`                     MEDIUMTEXT NOT NULL,
             `start_date`                    INT(11) UNSIGNED NOT NULL,
             `end_date`                      INT(11) UNSIGNED NOT NULL,
