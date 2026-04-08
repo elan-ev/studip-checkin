@@ -5,7 +5,10 @@
                 $gettext('Liste der Nutzer unter Form:') + ` ${form.name[lang]}`
             }}
             <span class="actions">
-                <a :href="exportLink"><StudipIcon shape="export" :title="$gettext('CSV Export')" /></a>
+                <a :href="exportLink" class="button checkin-caption-action-export-button">
+                    <StudipIcon shape="export" class="checkin-caption-action-export-icon" />
+                    {{ $gettext('CSV Export') }}
+                </a>
             </span>
         </caption>
         <thead>
@@ -56,4 +59,15 @@ const lang = computed(() => {
 });
 </script>
 
-<style></style>
+<style lang="scss">
+.checkin-caption-action-export {
+    &-button.button {
+        margin: 0;
+    }
+    &-icon {
+        display: inline-block;
+        vertical-align: bottom;
+        padding-right: 5px;
+    }
+}
+</style>
