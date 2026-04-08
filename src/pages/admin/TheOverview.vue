@@ -1,10 +1,5 @@
 <template>
     <section class="checkin-overview">
-        <header class="checkin-header">
-            <h2 class="checkin-header-content">
-                {{ $gettext('CheckInPlugin') }}
-            </h2>
-        </header>
         <div class="checkin-form-list-container">
             <div class="checkin-form-list">
                 <FormsList :forms="formStore.all" />
