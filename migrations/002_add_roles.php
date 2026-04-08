@@ -1,6 +1,6 @@
 <?php
 /**
- * InitStudipCheckin
+ * AddRoles
  *
  * Migration zum Hinzufügen von Rollen für das StudipCheckin-Plugin.
  *
