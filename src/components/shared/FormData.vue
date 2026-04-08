@@ -10,14 +10,21 @@
                 />
             </template>
         </fieldset>
-        <footer v-if="!readOnly">
-            <button class="button accept" @click.prevent="saveForm">
-                {{ $gettext('Speichern') }}
-            </button>
+        <footer>
+            <template v-if="!readOnly">
+                <button class="button accept" @click.prevent="saveForm">
+                    {{ $gettext('Speichern') }}
+                </button>
 
-            <button v-if="!disableCancel" class="button cancel" @click.prevent="cancel">
-                {{ $gettext('Abbrechen') }}
-            </button>
+                <button v-if="!disableCancel" class="button cancel" @click.prevent="cancel">
+                    {{ $gettext('Abbrechen') }}
+                </button>
+            </template>
+            <template v-else>
+                 <button class="button edit" @click.prevent="editForm">
+                    {{ $gettext('Bearbeiten') }}
+                </button>
+            </template>
         </footer>
     </form>
 </template>
@@ -50,9 +57,13 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
+    inProfile: {
+        type: Boolean,
+        default: false
+    }
 });
 
-const emit = defineEmits(['done', 'close']);
+const emit = defineEmits(['done', 'close', 'edit']);
 
 const form = computed(() => {
     return formStore.byId(props.formId);
@@ -157,4 +168,8 @@ const saveForm = async () => {
 const cancel = () => {
     emit('close');
 };
+
+const editForm = () => {
+    emit('edit');
+}
 </script>

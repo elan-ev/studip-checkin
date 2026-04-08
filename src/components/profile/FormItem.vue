@@ -1,7 +1,7 @@
 <template>
     <tr>
         <td>
-            {{ form.name[lang] }}
+            <button class="as-link" @click="showForm">{{ form.name[lang] }}</button>
         </td>
         <td>{{ form.version }}</td>
         <td class="actions">

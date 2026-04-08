@@ -1,16 +1,16 @@
 <template>
     <tr>
-        <td>{{ form.name[lang] }}</td>
+        <td><router-link :to="{ path: `/edit/${form.id}` }">{{ form.name[lang] }}</router-link></td>
         <td :title="filterText">{{ filterCounter }}</td>
         <td>{{ form.version }}</td>
         <td>{{ startDate }}</td>
         <td>{{ endDate }}</td>
         <td>{{ status }}</td>
         <td>
-            <router-link :to="{ path: `/form/${form.id}/related-users` }">{{ userNum }}</router-link>
+            <router-link :to="{ path: `/form/${form.id}/related-users` }" class="checkin-table-link">{{ userNum }}</router-link>
         </td>
         <td>
-            <router-link :to="{ path: `/form/${form.id}/user-data` }">{{ dataNum }}</router-link>
+            <router-link :to="{ path: `/form/${form.id}/user-data` }" class="checkin-table-link">{{ dataNum }}</router-link>
         </td>
         <td class="actions">
             <StudipActionMenu
@@ -174,3 +174,8 @@ const redirectRelatedUsers = () => {
     router.push({ path:  `/form/${props.form.id}/related-users` });
 }
 </script>
+<style lang="scss">
+.checkin-table-link {
+    display: block;
+}
+</style>

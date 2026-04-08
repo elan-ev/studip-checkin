@@ -4,6 +4,8 @@
         :formId="formId"
         :formDataId="formDataId"
         :readOnly="readOnly"
+        :inProfile="inProfile"
+        @edit="editForm"
         @done="cleanFormRecord"
         @close="closeDrawer"
     />
@@ -37,8 +39,12 @@ const lang = computed(() => {
     return contextStore.langSelector;
 });
 
+const inProfile = computed(() => {
+    return drawerStore.drawerContext.value === 'profile';
+});
+
 const cleanFormRecord = () => {
-    if (drawerStore.drawerContext.value === 'profile') {
+    if (inProfile.value) {
         formStore.completeUserFormDataRecord(props.formId);
     }
 
@@ -48,6 +54,10 @@ const cleanFormRecord = () => {
 const closeDrawer = () => {
     drawerStore.closeDrawer();
 };
+
+const editForm = () => {
+    drawerStore.openFormDataInDrawer(props.formId, props.formDataId, false, form.value.name[lang.value]);
+}
 </script>
 <style lang="scss">
 .checkin-drawer-form-description {
