@@ -65,8 +65,8 @@
     </section>
 
     <label>
-        {{ $gettext('Pflichtfeld') }}
         <input type="checkbox" v-model="element.payload.required" />
+        {{ $gettext('Pflichtfeld') }}
     </label>
     <section v-if="hasCondition" class="checkin-form-input-condition">
         <h3>
