@@ -7,7 +7,7 @@
         "Ron Lucke <lucke@elan-ev.de> (elan e.V.)",
         "Farbod Zamani <zamani@elan-ev.de> (elan e.V.)"
     ],
-    "license": "AGPL-3.0",
+    "license": "GPL-3.0",
     "repository": {
         "type": "git",
         "url": "https://github.com/elan-ev/studip-checkin.git"
