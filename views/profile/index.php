@@ -1,0 +1,1 @@
+<div id="studip-checkin-profile-app" data-preferred-language='<?= $preferredLanguage ?>'></div>

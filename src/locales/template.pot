@@ -1,0 +1,579 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+
+#: src/components/admin/FormSettings.vue
+#: src/components/admin/FormSettings.vue:81
+#: src/components/expanded-views/UserFilterExpandedView.vue
+#: src/components/expanded-views/UserFilterExpandedView.vue:65
+#: src/components/shared/FormData.vue
+#: src/components/shared/FormData.vue:27
+msgid "Abbrechen"
+msgstr ""
+
+#: src/components/admin/FormItem.vue
+#: src/components/admin/FormItem.vue:82
+msgid "abgelaufen"
+msgstr ""
+
+#: src/components/admin/RelatedUsersList.vue
+#: src/components/admin/RelatedUsersList.vue:11
+msgid "Akiv"
+msgstr ""
+
+#: src/components/admin/FormsList.vue
+#: src/components/admin/FormsList.vue:23
+#: src/components/admin/FormUserDataList.vue
+#: src/components/admin/FormUserDataList.vue:19
+#: src/components/admin/RelatedUsersList.vue
+#: src/components/admin/RelatedUsersList.vue:13
+#: src/components/profile/FormsList.vue
+#: src/components/profile/FormsList.vue:12
+#: src/components/studip/StudipActionMenu.vue
+#: src/components/studip/StudipActionMenu.vue:10
+msgid "Aktionen"
+msgstr ""
+
+#: src/components/studip/StudipActionMenu.vue
+#: src/components/studip/StudipActionMenu.vue:152
+msgid "Aktionsmenü"
+msgstr ""
+
+#: src/components/studip/StudipActionMenu.vue
+#: src/components/studip/StudipActionMenu.vue:149
+msgid "Aktionsmenü für %{context}"
+msgstr ""
+
+#: src/components/admin/FormItem.vue
+#: src/components/admin/FormItem.vue:89
+msgid "aktiv"
+msgstr ""
+
+#: src/components/admin/FormUserDataItem.vue
+#: src/components/admin/FormUserDataItem.vue:11
+msgid "Antworten betrachten"
+msgstr ""
+
+#: src/components/profile/FormItem.vue
+#: src/components/profile/FormItem.vue:54
+msgid "Anzeigen"
+msgstr ""
+
+#: src/components/profile/FormItem.vue
+#: src/components/profile/FormItem.vue:57
+msgid "Ausfüllen"
+msgstr ""
+
+#: src/composables/inputElements.js
+#: src/composables/inputElements.js:13
+msgid "Auswahlliste"
+msgstr ""
+
+#: src/components/admin/FormItem.vue
+#: src/components/admin/FormItem.vue:20
+#: src/components/profile/FormItem.vue
+#: src/components/profile/FormItem.vue:57
+#: src/components/shared/FormData.vue
+#: src/components/shared/FormData.vue:32
+msgid "Bearbeiten"
+msgstr ""
+
+#: src/components/admin/FormInput.vue
+#: src/components/admin/FormInput.vue:73
+msgid "Bedingung"
+msgstr ""
+
+#: src/components/admin/FormInput.vue
+msgid "Bedingung entfernen"
+msgstr ""
+
+#: src/components/admin/FormInput.vue
+#: src/components/admin/FormInput.vue:108
+msgid "Bedingung hinzufügen"
+msgstr ""
+
+#: src/pages/admin/FormPage.vue
+#: src/pages/admin/FormPage.vue:118
+msgid "Beim Erstellen des Formulars ist ein Fehler aufgetreten."
+msgstr ""
+
+#: src/components/admin/FormSettings.vue
+#: src/components/admin/FormSettings.vue:11
+#: src/components/admin/FormSettings.vue:26
+msgid "Beschreibung"
+msgstr ""
+
+#: src/components/admin/FormInput.vue
+#: src/components/admin/FormInput.vue:28
+msgid "Beschriftung"
+msgstr ""
+
+#: src/components/admin/FormSettings.vue
+#: src/components/admin/FormSettings.vue:123
+msgid "Bitte fügen Sie mindestens ein Formularelement ein."
+msgstr ""
+
+#: src/pages/user/UserForms.vue
+#: src/pages/user/UserForms.vue:4
+msgid "Bitte füllen Sie die folgenden Formulare aus"
+msgstr ""
+
+#: src/components/admin/FormSettings.vue
+#: src/components/admin/FormSettings.vue:127
+msgid "Bitte geben Sie ein Enddatum an."
+msgstr ""
+
+#: src/components/admin/FormSettings.vue
+#: src/components/admin/FormSettings.vue:126
+msgid "Bitte geben Sie ein Startdatum an."
+msgstr ""
+
+#: src/composables/useValidation.js
+#: src/composables/useValidation.js:40
+msgid "Bitte geben Sie eine gültige E-Mail-Adresse ein."
+msgstr ""
+
+#: src/composables/useValidation.js
+#: src/composables/useValidation.js:47
+msgid "Bitte geben Sie eine gültige URL ein."
+msgstr ""
+
+#: src/components/admin/FormSettings.vue
+#: src/components/admin/FormSettings.vue:121
+msgid "Bitte geben Sie einen Titel an."
+msgstr ""
+
+#: src/components/admin/FormSettings.vue
+#: src/components/admin/FormSettings.vue:128
+msgid "Bitte prüfen Sie Start- und Enddatum."
+msgstr ""
+
+#: src/components/admin/FormSettings.vue
+#: src/components/admin/FormSettings.vue:156
+#: src/components/shared/FormData.vue
+#: src/components/shared/FormData.vue:165
+msgid "Bitte überprüfen Sie Ihre Eingaben."
+msgstr ""
+
+#: src/components/admin/FormEditor.vue
+#: src/components/admin/FormEditor.vue:17
+msgid "Bitte wählen Sie ein Element aus der Liste aus."
+msgstr ""
+
+#: src/components/admin/FormSettings.vue
+#: src/components/admin/FormSettings.vue:125
+msgid "Bitte wählen Sie mindestens einen Zielgruppenfilter aus."
+msgstr ""
+
+#: src/components/admin/FormUserDataList.vue
+#: src/components/admin/FormUserDataList.vue:10
+msgid "CSV Export"
+msgstr ""
+
+#: src/components/shared/FormData.vue
+#: src/components/shared/FormData.vue:5
+msgid "Das Formular enthält Fehler. Bitte überprüfen Sie die folgenden Felder:"
+msgstr ""
+
+#: src/components/shared/FormData.vue
+#: src/components/shared/FormData.vue:190
+msgid "Das Formular konnte nicht gespeichert werden!"
+msgstr ""
+
+#: src/components/shared/FormData.vue
+#: src/components/shared/FormData.vue:193
+msgid "Das Formular wurde erfolgreich gespeichert"
+msgstr ""
+
+#: src/components/admin/FormItem.vue
+#: src/components/admin/FormItem.vue:26
+msgid "Daten exportieren"
+msgstr ""
+
+#: src/components/admin/FormUserDataItem.vue
+msgid "Datensatz"
+msgstr ""
+
+#: src/components/admin/FormSettings.vue
+#: src/components/admin/FormSettings.vue:5
+msgid "DE"
+msgstr ""
+
+#: src/composables/useValidation.js
+#: src/composables/useValidation.js:34
+msgid "Der Wert ist zu groß."
+msgstr ""
+
+#: src/composables/useValidation.js
+#: src/composables/useValidation.js:31
+msgid "Der Wert ist zu klein."
+msgstr ""
+
+#: src/composables/useValidation.js
+#: src/composables/useValidation.js:22
+msgid "Dieses Feld ist ein Pflichtfeld."
+msgstr ""
+
+#: src/components/expanded-views/UserFilterExpandedView.vue
+msgid "Dieses Feld löschen"
+msgstr ""
+
+#: src/composables/inputElements.js
+#: src/composables/inputElements.js:15
+msgid "E-Mail"
+msgstr ""
+
+#: src/composables/inputElements.js
+#: src/composables/inputElements.js:10
+msgid "Einfachauswahl"
+msgstr ""
+
+#: src/composables/inputElements.js
+#: src/composables/inputElements.js:8
+msgid "Eingabezeile"
+msgstr ""
+
+#: src/components/admin/FormSettings.vue
+#: src/components/admin/FormSettings.vue:20
+msgid "EN"
+msgstr ""
+
+#: src/components/admin/FormsList.vue
+#: src/components/admin/FormsList.vue:19
+msgid "Enddatum"
+msgstr ""
+
+#: src/components/admin/FormSettings.vue
+#: src/components/admin/FormSettings.vue:46
+msgid "Endet am"
+msgstr ""
+
+#: src/components/admin/FormItem.vue
+#: src/components/admin/FormItem.vue:86
+msgid "endet bald"
+msgstr ""
+
+#: src/components/admin/FormInput.vue
+#: src/components/admin/FormInput.vue:97
+msgid "Erwarteter Wert"
+msgstr ""
+
+#: src/components/admin/FormInput.vue
+#: src/components/admin/FormInput.vue:220
+msgid "Es ist eine leer Option ist vorhanden."
+msgstr ""
+
+#: src/components/admin/FormSettings.vue
+#: src/components/admin/FormSettings.vue:52
+msgid "Es wurde noch kein Zielgruppenfilter gesetzt"
+msgstr ""
+
+#: src/components/expanded-views/UserFilterExpandedView.vue
+#: src/components/expanded-views/UserFilterExpandedView.vue:56
+msgid "Feld hinzufügen"
+msgstr ""
+
+#: src/components/expanded-views/UserFilterExpandedView.vue
+msgid "Feldname"
+msgstr ""
+
+#: src/components/admin/FormsList.vue
+#: src/components/admin/FormsList.vue:16
+msgid "Filter"
+msgstr ""
+
+#: src/components/admin/FormItem.vue
+msgid "Formular"
+msgstr ""
+
+#: src/components/admin/FormsList.vue
+#: src/components/admin/FormsList.vue:10
+#: src/components/profile/FormsList.vue
+#: src/components/profile/FormsList.vue:5
+msgid "Formulare"
+msgstr ""
+
+#: src/pages/admin/FormPage.vue
+#: src/pages/admin/FormPage.vue:4
+msgid "Formulartitel"
+msgstr ""
+
+#: src/composables/inputElements.js
+#: src/composables/inputElements.js:11
+msgid "Ja/Nein-Schalter"
+msgstr ""
+
+#: src/components/admin/RelatedUsersList.vue
+#: src/components/admin/RelatedUsersList.vue:19
+msgid "Kein Nutzer gefunden."
+msgstr ""
+
+#: src/components/admin/FormUserDataList.vue
+#: src/components/admin/FormUserDataList.vue:25
+msgid "Keine Daten gefunden."
+msgstr ""
+
+#: src/components/admin/FormsList.vue
+#: src/components/admin/FormsList.vue:29
+#: src/components/profile/FormsList.vue
+#: src/components/profile/FormsList.vue:18
+msgid "Keine Formulare gefunden."
+msgstr ""
+
+#: src/components/admin/FormItem.vue
+#: src/components/admin/FormItem.vue:21
+msgid "Kopieren"
+msgstr ""
+
+#: src/components/admin/FormUserDataList.vue
+#: src/components/admin/FormUserDataList.vue:18
+msgid "letzte Änderung"
+msgstr ""
+
+#: src/components/admin/RelatedUsersList.vue
+#: src/components/admin/RelatedUsersList.vue:5
+msgid "Liste der Nutzenden für Formular:"
+msgstr ""
+
+#: src/components/admin/FormUserDataList.vue
+#: src/components/admin/FormUserDataList.vue:5
+msgid "Liste der Nutzer unter Form:"
+msgstr ""
+
+#: src/components/admin/FormInput.vue
+#: src/components/admin/FormItem.vue
+#: src/components/admin/FormItem.vue:22
+#: src/components/admin/FormUserDataItem.vue
+#: src/components/admin/FormUserDataItem.vue:12
+#: src/components/admin/RelatedUserItem.vue
+msgid "Löschen"
+msgstr ""
+
+#: src/components/admin/FormInput.vue
+#: src/components/admin/FormInput.vue:62
+msgid "Maximum"
+msgstr ""
+
+#: src/composables/inputElements.js
+#: src/composables/inputElements.js:12
+msgid "Mehrfachauswahl"
+msgstr ""
+
+#: src/composables/inputElements.js
+#: src/composables/inputElements.js:9
+msgid "Mehrzeiliges Textfeld"
+msgstr ""
+
+#: src/components/admin/FormInput.vue
+#: src/components/admin/FormInput.vue:58
+msgid "Minimum"
+msgstr ""
+
+#: src/components/admin/RelatedUserItem.vue
+#: src/components/admin/RelatedUserItem.vue:44
+msgid "Möchten Sie %{name} wirklich aus diesem Formular löschen?"
+msgstr ""
+
+#: src/components/admin/FormItem.vue
+#: src/components/admin/FormItem.vue:156
+msgid "Möchten Sie das Formular \"%{name}\" wirklich löschen?"
+msgstr ""
+
+#: src/components/admin/FormUserDataItem.vue
+#: src/components/admin/FormUserDataItem.vue:69
+msgid "Möchten Sie die Formulardaten für %{name} wirklich löschen?"
+msgstr ""
+
+#: src/components/admin/FormEditor.vue
+#: src/components/admin/FormEditor.vue:40
+msgid "Möchten Sie dieses Feld wirklich löschen?"
+msgstr ""
+
+#: src/components/admin/FormInput.vue
+msgid "Nach oben bewegen"
+msgstr ""
+
+#: src/components/admin/FormInput.vue
+msgid "Nach unten bewegen"
+msgstr ""
+
+#: src/components/admin/FormsList.vue
+#: src/components/admin/FormsList.vue:15
+#: src/components/admin/RelatedUsersList.vue
+#: src/components/admin/RelatedUsersList.vue:10
+#: src/components/profile/FormsList.vue
+#: src/components/profile/FormsList.vue:10
+msgid "Name"
+msgstr ""
+
+#: src/components/admin/FormInput.vue
+#: src/components/admin/FormInput.vue:54
+msgid "Neue Option hinzufügen"
+msgstr ""
+
+#: src/pages/admin/FormPage.vue
+#: src/pages/admin/FormPage.vue:4
+msgid "Neues Formular"
+msgstr ""
+
+#: src/components/admin/FormsList.vue
+#: src/components/admin/FormsList.vue:40
+msgid "Neues Formular erstellen"
+msgstr ""
+
+#: src/components/admin/FormItem.vue
+#: src/components/admin/FormItem.vue:25
+#: src/components/admin/FormsList.vue
+#: src/components/admin/FormsList.vue:21
+#: src/components/admin/FormUserDataList.vue
+#: src/components/admin/FormUserDataList.vue:16
+msgid "Nutzende"
+msgstr ""
+
+#: src/components/admin/RelatedUserItem.vue
+#: src/components/profile/FormItem.vue
+msgid "Nutzer"
+msgstr ""
+
+#: src/components/admin/FormInput.vue
+msgid "Option Löschen"
+msgstr ""
+
+#: src/components/admin/FormInput.vue
+#: src/components/admin/FormInput.vue:36
+msgid "Optionen"
+msgstr ""
+
+#: src/components/admin/FormInput.vue
+#: src/components/admin/FormInput.vue:69
+msgid "Pflichtfeld"
+msgstr ""
+
+#: src/components/admin/FormInput.vue
+#: src/components/admin/FormInput.vue:32
+msgid "Platzhalter"
+msgstr ""
+
+#: src/components/admin/FormItem.vue
+#: src/components/admin/FormItem.vue:24
+#: src/components/admin/FormsList.vue
+#: src/components/admin/FormsList.vue:22
+msgid "Rückläufe"
+msgstr ""
+
+#: src/components/studip/StudipDrawer.vue
+msgid "Schließen"
+msgstr ""
+
+#: src/components/admin/FormSettings.vue
+#: src/components/admin/FormSettings.vue:78
+#: src/components/expanded-views/UserFilterExpandedView.vue
+#: src/components/expanded-views/UserFilterExpandedView.vue:62
+#: src/components/shared/FormData.vue
+#: src/components/shared/FormData.vue:23
+msgid "Speichern"
+msgstr ""
+
+#: src/components/admin/FormsList.vue
+#: src/components/admin/FormsList.vue:18
+msgid "Startdatum"
+msgstr ""
+
+#: src/components/admin/FormSettings.vue
+#: src/components/admin/FormSettings.vue:35
+msgid "Startet am"
+msgstr ""
+
+#: src/components/admin/FormsList.vue
+#: src/components/admin/FormsList.vue:20
+msgid "Status"
+msgstr ""
+
+#: src/components/admin/FormSettings.vue
+#: src/components/admin/FormSettings.vue:22
+#: src/components/admin/FormSettings.vue:7
+msgid "Titel"
+msgstr ""
+
+#: src/components/expanded-views/UserFilterExpandedView.vue
+#: src/components/expanded-views/UserFilterExpandedView.vue:5
+msgid "und"
+msgstr ""
+
+#: src/components/admin/FormInput.vue
+#: src/components/admin/FormInput.vue:203
+#: src/components/admin/FormInput.vue:213
+msgid "Ungültige Position für das Element"
+msgstr ""
+
+#: src/components/admin/RelatedUsersList.vue
+#: src/components/admin/RelatedUsersList.vue:12
+msgid "Unsichbar"
+msgstr ""
+
+#: src/composables/inputElements.js
+#: src/composables/inputElements.js:14
+msgid "URL"
+msgstr ""
+
+#: src/components/expanded-views/UserFilterExpandedView.vue
+msgid "Vergleichsoperator"
+msgstr ""
+
+#: src/components/admin/FormsList.vue
+#: src/components/admin/FormsList.vue:17
+#: src/components/profile/FormsList.vue
+#: src/components/profile/FormsList.vue:11
+msgid "Version"
+msgstr ""
+
+#: src/components/admin/FormUserDataList.vue
+#: src/components/admin/FormUserDataList.vue:17
+msgid "Version des Formulars"
+msgstr ""
+
+#: src/components/expanded-views/UserFilterExpandedView.vue
+msgid "Wert"
+msgstr ""
+
+#: src/components/admin/FormInput.vue
+#: src/components/admin/FormInput.vue:38
+msgid "Wert der Option"
+msgstr ""
+
+#: src/composables/inputElements.js
+#: src/composables/inputElements.js:16
+msgid "Zahlenfeld"
+msgstr ""
+
+#: src/components/admin/FormInput.vue
+#: src/components/admin/FormInput.vue:83
+msgid "Ziel"
+msgstr ""
+
+#: src/store/drawer.js
+#: src/store/drawer.js:46
+msgid "Zielgruppenfilter"
+msgstr ""
+
+#: src/components/admin/FormSettings.vue
+#: src/components/admin/FormSettings.vue:71
+msgid "Zielgruppenfilter ändern"
+msgstr ""
+
+#: src/components/admin/FormSettings.vue
+#: src/components/admin/FormSettings.vue:71
+msgid "Zielgruppenfilter hinzufügen"
+msgstr ""
+
+#: src/pages/user/UserForms.vue
+#: src/pages/user/UserForms.vue:17
+msgid "Zur Startseite"
+msgstr ""
+
+#: src/pages/admin/FormUserDataPage.vue
+#: src/pages/admin/FormUserDataPage.vue:3
+#: src/pages/admin/RelatedUsersPage.vue
+#: src/pages/admin/RelatedUsersPage.vue:3
+msgid "Zurück zur Übersicht"
+msgstr ""
