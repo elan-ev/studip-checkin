@@ -1,7 +1,7 @@
 {
     "name": "studip-checkin-lib",
     "private": true,
-    "version": "0.1.0",
+    "version": "0.1.1",
     "author": "Ron Lucke <lucke@elan-ev.de> (elan e.V.)",
     "contributors": [
         "Ron Lucke <lucke@elan-ev.de> (elan e.V.)",
@@ -33,7 +33,7 @@
         "gettext:compile": "node scripts/compile-translations.js",
         "preview": "vite preview",
         "prezip": "npm install && npm run build && composer install --no-dev",
-        "zip": "zip -r studip-checkin-v$npm_package_version.zip app assets lib migrations dist vendor LICENSE README.md StudipCheckin.php bootstrap.php plugin.manifest -x '*.editorconfig' -x 'vendor/*.git*' -x '*.DS_Store'"
+        "zip": "zip -r studip-checkin-v$npm_package_version.zip controllers dist lib migrations vendor views LICENSE LICENSE-SUPPLEMENT.txt README.md StudipCheckin.php bootstrap.php plugin.manifest -x '*.editorconfig' -x 'vendor/*.git*' -x '*.DS_Store'"
     },
     "dependencies": {
         "pinia": "^3.0.3",
