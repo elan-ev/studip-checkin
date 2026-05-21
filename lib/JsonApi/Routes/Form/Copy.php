@@ -66,9 +66,10 @@ class Copy extends JsonApiController
         $userFilter = new UserFilter();
         $userFilter->fields = [];
         $userFilter->store();
+        $now = date('d.m.Y H:i');
 
         $form = Form::create([
-            'name' => $sourceForm->name . ' (Kopie vom ' . date('d.m.Y H:i') . ')',
+            'name' => ['de' => $sourceForm->name['de'] . ' (Kopie vom ' . $now . ')', 'en' => $sourceForm->name['en'] . ' (copy from' . $now . ')'],
             'description' => $sourceForm->description,
             'filter_id' => $userFilter->getId(),
             'structure' => $sourceForm->structure,
