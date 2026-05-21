@@ -38,21 +38,30 @@ class AdminController extends PluginController
             $form = StudipCheckin\Models\Form::find($form_id);
             $filename = str_replace(' ', '_', $form->name[$lang]);
             $structure = json_decode($form->structure, true);
-            $staticHeaders = ['Nachname', 'Vorname', 'Username', 'Matrikelnummer'];
-            $form_headers = array_column(array_column($structure, 'payload'), 'label');
+            
+            $staticHeaders = ['Nachname', 'Vorname', 'Username', 'Matrikelnummer', 'Erstellt am', 'Geändert am', 'Formular-Version'];
+            
+            $form_headers = [];
+            foreach ($structure as $field) {
+                $form_headers[] = $field['payload']['label'][$lang] ?? $field['payload']['label']['de'] ?? '';
+            }
+            
             $headers = array_merge($staticHeaders, $form_headers);
-
             $formUserData = StudipCheckin\Models\FormUserData::findBySQL('`form_id` = ?', [$form->id]);
 
             foreach ($formUserData as $data) {
                 $user = User::find($data->user_id);
-                $user_information = [$user->nachname, $user->vorname, $user->username, $user->matriculation_number];
+                $created_at = $data->mkdate ? date('d.m.Y H:i', $data->mkdate) : '';
+                $updated_at = $data->chdate ? date('d.m.Y H:i', $data->chdate) : '';
+                $version = $data->form_version ?? '';
+                $user_information = [$user->nachname, $user->vorname, $user->username, $user->matriculation_number, $created_at, $updated_at, $version];
                 $form_data = json_decode($data->form_data, true);
                 $user_data = [];
+                
                 foreach ($structure as $field) {
                     $id = $field['id'];
                     $rawValue = $form_data[$id] ?? null;
-                    $user_data[] = $this->transformValue($field, $rawValue);
+                    $user_data[] = $this->transformValue($field, $rawValue, $lang);
                 }
 
                 $csvdata[] = array_merge($user_information, $user_data);
@@ -62,19 +71,20 @@ class AdminController extends PluginController
         $this->render_csv(array_merge([$headers], $csvdata), "{$filename}.csv");
     }
 
-    private function transformValue($field, $rawValue)
+    private function transformValue($field, $rawValue, $lang)
     {
-        if ($rawValue === null)
+        if ($rawValue === null) {
             return '';
+        }
 
         $type = $field['type'] ?? '';
         $options = $field['payload']['options'] ?? [];
 
         return match ($type) {
-            'radio' => $options[$rawValue]['text'] ?? $rawValue,
+            'radio', 'select' => $options[$rawValue]['text'][$lang] ?? $options[$rawValue]['text']['de'] ?? $rawValue,
             'multiselect' => is_array($rawValue)
-            ? implode(', ', array_map(fn($idx) => $options[$idx]['text'] ?? $idx, $rawValue))
-            : $rawValue,
+                ? implode(', ', array_map(fn($idx) => $options[$idx]['text'][$lang] ?? $options[$idx]['text']['de'] ?? $idx, $rawValue))
+                : $rawValue,
             'switch' => $rawValue ? 'Ja' : 'Nein',
             default => is_array($rawValue) ? implode(', ', $rawValue) : $rawValue,
         };
