@@ -5,7 +5,7 @@
             <p>{{ form.description[lang] }}</p>
         </header>
         <section>
-            <FormData :formId="formId" :disable-cancel="records.size === 1" @done="cleanFormRecord" @close="goBack" />
+            <FormData :formId="formId" @done="cleanFormRecord" @close="goBack" />
         </section>
     </article>
 </template>
@@ -41,7 +41,12 @@ const cleanFormRecord = () => {
 };
 
 const goBack = () => {
-    router.push({ name: 'user-forms' });
+    if (records.size > 1) {
+        router.push({ name: 'user-forms' });
+    }
+    else {
+        window.location = STUDIP.URLHelper.getURL('dispatch.php/start');
+    }
 };
 </script>
 
