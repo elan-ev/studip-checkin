@@ -1,7 +1,12 @@
 <template>
     <tr>
         <td>
-            <button class="as-link" @click="showForm">{{ form.name[lang] }}</button>
+            <template v-if="hasFormData">
+                <button class="as-link" @click="showForm">{{ form.name[lang] }}</button>
+            </template>
+            <template v-else>
+                <button class="as-link" @click="editForm">{{ form.name[lang] }} ({{ $gettext('noch nicht ausgefüllt') }})</button>
+            </template>
         </td>
         <td>{{ form.version }}</td>
         <td class="actions">
@@ -45,6 +50,10 @@ const formData = computed(() => {
 
 const hasFormData = computed(() => {
     return formData.value !== null;
+});
+
+const hasChanged = computed(() => {
+    return false; // TODO
 });
 
 const actionMenuItems = computed(() => {
