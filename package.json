@@ -1,7 +1,7 @@
 {
     "name": "studip-checkin-lib",
     "private": true,
-    "version": "0.1.1",
+    "version": "0.2.0",
     "author": "Ron Lucke <lucke@elan-ev.de> (elan e.V.)",
     "contributors": [
         "Ron Lucke <lucke@elan-ev.de> (elan e.V.)",
@@ -44,13 +44,14 @@
         "@ckeditor/ckeditor5-vue": "^7.3.0",
         "@headlessui/vue": "^1.7.23",
         "@vitejs/plugin-vue": "^6.0.1",
+        "gettext-extractor-vue": "^5.2.0",
+        "gettext-parser": "^9.0.2",
+        "glob": "^13.0.6",
         "kitsu": "^11.1.0",
         "po2json": "^0.4.5",
         "sass": "^1.97.2",
         "sass-loader": "^16.0.6",
         "vite": "^7.1.12",
-        "vue3-gettext": "^4.0.0-beta.1",
-        "gettext-extractor-vue": "^5.2.0",
-        "gettext-parser": "^9.0.2"
+        "vue3-gettext": "^4.0.0-beta.1"
     }
 }

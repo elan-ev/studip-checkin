@@ -126,6 +126,9 @@ msgstr ""
 msgid "Bitte wählen Sie ein Element aus der Liste aus."
 msgstr ""
 
+msgid "Bitte wählen Sie mindestens eine Option aus."
+msgstr ""
+
 msgid "Bitte wählen Sie mindestens einen Zielgruppenfilter aus."
 msgstr ""
 
@@ -339,6 +342,9 @@ msgstr ""
 #: src/components/admin/FormsList.vue
 #: src/components/admin/FormsList.vue:41
 msgid "Neues Formular erstellen"
+msgstr ""
+
+msgid "noch nicht ausgefüllt"
 msgstr ""
 
 #: src/components/admin/FormsList.vue

@@ -126,6 +126,9 @@ msgstr "Please check your entries."
 msgid "Bitte wählen Sie ein Element aus der Liste aus."
 msgstr "Please select an item from the list."
 
+msgid "Bitte wählen Sie mindestens eine Option aus."
+msgstr "Please select at least one option."
+
 msgid "Bitte wählen Sie mindestens einen Zielgruppenfilter aus."
 msgstr "Please select at least one target audience filter."
 
@@ -340,6 +343,9 @@ msgstr "New form"
 #: src/components/admin/FormsList.vue:41
 msgid "Neues Formular erstellen"
 msgstr "Create a new form"
+
+msgid "noch nicht ausgefüllt"
+msgstr "not yet filled out"
 
 #: src/components/admin/FormsList.vue
 #: src/components/admin/FormsList.vue:22

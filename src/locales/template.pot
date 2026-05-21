@@ -55,12 +55,12 @@ msgid "Antworten betrachten"
 msgstr ""
 
 #: src/components/profile/FormItem.vue
-#: src/components/profile/FormItem.vue:54
+#: src/components/profile/FormItem.vue:63
 msgid "Anzeigen"
 msgstr ""
 
 #: src/components/profile/FormItem.vue
-#: src/components/profile/FormItem.vue:57
+#: src/components/profile/FormItem.vue:66
 msgid "Ausfüllen"
 msgstr ""
 
@@ -72,7 +72,7 @@ msgstr ""
 #: src/components/admin/FormItem.vue
 #: src/components/admin/FormItem.vue:20
 #: src/components/profile/FormItem.vue
-#: src/components/profile/FormItem.vue:57
+#: src/components/profile/FormItem.vue:66
 #: src/components/shared/FormData.vue
 #: src/components/shared/FormData.vue:32
 msgid "Bearbeiten"
@@ -129,12 +129,12 @@ msgid "Bitte geben Sie ein Startdatum an."
 msgstr ""
 
 #: src/composables/useValidation.js
-#: src/composables/useValidation.js:40
+#: src/composables/useValidation.js:44
 msgid "Bitte geben Sie eine gültige E-Mail-Adresse ein."
 msgstr ""
 
 #: src/composables/useValidation.js
-#: src/composables/useValidation.js:47
+#: src/composables/useValidation.js:51
 msgid "Bitte geben Sie eine gültige URL ein."
 msgstr ""
 
@@ -158,6 +158,11 @@ msgstr ""
 #: src/components/admin/FormEditor.vue
 #: src/components/admin/FormEditor.vue:17
 msgid "Bitte wählen Sie ein Element aus der Liste aus."
+msgstr ""
+
+#: src/composables/useValidation.js
+#: src/composables/useValidation.js:25
+msgid "Bitte wählen Sie mindestens eine Option aus."
 msgstr ""
 
 #: src/components/admin/FormSettings.vue
@@ -200,17 +205,17 @@ msgid "DE"
 msgstr ""
 
 #: src/composables/useValidation.js
-#: src/composables/useValidation.js:34
+#: src/composables/useValidation.js:38
 msgid "Der Wert ist zu groß."
 msgstr ""
 
 #: src/composables/useValidation.js
-#: src/composables/useValidation.js:31
+#: src/composables/useValidation.js:35
 msgid "Der Wert ist zu klein."
 msgstr ""
 
 #: src/composables/useValidation.js
-#: src/composables/useValidation.js:22
+#: src/composables/useValidation.js:23
 msgid "Dieses Feld ist ein Pflichtfeld."
 msgstr ""
 
@@ -259,7 +264,7 @@ msgid "Erwarteter Wert"
 msgstr ""
 
 #: src/components/admin/FormInput.vue
-#: src/components/admin/FormInput.vue:220
+#: src/components/admin/FormInput.vue:225
 msgid "Es ist eine leer Option ist vorhanden."
 msgstr ""
 
@@ -421,6 +426,11 @@ msgstr ""
 msgid "Neues Formular erstellen"
 msgstr ""
 
+#: src/components/profile/FormItem.vue
+#: src/components/profile/FormItem.vue:8
+msgid "noch nicht ausgefüllt"
+msgstr ""
+
 #: src/components/admin/FormItem.vue
 #: src/components/admin/FormItem.vue:25
 #: src/components/admin/FormsList.vue
@@ -501,8 +511,8 @@ msgid "und"
 msgstr ""
 
 #: src/components/admin/FormInput.vue
-#: src/components/admin/FormInput.vue:203
-#: src/components/admin/FormInput.vue:213
+#: src/components/admin/FormInput.vue:208
+#: src/components/admin/FormInput.vue:218
 msgid "Ungültige Position für das Element"
 msgstr ""
 
