@@ -1,14 +1,54 @@
 <template>
     <table class="default">
         <caption>
-            <span class="actions">
+            <span class="actions checkin-form-caption-actions">
+                <button type="button" class="as-link" :title="$gettext('Filter anzeigen/ausblenden')"
+                    :aria-expanded="isFilterOpen" @click="isFilterOpen = !isFilterOpen">
+                    <StudipIcon shape="filter2" />
+                </button>
                 <RouterLink :to="{ path: '/new' }" :title="$gettext('Neues Formular erstellen')">
                     <StudipIcon shape="add" />
                 </RouterLink>
             </span>
             {{ $gettext('Formulare') }}
+
         </caption>
         <thead>
+            <tr v-show="isFilterOpen">
+                <td colspan="9" class="checkin-filter-cell">
+                    <form class="default checkin-filter-wrapper">
+                        <div class="checkin-filter-group">
+                            <label>{{ $gettext('Status') }}
+                                <select v-model="selectedStatus">
+                                    <option value="all">{{ $gettext('Alle') }}</option>
+                                    <option value="active">{{ $gettext('aktiv') }}</option>
+                                    <option value="endingSoon">{{ $gettext('endet bald') }}</option>
+                                    <option value="expired">{{ $gettext('abgelaufen') }}</option>
+                                </select>
+                            </label>
+                        </div>
+
+                        <div class="checkin-filter-group">
+                            <label>{{ $gettext('Zeitraum von') }}
+                                <input type="date" v-model="filterStartDate"
+                                    :max="filterEndDate || undefined" /></label>
+                        </div>
+
+                        <div class="checkin-filter-group">
+                            <label>{{ $gettext('bis') }}
+                                <input type="date" v-model="filterEndDate"
+                                    :min="filterStartDate || undefined" /></label>
+                        </div>
+
+                        <div class="checkin-filter-group actions"
+                            v-if="filterStartDate || filterEndDate || selectedStatus !== 'all'">
+                            <button type="button" class="button secondary" @click="resetFilters">
+                                {{ $gettext('Filter zurücksetzen') }}
+                            </button>
+                        </div>
+                    </form>
+                </td>
+            </tr>
             <tr>
                 <th scope="col" width="50%" :aria-sort="getAriaSort('name')">
                     <button type="button" class="as-link sort-button" @click="sortBy('name')">
@@ -52,13 +92,13 @@
             </tr>
         </thead>
         <tbody>
-            <template v-if="sortedForms.length === 0">
+            <template v-if="filteredAndSortedForms.length === 0">
                 <tr>
                     <td colspan="9">{{ $gettext('Keine Formulare gefunden.') }}</td>
                 </tr>
             </template>
             <template v-else>
-                <FormItem v-for="form in sortedForms" :key="form.id" :form="form" />
+                <FormItem v-for="form in filteredAndSortedForms" :key="form.id" :form="form" />
             </template>
         </tbody>
         <tfoot>
@@ -88,14 +128,72 @@ const props = defineProps({
 const sortKey = ref('');
 const sortOrder = ref('asc');
 
+const isFilterOpen = ref(false);
+const selectedStatus = ref('all');
+const filterStartDate = ref('');
+const filterEndDate = ref('');
+
 const lang = strtok(str_replace('_', '-', window.STUDIP?.URLHelper?.parameters?._language || 'de'), '-');
 
-const sortedForms = computed(() => {
+const checkExpired = (form) => {
+    const endDate = form?.['end-date'];
+    if (!endDate) return false;
+    const today = new Date();
+    const end = new Date(endDate);
+    today.setHours(0, 0, 0, 0);
+    end.setHours(0, 0, 0, 0);
+    return end < today;
+};
+
+const checkEndingSoon = (form) => {
+    const endDate = form?.['end-date'] || form?.endDate;
+    if (!endDate) return false;
+    const today = new Date();
+    const end = new Date(endDate);
+    today.setHours(0, 0, 0, 0);
+    end.setHours(0, 0, 0, 0);
+    const diffMs = end - today;
+    const diffDays = diffMs / (1000 * 60 * 60 * 24);
+    return diffDays >= 0 && diffDays <= 7;
+};
+
+const filteredAndSortedForms = computed(() => {
+    let result = props.forms.filter(form => {
+        if (selectedStatus.value !== 'all') {
+            const isExpired = checkExpired(form);
+            const isEndingSoon = checkEndingSoon(form);
+
+            if (selectedStatus.value === 'expired' && !isExpired) return false;
+            if (selectedStatus.value === 'endingSoon' && (!isEndingSoon || isExpired)) return false;
+            if (selectedStatus.value === 'active' && (isExpired || isEndingSoon)) return false;
+        }
+
+        const formStart = form['start-date'] ? new Date(form['start-date']) : new Date('1970-01-01');
+        const formEnd = form['end-date'] ? new Date(form['end-date']) : new Date('2099-12-31');
+
+        formStart.setHours(0, 0, 0, 0);
+        formEnd.setHours(0, 0, 0, 0);
+
+        if (filterStartDate.value) {
+            const filterStart = new Date(filterStartDate.value);
+            filterStart.setHours(0, 0, 0, 0);
+            if (formEnd < filterStart) return false;
+        }
+
+        if (filterEndDate.value) {
+            const filterEnd = new Date(filterEndDate.value);
+            filterEnd.setHours(0, 0, 0, 0);
+            if (formStart > filterEnd) return false;
+        }
+
+        return true;
+    });
+
     if (!sortKey.value) {
-        return props.forms;
+        return result;
     }
 
-    return [...props.forms].sort((a, b) => {
+    return result.sort((a, b) => {
         let modifier = sortOrder.value === 'asc' ? 1 : -1;
         let valA, valB;
 
@@ -121,7 +219,6 @@ const sortedForms = computed(() => {
                 break;
 
             case 'responses':
-                // Entspricht dataNum in FormItem
                 valA = Number(a?.['form-user-data']?.data?.length || 0);
                 valB = Number(b?.['form-user-data']?.data?.length || 0);
                 break;
@@ -150,6 +247,12 @@ const getAriaSort = (key) => {
     return sortOrder.value === 'asc' ? 'ascending' : 'descending';
 };
 
+const resetFilters = () => {
+    selectedStatus.value = 'all';
+    filterStartDate.value = '';
+    filterEndDate.value = '';
+};
+
 function strtok(str, token) {
     return str.split(token)[0];
 }
@@ -159,10 +262,40 @@ function str_replace(search, replace, subject) {
 
 onMounted(() => {
     sortBy('name');
-})
+});
 </script>
 
 <style lang="scss" scoped>
+.checkin-form-caption-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.checkin-filter-cell {
+    padding: 0 !important;
+}
+
+.checkin-filter-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 16px;
+    padding: 12px;
+    background-color: #f5f5f5;
+    border: none;
+
+    .checkin-filter-group {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        &.actions {
+            margin-left: auto;
+        }
+    }
+}
+
 .sort-button {
     display: inline-flex;
     align-items: baseline;
