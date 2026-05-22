@@ -43,6 +43,9 @@ msgstr ""
 msgid "aktiv"
 msgstr ""
 
+msgid "Alle"
+msgstr ""
+
 msgid "Antworten betrachten"
 msgstr ""
 
@@ -90,6 +93,9 @@ msgstr ""
 #: src/components/admin/FormInput.vue
 #: src/components/admin/FormInput.vue:28
 msgid "Beschriftung"
+msgstr ""
+
+msgid "bis"
 msgstr ""
 
 msgid "Bitte fügen Sie mindestens ein Formularelement ein."
@@ -221,6 +227,12 @@ msgid "Feldname"
 msgstr ""
 
 msgid "Filter"
+msgstr ""
+
+msgid "Filter anzeigen/ausblenden"
+msgstr ""
+
+msgid "Filter zurücksetzen"
 msgstr ""
 
 #: src/components/admin/FormItem.vue
@@ -455,6 +467,9 @@ msgstr ""
 
 #: src/composables/inputElements.js
 msgid "Zahlenfeld"
+msgstr ""
+
+msgid "Zeitraum von"
 msgstr ""
 
 #: src/components/admin/FormInput.vue

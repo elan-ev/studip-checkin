@@ -13,6 +13,8 @@ msgstr ""
 
 #: src/components/admin/FormItem.vue
 #: src/components/admin/FormItem.vue:82
+#: src/components/admin/FormsList.vue
+#: src/components/admin/FormsList.vue:26
 msgid "abgelaufen"
 msgstr ""
 
@@ -22,7 +24,7 @@ msgid "Akiv"
 msgstr ""
 
 #: src/components/admin/FormsList.vue
-#: src/components/admin/FormsList.vue:23
+#: src/components/admin/FormsList.vue:91
 #: src/components/admin/FormUserDataList.vue
 #: src/components/admin/FormUserDataList.vue:19
 #: src/components/admin/RelatedUsersList.vue
@@ -46,7 +48,14 @@ msgstr ""
 
 #: src/components/admin/FormItem.vue
 #: src/components/admin/FormItem.vue:89
+#: src/components/admin/FormsList.vue
+#: src/components/admin/FormsList.vue:24
 msgid "aktiv"
+msgstr ""
+
+#: src/components/admin/FormsList.vue
+#: src/components/admin/FormsList.vue:23
+msgid "Alle"
 msgstr ""
 
 #: src/components/admin/FormUserDataItem.vue
@@ -106,6 +115,11 @@ msgstr ""
 #: src/components/admin/FormInput.vue
 #: src/components/admin/FormInput.vue:28
 msgid "Beschriftung"
+msgstr ""
+
+#: src/components/admin/FormsList.vue
+#: src/components/admin/FormsList.vue:38
+msgid "bis"
 msgstr ""
 
 #: src/components/admin/FormSettings.vue
@@ -244,7 +258,7 @@ msgid "EN"
 msgstr ""
 
 #: src/components/admin/FormsList.vue
-#: src/components/admin/FormsList.vue:19
+#: src/components/admin/FormsList.vue:71
 msgid "Enddatum"
 msgstr ""
 
@@ -255,6 +269,8 @@ msgstr ""
 
 #: src/components/admin/FormItem.vue
 #: src/components/admin/FormItem.vue:86
+#: src/components/admin/FormsList.vue
+#: src/components/admin/FormsList.vue:25
 msgid "endet bald"
 msgstr ""
 
@@ -283,8 +299,17 @@ msgid "Feldname"
 msgstr ""
 
 #: src/components/admin/FormsList.vue
-#: src/components/admin/FormsList.vue:16
+#: src/components/admin/FormsList.vue:60
 msgid "Filter"
+msgstr ""
+
+#: src/components/admin/FormsList.vue
+msgid "Filter anzeigen/ausblenden"
+msgstr ""
+
+#: src/components/admin/FormsList.vue
+#: src/components/admin/FormsList.vue:46
+msgid "Filter zurücksetzen"
 msgstr ""
 
 #: src/components/admin/FormItem.vue
@@ -292,7 +317,7 @@ msgid "Formular"
 msgstr ""
 
 #: src/components/admin/FormsList.vue
-#: src/components/admin/FormsList.vue:10
+#: src/components/admin/FormsList.vue:13
 #: src/components/profile/FormsList.vue
 #: src/components/profile/FormsList.vue:5
 msgid "Formulare"
@@ -319,7 +344,7 @@ msgid "Keine Daten gefunden."
 msgstr ""
 
 #: src/components/admin/FormsList.vue
-#: src/components/admin/FormsList.vue:29
+#: src/components/admin/FormsList.vue:97
 #: src/components/profile/FormsList.vue
 #: src/components/profile/FormsList.vue:18
 msgid "Keine Formulare gefunden."
@@ -403,7 +428,7 @@ msgid "Nach unten bewegen"
 msgstr ""
 
 #: src/components/admin/FormsList.vue
-#: src/components/admin/FormsList.vue:15
+#: src/components/admin/FormsList.vue:55
 #: src/components/admin/RelatedUsersList.vue
 #: src/components/admin/RelatedUsersList.vue:10
 #: src/components/profile/FormsList.vue
@@ -422,7 +447,7 @@ msgid "Neues Formular"
 msgstr ""
 
 #: src/components/admin/FormsList.vue
-#: src/components/admin/FormsList.vue:40
+#: src/components/admin/FormsList.vue:108
 msgid "Neues Formular erstellen"
 msgstr ""
 
@@ -434,7 +459,7 @@ msgstr ""
 #: src/components/admin/FormItem.vue
 #: src/components/admin/FormItem.vue:25
 #: src/components/admin/FormsList.vue
-#: src/components/admin/FormsList.vue:21
+#: src/components/admin/FormsList.vue:79
 #: src/components/admin/FormUserDataList.vue
 #: src/components/admin/FormUserDataList.vue:16
 msgid "Nutzende"
@@ -467,7 +492,7 @@ msgstr ""
 #: src/components/admin/FormItem.vue
 #: src/components/admin/FormItem.vue:24
 #: src/components/admin/FormsList.vue
-#: src/components/admin/FormsList.vue:22
+#: src/components/admin/FormsList.vue:86
 msgid "Rückläufe"
 msgstr ""
 
@@ -485,7 +510,7 @@ msgid "Speichern"
 msgstr ""
 
 #: src/components/admin/FormsList.vue
-#: src/components/admin/FormsList.vue:18
+#: src/components/admin/FormsList.vue:64
 msgid "Startdatum"
 msgstr ""
 
@@ -495,7 +520,8 @@ msgid "Startet am"
 msgstr ""
 
 #: src/components/admin/FormsList.vue
-#: src/components/admin/FormsList.vue:20
+#: src/components/admin/FormsList.vue:21
+#: src/components/admin/FormsList.vue:76
 msgid "Status"
 msgstr ""
 
@@ -531,7 +557,7 @@ msgid "Vergleichsoperator"
 msgstr ""
 
 #: src/components/admin/FormsList.vue
-#: src/components/admin/FormsList.vue:17
+#: src/components/admin/FormsList.vue:61
 #: src/components/profile/FormsList.vue
 #: src/components/profile/FormsList.vue:11
 msgid "Version"
@@ -554,6 +580,11 @@ msgstr ""
 #: src/composables/inputElements.js
 #: src/composables/inputElements.js:16
 msgid "Zahlenfeld"
+msgstr ""
+
+#: src/components/admin/FormsList.vue
+#: src/components/admin/FormsList.vue:32
+msgid "Zeitraum von"
 msgstr ""
 
 #: src/components/admin/FormInput.vue

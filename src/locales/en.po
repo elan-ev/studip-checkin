@@ -43,6 +43,9 @@ msgstr "Context menu for  %{context}"
 msgid "aktiv"
 msgstr "activ"
 
+msgid "Alle"
+msgstr "all"
+
 msgid "Antworten betrachten"
 msgstr "View replies"
 
@@ -91,6 +94,9 @@ msgstr "Description"
 #: src/components/admin/FormInput.vue:28
 msgid "Beschriftung"
 msgstr "Labeling"
+
+msgid "bis"
+msgstr "to"
 
 msgid "Bitte fügen Sie mindestens ein Formularelement ein."
 msgstr "Please include at least one form field."
@@ -222,6 +228,12 @@ msgstr "Field name"
 
 msgid "Filter"
 msgstr "Filter"
+
+msgid "Filter anzeigen/ausblenden"
+msgstr "show/hide filters"
+
+msgid "Filter zurücksetzen"
+msgstr "Reset filters"
 
 #: src/components/admin/FormItem.vue
 msgid "Formular"
@@ -456,6 +468,9 @@ msgstr "Value of the option"
 #: src/composables/inputElements.js
 msgid "Zahlenfeld"
 msgstr "Number field"
+
+msgid "Zeitraum von"
+msgstr "Period from"
 
 #: src/components/admin/FormInput.vue
 #: src/components/admin/FormInput.vue:83
