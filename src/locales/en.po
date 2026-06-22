@@ -189,6 +189,9 @@ msgstr "Single selection"
 msgid "Eingabezeile"
 msgstr "Input field"
 
+msgid "Einstellungen"
+msgstr "Settings"
+
 msgid "EN"
 msgstr "EN"
 
@@ -281,6 +284,9 @@ msgstr "List of users for the form:"
 #: src/components/admin/FormUserDataList.vue:4
 msgid "Liste der Nutzer unter Form:"
 msgstr "List of users for the form:"
+
+msgid "Liste wird geladen..."
+msgstr "Loading list..."
 
 #: src/components/admin/FormInput.vue
 #: src/components/admin/FormItem.vue

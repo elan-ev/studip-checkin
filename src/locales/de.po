@@ -189,6 +189,9 @@ msgstr ""
 msgid "Eingabezeile"
 msgstr ""
 
+msgid "Einstellungen"
+msgstr ""
+
 msgid "EN"
 msgstr ""
 
@@ -280,6 +283,9 @@ msgstr ""
 #: src/components/admin/FormUserDataList.vue
 #: src/components/admin/FormUserDataList.vue:4
 msgid "Liste der Nutzer unter Form:"
+msgstr ""
+
+msgid "Liste wird geladen..."
 msgstr ""
 
 #: src/components/admin/FormInput.vue
