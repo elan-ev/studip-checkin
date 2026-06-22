@@ -1,7 +1,46 @@
 <template>
     <div class="form-settings">
         <form class="default form-settings-form">
-            <fieldset>
+            <fieldset class="collapsable">
+                <legend>
+                    {{ $gettext('Einstellungen') }}
+                </legend>
+                <label>
+                    <span class="required">{{ $gettext('Startet am') }}</span>
+                    <div class="date-container">
+                        <input type="date" name="start-date" v-model="form['start-date']" :max="form['end-date']"
+                            required />
+                    </div>
+                    <br />
+                    <span class="required">{{ $gettext('Endet am') }}</span>
+                    <div class="date-container">
+                        <input type="date" name="end-date" v-model="form['end-date']" :min="form['start-date']"
+                            required />
+                    </div>
+                </label>
+                <div v-if="!hasUserFilter" class="messagebox messagebox_warning">
+                    {{ $gettext('Es wurde noch kein Zielgruppenfilter gesetzt') }}
+                </div>
+                <div v-else class="messagebox messagebox_info">
+                    {{
+                        $ngettext(
+                            '%{counter} Zielgruppenfilter wurde gesetzt',
+                            '%{counter} Zielgruppenfilter wurden gesetzt',
+                            userFiltersCounter,
+                            { counter: userFiltersCounter },
+                        )
+                    }}
+                </div>
+                <label>
+                    <button class="button" :class="{ add: !hasUserFilter, edit: hasUserFilter }"
+                        @click.prevent="openUserFilterDrawer">
+                        {{
+                            hasUserFilter ? $gettext('Zielgruppenfilter ändern') : $gettext('Zielgruppenfilter hinzufügen')
+                        }}
+                    </button>
+                </label>
+            </fieldset>
+            <fieldset class="collapsable collapsed">
                 <legend>{{ $gettext('DE') }}</legend>
                 <label>
                     <span class="required">{{ $gettext('Titel') }}</span>
@@ -9,14 +48,11 @@
                 </label>
                 <label>
                     {{ $gettext('Beschreibung') }}
-                    <textarea
-                        v-model="form.description['de']"
-                        name="description-de"
-                        class="form-settings-description"
-                    />
+                    <textarea v-model="form.description['de']" name="description-de"
+                        class="form-settings-description" />
                 </label>
             </fieldset>
-            <fieldset>
+            <fieldset class="collapsable collapsed">
                 <legend>{{ $gettext('EN') }}</legend>
                 <label>
                     <span class="required">{{ $gettext('Titel') }}</span>
@@ -24,54 +60,10 @@
                 </label>
                 <label>
                     {{ $gettext('Beschreibung') }}
-                    <textarea
-                        v-model="form.description['en']"
-                        name="description-en"
-                        class="form-settings-description"
-                    />
+                    <textarea v-model="form.description['en']" name="description-en"
+                        class="form-settings-description" />
                 </label>
             </fieldset>
-            <label>
-                <span class="required">{{ $gettext('Startet am') }}</span>
-                <div class="date-container">
-                    <input
-                        type="date"
-                        name="start-date"
-                        v-model="form['start-date']"
-                        :max="form['end-date']"
-                        required
-                    />
-                </div>
-                <br />
-                <span class="required">{{ $gettext('Endet am') }}</span>
-                <div class="date-container">
-                    <input type="date" name="end-date" v-model="form['end-date']" :min="form['start-date']" required />
-                </div>
-            </label>
-            <div v-if="!hasUserFilter" class="messagebox messagebox_warning">
-                {{ $gettext('Es wurde noch kein Zielgruppenfilter gesetzt') }}
-            </div>
-            <div v-else class="messagebox messagebox_info">
-                {{
-                    $ngettext(
-                        '%{counter} Zielgruppenfilter wurde gesetzt',
-                        '%{counter} Zielgruppenfilter wurden gesetzt',
-                        userFiltersCounter,
-                        { counter: userFiltersCounter },
-                    )
-                }}
-            </div>
-            <label>
-                <button
-                    class="button"
-                    :class="{ add: !hasUserFilter, edit: hasUserFilter }"
-                    @click.prevent="openUserFilterDrawer"
-                >
-                    {{
-                        hasUserFilter ? $gettext('Zielgruppenfilter ändern') : $gettext('Zielgruppenfilter hinzufügen')
-                    }}
-                </button>
-            </label>
         </form>
         <div class="form-settings-actions">
             <button class="button accept" @click.prevent="saveForm">
@@ -193,15 +185,18 @@ const openUserFilterDrawer = () => {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .form-settings {
     flex-basis: 25%;
     max-width: 405px;
     height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     border: none;
+    padding-right: 15px;
 
     .form-settings-form {
         .form-settings-description {
@@ -213,10 +208,18 @@ const openUserFilterDrawer = () => {
     .form-settings-actions {
         display: flex;
         flex-direction: row;
-        justify-content: center;
-        margin-bottom: -10px;
+        justify-content: flex-end;
+
+        button.button {
+            margin: unset;
+
+            &:not(:last-child) {
+                margin-right: 10px;
+            }
+        }
     }
 }
+
 .date-container {
     display: flex;
     gap: 10px;

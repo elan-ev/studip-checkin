@@ -157,7 +157,7 @@ const title = computed(() => {
 .checkin-action-menu {
     .action-menu-item {
         .studip-icon {
-            vertical-align: middle;
+            vertical-align: text-bottom;
             display: inline-block;
             margin-right: 0.5em;
         }

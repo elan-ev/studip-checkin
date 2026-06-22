@@ -1,7 +1,7 @@
 {
     "name": "studip-checkin-lib",
     "private": true,
-    "version": "0.2.1",
+    "version": "0.2.2",
     "author": "Ron Lucke <lucke@elan-ev.de> (elan e.V.)",
     "contributors": [
         "Ron Lucke <lucke@elan-ev.de> (elan e.V.)",

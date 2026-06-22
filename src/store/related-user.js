@@ -28,7 +28,7 @@ export const useRelatedUserStore = defineStore('relatedUserStore', () => {
     async function fetchByFormId(formId) {
         isLoading.value = true;
         try {
-            const { data } = await api.get(`checkin-forms/${formId}/related-users`);
+            await new Promise(resolve => setTimeout(resolve, 10000));
             clearRecords();
             data.forEach((relatedUser => {
                 storeRecord(relatedUser);
