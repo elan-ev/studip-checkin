@@ -1,0 +1,57 @@
+{
+    "name": "elan-ev/studip-checkin",
+    "version": "0.2.3",
+    "license": [
+        "GPL-3.0"
+    ],
+    "dependencies": {
+        "guzzlehttp/guzzle": {
+            "version": "7.10.0",
+            "license": [
+                "MIT"
+            ]
+        },
+        "guzzlehttp/promises": {
+            "version": "2.3.0",
+            "license": [
+                "MIT"
+            ]
+        },
+        "guzzlehttp/psr7": {
+            "version": "2.9.0",
+            "license": [
+                "MIT"
+            ]
+        },
+        "psr/http-client": {
+            "version": "1.0.3",
+            "license": [
+                "MIT"
+            ]
+        },
+        "psr/http-factory": {
+            "version": "1.1.0",
+            "license": [
+                "MIT"
+            ]
+        },
+        "psr/http-message": {
+            "version": "2.0",
+            "license": [
+                "MIT"
+            ]
+        },
+        "ralouphie/getallheaders": {
+            "version": "3.0.3",
+            "license": [
+                "MIT"
+            ]
+        },
+        "symfony/deprecation-contracts": {
+            "version": "v3.6.0",
+            "license": [
+                "MIT"
+            ]
+        }
+    }
+}

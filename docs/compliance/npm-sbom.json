@@ -3,9 +3,9 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "studip-checkin-lib@0.2.3",
-  "documentNamespace": "http://spdx.org/spdxdocs/studip-checkin-lib-0.2.3-5a5dde16-260a-4d0a-9887-a8ba5960fda6",
+  "documentNamespace": "http://spdx.org/spdxdocs/studip-checkin-lib-0.2.3-dc0b822c-f4ad-45f9-a33d-196e845233cd",
   "creationInfo": {
-    "created": "2026-08-25T07:24:19.979Z",
+    "created": "2026-08-25T07:33:59.122Z",
     "creators": [
       "Tool: npm/cli-10.9.8"
     ]
