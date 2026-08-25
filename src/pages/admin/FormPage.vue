@@ -112,11 +112,10 @@ const saveForm = async (formData) => {
         // Logic to update the existing form
         await formStore.updateForm(formData);
     }
+    console.debug(errors?.value);
     if (errors?.value) {
-        // Show error!
         console.error(errors.value);
         STUDIP.Report.error($gettext('Beim Erstellen des Formulars ist ein Fehler aufgetreten.'));
-        return;
     }
     finishUpAndGoBack();
 };

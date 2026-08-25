@@ -57,14 +57,6 @@
             </button>
         </section>
     </form>
-    <div class="user-filter-fields-actions">
-        <button class="button accept" @click.prevent="submitUserFilter">
-            {{ $gettext('Speichern') }}
-        </button>
-        <button class="button cancel" @click.prevent="cancel">
-            {{ $gettext('Abbrechen') }}
-        </button>
-    </div>
 </template>
 
 <script setup>
@@ -136,7 +128,8 @@ const cancel = async () => {
 const submitUserFilter = async () => {
     await userFilterStore.applyUserFilter(allAppliedFields.value);
     if (errors.value) {
-        // Display Error!
+        console.error(errors.value);
+        STUDIP.Report.error($gettext('Speichern der Filter ist ein Fehler aufgetreten.'));
         return;
     }
     // Display success!
