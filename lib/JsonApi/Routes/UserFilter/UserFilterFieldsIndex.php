@@ -31,12 +31,18 @@ class UserFilterFieldsIndex extends JsonApiController
             throw new AuthorizationFailedException();
         }
 
-        // TODO: This part is important for the inclusion of the user filters. We can also improve it later!
         $dir = __DIR__ . '/../../../UserFilterFields';
 
-        foreach (glob($dir . '/*.php') as $file) {
-            require_once $file;
-        }
+        // foreach (glob($dir . '/*.php') as $file) {
+        //     require_once $file;
+        // }
+
+        require_once $dir . '/StudipCheckinDegreeFilter.php';
+        require_once $dir . '/StudipCheckinDomainFilter.php';
+        require_once $dir . '/StudipCheckinGenderFilter.php';
+        require_once $dir . '/StudipCheckinInstituteFilter.php';
+        require_once $dir . '/StudipCheckinPermissionFilter.php';
+        // we do not need Statusgroups right now!
 
         $filtering = $this->getQueryParameters()->getFilteringParameters() ?: [];
         $target = $filtering['target'] ?? '';
