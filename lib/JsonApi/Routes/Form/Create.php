@@ -107,13 +107,15 @@ class Create extends JsonApiController
         $userFilter->fields = [];
         foreach ($filterFields as $field) {
             $classname = $field['attributes']['type'];
-            $f = new $classname();
-            if (!empty($field['id'])) {
-                $f->setId($field['id']);
+            if (!empty($classname) && class_exists($classname)) {
+                $f = new $classname();
+                if (!empty($field['id'])) {
+                    $f->setId($field['id']);
+                }
+                $f->setCompareOperator($field['attributes']['compare-operator']);
+                $f->setValue($field['attributes']['value']);
+                $userFilter->addField($f);
             }
-            $f->setCompareOperator($field['attributes']['compare-operator']);
-            $f->setValue($field['attributes']['value']);
-            $userFilter->addField($f);
         }
         $userFilter->store();
 

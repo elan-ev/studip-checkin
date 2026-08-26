@@ -39,7 +39,7 @@ class UserFiltersCreate extends JsonApiController
         $json = $this->validate($request);
         $user = $this->getUser($request);
 
-        if (!Authority::canCreateUserFilters($user, $filter)) {
+        if (!Authority::canCreateUserFilters($user)) {
             throw new AuthorizationFailedException();
         }
 
@@ -70,5 +70,4 @@ class UserFiltersCreate extends JsonApiController
             return 'Missing `filters` member of attributes block.';
         }
     }
-
 }
