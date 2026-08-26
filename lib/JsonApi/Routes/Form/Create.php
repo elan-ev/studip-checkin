@@ -106,7 +106,7 @@ class Create extends JsonApiController
         $userFilter = new UserFilter();
         $userFilter->fields = [];
         foreach ($filterFields as $field) {
-            $classname = $field['attributes']['type'];
+            $classname = $field['attributes']['type'] ?? null;
             if (!empty($classname) && class_exists($classname)) {
                 $f = new $classname();
                 if (!empty($field['id'])) {

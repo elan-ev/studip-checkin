@@ -116,6 +116,7 @@ const saveForm = async (formData) => {
     if (errors?.value) {
         console.error(errors.value);
         STUDIP.Report.error($gettext('Beim Erstellen des Formulars ist ein Fehler aufgetreten.'));
+        return;
     }
     finishUpAndGoBack();
 };
