@@ -38,8 +38,19 @@ class FormUserDataIndex extends JsonApiController
         }
 
         list($offset, $limit) = $this->getOffsetAndLimit();
-        $formUserData = FormUserData::findBySQL('`form_id` = ? LIMIT ? OFFSET ?', [$form->id, $limit, $offset]);
+        $total = count(FormUserData::findBySQL('`form_id` = ? ', [$form->id]));
+        $formUserData = FormUserData::findBySQL(
+            'JOIN auth_user_md5 ON (checkin_form_user_data.user_id = auth_user_md5.user_id) WHERE checkin_form_user_data.form_id = ? ORDER BY auth_user_md5.username ASC LIMIT ? OFFSET ?',
+            [$form->id, $limit, $offset]
+        );
 
-        return $this->getPaginatedContentResponse($formUserData, count($formUserData));
+        $apiResponse = $this->getPaginatedContentResponse($formUserData, $total);
+
+        $payload = json_decode((string) $apiResponse->getBody(), true);
+        $payload['meta']['page']['hasMore'] = ($offset + count($formUserData)) < $total;
+        $apiResponse->getBody()->rewind();
+        $apiResponse->getBody()->write(json_encode($payload));
+
+        return $apiResponse;
     }
 }

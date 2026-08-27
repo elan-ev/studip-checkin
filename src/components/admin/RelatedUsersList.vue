@@ -67,12 +67,14 @@ const lang = computed(() => {
 const hasMore = computed(() => {
     const pagination = relatedUserStore.getPaginationForForm(props.form.id);
 
-    return pagination.hasMore;
+    const hasMore = pagination.hasMore;
+
+    const totalLoaded = pagination.total === props.users.length;
+
+    return hasMore && !totalLoaded;
 });
 
 const loadMoreData = () => {
     relatedUserStore.fetchByFormId(props.form.id, { loadMore: true });
 }
 </script>
-
-<style></style>

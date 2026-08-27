@@ -2,7 +2,7 @@
     <table class="default">
         <caption>
             {{
-                $gettext('Liste der Nutzer unter Form:') + ` ${form.name[lang]}`
+                $gettext('Liste der Rückläufe für Formular:') + ` ${form.name[lang]}`
             }}
             <span class="actions">
                 <a :href="exportLink" class="button checkin-caption-action-export-button">
@@ -28,7 +28,21 @@
             <template v-else>
                 <FormUserDataItem v-for="formData in data" :key="formData.id" :formData="formData" :formId="form.id" />
             </template>
+            <template v-if="hasMore">
+                <tr>
+                    <td colspan="7">{{ $gettext('Es gibt noch weitere Einträge.') }}</td>
+                </tr>
+            </template>
         </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="9">
+                    <Button class="button" :disabled="!hasMore" @click="loadMoreData">
+                        {{ $gettext('mehr Laden ...') }}
+                    </Button>
+                </td>
+            </tr>
+        </tfoot>
     </table>
 </template>
 
@@ -37,8 +51,10 @@ import { computed } from 'vue';
 import StudipIcon from '@/components/studip/StudipIcon.vue';
 import FormUserDataItem from './FormUserDataItem.vue';
 import { useContextStore } from '@/store/context';
+import { useFormUserDataStore } from '@/store/form-user-data';
 
 const contextStore = useContextStore();
+const formUserDataStore = useFormUserDataStore();
 
 const props = defineProps({
     data: {
@@ -57,6 +73,20 @@ const exportLink = computed(() => {
 const lang = computed(() => {
     return contextStore.langSelector;
 });
+
+const hasMore = computed(() => {
+    const pagination = formUserDataStore.getPaginationForForm(props.form.id);
+
+    const hasMore = pagination.hasMore;
+
+    const totalLoaded = pagination.total === props.data.length;
+
+    return hasMore && !totalLoaded;
+});
+
+const loadMoreData = () => {
+    formUserDataStore.fetchByFormId(props.form.id, { loadMore: true });
+}
 </script>
 
 <style lang="scss">

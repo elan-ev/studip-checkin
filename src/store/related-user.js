@@ -14,7 +14,7 @@ export const useRelatedUserStore = defineStore('relatedUserStore', () => {
         if (!paginationByForm.value.has(formId)) {
             paginationByForm.value.set(formId, {
                 offset: 0,
-                limit: 1,
+                limit: 30,
                 total: 0,
                 hasMore: true,
             });
@@ -227,6 +227,5 @@ export const useRelatedUserStore = defineStore('relatedUserStore', () => {
         isLoadingMore,
         errors,
         getPaginationForForm,
-        paginationByForm
     };
 });
