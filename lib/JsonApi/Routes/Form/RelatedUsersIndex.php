@@ -39,8 +39,19 @@ class RelatedUsersIndex extends JsonApiController
         }
 
         list($offset, $limit) = $this->getOffsetAndLimit();
-        $relatedUsers = RelatedUser::findBySQL('`form_id` = ? LIMIT ? OFFSET ?', [$form->id, $limit, $offset]);
+        $total = count(RelatedUser::findBySQL('`form_id` = ?', [$form->id]));
+        $relatedUsers = RelatedUser::findBySQL(
+            'JOIN auth_user_md5 ON (checkin_related_users.user_id = auth_user_md5.user_id) WHERE checkin_related_users.form_id = ? ORDER BY auth_user_md5.username ASC LIMIT ? OFFSET ?',
+            [$form->id, $limit, $offset]
+        );
 
-        return $this->getPaginatedContentResponse($relatedUsers, count($relatedUsers));
+        $apiResponse = $this->getPaginatedContentResponse($relatedUsers, $total);
+
+        $payload = json_decode((string) $apiResponse->getBody(), true);
+        $payload['meta']['page']['hasMore'] = ($offset + count($relatedUsers)) < $total;
+        $apiResponse->getBody()->rewind();
+        $apiResponse->getBody()->write(json_encode($payload));
+
+        return $apiResponse;
     }
 }

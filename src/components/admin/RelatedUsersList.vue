@@ -22,7 +22,21 @@
             <template v-else>
                 <RelatedUserItem v-for="user in users" :key="user.id" :user="user" />
             </template>
+            <template v-if="hasMore">
+                <tr>
+                    <td colspan="7">{{ $gettext('Es gibt noch weitere Einträge.') }}</td>
+                </tr>
+            </template>
         </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="9">
+                    <Button class="button" :disabled="!hasMore" @click="loadMoreData">
+                        {{ $gettext('mehr Laden ...') }}
+                    </Button>
+                </td>
+            </tr>
+        </tfoot>
     </table>
 </template>
 
@@ -30,8 +44,10 @@
 import { computed } from 'vue';
 import RelatedUserItem from './RelatedUserItem.vue';
 import { useContextStore } from '@/store/context';
+import { useRelatedUserStore } from '@/store/related-user';
 
 const contextStore = useContextStore();
+const relatedUserStore = useRelatedUserStore();
 
 const props = defineProps({
     users: {
@@ -47,6 +63,16 @@ const props = defineProps({
 const lang = computed(() => {
     return contextStore.langSelector;
 });
+
+const hasMore = computed(() => {
+    const pagination = relatedUserStore.getPaginationForForm(props.form.id);
+
+    return pagination.hasMore;
+});
+
+const loadMoreData = () => {
+    relatedUserStore.fetchByFormId(props.form.id, { loadMore: true });
+}
 </script>
 
 <style></style>

@@ -6,7 +6,7 @@
         <div class="checkin-related-users">
             <div class="checkin-related-users-list-container">
                 <div class="checkin-related-users-list">
-                    <RelatedUsersList :users="relatedUserStore.all" :form="formStore.byId(formId)" />
+                    <RelatedUsersList :users="relatedUsers" :form="form" />
                 </div>
             </div>
         </div>
@@ -28,21 +28,27 @@ import LoadingSplash from '@/components/shared/LoadingSplash.vue';
 import { computed, onMounted } from 'vue';
 import { useRelatedUserStore } from '@/store/related-user';
 import { useDrawerStore } from '@/store/drawer';
-import { storeToRefs } from 'pinia';
 import { useFormStore } from '@/store/form';
 
 const formStore = useFormStore();
 const relatedUserStore = useRelatedUserStore();
 const drawerStore = useDrawerStore();
-const { records } = storeToRefs(relatedUserStore);
 
 const props = defineProps({
-    formId: Number,
+    formId: String,
 });
 
 const relatedUsersLoading = computed(() => {
     return relatedUserStore.isLoading;
 });
+
+const relatedUsers = computed(() => {
+    return relatedUserStore.byFormId(parseInt(props.formId)) ?? [];
+});
+
+const form = computed(() => {
+    return formStore.byId(props.formId);
+})
 
 onMounted(async () => {
     await relatedUserStore.fetchByFormId(props.formId);

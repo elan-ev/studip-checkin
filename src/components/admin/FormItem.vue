@@ -119,11 +119,11 @@ const isEndingSoon = computed(() => {
 });
 
 const userNum = computed(() => {
-    return props.form?.['related-users']?.data?.length ?? 0;
+    return props.form?.['related-users-count'] ?? 0;
 });
 
 const dataNum = computed(() => {
-    return props.form?.['form-user-data']?.data?.length ?? 0;
+    return props.form?.['form-user-data-count'] ?? 0;
 });
 
 const startDate = computed(() => {

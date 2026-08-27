@@ -4,15 +4,70 @@ import { api } from './api/kitsu-api.js';
 
 export const useRelatedUserStore = defineStore('relatedUserStore', () => {
     const records = ref(new Map());
+    const recordsByForm = ref(new Map());
+    const paginationByForm = ref(new Map());
     const isLoading = ref(false);
+    const isLoadingMore = ref(false);
     const errors = ref(false);
 
+    function getPaginationForForm(formId) {
+        if (!paginationByForm.value.has(formId)) {
+            paginationByForm.value.set(formId, {
+                offset: 0,
+                limit: 1,
+                total: 0,
+                hasMore: true,
+            });
+        }
+        return paginationByForm.value.get(formId);
+    }
+
     function storeRecord(newRecord) {
+        const formId = newRecord['form-id'];
         records.value.set(String(newRecord.id), newRecord);
+
+        if (!recordsByForm.value.has(formId)) {
+            recordsByForm.value.set(formId, []);
+        }
+
+        const users = recordsByForm.value.get(formId);
+        const existingIndex = users.findIndex((m) => m.id === newRecord.id);
+
+        if (existingIndex > -1) {
+            users[existingIndex] = newRecord;
+        } else {
+            users.push(newRecord);
+        }
+    }
+
+    function storeRecords(newRecords) {
+        if (!newRecords || newRecords.length === 0) return;
+
+        const formId = newRecords[0]['form-id'];
+
+        newRecords.forEach((rec) => records.value.set(rec.id, rec));
+
+        const currentUsers = recordsByForm.value.get(formId) || [];
+
+        const updatedUsers = [...currentUsers];
+
+        newRecords.forEach((newRecord) => {
+            const existingIndex = updatedUsers.findIndex((m) => m.id === newRecord.id);
+            if (existingIndex > -1) {
+                updatedUsers[existingIndex] = newRecord;
+            } else {
+                updatedUsers.push(newRecord);
+            }
+        });
+
+
+        recordsByForm.value.set(formId, updatedUsers);
     }
 
     function clearRecords() {
         records.value = new Map();
+        recordsByForm.value = new Map();
+        paginationByForm.value = new Map();
     }
 
     const all = computed(() => {
@@ -25,19 +80,52 @@ export const useRelatedUserStore = defineStore('relatedUserStore', () => {
         return records.value.get(String(id));
     }
 
-    async function fetchByFormId(formId) {
-        isLoading.value = true;
+    function byFormId(formId) {
+        return recordsByForm.value.get(formId) || [];
+    }
+
+    async function fetchByFormId(formId, { loadMore = false } = {}) {
+        const pagination = getPaginationForForm(formId);
+        if (loadMore && (!pagination.hasMore || isLoadingMore.value)) {
+            return;
+        }
+
+        if (loadMore) {
+            isLoadingMore.value = true;
+        } else {
+            isLoading.value = true;
+        }
+
+        const currentOffset = loadMore ? pagination.offset + pagination.limit : 0;
+
         try {
-            await new Promise(resolve => setTimeout(resolve, 10000));
-            clearRecords();
-            data.forEach((relatedUser => {
-                storeRecord(relatedUser);
-            }))
+            const { data, meta } = await api.fetch(`checkin-forms/${formId}/related-users`, {
+                params: {
+                    'page[offset]': currentOffset,
+                    'page[limit]': pagination.limit,
+                },
+            });
+            storeRecords(data);
+            if (meta.page) {
+                const total = meta.page.total ?? 0;
+                const offset = meta.page.offset ?? currentOffset;
+                const limit = meta.page.limit ?? pagination.limit;
+                const hasMore = meta.page.hasMore ?? false;
+
+                paginationByForm.value.set(formId, {
+                    offset,
+                    limit,
+                    total,
+                    hasMore,
+                });
+            }
+
         } catch (err) {
             console.error(`Error while fetching related users for form with id: ${formId}`, err);
             errors.value = err;
         } finally {
             isLoading.value = false;
+            isLoadingMore.value = false;
         }
     }
 
@@ -71,7 +159,16 @@ export const useRelatedUserStore = defineStore('relatedUserStore', () => {
     }
 
     async function removeRecord(relatedUserId, deletePermanently = false) {
+        const record = records.value.get(relatedUserId);
+        if (!record) return;
+
+        const formId = record['form-id'];
         records.value.delete(String(relatedUserId));
+        if (recordsByForm.value.has(formId)) {
+            const users = recordsByForm.value.get(formId);
+            const filtered = users.filter((m) => m.id !== relatedUserId);
+            recordsByForm.value.set(formId, filtered);
+        }
         if (deletePermanently) {
             isLoading.value = true;
             try {
@@ -114,10 +211,12 @@ export const useRelatedUserStore = defineStore('relatedUserStore', () => {
 
     return {
         records,
+        recordsByForm,
         storeRecord,
         clearRecords,
         all,
         byId,
+        byFormId,
         fetchByFormId,
         fetchAll,
         fetchById,
@@ -125,6 +224,9 @@ export const useRelatedUserStore = defineStore('relatedUserStore', () => {
         updateRecord,
         createRecord,
         isLoading,
+        isLoadingMore,
         errors,
+        getPaginationForForm,
+        paginationByForm
     };
 });
