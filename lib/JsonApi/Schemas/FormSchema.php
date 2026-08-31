@@ -59,8 +59,8 @@ class FormSchema extends \JsonApi\Schemas\SchemaProvider
             'version' => (int) $resource['version'],
             'start-date' => $resource['start_date'] ? date('Y-m-d', $resource['start_date']) : null,
             'end-date' => $resource['end_date'] ? date('Y-m-d', $resource['end_date']) : null,
-            'related-users-count' => sizeof($resource['related_users']),
-            'form-user-data-count' => sizeof($resource['form_user_data']),
+            'related-users-count' => $resource->countRelatedUsers(),
+            'form-user-data-count' => $resource->countFormUserData(),
         ];
     }
 

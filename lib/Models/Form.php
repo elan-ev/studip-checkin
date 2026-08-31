@@ -100,4 +100,14 @@ class Form extends SimpleORMap
 
         return $filteredStructure;
     }
+
+    public function countRelatedUsers(): int
+    {
+        return RelatedUser::countBySql('form_id = ?', [$this->id]) ?? 0;
+    }
+
+    public function countFormUserData(): int
+    {
+        return FormUserData::countBySql('form_id = ?', [$this->id]) ?? 0;
+    }
 }
