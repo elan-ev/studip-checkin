@@ -52,18 +52,17 @@ class FormSchema extends \JsonApi\Schemas\SchemaProvider
     public function getAttributes($resource, ContextInterface $context): iterable
     {
         return [
-            'filter-id'  => (string) $resource['filter_id'],
-            'name' => $resource['name']->getArrayCopy(),
-            'description' => $resource['description']->getArrayCopy() ?? [],
-            'structure' => $resource['structure']->getArrayCopy(),
+            'filter-id' => (string) $resource['filter_id'],
+            'name' => is_object($resource['name']) ? $resource['name']->getArrayCopy() : [],
+            'description' => is_object($resource['description']) ? $resource['description']->getArrayCopy() : [],
+            'structure' => is_object($resource['structure']) ? $resource['structure']->getArrayCopy() : [],
             'version' => (int) $resource['version'],
-            'start-date' => $resource['start_date'] ? date('Y-m-d', $resource['start_date']) : null,
-            'end-date' => $resource['end_date'] ? date('Y-m-d', $resource['end_date']) : null,
+            'start-date' => $resource['start_date'] ? date('Y-m-d', (int) $resource['start_date']) : null,
+            'end-date' => $resource['end_date'] ? date('Y-m-d', (int) $resource['end_date']) : null,
             'related-users-count' => $resource->countRelatedUsers(),
             'form-user-data-count' => $resource->countFormUserData(),
         ];
     }
-
     /**
      * {@inheritdoc}
      */
@@ -71,23 +70,23 @@ class FormSchema extends \JsonApi\Schemas\SchemaProvider
     {
         $relationships = [];
 
-        $relationships = $this->addUserFilterRelationship(
-            $relationships,
-            $resource,
-            $this->shouldInclude($context, self::REL_USER_FILTER)
-        );
+        // $relationships = $this->addUserFilterRelationship(
+        //     $relationships,
+        //     $resource,
+        //     $this->shouldInclude($context, self::REL_USER_FILTER)
+        // );
 
-        $relationships = $this->addRelatedUsersRelationship(
-            $relationships,
-            $resource,
-            $this->shouldInclude($context, self::REL_RELATED_USERS)
-        );
+        // $relationships = $this->addRelatedUsersRelationship(
+        //     $relationships,
+        //     $resource,
+        //     $this->shouldInclude($context, self::REL_RELATED_USERS)
+        // );
 
-        $relationships = $this->addFormUserDataRelationship(
-            $relationships,
-            $resource,
-            $this->shouldInclude($context, self::REL_FORM_USER_DATA)
-        );
+        // $relationships = $this->addFormUserDataRelationship(
+        //     $relationships,
+        //     $resource,
+        //     $this->shouldInclude($context, self::REL_FORM_USER_DATA)
+        // );
 
         return $relationships;
     }

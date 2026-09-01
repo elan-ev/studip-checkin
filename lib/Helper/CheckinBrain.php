@@ -38,7 +38,7 @@ class CheckinBrain {
             $forms = RelatedUser::getActiveFormsByUser($userId);
             foreach ($forms as $form) {
                 // If the form has date range and it is not expired?
-                if (!$form->isRunnable()) {
+                if (!$form || !$form->isRunnable()) {
                     continue;
                 }
                 // If the user has already answer this version of the form!?

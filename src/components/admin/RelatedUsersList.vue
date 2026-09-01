@@ -22,17 +22,12 @@
             <template v-else>
                 <RelatedUserItem v-for="user in users" :key="user.id" :user="user" />
             </template>
-            <template v-if="hasMore">
-                <tr>
-                    <td colspan="7">{{ $gettext('Es gibt noch weitere Einträge.') }}</td>
-                </tr>
-            </template>
         </tbody>
         <tfoot>
             <tr>
                 <td colspan="9">
                     <Button class="button" :disabled="!hasMore" @click="loadMoreData">
-                        {{ $gettext('mehr Laden ...') }}
+                        {{ $gettext('Weitere Einträge laden') }}
                     </Button>
                 </td>
             </tr>

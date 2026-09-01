@@ -26,9 +26,8 @@ class Index extends JsonApiController
 {
     protected $allowedPagingParameters = ['offset', 'limit'];
     protected $allowedIncludePaths = [
-        // do NOT use REL_RELATED_USERS and REL_FORM_USER_DATA -> too much data!
-        // FormSchema::REL_FORM_USER_DATA, 
-        // FormSchema::REL_RELATED_USERS,
+        FormSchema::REL_FORM_USER_DATA, 
+        FormSchema::REL_RELATED_USERS,
         FormSchema::REL_USER_FILTER,
     ];
 

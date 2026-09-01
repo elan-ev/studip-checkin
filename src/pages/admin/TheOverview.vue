@@ -17,7 +17,7 @@ const formStore = useFormStore();
 const userFilterStore = useUserFilterStore();
 
 onMounted(async () => {
-    await formStore.fetchAll(['user-filter']);
+    await formStore.fetchAll();
     await userFilterStore.fetchAvailableFields();
 });
 </script>
