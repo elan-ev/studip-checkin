@@ -5,7 +5,7 @@ import { api } from './api/kitsu-api.js';
 export const useFormStore = defineStore('formStore', () => {
     const records = ref(new Map());
     const isLoading = ref(false);
-    const errors = ref(false);
+    const errors = ref(true);
 
     function storeRecord(newRecord) {
         records.value.set(String(newRecord.id), newRecord);
@@ -15,12 +15,17 @@ export const useFormStore = defineStore('formStore', () => {
         records.value = new Map();
     }
 
+    function clearErrors() {
+        errors.value = false;
+    }
+
     const all = computed(() => {
         void records.value.size;
         return [...records.value.values()];
     });
 
     async function removeRecord(formId, deletePermanently = false) {
+        clearErrors();
         let performRemove = true;
         if (deletePermanently) {
             isLoading.value = true;
@@ -45,6 +50,7 @@ export const useFormStore = defineStore('formStore', () => {
     }
 
     async function fetchAll(includePaths = []) {
+        clearErrors();
         isLoading.value = true;
         try {
             const config = prepareRequestConfig(includePaths);
@@ -64,6 +70,7 @@ export const useFormStore = defineStore('formStore', () => {
     }
 
     async function fetchById(id, includePaths = []) {
+        clearErrors();
         isLoading.value = true;
         try {
             const config = prepareRequestConfig(includePaths);
@@ -78,6 +85,7 @@ export const useFormStore = defineStore('formStore', () => {
     }
 
     async function createForm(formData, includePaths = []) {
+        clearErrors();
         isLoading.value = true;
         try {
             const config = prepareRequestConfig(includePaths);
@@ -92,6 +100,7 @@ export const useFormStore = defineStore('formStore', () => {
     }
 
     async function copyForm(formId) {
+        clearErrors();
         isLoading.value = true;
         const formData = {
                 type: 'checkin-forms',
@@ -109,6 +118,7 @@ export const useFormStore = defineStore('formStore', () => {
     }
 
     async function updateForm(formData, includePaths = []) {
+        clearErrors();
         isLoading.value = true;
         try {
             const config = prepareRequestConfig(includePaths);
@@ -134,6 +144,7 @@ export const useFormStore = defineStore('formStore', () => {
     }
 
     async function fetchByUserId(userId, all = false) {
+        clearErrors();
         isLoading.value = true;
         try {
             const { data } = await api.get(`checkin-user-forms/${userId}/${all ? 'all' : 'pending'}`);
@@ -158,6 +169,7 @@ export const useFormStore = defineStore('formStore', () => {
         storeRecord,
         clearRecords,
         removeRecord,
+        clearErrors,
         isLoading,
         errors,
         all,

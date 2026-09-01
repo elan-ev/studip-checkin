@@ -1,5 +1,7 @@
 import { createWebHistory, createRouter } from 'vue-router';
 
+import { useFormStore } from '../store/form.js';
+
 import TheOverview from '../pages/admin/TheOverview.vue';
 import FormPage from '../pages/admin/FormPage.vue';
 import RelatedUsersPage from '../pages/admin/RelatedUsersPage.vue';
@@ -19,4 +21,11 @@ const baseUrl = `${absoluteUriStudip.pathname}plugins.php/studipcheckin/admin/#`
 export const router = createRouter({
     history: createWebHistory(baseUrl),
     routes,
+});
+
+router.beforeEach((to, from, next) => {
+    const formStore = useFormStore();
+    formStore.clearErrors();
+    
+    next();
 });
