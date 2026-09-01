@@ -5,7 +5,7 @@
     <div class="checkin-form-user-data">
         <div class="checkin-form-user-data-list-container">
             <div class="checkin-form-user-data-list">
-                <FormUserDataList :data="formUserDataStore.all" :form="formStore.byId(formId)" />
+                <FormUserDataList :data="userData" :form="formStore.byId(formId)" />
             </div>
             <div class="checkin-form-user-data-list-footer">
                 <!-- Here comes the pagination! -->
@@ -29,7 +29,7 @@
 <script setup>
 import FormUserDataList from '@/components/admin/FormUserDataList.vue';
 import StudipDrawer from '@/components/studip/StudipDrawer.vue';
-import { onMounted  } from 'vue';
+import { computed, onMounted  } from 'vue';
 import { useFormUserDataStore } from '@/store/form-user-data';
 import { useDrawerStore } from '@/store/drawer';
 import { useFormStore } from '@/store/form';
@@ -40,6 +40,10 @@ const drawerStore = useDrawerStore();
 
 const props = defineProps({
     formId: Number,
+});
+
+const userData = computed(() => {
+    return formUserDataStore.byFormId(parseInt(props.formId)) ?? [];
 });
 
 onMounted(async () => {

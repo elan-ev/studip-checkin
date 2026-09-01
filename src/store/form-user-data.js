@@ -79,6 +79,10 @@ export const useFormUserDataStore = defineStore('formUserDataStore', () => {
         return all.value.find((record) => record['form-id'] === Number(formId));
     }
 
+    function byFormId(formId) {
+        return recordsByForm.value.get(formId) || [];
+    }
+
     const all = computed(() => {
         void records.value.size;
         return [...records.value.values()];
@@ -112,6 +116,7 @@ export const useFormUserDataStore = defineStore('formUserDataStore', () => {
         isLoading.value = true;
         try {
             const { data } = await api.get('checkin-form-user-data');
+            clearRecords();
             data.forEach((record) => {
                 storeRecord(record);
             });
@@ -225,6 +230,7 @@ export const useFormUserDataStore = defineStore('formUserDataStore', () => {
 
     return {
         records,
+        recordsByForm,
         isLoading,
         errors,
         all,
@@ -238,6 +244,7 @@ export const useFormUserDataStore = defineStore('formUserDataStore', () => {
         fetchByFormId,
         getPaginationForForm,
 
-        getByFormId
+        getByFormId,
+        byFormId
     };
 });
