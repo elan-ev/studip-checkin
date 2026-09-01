@@ -57,7 +57,9 @@ class RelatedUser extends SimpleORMap
         $records = self::findBySQL('user_id = ? AND active = 1', [$userId]);
         $forms = [];
         foreach ($records as $record) {
-            $forms[] = $record->form;
+            if ($record->form) {
+                $forms[] = $record->form;
+            }
         }
         return $forms;
     }

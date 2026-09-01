@@ -29,6 +29,11 @@ class UserFormsIndex extends JsonApiController
     {
         $requestedUser = $this->getUser($request);
         $user = \User::find($args['id']);
+
+        if (!$user) {
+            throw new RecordNotFoundException();
+        }
+
         if (!Authority::canIndexUserForms($user, $requestedUser)) {
             throw new AuthorizationFailedException();
         }

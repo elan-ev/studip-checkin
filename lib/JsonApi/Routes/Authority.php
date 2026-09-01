@@ -93,6 +93,10 @@ class Authority
 
     public static function canIndexUserForms(User $user, User $requesting): bool
     {
+        if (self::rootAndAdminOnly($requesting)) {
+            return true;
+        }
+
         return $GLOBALS['perm']->have_perm('user', $user->id) && $user->id === $requesting->id;
     }
 
