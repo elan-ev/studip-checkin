@@ -280,10 +280,8 @@ msgstr "Last updated"
 msgid "Liste der Nutzenden für Formular:"
 msgstr "List of users for the form:"
 
-#: src/components/admin/FormUserDataList.vue
-#: src/components/admin/FormUserDataList.vue:4
-msgid "Liste der Nutzer unter Form:"
-msgstr "List of users for the form:"
+msgid "Liste der Rückläufe für Formular:"
+msgstr "List of Responses for the Form:"
 
 msgid "Liste wird geladen..."
 msgstr "Loading list..."
@@ -412,6 +410,9 @@ msgstr "Close"
 msgid "Speichern"
 msgstr "Save"
 
+msgid "Speichern der Filter ist ein Fehler aufgetreten."
+msgstr "An error occurred while saving the filters."
+
 #: src/components/admin/FormsList.vue
 #: src/components/admin/FormsList.vue:20
 msgid "Startdatum"
@@ -461,6 +462,9 @@ msgstr "Version"
 #: src/components/admin/FormUserDataList.vue:15
 msgid "Version des Formulars"
 msgstr "Version of the form"
+
+msgid "Weitere Einträge laden"
+msgstr "Load more entries"
 
 #: src/components/expanded-views/UserFilterExpandedView.vue
 msgid "Wert"

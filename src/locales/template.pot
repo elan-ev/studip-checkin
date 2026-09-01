@@ -4,8 +4,6 @@ msgstr ""
 
 #: src/components/admin/FormSettings.vue
 #: src/components/admin/FormSettings.vue:73
-#: src/components/expanded-views/UserFilterExpandedView.vue
-#: src/components/expanded-views/UserFilterExpandedView.vue:65
 #: src/components/shared/FormData.vue
 #: src/components/shared/FormData.vue:27
 msgid "Abbrechen"
@@ -102,7 +100,7 @@ msgid "Bedingung hinzufügen"
 msgstr ""
 
 #: src/pages/admin/FormPage.vue
-#: src/pages/admin/FormPage.vue:118
+#: src/pages/admin/FormPage.vue:117
 msgid "Beim Erstellen des Formulars ist ein Fehler aufgetreten."
 msgstr ""
 
@@ -372,7 +370,7 @@ msgstr ""
 
 #: src/components/admin/FormUserDataList.vue
 #: src/components/admin/FormUserDataList.vue:5
-msgid "Liste der Nutzer unter Form:"
+msgid "Liste der Rückläufe für Formular:"
 msgstr ""
 
 #: src/pages/admin/RelatedUsersPage.vue
@@ -511,11 +509,14 @@ msgstr ""
 
 #: src/components/admin/FormSettings.vue
 #: src/components/admin/FormSettings.vue:70
-#: src/components/expanded-views/UserFilterExpandedView.vue
-#: src/components/expanded-views/UserFilterExpandedView.vue:62
 #: src/components/shared/FormData.vue
 #: src/components/shared/FormData.vue:23
 msgid "Speichern"
+msgstr ""
+
+#: src/components/expanded-views/UserFilterExpandedView.vue
+#: src/components/expanded-views/UserFilterExpandedView.vue:132
+msgid "Speichern der Filter ist ein Fehler aufgetreten."
 msgstr ""
 
 #: src/components/admin/FormsList.vue
@@ -575,6 +576,13 @@ msgstr ""
 #: src/components/admin/FormUserDataList.vue
 #: src/components/admin/FormUserDataList.vue:17
 msgid "Version des Formulars"
+msgstr ""
+
+#: src/components/admin/FormUserDataList.vue
+#: src/components/admin/FormUserDataList.vue:36
+#: src/components/admin/RelatedUsersList.vue
+#: src/components/admin/RelatedUsersList.vue:30
+msgid "Weitere Einträge laden"
 msgstr ""
 
 #: src/components/expanded-views/UserFilterExpandedView.vue
