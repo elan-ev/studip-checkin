@@ -5,7 +5,7 @@ import { api } from './api/kitsu-api.js';
 export const useFormStore = defineStore('formStore', () => {
     const records = ref(new Map());
     const isLoading = ref(false);
-    const errors = ref(true);
+    const errors = ref(false);
 
     function storeRecord(newRecord) {
         records.value.set(String(newRecord.id), newRecord);

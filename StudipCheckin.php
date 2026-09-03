@@ -82,8 +82,8 @@ class StudipCheckin extends StudIPPlugin implements SystemPlugin, JsonApiPlugin
 
     private function buildContentsNavigation(): Navigation
     {
-        $navigation = new Navigation($this->_('CheckInPlugin'));
-        $navigation->setDescription('TODO: Lorem ipsum dolor');
+        $navigation = new Navigation($this->_('CheckIn'));
+        $navigation->setDescription('Erstellen und Verwalten von Formularen nach dem Login');
         $navigation->setImage(Icon::create('place', 'navigation'));
         $navigation->addSubNavigation('index', new Navigation(
             'Übersicht',

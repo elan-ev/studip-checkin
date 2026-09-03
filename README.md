@@ -1,5 +1,8 @@
 # StudipCheckinPlugin
 
+Das Stud.IP CheckIn Plugin ermöglicht es, nach dem Login gezielt Formulare an spezifische Nutzergruppen auszuspielen. Administrierende können genau festlegen, 
+welche Zielgruppen beim Einstieg in die Plattform adressiert werden, um notwendige Rückmeldungen, Zustimmungen oder Datenerfassungen direkt und effizient einzuholen.
+
 ## Voraussetzungen
 Bevor Sie das Plugin installieren oder entwickeln, stellen Sie sicher, dass folgende Werkzeuge auf Ihrem System installiert sind:
 * Node.js

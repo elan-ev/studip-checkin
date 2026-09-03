@@ -2,22 +2,22 @@
   "spdxVersion": "SPDX-2.3",
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
-  "name": "studip-checkin-lib@0.3.4",
-  "documentNamespace": "http://spdx.org/spdxdocs/studip-checkin-lib-0.3.4-de3f752c-5da7-4e48-8c52-91ed180012dc",
+  "name": "studip-checkin-lib@0.3.5",
+  "documentNamespace": "http://spdx.org/spdxdocs/studip-checkin-lib-0.3.5-3f935cc9-c684-43de-af2b-e21006be99ee",
   "creationInfo": {
-    "created": "2026-09-01T14:32:04.941Z",
+    "created": "2026-09-03T11:39:06.080Z",
     "creators": [
       "Tool: npm/cli-10.9.8"
     ]
   },
   "documentDescribes": [
-    "SPDXRef-Package-studip-checkin-lib-0.3.4"
+    "SPDXRef-Package-studip-checkin-lib-0.3.5"
   ],
   "packages": [
     {
       "name": "studip-checkin-lib",
-      "SPDXID": "SPDXRef-Package-studip-checkin-lib-0.3.4",
-      "versionInfo": "0.3.4",
+      "SPDXID": "SPDXRef-Package-studip-checkin-lib-0.3.5",
+      "versionInfo": "0.3.5",
       "packageFileName": "",
       "primaryPackagePurpose": "LIBRARY",
       "downloadLocation": "NOASSERTION",
@@ -28,7 +28,7 @@
         {
           "referenceCategory": "PACKAGE-MANAGER",
           "referenceType": "purl",
-          "referenceLocator": "pkg:npm/studip-checkin-lib@0.3.4"
+          "referenceLocator": "pkg:npm/studip-checkin-lib@0.3.5"
         }
       ]
     },
@@ -7495,77 +7495,77 @@
   "relationships": [
     {
       "spdxElementId": "SPDXRef-DOCUMENT",
-      "relatedSpdxElement": "SPDXRef-Package-studip-checkin-lib-0.3.4",
+      "relatedSpdxElement": "SPDXRef-Package-studip-checkin-lib-0.3.5",
       "relationshipType": "DESCRIBES"
     },
     {
       "spdxElementId": "SPDXRef-Package-pinia-4.0.3",
-      "relatedSpdxElement": "SPDXRef-Package-studip-checkin-lib-0.3.4",
+      "relatedSpdxElement": "SPDXRef-Package-studip-checkin-lib-0.3.5",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-vue-3.5.41",
-      "relatedSpdxElement": "SPDXRef-Package-studip-checkin-lib-0.3.4",
+      "relatedSpdxElement": "SPDXRef-Package-studip-checkin-lib-0.3.5",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-vue-router-4.6.4",
-      "relatedSpdxElement": "SPDXRef-Package-studip-checkin-lib-0.3.4",
+      "relatedSpdxElement": "SPDXRef-Package-studip-checkin-lib-0.3.5",
       "relationshipType": "DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-ckeditor.ckeditor5-vue-7.3.0",
-      "relatedSpdxElement": "SPDXRef-Package-studip-checkin-lib-0.3.4",
+      "relatedSpdxElement": "SPDXRef-Package-studip-checkin-lib-0.3.5",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-headlessui.vue-1.7.23",
-      "relatedSpdxElement": "SPDXRef-Package-studip-checkin-lib-0.3.4",
+      "relatedSpdxElement": "SPDXRef-Package-studip-checkin-lib-0.3.5",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-vitejs.plugin-vue-6.0.8",
-      "relatedSpdxElement": "SPDXRef-Package-studip-checkin-lib-0.3.4",
+      "relatedSpdxElement": "SPDXRef-Package-studip-checkin-lib-0.3.5",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-gettext-extractor-vue-5.2.0",
-      "relatedSpdxElement": "SPDXRef-Package-studip-checkin-lib-0.3.4",
+      "relatedSpdxElement": "SPDXRef-Package-studip-checkin-lib-0.3.5",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-gettext-parser-9.1.1",
-      "relatedSpdxElement": "SPDXRef-Package-studip-checkin-lib-0.3.4",
+      "relatedSpdxElement": "SPDXRef-Package-studip-checkin-lib-0.3.5",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-glob-13.0.6",
-      "relatedSpdxElement": "SPDXRef-Package-studip-checkin-lib-0.3.4",
+      "relatedSpdxElement": "SPDXRef-Package-studip-checkin-lib-0.3.5",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-kitsu-11.1.0",
-      "relatedSpdxElement": "SPDXRef-Package-studip-checkin-lib-0.3.4",
+      "relatedSpdxElement": "SPDXRef-Package-studip-checkin-lib-0.3.5",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-sass-1.103.0",
-      "relatedSpdxElement": "SPDXRef-Package-studip-checkin-lib-0.3.4",
+      "relatedSpdxElement": "SPDXRef-Package-studip-checkin-lib-0.3.5",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-sass-loader-17.0.0",
-      "relatedSpdxElement": "SPDXRef-Package-studip-checkin-lib-0.3.4",
+      "relatedSpdxElement": "SPDXRef-Package-studip-checkin-lib-0.3.5",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-vite-7.3.6",
-      "relatedSpdxElement": "SPDXRef-Package-studip-checkin-lib-0.3.4",
+      "relatedSpdxElement": "SPDXRef-Package-studip-checkin-lib-0.3.5",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
       "spdxElementId": "SPDXRef-Package-vue3-gettext-4.0.1",
-      "relatedSpdxElement": "SPDXRef-Package-studip-checkin-lib-0.3.4",
+      "relatedSpdxElement": "SPDXRef-Package-studip-checkin-lib-0.3.5",
       "relationshipType": "DEV_DEPENDENCY_OF"
     },
     {
